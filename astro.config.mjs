@@ -17,25 +17,29 @@ export default defineConfig({
       ],
       sidebar: [
         {
-          label: "Menu",
-          collapsed: false,
-          items: [
-            { slug: "menu/introduction" },
-            {
-              label: "GitHub",
-              link: "https://github.com/jamil2018/appraisejs-core",
-              attrs: {
-                target: "_blank",
-                rel: "noopener noreferrer",
-                class: "sidebar-link-github",
-              },
-            },
-          ],
-        },
-        {
           label: "Getting Started",
           collapsed: false,
           autogenerate: { directory: "getting-started" },
+        },
+        {
+          label: "Architecture",
+          collapsed: false,
+          autogenerate: { directory: "architecture" },
+        },
+        {
+          label: "Guides",
+          collapsed: false,
+          autogenerate: { directory: "guides" },
+        },
+        {
+          label: "References",
+          collapsed: false,
+          autogenerate: { directory: "references" },
+        },
+        {
+          label: "Tutorials",
+          collapsed: false,
+          autogenerate: { directory: "tutorials" },
         },
       ],
     }),
