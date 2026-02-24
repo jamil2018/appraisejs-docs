@@ -1,13 +1,21 @@
 ---
 title: Wait Steps
-description: A guide in my new Starlight docs site.
+description: Built-in timing and synchronization template steps.
 sidebar:
   order: 4
 ---
 
-Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
+From `src/tests/steps/actions/wait.step.ts`:
 
-## Further reading
+## Available signatures
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+- `the user waits for the current page to be loaded`
+- `the user waits for the route {string} to be loaded`
+- `the user waits for the element {string} to become visible`
+- `the user waits for the {string} element to disappear`
+- `the user waits for {int} seconds`
+
+## Notes
+
+- Route waiting builds URL from selected environment base URL.
+- Element waits use locator resolution and Playwright selector states.

@@ -1,13 +1,23 @@
 ---
 title: Click Steps
-description: A guide in my new Starlight docs site.
+description: Built-in click interaction template steps.
 sidebar:
   order: 1
 ---
 
-Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
+From `src/tests/steps/actions/click.step.ts`:
 
-## Further reading
+## Available signatures
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+- `the user clicks on the {string} element`
+- `the user double clicks on the {string} element`
+- `the user right clicks on the {string} element`
+
+## Parameters
+
+- `{string}`: locator name resolved through locator mappings.
+
+## Notes
+
+- Steps fail if locator name cannot be resolved.
+- Right click uses Playwright `click({ button: 'right' })`.

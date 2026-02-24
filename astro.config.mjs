@@ -43,6 +43,11 @@ export default defineConfig({
           collapsed: false,
           autogenerate: { directory: "tutorials" },
         },
+        {
+          label: "Operations",
+          collapsed: false,
+          autogenerate: { directory: "operations" },
+        },
       ],
     }),
   ],

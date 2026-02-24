@@ -1,13 +1,35 @@
 ---
 title: Template Steps
-description: A guide in my new Starlight docs site.
+description: Build reusable action/assertion step definitions.
 sidebar:
-  order: 5
+  order: 7
 ---
 
-Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
+Template steps are reusable behavior units used inside test-case flows.
 
-## Further reading
+## Create a template step
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+1. Go to `Template Steps -> Create`.
+2. Fill `Name`, `Description`, and `Icon`.
+3. Select `Template Step Group`.
+4. Choose `Type` (`ACTION` or `ASSERTION`).
+5. Define `Signature` (Cucumber step text pattern).
+6. Configure `Parameters` (type, order).
+7. Save.
+
+## Important behavior
+
+- Signature/parameter updates can regenerate function definition previews.
+- Generated definitions map to Cucumber `When`/`Then` style based on type.
+
+## Parameter types
+
+- `STRING`: free-text input.
+- `NUMBER`: numeric input.
+- `BOOLEAN`: true/false input.
+- `LOCATOR`: locator-name reference resolved at runtime.
+
+## Related
+
+- [Template Step Groups](/guides/template_step_groups)
+- [References](/references/click_steps)

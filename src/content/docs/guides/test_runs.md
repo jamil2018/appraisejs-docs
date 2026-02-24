@@ -1,13 +1,33 @@
 ---
 title: Test Runs
-description: A guide in my new Starlight docs site.
+description: Execute selected tests with environment and runtime options.
 sidebar:
-  order: 9
+  order: 11
 ---
 
-Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
+Test runs execute cases by tag selection or explicit case selection.
 
-## Further reading
+## Create a test run
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+1. Go to `Test Runs -> Create`.
+2. Choose selection mode (`By Tags` or `By Test Cases`).
+3. Provide run `Name`.
+4. Select `Environment`.
+5. Set `Test Workers Count` (minimum 1).
+6. Select `Browser Engine` (`CHROMIUM`, `FIREFOX`, `WEBKIT`).
+7. Submit.
+
+## Runtime behavior
+
+- Name uniqueness is validated.
+- Run starts immediately after creation.
+- You are redirected to run details if run ID is returned.
+
+## Run details page
+
+Use the details screen to inspect:
+
+- Current run status and result.
+- Linked test cases and selection scope.
+- Run logs and trace artifacts.
+- Linked report access after completion.

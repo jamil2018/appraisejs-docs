@@ -1,13 +1,29 @@
 ---
 title: Running Tests
-description: A guide in my new Starlight docs site.
+description: Execute targeted runs by tags or explicit test-case selection.
 sidebar:
   order: 2
 ---
 
-Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
+This tutorial shows both run-selection modes in AppraiseJS core.
 
-## Further reading
+## Path A: Run by tags
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+1. Ensure your test cases include tags (for example `@smoke`).
+2. Open `Test Runs -> Create`.
+3. Choose `By Tags`.
+4. Select one or more tags.
+5. Set run name, environment, workers, and browser engine.
+6. Submit.
+
+## Path B: Run by explicit test cases
+
+1. Open `Test Runs -> Create`.
+2. Choose `By Test Cases`.
+3. Select desired cases.
+4. Set run configuration and submit.
+
+## During execution
+
+- Watch live status in test run details.
+- Open logs/trace links for failures.

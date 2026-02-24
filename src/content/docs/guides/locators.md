@@ -1,13 +1,35 @@
 ---
 title: Locators
-description: A guide in my new Starlight docs site.
+description: Define reusable selectors used by template steps.
 sidebar:
-  order: 4
+  order: 5
 ---
 
-Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
+Locators are named selector definitions referenced by test steps.
 
-## Further reading
+## Create a locator
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+1. Go to `Locators -> Create`.
+2. Set `Name`.
+3. Set `Selector` (`value`, CSS or XPath).
+4. Choose `Locator Group`.
+5. Save.
+
+## Why locators matter
+
+- Decouples test logic from raw selector strings.
+- Reduces update effort when UI selectors change.
+- Enables step-level reuse across many cases.
+
+## Sync behavior
+
+- The core repo includes locator sync scripts.
+- `npm run sync-locators`
+- `npm run sync-locator-groups`
+- Locator mappings are maintained in `src/tests` artifacts and consumed during execution.
+
+## Good practices
+
+- Prefer stable `data-testid` selectors.
+- Keep naming human-readable (`loginSubmitButton`).
+- Do not duplicate the same selector across many locator names.

@@ -1,13 +1,19 @@
 ---
 title: Storage Steps
-description: A guide in my new Starlight docs site.
+description: Built-in variable storage template steps.
 sidebar:
   order: 5
 ---
 
-Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
+From `src/tests/steps/actions/store.step.ts`:
 
-## Further reading
+## Available signatures
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+- `the user stores the {string} element text inside the variable {string}`
+- `the user stores the {string} text input value inside the variable {string}`
+- `the user stores the {string} textarea input value inside the variable {string}`
+
+## Notes
+
+- Stored variables can be reused in later steps.
+- Missing locator names cause immediate failure.

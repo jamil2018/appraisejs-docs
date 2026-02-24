@@ -1,13 +1,22 @@
 ---
 title: Dashboard
-description: A guide in my new Starlight docs site.
+description: Monitor high-level quality signals and system activity.
 sidebar:
-  order: 11
+  order: 13
 ---
 
-Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
+The dashboard is the operational home screen for AppraiseJS.
 
-## Further reading
+## Main panels
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+- Entity cards: counts for test cases, suites, template steps, ongoing runs.
+- Attention drawer: priority items such as failing/flaky trends.
+- Quick actions drawer: shortcuts to common create/view workflows.
+- Execution health panel: test-suite execution health view.
+
+## Daily workflow
+
+1. Check active runs and failing trends.
+2. Open problematic reports.
+3. Trigger targeted runs after fixes.
+4. Track stability movement over time.

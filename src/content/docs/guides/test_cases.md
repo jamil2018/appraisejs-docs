@@ -1,13 +1,30 @@
 ---
 title: Test Cases
-description: A guide in my new Starlight docs site.
+description: Build executable visual scenarios with ordered steps.
 sidebar:
-  order: 8
+  order: 10
 ---
 
-Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
+A test case is a single scenario composed of ordered template steps.
 
-## Further reading
+## Create a test case
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+1. Go to `Test Cases -> Create`.
+2. Add title (min 3 chars) and description.
+3. Select one or more test suites.
+4. Optionally add tags.
+5. Build the flow in the diagram editor.
+6. Fill required parameters for each step.
+7. Save.
+
+## Validation behavior
+
+- At least one suite is required.
+- Missing mandatory step parameters block save.
+- Generated Gherkin preview reflects current step order.
+
+## Flow design tips
+
+- Keep one business outcome per test case.
+- Use clear step labels and stable locator references.
+- Use template test cases for repeated patterns.

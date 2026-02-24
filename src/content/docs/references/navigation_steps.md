@@ -1,13 +1,20 @@
 ---
 title: Navigation Steps
-description: A guide in my new Starlight docs site.
+description: Built-in browser navigation template steps.
 sidebar:
   order: 3
 ---
 
-Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
+From `src/tests/steps/actions/navigation.step.ts`:
 
-## Further reading
+## Available signatures
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+- `the user navigates to the {string} url`
+- `the user navigates to the base url of the selected environment`
+- `the user reloads the page`
+- `the user goes back to the previous page`
+
+## Notes
+
+- Environment-based navigation reads selected run environment.
+- Navigation waits for `domcontentloaded`.

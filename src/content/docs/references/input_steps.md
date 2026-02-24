@@ -1,13 +1,22 @@
 ---
 title: Input Steps
-description: A guide in my new Starlight docs site.
+description: Built-in form and input interaction template steps.
 sidebar:
   order: 2
 ---
 
-Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
+From `src/tests/steps/actions/input.step.ts`:
 
-## Further reading
+## Available signatures
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+- `the user fills in the {string} input field with value {string}`
+- `the user clears the {string} field`
+- `the user selects the {string} option of the {string} dropdown`
+- `the user checks the {string} checkbox`
+- `the user unchecks the {string} checkbox`
+- `the user fills in the {string} input with data from the stored variable {string}`
+
+## Notes
+
+- Locator parameters are looked up by locator name.
+- Stored-variable input fails if variable is missing.

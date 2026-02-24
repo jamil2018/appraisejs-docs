@@ -1,13 +1,32 @@
 ---
 title: Environments
-description: A guide in my new Starlight docs site.
+description: Configure run targets and credentials.
 sidebar:
   order: 2
 ---
 
-Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
+Environments define where test runs execute.
 
-## Further reading
+## Create an environment
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+1. Go to `Environments -> Create`.
+2. Fill `Name` and `Base URL`.
+3. Optionally fill `API Base URL`, `Username`, and `Password`.
+4. Save.
+
+## Validation rules
+
+- `Name`: required.
+- `Base URL`: required and must be a valid URL.
+- `API Base URL`: optional; if provided, must be a valid URL.
+
+## Usage in test runs
+
+- Each test run requires one selected environment.
+- Environment-aware navigation and wait steps read this configuration at runtime.
+- Environment data drives base URL resolution and target context for the run.
+
+## Tips
+
+- Use stable names like `Local`, `Staging`, `Prod-Snapshot`.
+- Keep secrets local; avoid committing sensitive `.env` values.

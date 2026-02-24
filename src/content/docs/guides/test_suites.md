@@ -1,13 +1,23 @@
 ---
 title: Test Suites
-description: A guide in my new Starlight docs site.
+description: Group related test cases and assign module/tag metadata.
 sidebar:
-  order: 7
+  order: 9
 ---
 
-Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
+Test suites bundle related test cases for organization and reporting.
 
-## Further reading
+## Create a test suite
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+1. Go to `Test Suites -> Create`.
+2. Fill `Name` (min 3 chars).
+3. Add `Description`.
+4. Select one `Module`.
+5. Optionally attach `Test Cases` and `Tags`.
+6. Save.
+
+## Why suites are useful
+
+- Logical grouping by feature or flow.
+- Better run selection and metrics aggregation.
+- Cleaner report slicing by business area.

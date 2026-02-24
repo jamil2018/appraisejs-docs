@@ -1,13 +1,44 @@
 ---
 title: Overview
-description: A guide in my new Starlight docs site.
+description: High-level system architecture and where each responsibility lives.
 sidebar:
   order: 1
 ---
 
-Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
+AppraiseJS is a local-first Next.js platform that combines visual test authoring, orchestration, execution, and reporting in one runtime.
 
-## Further reading
+## Architecture map
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+1. UI layer (`src/app`, `src/components`): authoring screens, run dashboards, report views.
+2. Server layer (`src/actions`, `src/app/api`): input validation, persistence, run orchestration, streaming APIs.
+3. Core orchestration (`src/lib`, `scripts`): feature generation, sync logic, execution coordination, report parsing, metrics.
+4. Data layer (`prisma` + SQLite): authoritative model for authored entities, runs, reports, and metrics.
+5. Runner layer (`src/tests`): Cucumber + Playwright execution, hooks, trace capture, step libraries.
+
+```mermaid
+flowchart LR
+  UI["UI Pages"] --> SA["Server Actions / API Routes"]
+  SA --> CORE["Core Libs + Scripts"]
+  CORE --> DB["Prisma + SQLite"]
+  CORE --> RUNNER["Cucumber + Playwright"]
+  RUNNER --> REPORT["Cucumber JSON + Traces"]
+  REPORT --> CORE
+  CORE --> DB
+  SA --> UI
+```
+
+## How to read this section
+
+- [Execution Lifecycle](/architecture/execution_lifecycle): request-to-result runtime flow.
+- [Synchronization Pipeline](/architecture/synchronization_pipeline): DB <-> filesystem parity and artifact generation.
+- [Data and Reporting Model](/architecture/data_model_and_reporting): run/report entities and matching logic.
+- [Runtime Services and APIs](/architecture/runtime_services_and_apis): process manager, SSE logs, traces, and downloads.
+
+## Key implementation anchors
+
+- Test run execution: `src/lib/test-run/test-run-executor.ts`
+- Process lifecycle and events: `src/lib/test-run/process-manager.ts`
+- Report parsing and enum mapping: `src/lib/test-run/report-parser.ts`
+- Bidirectional sync: `src/lib/bidirectional-sync.ts`
+- Feature generation: `src/lib/feature-file-generator.ts`
+- Run orchestration action: `src/actions/test-run/test-run-actions.ts`

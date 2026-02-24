@@ -1,13 +1,31 @@
 ---
 title: Creating Tests
-description: A guide in my new Starlight docs site.
+description: End-to-end walkthrough for creating maintainable test assets.
 sidebar:
   order: 1
 ---
 
-Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
+This tutorial builds a first-class scenario using the same model as `appraisejs-core`.
 
-## Further reading
+## Goal
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+- Create a login smoke scenario that can be reused in future runs.
+
+## Steps
+
+1. Create module `Authentication`.
+2. Create locator group `Login Page` linked to the module.
+3. Add locators (`emailInput`, `passwordInput`, `submitButton`, `welcomeBanner`).
+4. Create suite `Auth Smoke`.
+5. Create case `Valid login shows welcome banner` and add it to the suite.
+6. Add step: navigate to selected environment base URL.
+7. Add step: fill email input.
+8. Add step: fill password input.
+9. Add step: click submit button.
+10. Add step: assert welcome banner visibility `true`.
+11. Save test case.
+
+## Validate before running
+
+- Ensure all mandatory parameters are filled.
+- Confirm environment base URL is reachable.
