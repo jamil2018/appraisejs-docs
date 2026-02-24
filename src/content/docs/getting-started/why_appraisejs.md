@@ -1,13 +1,37 @@
 ---
 title: Why AppraiseJS
-description: A guide in my new Starlight docs site.
+description: Why teams choose AppraiseJS for test development and execution.
 sidebar:
   order: 4
 ---
 
-Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
+AppraiseJS exists to remove the usual split between test management tools and automation execution frameworks.
 
-## Further reading
+## The problem it solves
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+- Traditional setups require stitching multiple tools together.
+- Test logic often lives only in code, slowing collaboration.
+- Reporting and execution context are fragmented.
+- Teams spend too much time maintaining framework glue.
+
+## What AppraiseJS changes
+
+- One local app for authoring, execution, and reporting.
+- Visual-first test modeling with reusable template steps and locators.
+- Automatic generation/sync of executable artifacts.
+- Built-in run orchestration (tags, workers, browser engine selection).
+- Structured report ingestion with test-case and suite-level metrics.
+
+## Who it is for
+
+- QA engineers building and scaling automation
+- Manual testers transitioning into automation
+- Developers who want a shared testing control plane
+- Teams that want fast setup and local ownership
+
+## Practical outcomes
+
+- Faster onboarding and initial test creation
+- Better reuse through template steps and locator groups
+- Clear traceability from test definition to run result
+- Reduced framework plumbing for day-to-day QA work

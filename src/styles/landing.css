@@ -1,0 +1,187 @@
+/* Landing page – imported from src/content/docs/index.mdx */
+
+/* ─── Hide Starlight header on landing ────────────────────────── */
+
+header.header {
+  display: none !important;
+}
+
+/* ─── Root layout ─────────────────────────────────────────────── */
+
+.landing-root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-bottom: 3rem;
+  background-image:
+    radial-gradient(
+      60rem 16rem at 30% 0,
+      color-mix(in oklab, var(--sl-color-accent) 8%, transparent),
+      transparent
+    );
+}
+
+/* ─── Shared section panel ────────────────────────────────────── */
+
+.landing-panel {
+  border: 1px solid color-mix(in oklab, var(--sl-color-gray-5) 50%, transparent);
+  border-radius: 0.75rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  background: color-mix(in oklab, var(--sl-color-text) 4%, var(--sl-color-bg));
+}
+
+.landing-kicker {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sl-color-accent);
+}
+
+.landing-heading {
+  margin: 0.5rem 0 1.25rem;
+  font-size: clamp(1.35rem, 3.2vw, 2rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: var(--sl-color-text);
+}
+
+/* ─── Starlight splash hero ───────────────────────────────────── */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--sl-color-gray-5) 50%, transparent);
+  border-radius: 1rem;
+  padding: clamp(2rem, 5vw, 3rem);
+  margin-top: 0.5rem;
+  background:
+    radial-gradient(
+      50rem 20rem at 8% 0%,
+      color-mix(in oklab, var(--sl-color-accent) 8%, transparent),
+      transparent
+    ),
+    radial-gradient(
+      40rem 16rem at 92% 100%,
+      color-mix(in oklab, var(--sl-color-accent) 5%, transparent),
+      transparent
+    ),
+    color-mix(in oklab, var(--sl-color-text) 4%, var(--sl-color-bg));
+}
+
+.hero h1 {
+  max-width: 14ch;
+  font-size: clamp(2.25rem, 5.5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--sl-color-text);
+  margin: 0;
+}
+
+.hero .tagline {
+  max-width: 56ch;
+  font-size: clamp(1rem, 1.75vw, 1.15rem);
+  color: var(--sl-color-gray-2);
+  line-height: 1.55;
+}
+
+.hero .actions {
+  gap: 0.75rem;
+}
+
+.hero .actions .sl-link-button {
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.3rem;
+  font-weight: 500;
+}
+
+.hero .actions .sl-link-button.primary {
+  background: var(--sl-color-accent);
+  border-color: var(--sl-color-accent);
+  color: var(--sl-color-white);
+}
+
+.hero .actions .sl-link-button.primary:hover {
+  box-shadow: 0 4px 20px color-mix(in oklab, var(--sl-color-accent) 30%, transparent);
+}
+
+.hero .actions .sl-link-button.secondary {
+  background: color-mix(in oklab, var(--sl-color-text) 6%, var(--sl-color-bg));
+  border-color: color-mix(in oklab, var(--sl-color-gray-5) 60%, transparent);
+  color: var(--sl-color-text);
+}
+
+.hero .actions .sl-link-button:hover {
+  transform: translateY(-1px);
+}
+
+.hero .hero-html {
+  width: min(100%, 26rem);
+}
+
+/* ─── Terminal code card ──────────────────────────────────────── */
+
+.landing-terminal {
+  border: 1px solid color-mix(in oklab, var(--sl-color-gray-5) 50%, transparent);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: var(--sl-color-bg);
+  box-shadow: 0 4px 24px color-mix(in oklab, var(--sl-color-black) 8%, transparent);
+}
+
+.landing-terminal__dots {
+  display: flex;
+  gap: 0.45rem;
+  padding: 0.65rem 0.8rem;
+  border-bottom: 1px solid color-mix(in oklab, var(--sl-color-gray-5) 50%, transparent);
+}
+
+.landing-terminal__dots span {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--sl-color-gray-4);
+}
+
+.landing-terminal pre {
+  margin: 0;
+  padding: 0.9rem 1rem;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+
+/* ─── Responsive ──────────────────────────────────────────────── */
+
+@media (max-width: 50rem) {
+  .hero,
+  .landing-panel {
+    border-radius: 0.65rem;
+  }
+
+  .hero {
+    padding: clamp(1.5rem, 4vw, 2rem);
+  }
+}
+
+/* ─── Motion ──────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero .actions .sl-link-button {
+    transition:
+      transform 0.16s ease,
+      border-color 0.16s ease,
+      box-shadow 0.16s ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero .actions .sl-link-button:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}

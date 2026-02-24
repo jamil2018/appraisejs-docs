@@ -1,0 +1,79 @@
+---
+/**
+ * Landing section: Bento grid of features (from overview/why_appraisejs).
+ */
+const features = [
+  { title: 'Visual Test Modeling', description: 'Model modules, suites, cases, and reusable steps in a single interface.', span: 2 },
+  { title: 'Tag-Based Orchestration', description: 'Target execution by filter and identifier tags.', span: 1 },
+  { title: 'Multi-Browser Runs', description: 'Execute on Chromium, Firefox, or WebKit with worker control.', span: 1 },
+  { title: 'Live Run Visibility', description: 'Track status, logs, and artifacts while tests execute.', span: 1 },
+  { title: 'Structured Reporting Pipeline', description: 'Ingest Cucumber output into feature/scenario/step entities for analytics and debugging.', span: 2 },
+  { title: 'Sync Tooling', description: 'Keep DB entities and generated feature artifacts in parity with sync scripts.', span: 1 },
+];
+---
+
+<section class="landing-panel landing-bento" aria-labelledby="features-heading">
+  <p class="landing-kicker">FEATURES</p>
+  <h2 id="features-heading" class="landing-heading">A bento grid tailored for QA engineering workflows.</h2>
+  <div class="landing-bento-grid">
+    {features.map((f) => (
+      <article class:list={['landing-bento-card', f.span === 2 && 'landing-bento-card--span-2']}>
+        <h3>{f.title}</h3>
+        <p>{f.description}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style is:global>
+  .landing-bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .landing-bento-card {
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background: var(--sl-color-surface-1, color-mix(in oklab, var(--sl-color-text) 6%, var(--sl-color-background)));
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .landing-bento-card:hover {
+    background: var(--sl-color-surface-2, color-mix(in oklab, var(--sl-color-text) 10%, var(--sl-color-background)));
+    transform: translateY(-2px);
+  }
+
+  .landing-bento-card h3 {
+    margin: 0 0 0.4rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--sl-color-text);
+  }
+
+  .landing-bento-card p {
+    margin: 0;
+    color: var(--sl-color-text-accent);
+    font-size: 0.875rem;
+    line-height: 1.45;
+  }
+
+  .landing-bento-card--span-2 {
+    grid-column: span 2;
+  }
+
+  @media (max-width: 960px) {
+    .landing-bento-grid {
+      grid-template-columns: 1fr;
+    }
+    .landing-bento-card--span-2 {
+      grid-column: auto;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .landing-bento-card:hover {
+      transform: none;
+    }
+  }
+</style>

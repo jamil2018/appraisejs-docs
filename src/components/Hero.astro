@@ -1,0 +1,175 @@
+---
+/**
+ * Custom Hero override for splash/landing page.
+ * Next.js-style: headline, tagline, CTAs, supporting line, code card (right/below).
+ * Data from frontmatter via Starlight: Astro.locals.starlightRoute.entry.data.hero
+ */
+interface HeroAction {
+  text: string;
+  link: string;
+  variant?: string;
+  attrs?: Record<string, string | number | boolean>;
+}
+interface HeroData {
+  title?: string;
+  template?: string;
+  hero?: { title?: string; tagline?: string; supportingLine?: string; actions?: HeroAction[] };
+}
+const entry = Astro.locals.starlightRoute?.entry;
+const data: HeroData = entry?.data ?? {};
+const hero = data.hero ?? {};
+const title = hero.title ?? data.title ?? '';
+const tagline = hero.tagline ?? '';
+const supportingLine = hero.supportingLine ?? '';
+const actions: HeroAction[] = hero.actions ?? [];
+const hasHero = !!(title || tagline || actions.length);
+const isSplash = data.template === 'splash';
+---
+
+{hasHero && (
+  <header class="hero landing-hero" aria-labelledby={title ? 'starlight__hero__title' : undefined}>
+    <div class="landing-hero__stack">
+      <div class="landing-hero__copy">
+        {title && (
+          <h1 id="starlight__hero__title" class="landing-hero__title">
+            {title}
+          </h1>
+        )}
+        {tagline && <p class="landing-hero__tagline tagline">{tagline}</p>}
+        {actions.length > 0 && (
+          <div class="landing-hero__actions actions">
+            {actions.map((action: HeroAction) => {
+              const { text, link: href, variant = 'secondary', attrs = {} } = action;
+              const classList = ['sl-link-button', variant].filter(Boolean).join(' ');
+              return (
+                <a href={href} class={classList} {...attrs}>
+                  {text}
+                </a>
+              );
+            })}
+          </div>
+        )}
+        {isSplash && supportingLine && (
+          <p class="landing-hero__supporting">{supportingLine}</p>
+        )}
+      </div>
+      {isSplash && (
+        <div class="landing-hero__code-card" aria-hidden="true">
+          <pre><code>npx create-appraisejs@latest
+cd my-appraisejs
+npm run dev</code></pre>
+        </div>
+      )}
+    </div>
+  </header>
+)}
+
+<style is:global>
+  .landing-hero {
+    position: relative;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    margin-top: 0.5rem;
+  }
+
+  .landing-hero__stack {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.5rem, 4vw, 2.5rem);
+    align-items: start;
+    text-align: left;
+  }
+
+  @media (min-width: 960px) {
+    .landing-hero__stack {
+      grid-template-columns: 1fr minmax(280px, 380px);
+      align-items: start;
+    }
+  }
+
+  .landing-hero__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .landing-hero__title {
+    max-width: none;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    font-weight: 700;
+    color: var(--sl-color-text);
+    margin: 0;
+  }
+
+  .landing-hero__tagline {
+    max-width: 56ch;
+    font-size: clamp(1rem, 1.75vw, 1.25rem);
+    color: var(--sl-color-text-accent);
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  .landing-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    margin-top: 0.25rem;
+  }
+
+  .landing-hero__actions .sl-link-button {
+    border-radius: 0.5rem;
+    padding: 0.5rem 1.25rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+  }
+
+  .landing-hero__actions .sl-link-button.primary {
+    background: var(--sl-color-accent);
+    border: 1px solid var(--sl-color-accent);
+    color: var(--sl-color-accent-text, white);
+  }
+
+  .landing-hero__actions .sl-link-button.secondary,
+  .landing-hero__actions .sl-link-button.minimal {
+    background: var(--sl-color-background);
+    border: 1px solid var(--sl-color-hairline, var(--sl-color-gray-4));
+    color: var(--sl-color-text);
+  }
+
+  .landing-hero__actions .sl-link-button:hover {
+    transform: translateY(-2px);
+    border-color: var(--sl-color-accent-low, var(--sl-color-gray-4));
+  }
+
+  .landing-hero__supporting {
+    margin: 0.25rem 0 0;
+    font-size: 0.8125rem;
+    color: var(--sl-color-text-accent);
+    font-weight: 400;
+  }
+
+  .landing-hero__code-card {
+    border-radius: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--sl-color-surface-1, color-mix(in oklab, var(--sl-color-text) 8%, var(--sl-color-background)));
+    border: 1px solid var(--sl-color-hairline, color-mix(in oklab, var(--sl-color-text) 12%, transparent));
+    box-shadow: 0 4px 24px color-mix(in oklab, var(--sl-color-text) 8%, transparent);
+  }
+
+  .landing-hero__code-card pre {
+    margin: 0;
+    font-family: var(--sl-font-mono);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--sl-color-text);
+    overflow-x: auto;
+  }
+
+  .landing-hero__code-card code {
+    color: inherit;
+  }
+</style>

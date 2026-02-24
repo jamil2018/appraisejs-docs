@@ -1,0 +1,89 @@
+---
+/**
+ * Landing: Final CTA panel — "Start building tests the way you think" + Get started, GitHub, Architecture.
+ */
+---
+
+<section class="landing-panel landing-cta-panel" aria-labelledby="cta-heading">
+  <h2 id="cta-heading" class="landing-cta-panel__title">Start building tests the way you think.</h2>
+  <p class="landing-cta-panel__sub">One app for authoring, execution, and reporting. Open-source and local-first.</p>
+  <div class="landing-cta-panel__actions">
+    <a href="/getting-started/quick_start/" class="sl-link-button primary">Get started</a>
+    <a href="https://github.com/jamil2018/appraisejs-core" class="sl-link-button secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="/architecture/overview/" class="landing-cta-panel__link">Architecture</a>
+  </div>
+</section>
+
+<style is:global>
+  .landing-cta-panel {
+    text-align: center;
+    padding: clamp(2rem, 5vw, 3rem) clamp(1rem, 3vw, 1.25rem);
+    background: var(--sl-color-surface-1, color-mix(in oklab, var(--sl-color-text) 6%, var(--sl-color-bg)));
+    border: 1px solid var(--sl-color-hairline, color-mix(in oklab, var(--sl-color-text) 12%, transparent));
+    border-radius: 0.75rem;
+  }
+
+  .landing-cta-panel__title {
+    margin: 0;
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--sl-color-text);
+  }
+
+  .landing-cta-panel__sub {
+    margin: 0.5rem 0 1.25rem;
+    font-size: 0.9375rem;
+    color: var(--sl-color-text-accent);
+    max-width: 42ch;
+    margin-inline: auto;
+  }
+
+  .landing-cta-panel__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .landing-cta-panel__actions .sl-link-button {
+    border-radius: 0.5rem;
+    padding: 0.5rem 1.25rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: transform 0.16s ease, border-color 0.16s ease;
+  }
+
+  .landing-cta-panel__actions .sl-link-button.primary {
+    background: var(--sl-color-accent);
+    border: 1px solid var(--sl-color-accent);
+    color: var(--sl-color-accent-text, white);
+  }
+
+  .landing-cta-panel__actions .sl-link-button.secondary {
+    background: var(--sl-color-bg);
+    border: 1px solid var(--sl-color-hairline, var(--sl-color-gray-4));
+    color: var(--sl-color-text);
+  }
+
+  .landing-cta-panel__actions .sl-link-button:hover {
+    transform: translateY(-2px);
+  }
+
+  .landing-cta-panel__link {
+    font-size: 0.875rem;
+    color: var(--sl-color-accent);
+    text-decoration: none;
+  }
+
+  .landing-cta-panel__link:hover {
+    text-decoration: underline;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .landing-cta-panel__actions .sl-link-button:hover {
+      transform: none;
+    }
+  }
+</style>

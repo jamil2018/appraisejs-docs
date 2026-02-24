@@ -1,27 +1,43 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
+title: Home
+description: Visual-first test management, orchestration, execution, and reporting.
+template: splash
+hero:
+  title: AppraiseJS for visual test engineering workflows.
+  tagline: Design test flows visually, execute with Cucumber + Playwright, and keep portable artifacts your team owns.
+  image:
+    html: |
+      <div class="landing-terminal" aria-label="AppraiseJS setup commands">
+        <div class="landing-terminal__dots" aria-hidden="true"><span></span><span></span><span></span></div>
+        <pre><code>npx create-appraisejs@latest&#10;cd my-appraisejs&#10;npm run dev</code></pre>
+      </div>
+  actions:
+    - text: Get started
+      link: /getting-started/overview/
+      variant: primary
+    - text: GitHub
+      link: https://github.com/jamil2018/appraisejs-core
+      variant: secondary
+      attrs:
+        target: _blank
+        rel: noopener noreferrer
 ---
 
-import { Card, CardGrid } from "@astrojs/starlight/components";
+import "../../styles/landing.css";
+import TrustStrip from "../../components/TrustStrip.astro";
+import FeatureGrid from "../../components/FeatureGrid.astro";
+import DemoSection from "../../components/DemoSection.astro";
+import HowItWorksSection from "../../components/HowItWorksSection.astro";
+import DocCardsSection from "../../components/DocCardsSection.astro";
+import FinalCtaSection from "../../components/FinalCtaSection.astro";
+import LandingMotion from "../../components/LandingMotion.astro";
 
-## Next steps
-
-<CardGrid stagger>
-  <Card title="Update content" icon="pencil">
-    Edit `src/content/docs/index.mdx` to see this page change.
-  </Card>
-  <Card title="Change page layout" icon="document">
-    Delete `template: splash` in `src/content/docs/index.mdx` to display a
-    sidebar on this page.
-  </Card>
-  <Card title="Add new content" icon="add-document">
-    Add Markdown or MDX files to `src/content/docs` to create new pages.
-  </Card>
-  <Card title="Configure your site" icon="setting">
-    Edit your `sidebar` and other config in `astro.config.mjs`.
-  </Card>
-  <Card title="Read the docs" icon="open-book">
-    Learn more in [the Starlight Docs](https://starlight.astro.build/).
-  </Card>
-</CardGrid>
+<div class="landing-root">
+  <TrustStrip />
+  <FeatureGrid />
+  <DemoSection />
+  <HowItWorksSection />
+  <DocCardsSection />
+  <FinalCtaSection />
+  <LandingMotion />
+</div>

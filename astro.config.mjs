@@ -2,12 +2,14 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 
+import tailwindcss from "@tailwindcss/vite";
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [
     starlight({
       title: "AppraiseJS",
-      customCss: ["./src/styles/custom.css"],
+      customCss: ["./src/styles/global.css", "./src/styles/custom.css"],
       social: [
         {
           icon: "github",
@@ -44,4 +46,8 @@ export default defineConfig({
       ],
     }),
   ],
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });

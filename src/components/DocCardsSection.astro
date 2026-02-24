@@ -1,0 +1,75 @@
+---
+/**
+ * Landing section: Doc links grid (Overview, Getting Started, Quick Start, etc.).
+ */
+const docCards = [
+  { title: 'Overview', href: '/getting-started/overview/', description: 'Understand the platform model and capabilities.' },
+  { title: 'Getting Started', href: '/getting-started/getting_started/', description: 'Complete setup and first-run prerequisites.' },
+  { title: 'Quick Start', href: '/getting-started/quick_start/', description: 'Create and execute your first test run quickly.' },
+  { title: 'Guides', href: '/guides/dashboard/', description: 'Deep dive into modules, locators, suites, runs, and reports.' },
+  { title: 'Architecture', href: '/architecture/overview/', description: 'See how UI, sync, execution, and reporting connect.' },
+  { title: 'References', href: '/references/click_steps/', description: 'Action and validation step-level documentation.' },
+];
+---
+
+<section class="landing-panel landing-docs" aria-labelledby="docs-heading">
+  <p class="landing-kicker">DOCUMENTATION</p>
+  <h2 id="docs-heading" class="landing-heading">Navigate by intent.</h2>
+  <div class="landing-doc-grid">
+    {docCards.map((card) => (
+      <a href={card.href} class="landing-doc-card">
+        <strong>{card.title}</strong>
+        <span>{card.description}</span>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style is:global>
+  .landing-doc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .landing-doc-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    border-radius: 0.5rem;
+    padding: 0.9rem;
+    text-decoration: none;
+    background: var(--sl-color-surface-1, color-mix(in oklab, var(--sl-color-text) 6%, var(--sl-color-bg)));
+    color: inherit;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .landing-doc-card strong {
+    color: var(--sl-color-text);
+    font-size: 0.97rem;
+    font-weight: 600;
+  }
+
+  .landing-doc-card span {
+    color: var(--sl-color-text-accent);
+    font-size: 0.84rem;
+    line-height: 1.4;
+  }
+
+  .landing-doc-card:hover {
+    background: var(--sl-color-surface-2, color-mix(in oklab, var(--sl-color-text) 10%, var(--sl-color-bg)));
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 960px) {
+    .landing-doc-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .landing-doc-card:hover {
+      transform: none;
+    }
+  }
+</style>

@@ -1,0 +1,59 @@
+---
+/**
+ * Landing: trust strip — built-with / compatibility pills, centered beneath the hero.
+ */
+const pills = [
+  'Open-source',
+  'Playwright',
+  'Cucumber / Gherkin',
+  'TypeScript',
+  'CI-friendly',
+];
+---
+
+<section class="landing-trust" aria-label="Built with">
+  <p class="landing-trust__label">Built with</p>
+  <div class="landing-trust__list">
+    {pills.map((label) => (
+      <span class="landing-trust__pill">{label}</span>
+    ))}
+  </div>
+</section>
+
+<style is:global>
+  .landing-trust {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0;
+  }
+
+  .landing-trust__label {
+    margin: 0;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sl-color-gray-3);
+  }
+
+  .landing-trust__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .landing-trust__pill {
+    display: inline-block;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--sl-color-gray-2);
+    background: color-mix(in oklab, var(--sl-color-text) 5%, var(--sl-color-bg));
+    border: 1px solid color-mix(in oklab, var(--sl-color-gray-5) 50%, transparent);
+    border-radius: 9999px;
+  }
+</style>

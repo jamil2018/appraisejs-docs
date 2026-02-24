@@ -1,13 +1,44 @@
 ---
 title: Comparison
-description: A guide in my new Starlight docs site.
+description: How AppraiseJS compares to common testing approaches.
 sidebar:
   order: 5
 ---
 
-Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
+AppraiseJS can be viewed as a unified test control plane plus execution engine.
 
-## Further reading
+## AppraiseJS vs script-first automation setup
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+| Dimension | AppraiseJS | Script-first setup (raw framework) |
+| --- | --- | --- |
+| Authoring | Visual UI + structured entities | Code-only authoring |
+| Reuse model | Template steps + locator groups | Team-defined utilities/page objects |
+| Onboarding | Fast for mixed-skill teams | Slower for non-coders |
+| Orchestration | Built-in runs, tags, browser/worker config | Custom scripts/CI wiring |
+| Reporting model | Built-in persisted run/report entities | Depends on extra tooling |
+| Flexibility | Guided workflow with conventions | Maximum freedom, more maintenance |
+
+## AppraiseJS vs test-management + external runner
+
+| Dimension | AppraiseJS | Separate tools approach |
+| --- | --- | --- |
+| Tool count | Single local app | Multiple products/services |
+| Data flow | Native end-to-end path | Integration layer required |
+| Debug context | Logs + traces + report linkage in one place | Often split across systems |
+| Operational overhead | Lower local complexity | Higher setup/sync complexity |
+| Ownership | Local DB/files in project | Depends on vendor stack |
+
+## When to choose AppraiseJS
+
+Choose AppraiseJS when you want:
+
+- A single place to define, run, and inspect tests
+- Strong collaboration between QA and engineering
+- Quick setup with production-capable execution
+- Structured reporting and metrics without custom plumbing
+
+## When another approach may fit better
+
+- You need fully custom, code-only automation architecture
+- Your team already has mature framework + reporting infra
+- You require highly specialized execution patterns not in current workflows

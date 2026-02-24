@@ -1,0 +1,80 @@
+---
+/**
+ * Landing: How it works — 4-step stepper (Create project → Define → Compose → Run & review).
+ * Uses docs terminology: modules, locators, templates, test flow, reports.
+ */
+const steps = [
+  { num: 1, title: 'Create project', desc: 'Use create-appraisejs or clone the repo; run setup and sync.' },
+  { num: 2, title: 'Define modules, locators & templates', desc: 'Add environments, locator groups, and reusable template steps in the UI.' },
+  { num: 3, title: 'Compose test flow', desc: 'Build modules, suites, and cases; add steps to scenarios.' },
+  { num: 4, title: 'Run & review reports', desc: 'Create a test run, execute locally or in CI, and inspect results and metrics in-app.' },
+];
+---
+
+<section class="landing-panel landing-how" aria-labelledby="how-heading">
+  <p class="landing-kicker">HOW IT WORKS</p>
+  <h2 id="how-heading" class="landing-heading">Four steps to production-ready tests.</h2>
+  <ol class="landing-how__list">
+    {steps.map((step, i) => (
+      <li class="landing-how__step">
+        <span class="landing-how__num" aria-hidden="true">{step.num}</span>
+        <div class="landing-how__content">
+          <h3>{step.title}</h3>
+          <p>{step.desc}</p>
+        </div>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style is:global>
+  .landing-how__list {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .landing-how__step {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem 1.25rem;
+    align-items: start;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--sl-color-hairline, color-mix(in oklab, var(--sl-color-text) 12%, transparent));
+  }
+
+  .landing-how__step:last-child {
+    border-bottom: none;
+  }
+
+  .landing-how__num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    min-width: 2rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--sl-color-accent-text, white);
+    background: var(--sl-color-accent);
+    border-radius: 50%;
+  }
+
+  .landing-how__content h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--sl-color-text);
+  }
+
+  .landing-how__content p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--sl-color-text-accent);
+    line-height: 1.45;
+  }
+</style>
