@@ -5,19 +5,76 @@ sidebar:
   order: 1
 ---
 
-From `src/tests/steps/actions/click.step.ts`:
+Source: `src/tests/steps/actions/click.step.ts`.
 
-## Available signatures
+See shared placeholder rules in [Step Parameter Conventions](/references/step_parameter_conventions).
 
-- `the user clicks on the {string} element`
-- `the user double clicks on the {string} element`
-- `the user right clicks on the {string} element`
+## Step catalog
 
-## Parameters
+### 1. Click element
 
-- `{string}`: locator name resolved through locator mappings.
+Signature: `the user clicks on the {string} element`
 
-## Notes
+What it does:
 
-- Steps fail if locator name cannot be resolved.
-- Right click uses Playwright `click({ button: 'right' })`.
+- Resolves locator by name.
+- Performs a standard Playwright click.
+
+Parameters:
+
+| Parameter | Represents | Expected data |
+| --- | --- | --- |
+| `{string}` | Target locator name | Existing locator key (for example `loginButton`). |
+
+Example:
+
+```gherkin
+When the user clicks on the "loginButton" element
+```
+
+### 2. Double click element
+
+Signature: `the user double clicks on the {string} element`
+
+What it does:
+
+- Resolves locator by name.
+- Performs `dblclick()` on the matched element.
+
+Parameters:
+
+| Parameter | Represents | Expected data |
+| --- | --- | --- |
+| `{string}` | Target locator name | Existing locator key (for example `rowItem`). |
+
+Example:
+
+```gherkin
+When the user double clicks on the "rowItem" element
+```
+
+### 3. Right click element
+
+Signature: `the user right clicks on the {string} element`
+
+What it does:
+
+- Resolves locator by name.
+- Performs `click({ button: 'right' })`.
+
+Parameters:
+
+| Parameter | Represents | Expected data |
+| --- | --- | --- |
+| `{string}` | Target locator name | Existing locator key (for example `contextMenuTarget`). |
+
+Example:
+
+```gherkin
+When the user right clicks on the "contextMenuTarget" element
+```
+
+## Failure behavior
+
+- Step fails if locator cannot be resolved.
+- Step fails if element is not interactable in current page state.

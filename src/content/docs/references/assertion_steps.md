@@ -5,27 +5,132 @@ sidebar:
   order: 8
 ---
 
-From `src/tests/steps/validations/*.step.ts`:
+Source: `src/tests/steps/validations/*.step.ts`.
 
-## Text assertions
+See shared placeholder rules in [Step Parameter Conventions](/references/step_parameter_conventions).
 
-- `the element {string} should {boolean} contain the text {string}`
-- `the element {string} should {boolean} equal the text {string}`
+## Text assertion steps
 
-## Visibility assertion
+### 1. Contains text assertion
 
-- `the visibility status of the {string} element should be {boolean}`
+Signature: `the element {string} should {boolean} contain the text {string}`
 
-## Active state assertion
+What it does:
 
-- `the element {string} should have active status {boolean}`
+- Resolves locator.
+- Reads `textContent()`.
+- Asserts contains or does-not-contain based on boolean flag.
 
-## Navigation assertion
+Parameters:
 
-- `the url route should be equal to {string}`
+| Parameter | Represents | Expected data |
+| --- | --- | --- |
+| First `{string}` | Element locator name | Existing locator key (for example `toastMessage`). |
+| `{boolean}` | Positive or negative assertion | `true` for must contain, `false` for must not contain. |
+| Second `{string}` | Target text | Expected literal/partial text value. |
 
-## Notes
+Example:
 
-- Assertions use `Then` definitions.
-- Boolean parameters control positive/negative checks.
-- One stored-variable text assertion exists in file but is currently stubbed.
+```gherkin
+Then the element "toastMessage" should true contain the text "Saved successfully"
+```
+
+### 2. Equals text assertion
+
+Signature: `the element {string} should {boolean} equal the text {string}`
+
+What it does:
+
+- Resolves locator.
+- Reads `textContent()`.
+- Asserts exact equality or inequality based on boolean flag.
+
+Parameters:
+
+| Parameter | Represents | Expected data |
+| --- | --- | --- |
+| First `{string}` | Element locator name | Existing locator key (for example `pageTitle`). |
+| `{boolean}` | Positive or negative assertion | `true` for must equal, `false` for must not equal. |
+| Second `{string}` | Expected exact text | Exact value expected in element. |
+
+Example:
+
+```gherkin
+Then the element "pageTitle" should true equal the text "Dashboard"
+```
+
+## State assertion steps
+
+### 3. Visibility assertion
+
+Signature: `the visibility status of the {string} element should be {boolean}`
+
+What it does:
+
+- Resolves locator.
+- Uses Playwright visibility check.
+- Asserts visible/non-visible state.
+
+Parameters:
+
+| Parameter | Represents | Expected data |
+| --- | --- | --- |
+| `{string}` | Element locator name | Existing locator key. |
+| `{boolean}` | Expected visibility | `true` for visible, `false` for hidden/not visible. |
+
+Example:
+
+```gherkin
+Then the visibility status of the "successBanner" element should be true
+```
+
+### 4. Active/enabled assertion
+
+Signature: `the element {string} should have active status {boolean}`
+
+What it does:
+
+- Resolves locator.
+- Uses Playwright enabled-state check.
+- Asserts enabled/disabled expectation.
+
+Parameters:
+
+| Parameter | Represents | Expected data |
+| --- | --- | --- |
+| `{string}` | Element locator name | Existing locator key. |
+| `{boolean}` | Expected active state | `true` for active/enabled, `false` for not active/disabled. |
+
+Example:
+
+```gherkin
+Then the element "submitButton" should have active status true
+```
+
+### 5. URL route equality assertion
+
+Signature: `the url route should be equal to {string}`
+
+What it does:
+
+- Waits for network idle.
+- Extracts current pathname from URL.
+- Compares pathname to expected route.
+
+Parameters:
+
+| Parameter | Represents | Expected data |
+| --- | --- | --- |
+| `{string}` | Expected pathname | Route path (for example `/dashboard`). |
+
+Example:
+
+```gherkin
+Then the url route should be equal to "/dashboard"
+```
+
+## Known limitation
+
+The signature below exists but is currently stubbed (no implementation body):
+
+- `the element {string} should contain the text inside the stored variable {string}`

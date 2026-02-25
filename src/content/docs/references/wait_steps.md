@@ -5,17 +5,115 @@ sidebar:
   order: 4
 ---
 
-From `src/tests/steps/actions/wait.step.ts`:
+Source: `src/tests/steps/actions/wait.step.ts`.
 
-## Available signatures
+See shared placeholder rules in [Step Parameter Conventions](/references/step_parameter_conventions).
 
-- `the user waits for the current page to be loaded`
-- `the user waits for the route {string} to be loaded`
-- `the user waits for the element {string} to become visible`
-- `the user waits for the {string} element to disappear`
-- `the user waits for {int} seconds`
+## Step catalog
 
-## Notes
+### 1. Wait for current page load
 
-- Route waiting builds URL from selected environment base URL.
-- Element waits use locator resolution and Playwright selector states.
+Signature: `the user waits for the current page to be loaded`
+
+What it does:
+
+- Waits for current page to reach `domcontentloaded`.
+
+Parameters:
+
+- None.
+
+Example:
+
+```gherkin
+When the user waits for the current page to be loaded
+```
+
+### 2. Wait for route to load
+
+Signature: `the user waits for the route {string} to be loaded`
+
+What it does:
+
+- Reads selected environment base URL.
+- Combines base URL with provided route.
+- Waits for full URL match.
+
+Parameters:
+
+| Parameter | Represents | Expected data |
+| --- | --- | --- |
+| `{string}` | Route path | Relative route (for example `/dashboard` or `dashboard`). |
+
+Example:
+
+```gherkin
+When the user waits for the route "/dashboard" to be loaded
+```
+
+### 3. Wait for element visibility
+
+Signature: `the user waits for the element {string} to become visible`
+
+What it does:
+
+- Resolves locator by name.
+- Waits until selector state is `visible`.
+
+Parameters:
+
+| Parameter | Represents | Expected data |
+| --- | --- | --- |
+| `{string}` | Locator name | Existing locator key (for example `successBanner`). |
+
+Example:
+
+```gherkin
+When the user waits for the element "successBanner" to become visible
+```
+
+### 4. Wait for element disappearance
+
+Signature: `the user waits for the {string} element to disappear`
+
+What it does:
+
+- Resolves locator by name.
+- Waits until selector state is `hidden`.
+
+Parameters:
+
+| Parameter | Represents | Expected data |
+| --- | --- | --- |
+| `{string}` | Locator name | Existing locator key (for example `loadingSpinner`). |
+
+Example:
+
+```gherkin
+When the user waits for the "loadingSpinner" element to disappear
+```
+
+### 5. Wait fixed duration
+
+Signature: `the user waits for {int} seconds`
+
+What it does:
+
+- Pauses execution for provided seconds.
+
+Parameters:
+
+| Parameter | Represents | Expected data |
+| --- | --- | --- |
+| `{int}` | Duration in seconds | Positive integer (for example `2`). |
+
+Example:
+
+```gherkin
+When the user waits for 2 seconds
+```
+
+## Usage guidance
+
+- Prefer route/element waits over fixed-duration waits where possible.
+- Fixed waits are best as last-resort stabilization steps.
