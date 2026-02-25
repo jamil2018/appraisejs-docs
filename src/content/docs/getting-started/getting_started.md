@@ -19,7 +19,7 @@ This page follows the setup model documented in `appraisejs-core`.
 ```bash
 npx create-appraisejs
 cd <your-project-name>
-npm install
+npm run setup
 npm run dev
 ```
 
@@ -31,7 +31,6 @@ Open `http://localhost:3000` after startup.
 git clone https://github.com/jamil2018/appraisejs-core.git
 cd appraisejs-core
 npm run setup
-npm run sync-all
 npm run dev
 ```
 

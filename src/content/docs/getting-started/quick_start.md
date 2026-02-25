@@ -10,11 +10,12 @@ sidebar:
 ### If using `create-appraisejs`
 
 ```bash
-npm install
+npx create-appraisejs
+cd <your-project-name>
 npm run dev
 ```
 
-### If using `appraisejs-core` clone
+### If using `appraisejs-core` github clone
 
 ```bash
 npm run setup
