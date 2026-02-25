@@ -10,6 +10,9 @@ export default defineConfig({
     starlight({
       title: "AppraiseJS",
       customCss: ["./src/styles/global.css", "./src/styles/custom.css"],
+      components: {
+        Head: "./src/components/overrides/Head.astro",
+      },
       social: [
         {
           icon: "github",
