@@ -19,7 +19,6 @@ npm run dev
 
 ```bash
 npm run setup
-npm run sync-all
 npm run dev
 ```
 
