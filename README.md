@@ -44,6 +44,18 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
+## SEO configuration
+
+Set `SITE_URL` (or `PUBLIC_SITE_URL`) in your deployment environment to your
+production docs URL, for example:
+
+```bash
+SITE_URL=https://docs.yourdomain.com
+```
+
+This project now generates canonical URLs, `robots.txt`, and sitemap links from
+that value.
+
 ## 👀 Want to learn more?
 
 Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).

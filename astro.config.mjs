@@ -1,18 +1,41 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
+import sitemap from "@astrojs/sitemap";
 
 import tailwindcss from "@tailwindcss/vite";
 
+const rawSiteUrl =
+  process.env.SITE_URL ??
+  process.env.PUBLIC_SITE_URL ??
+  process.env.URL ??
+  "https://appraisejs-docs.vercel.app";
+const site = rawSiteUrl.startsWith("http")
+  ? rawSiteUrl
+  : `https://${rawSiteUrl}`;
+
 // https://astro.build/config
 export default defineConfig({
+  site,
   integrations: [
     starlight({
       title: "AppraiseJS",
+      description:
+        "AppraiseJS documentation for visual test modeling, orchestration, execution, and reporting workflows.",
       customCss: ["./src/styles/global.css", "./src/styles/custom.css"],
       components: {
         Head: "./src/components/overrides/Head.astro",
       },
+      head: [
+        {
+          tag: "meta",
+          attrs: {
+            name: "robots",
+            content:
+              "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+          },
+        },
+      ],
       social: [
         {
           icon: "github",
@@ -53,6 +76,7 @@ export default defineConfig({
         },
       ],
     }),
+    sitemap(),
   ],
 
   vite: {
