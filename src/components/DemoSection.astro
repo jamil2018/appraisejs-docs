@@ -3,31 +3,35 @@
  * Landing: "See it in action" two-column—left copy + bullets, right code card.
  */
 const bullets = [
-  'Create a project in minutes.',
-  'Compose tests visually, export standard artifacts.',
-  'Run locally or in CI and inspect results.',
+  "Create a project in minutes.",
+  "Compose tests visually, export standard artifacts.",
+  "Run locally or in CI and inspect results.",
 ];
 ---
 
 <section class="landing-panel landing-demo" aria-labelledby="demo-heading">
   <p class="landing-kicker">SEE IT IN ACTION</p>
-  <h2 id="demo-heading" class="landing-heading">From idea to run in one flow.</h2>
+  <h2 id="demo-heading" class="landing-heading">
+    From idea to run in one flow.
+  </h2>
   <div class="landing-demo__grid">
     <div class="landing-demo__copy">
       <p class="landing-demo__intro">
-        AppraiseJS gives you a single local app to define test assets, generate Gherkin artifacts, and run with Playwright. No glue code—just a clear path from authoring to results.
+        AppraiseJS gives you a single local app to define test assets, generate
+        Gherkin artifacts, and run with Playwright. No glue code—just a clear
+        path from authoring to results.
       </p>
       <ul class="landing-demo__bullets">
-        {bullets.map((b) => (
-          <li>{b}</li>
-        ))}
+        {bullets.map((b) => <li>{b}</li>)}
       </ul>
     </div>
     <div class="landing-demo__code" aria-hidden="true">
-      <pre><code>npm run setup
-npm run sync-all
+      <pre><code>npx create-appraisejs
+cd &lt;your-project-name&gt;
 npm run dev</code></pre>
-      <p class="landing-demo__code-caption">Then open the app and create your first run.</p>
+      <p class="landing-demo__code-caption">
+        Then open the app and create your first run.
+      </p>
     </div>
   </div>
 </section>
@@ -70,8 +74,15 @@ npm run dev</code></pre>
   .landing-demo__code {
     border-radius: 0.75rem;
     padding: 1.25rem 1.5rem;
-    background: var(--sl-color-surface-1, color-mix(in oklab, var(--sl-color-text) 8%, var(--sl-color-bg)));
-    border: 1px solid var(--sl-color-hairline, color-mix(in oklab, var(--sl-color-text) 12%, transparent));
+    background: var(
+      --sl-color-surface-1,
+      color-mix(in oklab, var(--sl-color-text) 8%, var(--sl-color-bg))
+    );
+    border: 1px solid
+      var(
+        --sl-color-hairline,
+        color-mix(in oklab, var(--sl-color-text) 12%, transparent)
+      );
   }
 
   .landing-demo__code pre {
