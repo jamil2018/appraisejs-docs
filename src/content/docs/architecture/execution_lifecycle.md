@@ -5,67 +5,121 @@ sidebar:
   order: 2
 ---
 
-This page describes the runtime lifecycle used by `createTestRunAction` and the test-run executor stack.
+This page documents the runtime path used by `createTestRunAction`, `executeTestRun`, and `ProcessManager`.
 
-## 1. Run creation and selection
+## Request payload (`testRunSchema`)
 
-1. Client submits test run config (`name`, `environmentId`, selection mode, workers, browser).
-2. Server validates with `testRunSchema` and checks unique run name.
-3. Server resolves execution scope:
-4. `By Tags`: fetches tags and expands matching test cases from case-level and suite-level tags.
-5. `By Test Cases`: resolves selected cases, then extracts `IDENTIFIER` tags to constrain execution safely.
-6. Creates `TestRun` + `TestRunTestCase` records and marks lifecycle as queued/running.
+| Field              | Type                       | Required    | Meaning                                                 |
+| ------------------ | -------------------------- | ----------- | ------------------------------------------------------- |
+| `name`             | `string`                   | Yes         | Human-readable run name. Must be unique in `TestRun`.   |
+| `environmentId`    | `string`                   | Yes         | Database ID for the target `Environment`.               |
+| `tags`             | `string[]`                 | Conditional | Tag IDs for tag-based selection mode.                   |
+| `testCases`        | `{ testCaseId: string }[]` | Conditional | Explicit case IDs when tag-based selection is not used. |
+| `testWorkersCount` | `number`                   | No          | Parallel worker count. Minimum value is `1`.            |
+| `browserEngine`    | `BrowserEngine` enum       | Yes         | `CHROMIUM`, `FIREFOX`, or `WEBKIT`.                     |
 
-## 2. Process launch
+Selection rule: at least one of `tags` or `testCases` must be provided.
 
-1. `executeTestRun()` generates a unique report path: `src/tests/reports/cucumber-{runId}-{timestamp}.json`.
-2. Environment variables are set (`ENVIRONMENT`, `HEADLESS`, `BROWSER`, `REPORT_PATH`).
-3. Cucumber args are composed from tag expression and parallel workers.
-4. Child process is spawned (`npx cucumber-js ...`) via `spawnTask`.
-5. Process is registered in `ProcessManager` under `runId`.
+## 1. Run creation and scope resolution
 
-## 3. Runtime events and traces
+1. Validate payload with `testRunSchema`.
+2. Enforce unique run name (`checkUniqueName`).
+3. Resolve target environment from `environmentId`; return `400` if not found.
+4. Determine filtering mode:
+   - Tag mode: `tags.length > 0`
+   - Test-case mode: `testCases.length > 0 && tags.length === 0`
+5. Build execution scope:
+   - Tag mode: collect matching test cases from case-level tags and suite-level tags.
+   - Test-case mode: fetch selected cases, extract `IDENTIFIER` tags, and reject request if no identifier tags exist.
+6. Create `TestRun` with:
+   - `status = RUNNING`
+   - `result = PENDING`
+   - Connected tags and created `TestRunTestCase` rows for scoped cases.
 
-1. Hooks in `src/tests/hooks/hooks.ts` track scenario status per step.
-2. On scenario end, hook emits JSON event: `scenario::end` to stdout.
-3. For failed scenarios, Playwright trace is written to `src/tests/reports/traces/*.zip`.
-4. `ProcessManager` parses emitted JSON and re-emits `scenario::end` events internally.
-5. Run action listens and updates `TestRunTestCase` status/result/trace path.
+## 2. Process launch (`executeTestRun`)
 
-## 4. Completion and persistence
+`createTestRunAction` invokes `executeTestRun` with:
 
-1. Process exit resolves run completion.
-2. Final logs are formatted and stored in `TestRunLog`.
-3. Cucumber JSON is parsed and persisted via `storeReportFromFile()`.
-4. Run status/result are finalized and UI paths are revalidated.
-5. Metrics updates run for test cases, test suites, and dashboard aggregates.
+| Parameter          | Type            | Meaning                                                                     |
+| ------------------ | --------------- | --------------------------------------------------------------------------- |
+| `testRunId`        | `string`        | External run identifier (`runId`), used as process key and artifact prefix. |
+| `environment`      | `Environment`   | Full environment record; `name` is exported to process env.                 |
+| `tags`             | `Tag[]`         | Tags converted into Cucumber tag expression (`or` combined).                |
+| `testWorkersCount` | `number`        | Controls `--parallel` argument when greater than `1`.                       |
+| `browserEngine`    | `BrowserEngine` | Mapped to Playwright browser name (`chromium`/`firefox`/`webkit`).          |
+| `headless`         | `boolean`       | Passed as `HEADLESS` env var, defaults to `true`.                           |
 
-```mermaid
-sequenceDiagram
-  participant UI
-  participant Action as createTestRunAction
-  participant Exec as test-run-executor
-  participant PM as ProcessManager
-  participant Hook as Cucumber Hooks
-  participant Report as report-actions
-  participant DB
+Execution steps:
 
-  UI->>Action: Submit test run
-  Action->>DB: Create TestRun + TestRunTestCase
-  Action->>Exec: executeTestRun(config)
-  Exec->>PM: register(runId, process)
-  Exec->>Hook: launch cucumber-js
-  Hook->>PM: emit scenario::end JSON
-  PM->>Action: scenario::end event
-  Action->>DB: update per-case status/trace
-  Hook-->>Exec: process exit + report file
-  Action->>Report: storeReportFromFile(runId, reportPath)
-  Report->>DB: create Report tree
-  Action->>DB: finalize run + logs + metrics
+1. Generate report path: `src/tests/reports/cucumber-{runId}-{timestamp}.json`.
+2. Set process env vars:
+   - `ENVIRONMENT`: environment name (`string`)
+   - `HEADLESS`: `"true"` or `"false"` (`string`)
+   - `BROWSER`: browser name (`string`)
+   - `REPORT_PATH`: absolute cucumber output path (`string`)
+3. Build Cucumber args:
+   - `-t <tagExpression>` when tags exist
+   - `--parallel <count>` when worker count > 1
+4. Spawn `npx cucumber-js ...` using `spawnTask`.
+5. Register process in `ProcessManager` under `testRunId`.
+6. Attach process exit handler that unregisters process immediately.
+
+## 3. Runtime events and trace artifacts
+
+Hooks in `src/tests/hooks/hooks.ts` emit structured JSON events to stdout:
+
+| Field               | Type                                             | Meaning                                                           |
+| ------------------- | ------------------------------------------------ | ----------------------------------------------------------------- |
+| `event`             | `"scenario::end"`                                | Event discriminator parsed by `ProcessManager`.                   |
+| `data.scenarioName` | `string`                                         | Cucumber scenario name.                                           |
+| `data.status`       | `"passed" \| "failed" \| "skipped" \| "unknown"` | Scenario outcome derived from step status progression.            |
+| `data.tracePath`    | `string \| undefined`                            | ZIP path for failed scenarios (`src/tests/reports/traces/*.zip`). |
+
+Flow:
+
+1. Hooks track per-scenario status during execution.
+2. On scenario completion, hooks emit `scenario::end` JSON.
+3. `ProcessManager` parses stdout/stderr and re-emits `scenario::end`.
+4. `createTestRunAction` listener maps status and updates matching `TestRunTestCase`.
+5. Scenario matching uses bracket prefix (`[Test Case Title]`) with fallback handling for tag-only runs.
+
+## 4. Completion, logs, and report persistence
+
+1. Wait for spawned process completion (`waitForTask`).
+2. Normalize captured stdout/stderr into `LogEntry[]` and persist in `TestRunLog`.
+3. Finalize run status/result:
+   - Exit code `0` -> `COMPLETED/PASSED`
+   - Non-zero -> `COMPLETED/FAILED`
+   - Preserve cancelled states when cancellation already occurred.
+4. Persist report tree using `storeReportFromFile(runId, reportPath)`:
+   - `Report` -> `ReportFeature` -> `ReportScenario` -> `ReportStep/ReportHook`
+   - Link back to run cases through `ReportTestCase`.
+5. Trigger metrics updates and revalidation paths for UI consistency.
+
+Flow diagram for this lifecycle:
+
+```nomnoml
+#direction: down
+#spacing: 60
+#stroke: #64748b
+#fill: #f8fafc
+[UI] -> [createTestRunAction]
+[createTestRunAction] -> [DB: Create TestRun + rows]
+[createTestRunAction] -> [test-run-executor]
+[test-run-executor] -> [ProcessManager: register]
+[test-run-executor] -> [Cucumber Hooks: launch]
+[Cucumber Hooks: launch] -> [ProcessManager: emit scenario::end]
+[ProcessManager: emit scenario::end] -> [createTestRunAction]
+[createTestRunAction] -> [DB: update status + tracePath]
+[test-run-executor] -> [createTestRunAction: process exit]
+[createTestRunAction] -> [report-actions: storeReportFromFile]
+[report-actions: storeReportFromFile] -> [DB: report hierarchy]
+[createTestRunAction] -> [DB: finalize run + logs]
 ```
 
-## Failure-handling notes
+## Failure and guardrail behavior
 
-- If no identifier tags are available for explicit case selection, run creation is rejected.
-- If report file is missing, report storage returns a structured error.
-- Process unregister happens on exit to avoid stale in-memory handles.
+- Reject run when both `tags` and `testCases` are empty.
+- Reject explicit case mode when selected cases have no `IDENTIFIER` tags.
+- Skip report generation when run is cancelled.
+- Return structured `404` when report file is missing at ingest time.

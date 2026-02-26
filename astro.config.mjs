@@ -4,6 +4,7 @@ import starlight from "@astrojs/starlight";
 import sitemap from "@astrojs/sitemap";
 
 import tailwindcss from "@tailwindcss/vite";
+import starlightNomnoml from "./src/plugins/starlight-nomnoml";
 
 const rawSiteUrl =
   process.env.SITE_URL ??
@@ -19,6 +20,7 @@ export default defineConfig({
   site,
   integrations: [
     starlight({
+      plugins: [starlightNomnoml()],
       title: "AppraiseJS",
       description:
         "AppraiseJS documentation for visual test modeling, orchestration, execution, and reporting workflows.",

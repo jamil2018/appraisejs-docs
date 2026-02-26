@@ -48,3 +48,38 @@ a.sidebar-link-github::before {
 .sl-markdown-content li {
   margin-block: 0.35rem;
 }
+
+.sl-markdown-content .mermaid-diagram {
+  margin-block: 1.25rem;
+  overflow-x: auto;
+  border: 1px solid var(--sl-color-hairline-light);
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  background: var(--sl-color-bg-nav);
+}
+
+.sl-markdown-content .nomnoml-diagram {
+  margin-block: 1.25rem;
+  overflow: visible;
+  border: 1px solid var(--sl-color-hairline-light);
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  background: var(--sl-color-bg-nav);
+}
+
+.sl-markdown-content .mermaid-diagram .mermaid {
+  min-width: fit-content;
+}
+
+.sl-markdown-content .mermaid-diagram svg {
+  display: block;
+  margin-inline: auto;
+  max-width: none;
+}
+
+.sl-markdown-content .nomnoml-diagram svg {
+  display: block;
+  margin-inline: auto;
+  max-width: 100%;
+  height: auto;
+}

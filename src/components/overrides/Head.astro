@@ -1,10 +1,108 @@
 ---
-import Analytics from '@vercel/analytics/astro';
-import SpeedInsights from '@vercel/speed-insights/astro';
+import Analytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
 
 const { head } = Astro.locals.starlightRoute;
 ---
 
-{head.map(({ tag: Tag, attrs, content }) => <Tag {...attrs} set:html={content} />)}
+{
+  head.map(({ tag: Tag, attrs, content }) => (
+    <Tag {...attrs} set:html={content} />
+  ))
+}
 <Analytics />
 <SpeedInsights />
+<script type="module">
+  import mermaid from "mermaid";
+
+  const mermaidState = (window.__APPRAISE_MERMAID_STATE__ ??= {
+    bound: false,
+    theme: null,
+  });
+
+  function getTheme() {
+    return document.documentElement.dataset.theme === "light"
+      ? "default"
+      : "dark";
+  }
+
+  function convertMermaidCodeBlocks() {
+    const blocks = document.querySelectorAll(
+      'pre[data-language="mermaid"], pre > code.language-mermaid',
+    );
+
+    blocks.forEach((el) => {
+      const pre = el.matches("pre") ? el : el.parentElement;
+      const code = el.matches("code") ? el : el.querySelector("code");
+      const definition = (code?.textContent ?? "").trim();
+
+      if (!pre || !definition) return;
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "mermaid-diagram";
+
+      const diagram = document.createElement("div");
+      diagram.className = "mermaid";
+      diagram.dataset.originalDefinition = definition;
+      diagram.textContent = definition;
+
+      wrapper.appendChild(diagram);
+      pre.replaceWith(wrapper);
+    });
+  }
+
+  function resetForThemeChange() {
+    document.querySelectorAll(".mermaid").forEach((diagram) => {
+      const definition = diagram.dataset.originalDefinition;
+      if (!definition) return;
+
+      diagram.removeAttribute("data-processed");
+      diagram.removeAttribute("id");
+      diagram.textContent = definition;
+    });
+  }
+
+  async function renderMermaidDiagrams() {
+    convertMermaidCodeBlocks();
+
+    const theme = getTheme();
+    if (mermaidState.theme !== theme) {
+      mermaid.initialize({ startOnLoad: false, theme });
+      mermaidState.theme = theme;
+      resetForThemeChange();
+    }
+
+    const nodes = Array.from(
+      document.querySelectorAll(".mermaid:not([data-processed='true'])"),
+    );
+    if (!nodes.length) return;
+
+    try {
+      await mermaid.run({ nodes });
+    } catch (error) {
+      console.error("Failed to render Mermaid diagram", error);
+    }
+  }
+
+  function queueRender() {
+    window.requestAnimationFrame(() => {
+      void renderMermaidDiagrams();
+    });
+  }
+
+  if (!mermaidState.bound) {
+    mermaidState.bound = true;
+
+    document.addEventListener("DOMContentLoaded", queueRender);
+    document.addEventListener("astro:page-load", queueRender);
+    document.addEventListener("astro:after-swap", queueRender);
+
+    const observer = new MutationObserver(queueRender);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+  }
+
+  queueRender();
+</script>

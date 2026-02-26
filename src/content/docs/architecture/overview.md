@@ -15,16 +15,19 @@ AppraiseJS is a local-first Next.js platform that combines visual test authoring
 4. Data layer (`prisma` + SQLite): authoritative model for authored entities, runs, reports, and metrics.
 5. Runner layer (`src/tests`): Cucumber + Playwright execution, hooks, trace capture, step libraries.
 
-```mermaid
-flowchart LR
-  UI["UI Pages"] --> SA["Server Actions / API Routes"]
-  SA --> CORE["Core Libs + Scripts"]
-  CORE --> DB["Prisma + SQLite"]
-  CORE --> RUNNER["Cucumber + Playwright"]
-  RUNNER --> REPORT["Cucumber JSON + Traces"]
-  REPORT --> CORE
-  CORE --> DB
-  SA --> UI
+The following diagram illustrates the architecture flow.
+
+```nomnoml
+#direction: right
+#stroke: #64748b
+#fill: #f8fafc
+[UI Pages] -> [Server Actions / API Routes]
+[Server Actions / API Routes] -> [Core Libs + Scripts]
+[Core Libs + Scripts] -> [Prisma + SQLite]
+[Core Libs + Scripts] -> [Cucumber + Playwright]
+[Cucumber + Playwright] -> [Cucumber JSON + Traces]
+[Cucumber JSON + Traces] -> [Core Libs + Scripts]
+[Server Actions / API Routes] -> [UI Pages]
 ```
 
 ## How to read this section
