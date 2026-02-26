@@ -24,7 +24,11 @@ export default defineConfig({
       title: "AppraiseJS",
       description:
         "AppraiseJS documentation for visual test modeling, orchestration, execution, and reporting workflows.",
-      customCss: ["./src/styles/global.css", "./src/styles/custom.css"],
+      customCss: [
+        "./src/styles/theme.css",
+        "./src/styles/global.css",
+        "./src/styles/custom.css",
+      ],
       components: {
         Head: "./src/components/overrides/Head.astro",
       },

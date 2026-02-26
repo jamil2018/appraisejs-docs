@@ -1,186 +1,204 @@
 /* Landing page – imported from src/content/docs/index.mdx */
 
-/* ─── Hide Starlight header on landing ────────────────────────── */
+body:has(.landing-root) {
+  background:
+    radial-gradient(
+      65rem 30rem at 15% -10%,
+      hsl(var(--primary) / 0.18),
+      transparent
+    ),
+    radial-gradient(
+      50rem 26rem at 85% 0%,
+      hsl(var(--accent) / 0.16),
+      transparent
+    ),
+    hsl(var(--background));
+}
 
-header.header {
+body:has(.landing-root) header.header {
   display: none !important;
 }
 
-/* ─── Root layout ─────────────────────────────────────────────── */
+body:has(.landing-root) main .content-panel:first-of-type {
+  display: none !important;
+}
+
+body:has(.landing-root) .content-panel:has(.landing-root) {
+  border-top: none !important;
+  padding-top: 0.5rem !important;
+}
+
+body:has(.landing-root) .main-frame {
+  padding-top: 0.5rem !important;
+}
+
+body:has(.landing-root) .landing-navbar {
+  top: 1rem;
+}
 
 .landing-root {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  padding-bottom: 3rem;
-  background-image:
-    radial-gradient(
-      60rem 16rem at 30% 0,
-      color-mix(in oklab, var(--sl-color-accent) 8%, transparent),
-      transparent
-    );
+  gap: 2rem;
+  padding: 0.5rem 0 4rem;
 }
 
-/* ─── Shared section panel ────────────────────────────────────── */
+.landing-root section {
+  max-width: 80rem;
+  margin-inline: auto;
+  width: 100%;
+}
 
-.landing-panel {
-  border: 1px solid color-mix(in oklab, var(--sl-color-gray-5) 50%, transparent);
-  border-radius: 0.75rem;
-  padding: clamp(1.5rem, 4vw, 2.5rem);
-  background: color-mix(in oklab, var(--sl-color-text) 4%, var(--sl-color-bg));
+.landing-navbar {
+  position: sticky;
+  top: 4.25rem;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid hsl(var(--border) / 0.65);
+  border-radius: var(--radius);
+  background: hsl(var(--background) / 0.72);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.landing-navbar__brand {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: hsl(var(--foreground));
+}
+
+.landing-navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.landing-navbar__links a {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+  text-decoration: none;
+}
+
+.landing-navbar__links a:hover {
+  color: hsl(var(--foreground));
+}
+
+.landing-cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.55rem 1rem;
+  border-radius: calc(var(--radius) - 0.2rem);
+  border: 1px solid hsl(var(--primary));
+  background: hsl(var(--primary));
+  color: white;
+  text-decoration: none;
+  font-size: 0.84rem;
+  font-weight: 600;
+  box-shadow: 0 0 0 transparent;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.landing-cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 26px hsl(var(--primary) / 0.45);
+}
+
+.landing-secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1rem;
+  border-radius: calc(var(--radius) - 0.2rem);
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--secondary) / 0.45);
+  color: hsl(var(--secondary-foreground));
+  text-decoration: none;
+  font-size: 0.84rem;
+  font-weight: 600;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.landing-secondary-button:hover {
+  transform: translateY(-2px);
+  border-color: hsl(var(--ring));
+  background: hsl(var(--secondary) / 0.7);
 }
 
 .landing-kicker {
   margin: 0;
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--sl-color-accent);
+  color: hsl(var(--accent));
 }
 
 .landing-heading {
-  margin: 0.5rem 0 1.25rem;
-  font-size: clamp(1.35rem, 3.2vw, 2rem);
+  margin: 0.65rem 0 1rem;
+  font-size: clamp(1.5rem, 3.3vw, 2.3rem);
   font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.025em;
-  color: var(--sl-color-text);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: hsl(var(--foreground));
 }
 
-/* ─── Starlight splash hero ───────────────────────────────────── */
-
-.hero {
+.landing-panel {
   position: relative;
   overflow: hidden;
-  border: 1px solid color-mix(in oklab, var(--sl-color-gray-5) 50%, transparent);
-  border-radius: 1rem;
-  padding: clamp(2rem, 5vw, 3rem);
-  margin-top: 0.5rem;
-  background:
-    radial-gradient(
-      50rem 20rem at 8% 0%,
-      color-mix(in oklab, var(--sl-color-accent) 8%, transparent),
-      transparent
-    ),
-    radial-gradient(
-      40rem 16rem at 92% 100%,
-      color-mix(in oklab, var(--sl-color-accent) 5%, transparent),
-      transparent
-    ),
-    color-mix(in oklab, var(--sl-color-text) 4%, var(--sl-color-bg));
+  border-radius: var(--radius);
+  border: 1px solid hsl(var(--border) / 0.8);
+  background: linear-gradient(180deg, hsl(var(--card)), hsl(var(--card) / 0.9));
+  padding: clamp(1.35rem, 4vw, 2.3rem);
 }
 
-.hero h1 {
-  max-width: 14ch;
-  font-size: clamp(2.25rem, 5.5vw, 3.5rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
-  color: var(--sl-color-text);
-  margin: 0;
+.landing-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    hsl(var(--primary) / 0.28),
+    transparent 60%
+  );
 }
 
-.hero .tagline {
-  max-width: 56ch;
-  font-size: clamp(1rem, 1.75vw, 1.15rem);
-  color: var(--sl-color-gray-2);
-  line-height: 1.55;
+.landing-card {
+  border-radius: calc(var(--radius) - 0.2rem);
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
 }
-
-.hero .actions {
-  gap: 0.75rem;
-}
-
-.hero .actions .sl-link-button {
-  border-radius: 0.5rem;
-  padding: 0.5rem 1.3rem;
-  font-weight: 500;
-}
-
-.hero .actions .sl-link-button.primary {
-  background: var(--sl-color-accent);
-  border-color: var(--sl-color-accent);
-  color: var(--sl-color-white);
-}
-
-.hero .actions .sl-link-button.primary:hover {
-  box-shadow: 0 4px 20px color-mix(in oklab, var(--sl-color-accent) 30%, transparent);
-}
-
-.hero .actions .sl-link-button.secondary {
-  background: color-mix(in oklab, var(--sl-color-text) 6%, var(--sl-color-bg));
-  border-color: color-mix(in oklab, var(--sl-color-gray-5) 60%, transparent);
-  color: var(--sl-color-text);
-}
-
-.hero .actions .sl-link-button:hover {
-  transform: translateY(-1px);
-}
-
-.hero .hero-html {
-  width: min(100%, 26rem);
-}
-
-/* ─── Terminal code card ──────────────────────────────────────── */
-
-.landing-terminal {
-  border: 1px solid color-mix(in oklab, var(--sl-color-gray-5) 50%, transparent);
-  border-radius: 0.75rem;
-  overflow: hidden;
-  background: var(--sl-color-bg);
-  box-shadow: 0 4px 24px color-mix(in oklab, var(--sl-color-black) 8%, transparent);
-}
-
-.landing-terminal__dots {
-  display: flex;
-  gap: 0.45rem;
-  padding: 0.65rem 0.8rem;
-  border-bottom: 1px solid color-mix(in oklab, var(--sl-color-gray-5) 50%, transparent);
-}
-
-.landing-terminal__dots span {
-  width: 0.6rem;
-  height: 0.6rem;
-  border-radius: 50%;
-  background: var(--sl-color-gray-4);
-}
-
-.landing-terminal pre {
-  margin: 0;
-  padding: 0.9rem 1rem;
-  font-size: 0.85rem;
-  line-height: 1.6;
-  overflow-x: auto;
-}
-
-/* ─── Responsive ──────────────────────────────────────────────── */
 
 @media (max-width: 50rem) {
-  .hero,
-  .landing-panel {
-    border-radius: 0.65rem;
+  .landing-navbar {
+    top: 3.8rem;
+    flex-wrap: wrap;
   }
 
-  .hero {
-    padding: clamp(1.5rem, 4vw, 2rem);
-  }
-}
-
-/* ─── Motion ──────────────────────────────────────────────────── */
-
-@media (prefers-reduced-motion: no-preference) {
-  .hero .actions .sl-link-button {
-    transition:
-      transform 0.16s ease,
-      border-color 0.16s ease,
-      box-shadow 0.16s ease;
+  .landing-navbar__links {
+    width: 100%;
+    justify-content: space-between;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero .actions .sl-link-button:hover {
+  .landing-cta-button:hover,
+  .landing-secondary-button:hover {
     transform: none;
     box-shadow: none;
   }

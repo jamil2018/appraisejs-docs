@@ -1,26 +1,48 @@
----
-/**
- * Landing: Final CTA panel — "Start building tests the way you think" + Get started, GitHub, Architecture.
- */
----
-
-<section class="landing-panel landing-cta-panel" aria-labelledby="cta-heading">
-  <h2 id="cta-heading" class="landing-cta-panel__title">Start building tests the way you think.</h2>
-  <p class="landing-cta-panel__sub">One app for authoring, execution, and reporting. Open-source and local-first.</p>
-  <div class="landing-cta-panel__actions">
-    <a href="/getting-started/quick_start/" class="sl-link-button primary">Get started</a>
-    <a href="https://github.com/jamil2018/appraisejs-core" class="sl-link-button secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
-    <a href="/architecture/overview/" class="landing-cta-panel__link">Architecture</a>
+<section class="landing-final">
+  <div class="landing-panel landing-cta-panel" aria-labelledby="cta-heading">
+    <div class="landing-cta-panel__glow landing-cta-panel__glow--primary" aria-hidden="true"></div>
+    <div class="landing-cta-panel__glow landing-cta-panel__glow--accent" aria-hidden="true"></div>
+    <h2 id="cta-heading" class="landing-cta-panel__title">
+      Ship browser quality with the same confidence as backend code.
+    </h2>
+    <p class="landing-cta-panel__sub">
+      Start with one flow this week, then scale across teams with reusable
+      models, deterministic runs, and clear reporting.
+    </p>
+    <div class="landing-cta-panel__actions">
+      <a href="/getting-started/quick_start/" class="landing-cta-button">
+        Get Started
+      </a>
+      <a href="/getting-started/overview/" class="landing-secondary-button">
+        Watch Demo
+      </a>
+    </div>
   </div>
+  <footer class="landing-footer">
+    <span>AppraiseJS</span>
+    <a href="/getting-started/quick_start/">Getting Started</a>
+    <a href="/architecture/overview/">Architecture</a>
+    <a
+      href="https://github.com/jamil2018/appraisejs-core"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      GitHub
+    </a>
+  </footer>
 </section>
 
 <style is:global>
+  .landing-final {
+    display: grid;
+    gap: 1rem;
+  }
+
   .landing-cta-panel {
+    isolation: isolate;
     text-align: center;
-    padding: clamp(2rem, 5vw, 3rem) clamp(1rem, 3vw, 1.25rem);
-    background: var(--sl-color-surface-1, color-mix(in oklab, var(--sl-color-text) 6%, var(--sl-color-bg)));
-    border: 1px solid var(--sl-color-hairline, color-mix(in oklab, var(--sl-color-text) 12%, transparent));
-    border-radius: 0.75rem;
+    padding-top: clamp(2rem, 5vw, 3rem);
+    padding-bottom: clamp(2rem, 5vw, 3rem);
   }
 
   .landing-cta-panel__title {
@@ -28,15 +50,20 @@
     font-size: clamp(1.5rem, 3.5vw, 2rem);
     font-weight: 600;
     letter-spacing: -0.02em;
-    color: var(--sl-color-text);
+    color: hsl(var(--foreground));
+    position: relative;
+    z-index: 1;
   }
 
   .landing-cta-panel__sub {
     margin: 0.5rem 0 1.25rem;
-    font-size: 0.9375rem;
-    color: var(--sl-color-text-accent);
+    font-size: 0.96rem;
+    color: hsl(var(--muted-foreground));
     max-width: 42ch;
     margin-inline: auto;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
   }
 
   .landing-cta-panel__actions {
@@ -45,45 +72,59 @@
     gap: 0.75rem 1rem;
     justify-content: center;
     align-items: center;
+    position: relative;
+    z-index: 1;
   }
 
-  .landing-cta-panel__actions .sl-link-button {
-    border-radius: 0.5rem;
-    padding: 0.5rem 1.25rem;
-    font-weight: 500;
+  .landing-cta-panel__glow {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .landing-cta-panel__glow--primary {
+    width: 20rem;
+    height: 20rem;
+    left: 5%;
+    top: -7rem;
+    background: hsl(var(--primary) / 0.22);
+  }
+
+  .landing-cta-panel__glow--accent {
+    width: 17rem;
+    height: 17rem;
+    right: 6%;
+    bottom: -6rem;
+    background: hsl(var(--accent) / 0.18);
+  }
+
+  .landing-cta-panel .landing-cta-button:hover {
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.4);
+  }
+
+  .landing-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.7rem 1rem;
+    color: hsl(var(--muted-foreground));
+    font-size: 0.82rem;
+  }
+
+  .landing-footer span {
+    color: hsl(var(--foreground));
+    font-weight: 600;
+  }
+
+  .landing-footer a {
+    color: hsl(var(--muted-foreground));
     text-decoration: none;
-    transition: transform 0.16s ease, border-color 0.16s ease;
   }
 
-  .landing-cta-panel__actions .sl-link-button.primary {
-    background: var(--sl-color-accent);
-    border: 1px solid var(--sl-color-accent);
-    color: var(--sl-color-accent-text, white);
-  }
-
-  .landing-cta-panel__actions .sl-link-button.secondary {
-    background: var(--sl-color-bg);
-    border: 1px solid var(--sl-color-hairline, var(--sl-color-gray-4));
-    color: var(--sl-color-text);
-  }
-
-  .landing-cta-panel__actions .sl-link-button:hover {
-    transform: translateY(-2px);
-  }
-
-  .landing-cta-panel__link {
-    font-size: 0.875rem;
-    color: var(--sl-color-accent);
-    text-decoration: none;
-  }
-
-  .landing-cta-panel__link:hover {
-    text-decoration: underline;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .landing-cta-panel__actions .sl-link-button:hover {
-      transform: none;
-    }
+  .landing-footer a:hover {
+    color: hsl(var(--foreground));
   }
 </style>

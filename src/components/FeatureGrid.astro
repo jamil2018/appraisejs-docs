@@ -1,45 +1,63 @@
 ---
-/**
- * Landing: 6 feature cards (Next.js-style grid). Wording aligned with AppraiseJS docs.
- */
 const features = [
   {
-    title: 'Visual test authoring',
-    description: 'Build test logic from composable blocks—modules, suites, cases, and reusable template steps.',
+    title: "Visual-first authoring for complex journeys",
+    description:
+      "Model flows with reusable modules and clear test intent before writing any low-level automation glue.",
+    icon: "flow",
   },
   {
-    title: 'Generates real code',
-    description: 'Export Playwright and Cucumber artifacts you can own: Gherkin features and execution flow.',
+    title: "Generated artifacts your team actually owns",
+    description:
+      "Produce Playwright + Cucumber output as versioned artifacts your engineers can review, evolve, and trust.",
+    icon: "artifacts",
   },
   {
-    title: 'Unified workflow',
-    description: 'Author, manage, run, and report in one place—no stitching multiple tools together.',
-  },
-  {
-    title: 'Fast onboarding',
-    description: 'Scaffold with create-appraisejs and sane defaults; from zero to running in minutes.',
-  },
-  {
-    title: 'Deterministic execution',
-    description: 'Repeatable runs with tag-driven orchestration and configurable workers, built for CI.',
-  },
-  {
-    title: 'Reports & insights',
-    description: 'Parse Cucumber output into structured reports; view pass/fail, durations, and failure context in-app.',
+    title: "Deterministic runs and useful feedback loops",
+    description:
+      "Execute by tags with controlled workers, then inspect structured reports to fix failures without guesswork.",
+    icon: "runtime",
   },
 ];
 ---
 
-<section class="landing-panel landing-features" aria-labelledby="features-heading">
-  <p class="landing-kicker">FEATURES</p>
-  <h2 id="features-heading" class="landing-heading">Built for teams that ship.</h2>
+<section
+  class="landing-panel landing-features"
+  aria-labelledby="features-heading"
+>
+  <p class="landing-kicker">Platform Pillars</p>
+  <h2 id="features-heading" class="landing-heading">
+    Product-grade test architecture from day one.
+  </h2>
   <div class="landing-features-grid">
-    {features.map((f) => (
-      <article class="landing-features-card">
-        <h3>{f.title}</h3>
-        <p>{f.description}</p>
-      </article>
-    ))}
+    {
+      features.map((f) => (
+        <article class="landing-features-card" tabindex="0">
+          <div class="landing-features-card__icon" aria-hidden="true">
+            {f.icon === "flow" && (
+              <svg viewBox="0 0 24 24">
+                <path d="M4 6h6v4H4zM14 6h6v4h-6zM9 14h6v4H9z" />
+                <path d="M10 8h4M16 10v3M12 10v4" />
+              </svg>
+            )}
+            {f.icon === "artifacts" && (
+              <svg viewBox="0 0 24 24">
+                <path d="M7 4h10l3 3v13H4V7z" />
+                <path d="M7 4v4h4M8 13h8M8 17h8" />
+              </svg>
+            )}
+            {f.icon === "runtime" && (
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="8" />
+                <path d="M12 8v5l3 2" />
+              </svg>
+            )}
+          </div>
+          <h3>{f.title}</h3>
+          <p>{f.description}</p>
+        </article>
+      ))
+    }
   </div>
 </section>
 
@@ -47,52 +65,61 @@ const features = [
   .landing-features-grid {
     display: grid;
     grid-template-columns: repeat(1, minmax(0, 1fr));
-    gap: 0.75rem;
-  }
-
-  @media (min-width: 640px) {
-    .landing-features-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  @media (min-width: 960px) {
-    .landing-features-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
+    gap: 0.85rem;
+    margin-top: 0.9rem;
   }
 
   .landing-features-card {
+    padding: 1.1rem;
+    border-color: hsl(var(--border) / 0.9);
+    background: hsl(var(--card) / 0.92);
+    transform: none;
+    height: 100%;
+    margin: 0;
+    border: 1px solid hsl(var(--border));
     border-radius: 0.5rem;
-    padding: 1rem;
-    background: var(--sl-color-surface-1, color-mix(in oklab, var(--sl-color-text) 6%, var(--sl-color-bg)));
-    border: 1px solid var(--sl-color-hairline, color-mix(in oklab, var(--sl-color-text) 10%, transparent));
-    transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
   }
 
-  .landing-features-card:hover {
-    background: var(--sl-color-surface-2, color-mix(in oklab, var(--sl-color-text) 10%, var(--sl-color-bg)));
-    transform: translateY(-2px);
-    border-color: var(--sl-color-hairline-shade, color-mix(in oklab, var(--sl-color-text) 16%, transparent));
+  .landing-features-card__icon {
+    width: 2.1rem;
+    height: 2.1rem;
+    display: grid;
+    place-items: center;
+    border-radius: 0.65rem;
+    border: 1px solid hsl(var(--border));
+    background: linear-gradient(
+      145deg,
+      hsl(var(--primary) / 0.18),
+      hsl(var(--accent) / 0.15)
+    );
+    margin-bottom: 0.85rem;
+  }
+
+  .landing-features-card__icon svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    fill: none;
+    stroke: hsl(var(--foreground));
+    stroke-width: 1.7;
   }
 
   .landing-features-card h3 {
     margin: 0 0 0.4rem;
-    font-size: 1rem;
+    font-size: 1.02rem;
     font-weight: 600;
-    color: var(--sl-color-text);
+    color: hsl(var(--card-foreground));
   }
 
   .landing-features-card p {
     margin: 0;
-    color: var(--sl-color-text-accent);
-    font-size: 0.875rem;
-    line-height: 1.45;
+    color: hsl(var(--muted-foreground));
+    font-size: 0.9rem;
+    line-height: 1.55;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .landing-features-card:hover {
-      transform: none;
+  @media (min-width: 58rem) {
+    .landing-features-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 </style>

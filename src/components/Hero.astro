@@ -1,175 +1,267 @@
----
-/**
- * Custom Hero override for splash/landing page.
- * Next.js-style: headline, tagline, CTAs, supporting line, code card (right/below).
- * Data from frontmatter via Starlight: Astro.locals.starlightRoute.entry.data.hero
- */
-interface HeroAction {
-  text: string;
-  link: string;
-  variant?: string;
-  attrs?: Record<string, string | number | boolean>;
-}
-interface HeroData {
-  title?: string;
-  template?: string;
-  hero?: { title?: string; tagline?: string; supportingLine?: string; actions?: HeroAction[] };
-}
-const entry = Astro.locals.starlightRoute?.entry;
-const data: HeroData = entry?.data ?? {};
-const hero = data.hero ?? {};
-const title = hero.title ?? data.title ?? '';
-const tagline = hero.tagline ?? '';
-const supportingLine = hero.supportingLine ?? '';
-const actions: HeroAction[] = hero.actions ?? [];
-const hasHero = !!(title || tagline || actions.length);
-const isSplash = data.template === 'splash';
----
-
-{hasHero && (
-  <header class="hero landing-hero" aria-labelledby={title ? 'starlight__hero__title' : undefined}>
-    <div class="landing-hero__stack">
-      <div class="landing-hero__copy">
-        {title && (
-          <h1 id="starlight__hero__title" class="landing-hero__title">
-            {title}
-          </h1>
-        )}
-        {tagline && <p class="landing-hero__tagline tagline">{tagline}</p>}
-        {actions.length > 0 && (
-          <div class="landing-hero__actions actions">
-            {actions.map((action: HeroAction) => {
-              const { text, link: href, variant = 'secondary', attrs = {} } = action;
-              const classList = ['sl-link-button', variant].filter(Boolean).join(' ');
-              return (
-                <a href={href} class={classList} {...attrs}>
-                  {text}
-                </a>
-              );
-            })}
-          </div>
-        )}
-        {isSplash && supportingLine && (
-          <p class="landing-hero__supporting">{supportingLine}</p>
-        )}
+<section
+  class="landing-hero landing-panel"
+  aria-labelledby="landing-hero-heading"
+>
+  <div
+    class="landing-hero__aurora landing-hero__aurora--primary"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="landing-hero__aurora landing-hero__aurora--accent"
+    aria-hidden="true"
+  >
+  </div>
+  <div class="landing-hero__grid">
+    <div class="landing-hero__copy">
+      <p class="landing-kicker">Model. Generate. Ship.</p>
+      <h1 id="landing-hero-heading">
+        Browser test automation that feels like building product.
+      </h1>
+      <p class="landing-hero__description">
+        AppraiseJS helps engineering teams model journeys visually, generate
+        real Playwright + Cucumber artifacts, and keep quality pipelines
+        deterministic as test coverage scales.
+      </p>
+      <div class="landing-hero__actions">
+        <a class="landing-cta-button" href="/getting-started/quick_start/">
+          Get Started
+        </a>
+        <a class="landing-secondary-button" href="/getting-started/overview/">
+          Watch Demo
+        </a>
       </div>
-      {isSplash && (
-        <div class="landing-hero__code-card" aria-hidden="true">
-          <pre><code>npx create-appraisejs@latest
-cd my-appraisejs
-npm run dev</code></pre>
-        </div>
-      )}
     </div>
-  </header>
-)}
+    <div class="landing-product-visual landing-card" aria-hidden="true">
+      <div class="landing-product-visual__header">
+        <div class="landing-product-visual__dots">
+          <span></span><span></span><span></span>
+        </div>
+        <span class="landing-product-visual__label">AppraiseJS</span>
+      </div>
+      <div class="landing-product-visual__body">
+        <div class="landing-product-visual__row">
+          <span>Test Run</span>
+          <strong>Checkout Flow Validation</strong>
+        </div>
+        <div class="landing-product-visual__meter">
+          <span style="--fill: 82%;"></span>
+        </div>
+        <ul>
+          <li>
+            <span class="state success"></span>
+            <code>Validate cart contents</code>
+            <small>10 test cases</small>
+          </li>
+          <li>
+            <span class="state success"></span>
+            <code>Validate checkout process</code>
+            <small>13 test cases</small>
+          </li>
+          <li>
+            <span class="state pending"></span>
+            <code>Validate payment process</code>
+            <small>12 test cases</small>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
 <style is:global>
   .landing-hero {
-    position: relative;
-    padding: clamp(1.5rem, 4vw, 2.5rem);
-    margin-top: 0.5rem;
+    isolation: isolate;
+    margin-top: 0.2rem;
   }
 
-  .landing-hero__stack {
+  .landing-hero__grid {
     position: relative;
     display: grid;
     grid-template-columns: 1fr;
-    gap: clamp(1.5rem, 4vw, 2.5rem);
-    align-items: start;
-    text-align: left;
+    align-items: center;
+    gap: clamp(1.5rem, 5vw, 3rem);
   }
 
-  @media (min-width: 960px) {
-    .landing-hero__stack {
-      grid-template-columns: 1fr minmax(280px, 380px);
-      align-items: start;
-    }
+  .landing-hero__copy h1 {
+    margin: 0.75rem 0 1rem;
+    font-size: clamp(2.1rem, 6vw, 4.05rem);
+    font-weight: 750;
+    line-height: 1;
+    letter-spacing: -0.035em;
+    color: hsl(var(--foreground));
+    max-width: 14ch;
   }
 
-  .landing-hero__copy {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: flex-start;
-  }
-
-  .landing-hero__title {
-    max-width: none;
-    font-size: clamp(2rem, 5vw, 3.25rem);
-    letter-spacing: -0.025em;
-    line-height: 1.2;
-    font-weight: 700;
-    color: var(--sl-color-text);
+  .landing-hero__description {
     margin: 0;
-  }
-
-  .landing-hero__tagline {
-    max-width: 56ch;
-    font-size: clamp(1rem, 1.75vw, 1.25rem);
-    color: var(--sl-color-text-accent);
-    margin: 0;
-    line-height: 1.55;
+    max-width: 54ch;
+    color: hsl(var(--muted-foreground));
+    font-size: clamp(1rem, 2vw, 1.12rem);
+    line-height: 1.6;
   }
 
   .landing-hero__actions {
+    margin-top: 1.4rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem 1.25rem;
-    margin-top: 0.25rem;
+    gap: 0.7rem;
   }
 
-  .landing-hero__actions .sl-link-button {
-    border-radius: 0.5rem;
-    padding: 0.5rem 1.25rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+  .landing-product-visual {
+    position: relative;
+    overflow: hidden;
+    padding: 1rem;
+    border-color: hsl(var(--border) / 0.95);
+    box-shadow: 0 30px 60px hsl(var(--background) / 0.55);
   }
 
-  .landing-hero__actions .sl-link-button.primary {
-    background: var(--sl-color-accent);
-    border: 1px solid var(--sl-color-accent);
-    color: var(--sl-color-accent-text, white);
+  .landing-product-visual::before {
+    content: "";
+    position: absolute;
+    inset: -40% -35% auto;
+    height: 15rem;
+    background: radial-gradient(
+      closest-side,
+      hsl(var(--primary) / 0.3),
+      transparent
+    );
+    pointer-events: none;
   }
 
-  .landing-hero__actions .sl-link-button.secondary,
-  .landing-hero__actions .sl-link-button.minimal {
-    background: var(--sl-color-background);
-    border: 1px solid var(--sl-color-hairline, var(--sl-color-gray-4));
-    color: var(--sl-color-text);
+  .landing-product-visual__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid hsl(var(--border));
+    padding-bottom: 0.8rem;
   }
 
-  .landing-hero__actions .sl-link-button:hover {
-    transform: translateY(-2px);
-    border-color: var(--sl-color-accent-low, var(--sl-color-gray-4));
+  .landing-product-visual__dots {
+    display: inline-flex;
+    gap: 0.35rem;
   }
 
-  .landing-hero__supporting {
-    margin: 0.25rem 0 0;
-    font-size: 0.8125rem;
-    color: var(--sl-color-text-accent);
-    font-weight: 400;
+  .landing-product-visual__dots span {
+    width: 0.62rem;
+    height: 0.62rem;
+    border-radius: 9999px;
+    background: hsl(var(--muted-foreground) / 0.5);
   }
 
-  .landing-hero__code-card {
-    border-radius: 0.75rem;
-    padding: 1.25rem 1.5rem;
-    background: var(--sl-color-surface-1, color-mix(in oklab, var(--sl-color-text) 8%, var(--sl-color-background)));
-    border: 1px solid var(--sl-color-hairline, color-mix(in oklab, var(--sl-color-text) 12%, transparent));
-    box-shadow: 0 4px 24px color-mix(in oklab, var(--sl-color-text) 8%, transparent);
+  .landing-product-visual__label {
+    font-size: 0.78rem;
+    color: hsl(var(--muted-foreground));
   }
 
-  .landing-hero__code-card pre {
+  .landing-product-visual__body {
+    position: relative;
+    padding-top: 1rem;
+  }
+
+  .landing-product-visual__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.6rem;
+    font-size: 0.83rem;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .landing-product-visual__row strong {
+    color: hsl(var(--card-foreground));
+    font-weight: 600;
+  }
+
+  .landing-product-visual__meter {
+    margin: 0.95rem 0 1rem;
+    height: 0.48rem;
+    border-radius: 9999px;
+    background: hsl(var(--secondary));
+    overflow: hidden;
+  }
+
+  .landing-product-visual__meter span {
+    display: block;
+    height: 100%;
+    width: var(--fill);
+    background: linear-gradient(
+      to right,
+      hsl(var(--primary)),
+      hsl(var(--accent))
+    );
+  }
+
+  .landing-product-visual ul {
+    list-style: none;
     margin: 0;
-    font-family: var(--sl-font-mono);
-    font-size: 0.875rem;
-    line-height: 1.6;
-    color: var(--sl-color-text);
-    overflow-x: auto;
+    padding: 0;
+    display: grid;
+    gap: 0.52rem;
   }
 
-  .landing-hero__code-card code {
-    color: inherit;
+  .landing-product-visual li {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.55rem 0.6rem;
+    border-radius: calc(var(--radius) - 0.3rem);
+    border: 1px solid hsl(var(--border) / 0.8);
+    background: hsl(var(--secondary) / 0.45);
+  }
+
+  .landing-product-visual li code {
+    font-size: 0.76rem;
+    color: hsl(var(--foreground));
+  }
+
+  .landing-product-visual li small {
+    color: hsl(var(--muted-foreground));
+    font-size: 0.72rem;
+  }
+
+  .landing-product-visual .state {
+    width: 0.52rem;
+    height: 0.52rem;
+    border-radius: 9999px;
+    display: inline-block;
+  }
+
+  .landing-product-visual .state.success {
+    background: hsl(var(--accent));
+  }
+
+  .landing-product-visual .state.pending {
+    background: hsl(var(--primary));
+  }
+
+  .landing-hero__aurora {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(70px);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .landing-hero__aurora--primary {
+    width: 20rem;
+    height: 20rem;
+    top: -6rem;
+    left: -5rem;
+    background: hsl(var(--primary) / 0.25);
+  }
+
+  .landing-hero__aurora--accent {
+    width: 16rem;
+    height: 16rem;
+    right: -4rem;
+    bottom: -6rem;
+    background: hsl(var(--accent) / 0.2);
+  }
+
+  @media (min-width: 64rem) {
+    .landing-hero__grid {
+      grid-template-columns: minmax(0, 1.12fr) minmax(22rem, 0.88fr);
+    }
   }
 </style>

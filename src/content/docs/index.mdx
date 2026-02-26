@@ -1,43 +1,26 @@
 ---
 title: Home
-description: Visual-first test management, orchestration, execution, and reporting.
+description: Build browser test systems visually, generate production-grade artifacts, and ship trusted release signals.
 template: splash
-hero:
-  title: AppraiseJS for visual test engineering workflows.
-  tagline: Design test flows visually, execute with Cucumber + Playwright, and keep portable artifacts your team owns.
-  image:
-    html: |
-      <div class="landing-terminal" aria-label="AppraiseJS setup commands">
-        <div class="landing-terminal__dots" aria-hidden="true"><span></span><span></span><span></span></div>
-        <pre><code>npx create-appraisejs&#10;cd my-appraisejs&#10;npm run dev</code></pre>
-      </div>
-  actions:
-    - text: Get started
-      link: /getting-started/overview/
-      variant: primary
-    - text: GitHub
-      link: https://github.com/jamil2018/appraisejs-core
-      variant: secondary
-      attrs:
-        target: _blank
-        rel: noopener noreferrer
 ---
 
 import "../../styles/landing.css";
+import LandingNavbar from "../../components/LandingNavbar.astro";
+import Hero from "../../components/Hero.astro";
 import TrustStrip from "../../components/TrustStrip.astro";
+import ProblemSection from "../../components/ProblemSection.astro";
 import FeatureGrid from "../../components/FeatureGrid.astro";
 import DemoSection from "../../components/DemoSection.astro";
-import HowItWorksSection from "../../components/HowItWorksSection.astro";
-import DocCardsSection from "../../components/DocCardsSection.astro";
 import FinalCtaSection from "../../components/FinalCtaSection.astro";
 import LandingMotion from "../../components/LandingMotion.astro";
 
 <div class="landing-root">
-  <TrustStrip />
-  <FeatureGrid />
-  <DemoSection />
-  <HowItWorksSection />
-  <DocCardsSection />
-  <FinalCtaSection />
   <LandingMotion />
+  <LandingNavbar />
+  <Hero />
+  <TrustStrip />
+  <ProblemSection />
+  <DemoSection />
+  <FeatureGrid />
+  <FinalCtaSection />
 </div>

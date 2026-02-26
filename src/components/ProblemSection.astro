@@ -1,0 +1,91 @@
+---
+const painPoints = [
+  {
+    title: "Critical knowledge is trapped in scripts",
+    description:
+      "Team context lives in scattered test files and tribal memory, not reusable system models.",
+  },
+  {
+    title: "Coverage scales slower than product velocity",
+    description:
+      "Every new flow adds duplicated setup, brittle selectors, and harder-to-debug failures.",
+  },
+  {
+    title: "CI becomes noisy before it becomes trusted",
+    description:
+      "Flaky orchestration and weak reporting make release signals harder to trust sprint over sprint.",
+  },
+];
+---
+
+<section
+  class="landing-problem landing-panel"
+  aria-labelledby="problem-heading"
+>
+  <p class="landing-kicker">The Problem</p>
+  <h2 id="problem-heading" class="landing-heading">
+    Browser testing breaks down when systems scale faster than test
+    architecture.
+  </h2>
+  <div class="landing-problem__grid">
+    {
+      painPoints.map((point) => (
+        <article class="landing-problem__item landing-card">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 7v6" />
+            <circle cx="12" cy="16.5" r="1" />
+          </svg>
+          <h3>{point.title}</h3>
+          <p>{point.description.trim()}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style is:global>
+  .landing-problem__grid {
+    display: grid;
+    gap: 0.8rem;
+    margin-top: 0.9rem;
+  }
+
+  .landing-problem__item {
+    padding: 1rem;
+    border-color: hsl(var(--border) / 0.9);
+    background: hsl(var(--card) / 0.92);
+    transform: none;
+    height: 100%;
+    margin: 0;
+  }
+
+  .landing-problem__item svg {
+    flex-shrink: 0;
+    margin-bottom: 0.65rem;
+    display: block;
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: none;
+    stroke: hsl(var(--accent));
+    stroke-width: 1.8;
+  }
+
+  .landing-problem__item h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: hsl(var(--card-foreground));
+    letter-spacing: -0.01em;
+  }
+
+  .landing-problem__item p {
+    color: hsl(var(--muted-foreground));
+    font-size: 0.9rem;
+  }
+
+  @media (min-width: 58rem) {
+    .landing-problem__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
