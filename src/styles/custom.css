@@ -20,6 +20,8 @@
   --sl-color-accent-high: hsl(var(--accent));
   --sl-color-accent-low: hsl(var(--primary) / 0.2);
   --sl-color-accent-text: hsl(var(--primary-foreground));
+  /* Ensure readable text on sidebar/nav highlighted (accent) background */
+  --sl-color-text-invert: hsl(var(--primary-foreground));
 
   --sl-color-hairline: hsl(var(--border));
   --sl-color-hairline-light: hsl(var(--border) / 0.55);
@@ -127,4 +129,8 @@ a.sidebar-link-github::before {
   margin-inline: auto;
   max-width: 100%;
   height: auto;
+}
+
+.social-icons::after {
+  display: none;
 }

@@ -1,0 +1,12 @@
+---
+// Force dark theme only; no theme toggle.
+// StarlightThemeProvider is required by other scripts (e.g. mermaid in Head.astro).
+// updatePickers is a no-op since ThemeSelect is removed.
+---
+
+<script is:inline>
+	window.StarlightThemeProvider = {
+		updatePickers() { /* no-op: theme toggle removed */ },
+	};
+	document.documentElement.dataset.theme = 'dark';
+</script>

@@ -8,8 +8,9 @@
   --popover: 222.2 84% 6%;
   --popover-foreground: 210 40% 98%;
 
-  --primary: 217.2 91.2% 59.8%;
-  --primary-foreground: 222.2 47.4% 11.2%;
+  /* Tailwind emerald-500 (#10b981) as primary */
+  --primary: 160 84% 39%;
+  --primary-foreground: 0 0% 100%;
 
   --secondary: 217.2 32.6% 17.5%;
   --secondary-foreground: 210 40% 98%;
@@ -17,14 +18,15 @@
   --muted: 217.2 32.6% 17.5%;
   --muted-foreground: 215 20.2% 65.1%;
 
-  --accent: 199 89% 55%;
-  --accent-foreground: 222.2 47.4% 11.2%;
+  /* Tailwind emerald-400 (#34d399) for accent/secondary highlights */
+  --accent: 158 64% 52%;
+  --accent-foreground: 160 50% 12%;
 
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 210 40% 98%;
 
   --border: 217.2 32.6% 17.5%;
-  --ring: 224.3 76.3% 48%;
+  --ring: 160 84% 39%;
 
   --radius: 0.75rem;
 }
