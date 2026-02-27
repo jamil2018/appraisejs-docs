@@ -7,16 +7,14 @@ const pills = [
   "Playwright compatible",
   "Cucumber artifact output",
   "TypeScript-ready pipelines",
-  "CI orchestration support",
+  "Git compatible",
 ];
 ---
 
 <section class="landing-trust landing-panel" aria-label="Built with">
   <p class="landing-trust__label">Built for teams shipping every week</p>
   <div class="landing-trust__list">
-    {pills.map((label) => (
-      <span class="landing-trust__pill">{label}</span>
-    ))}
+    {pills.map((label) => <span class="landing-trust__pill">{label}</span>)}
   </div>
 </section>
 

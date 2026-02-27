@@ -1,8 +1,8 @@
 ---
 const bullets = [
-  "Model one business-critical journey in minutes.",
+  "Model one business-critical test scenario in minutes.",
   "Generate and run production-ready Playwright + Cucumber artifacts.",
-  "Debug from structured scenario reports, not brittle logs.",
+  "Debug from structured test run reports, no more log sprawl.",
 ];
 ---
 
@@ -15,8 +15,9 @@ const bullets = [
     <div class="landing-demo__copy">
       <p class="landing-demo__intro">
         AppraiseJS is designed like a product workspace, not a docs utility:
-        journey modeling, execution orchestration, and report visibility live in
-        one coherent flow with shared language for QA and engineering.
+        test scenario modeling, execution orchestration, and report visibility
+        live in one coherent flow with shared language for test engineers and
+        developers.
       </p>
       <ul class="landing-demo__bullets">
         {bullets.map((b) => <li>{b}</li>)}
@@ -28,15 +29,15 @@ const bullets = [
       </div>
       <div class="landing-demo__visual-body">
         <aside>
-          <h3>Workspaces</h3>
+          <h3>Test Scenarios</h3>
           <ul>
-            <li>Checkout Flow</li>
-            <li>Billing Portal</li>
-            <li>Onboarding</li>
+            <li>Login</li>
+            <li>Users</li>
+            <li>Orders</li>
           </ul>
         </aside>
         <article>
-          <h4>Run Overview</h4>
+          <h4>Test Run Overview</h4>
           <div class="landing-demo__stats">
             <span><strong>42</strong> Scenarios</span>
             <span><strong>3</strong> Failing</span>

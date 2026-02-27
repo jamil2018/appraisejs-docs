@@ -3,17 +3,17 @@ const painPoints = [
   {
     title: "Critical knowledge is trapped in scripts",
     description:
-      "Team context lives in scattered test files and tribal memory, not reusable system models.",
+      "Framework knowledge lives in scattered test files, tribal memory, and unmaintained documentation.",
   },
   {
-    title: "Coverage scales slower than product velocity",
+    title: "Knowledge is not shared",
     description:
-      "Every new flow adds duplicated setup, brittle selectors, and harder-to-debug failures.",
+      "Knowledge is not shared between test engineers and testers, leading to duplication and inconsistency.",
   },
   {
-    title: "CI becomes noisy before it becomes trusted",
+    title: "Not designed for reusability and collaboration",
     description:
-      "Flaky orchestration and weak reporting make release signals harder to trust sprint over sprint.",
+      "Frameworks require complex setup, brittle selectors, and hard-to-debug failures, leading to slow development.",
   },
 ];
 ---
@@ -24,19 +24,20 @@ const painPoints = [
 >
   <p class="landing-kicker">The Problem</p>
   <h2 id="problem-heading" class="landing-heading">
-    Browser testing breaks down when systems scale faster than test
-    architecture.
+    Automation framework often becomes more complex than the product it tests
   </h2>
   <div class="landing-problem__grid">
     {
       painPoints.map((point) => (
-        <article class="landing-problem__item landing-card">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 7v6" />
-            <circle cx="12" cy="16.5" r="1" />
-          </svg>
-          <h3>{point.title}</h3>
+        <article class="landing-problem__item landing-card flex flex-col justify-between">
+          <div>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 7v6" />
+              <circle cx="12" cy="16.5" r="1" />
+            </svg>
+            <h3>{point.title}</h3>
+          </div>
           <p>{point.description.trim()}</p>
         </article>
       ))

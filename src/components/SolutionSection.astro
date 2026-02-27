@@ -1,0 +1,110 @@
+---
+const solutions = [
+  {
+    title: "Shared, reusable models",
+    description:
+      "Visual flows, template steps, locator groups centralize test knowledge and remove scattered scripts.",
+    icon: "layers",
+  },
+  {
+    title: "Everyone speaks the same language",
+    description:
+      " QA, developers, product teams use the same no-code visual format. Everyone can author and understand tests together.",
+    icon: "users",
+  },
+  {
+    title: "Composable automation, clear feedback",
+    description:
+      "One command, portable artifacts. Deterministic runs, clear reports, easy debugging.",
+    icon: "artifact",
+  },
+];
+---
+
+<section
+  class="landing-solution landing-panel"
+  aria-labelledby="solution-heading"
+>
+  <p class="landing-kicker">The Solution</p>
+  <h2 id="solution-heading" class="landing-heading">
+    Test management, orchestration, and execution — all in one place
+  </h2>
+  <div class="landing-solution__grid">
+    {
+      solutions.map((item) => (
+        <article class="landing-solution__item landing-card flex flex-col justify-between">
+          <div>
+            {item.icon === "layers" && (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                <path d="M2 17l10 5 10-5" />
+              </svg>
+            )}
+            {item.icon === "users" && (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="9" cy="7" r="4" />
+                <path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+                <circle cx="17" cy="11" r="3" />
+                <path d="M21 21v-1a3 3 0 0 0-3-3" />
+              </svg>
+            )}
+            {item.icon === "artifact" && (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 4h10l3 3v13H4V7z" />
+                <path d="M7 4v4h4M8 13h8M8 17h8" />
+              </svg>
+            )}
+            <h3>{item.title}</h3>
+          </div>
+          <p>{item.description.trim()}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style is:global>
+  .landing-solution__grid {
+    display: grid;
+    gap: 0.8rem;
+    margin-top: 0.9rem;
+  }
+
+  .landing-solution__item {
+    padding: 1rem;
+    border-color: hsl(var(--border) / 0.9);
+    background: hsl(var(--card) / 0.92);
+    transform: none;
+    height: 100%;
+    margin: 0;
+  }
+
+  .landing-solution__item svg {
+    flex-shrink: 0;
+    margin-bottom: 0.65rem;
+    display: block;
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: none;
+    stroke: hsl(var(--primary));
+    stroke-width: 1.8;
+  }
+
+  .landing-solution__item h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: hsl(var(--card-foreground));
+    letter-spacing: -0.01em;
+  }
+
+  .landing-solution__item p {
+    color: hsl(var(--muted-foreground));
+    font-size: 0.9rem;
+  }
+
+  @media (min-width: 58rem) {
+    .landing-solution__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
