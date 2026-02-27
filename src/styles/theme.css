@@ -1,4 +1,9 @@
 :root {
+  /* Shared navbar design tokens (landing + docs) */
+  --navbar-glass-bg: hsl(var(--background) / 0.72);
+  --navbar-border: 1px solid hsl(var(--border) / 0.65);
+  --navbar-radius: var(--radius);
+
   --background: 222.2 84% 4.9%;
   --foreground: 210 40% 98%;
 
