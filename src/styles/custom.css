@@ -131,6 +131,14 @@ a.sidebar-link-github::before {
   height: auto;
 }
 
+/* Overview demo video */
+.sl-markdown-content .overview-demo-video {
+  margin-block: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--sl-color-hairline-light);
+  background: var(--sl-color-bg-nav);
+}
+
 .social-icons::after {
   display: none;
 }
