@@ -1,6 +1,6 @@
 ---
-title: Getting Started
-description: Set up AppraiseJS and understand the first workflow.
+title: Installation
+description: Set up AppraiseJS
 sidebar:
   order: 2
 ---
