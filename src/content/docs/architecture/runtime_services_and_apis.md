@@ -5,6 +5,8 @@ sidebar:
   order: 5
 ---
 
+> Beginners: start with [Viewing Reports](/tutorials/viewing_reports/) and [Troubleshooting](/operations/troubleshooting/) first. This page is advanced runtime-operability detail.
+
 The runtime layer provides operational APIs around test execution.
 
 ## Process management service

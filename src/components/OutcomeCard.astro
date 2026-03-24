@@ -1,0 +1,17 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  tone?: "info" | "success" | "warning";
+}
+
+const { eyebrow, title, tone = "info" } = Astro.props as Props;
+---
+
+<section class={`outcome-card outcome-card--${tone}`}>
+  {eyebrow && <p class="outcome-card__eyebrow">{eyebrow}</p>}
+  <h3 class="outcome-card__title">{title}</h3>
+  <div class="outcome-card__body">
+    <slot />
+  </div>
+</section>

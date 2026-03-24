@@ -1,13 +1,17 @@
 ---
 title: Test Runs
-description: Execute selected tests with environment and runtime options.
+description: Create a focused execution with clear scope, environment, and runtime settings.
 sidebar:
   order: 11
 ---
 
 Test runs execute cases by tag selection or explicit case selection.
 
-## Create a test run
+## Workflow context
+
+Test runs are the handoff from authored assets into execution. This is where you decide exactly what should run and under which conditions.
+
+## Do this
 
 1. Go to `Test Runs -> Create`.
 2. Choose selection mode (`By Tags` or `By Test Cases`).
@@ -17,13 +21,14 @@ Test runs execute cases by tag selection or explicit case selection.
 6. Select `Browser Engine` (`CHROMIUM`, `FIREFOX`, `WEBKIT`).
 7. Submit.
 
-## Runtime behavior
+## Minimal example
 
-- Name uniqueness is validated.
-- Run starts immediately after creation.
-- You are redirected to run details if run ID is returned.
+- Name: `auth-smoke-local-chromium`
+- Selection mode: `By Tags`
+- Tag: `@smoke`
+- Environment: `Local`
 
-## Run details page
+## What good looks like
 
 Use the details screen to inspect:
 
@@ -31,3 +36,8 @@ Use the details screen to inspect:
 - Linked test cases and selection scope.
 - Run logs and trace artifacts.
 - Linked report access after completion.
+
+## Next step
+
+- [Running Tests](/tutorials/running_tests/)
+- [Reports](/guides/reports/)

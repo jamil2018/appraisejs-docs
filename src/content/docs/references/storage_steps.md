@@ -5,9 +5,15 @@ sidebar:
   order: 5
 ---
 
+> Beginners: start with [Template Steps](/guides/template_steps/) if you still need the authoring model first. This page is the exact storage-step reference.
+
 Source: `src/tests/steps/actions/store.step.ts`.
 
 See shared placeholder rules in [Step Parameter Conventions](/references/step_parameter_conventions).
+
+## Use this when
+
+Use storage steps when a later step needs to reuse text captured from the current page or form state.
 
 ## Step catalog
 
@@ -23,10 +29,10 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
-| First `{string}` | Element locator name | Existing locator key (for example `orderIdLabel`). |
-| Second `{string}` | Target variable key | New/existing variable name (for example `capturedOrderId`). |
+| Parameter         | Represents           | Expected data                                               |
+| ----------------- | -------------------- | ----------------------------------------------------------- |
+| First `{string}`  | Element locator name | Existing locator key (for example `orderIdLabel`).          |
+| Second `{string}` | Target variable key  | New/existing variable name (for example `capturedOrderId`). |
 
 Example:
 
@@ -46,9 +52,9 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
-| First `{string}` | Input locator name | Existing locator key (for example `emailInput`). |
+| Parameter         | Represents          | Expected data                                          |
+| ----------------- | ------------------- | ------------------------------------------------------ |
+| First `{string}`  | Input locator name  | Existing locator key (for example `emailInput`).       |
 | Second `{string}` | Target variable key | New/existing variable name (for example `savedEmail`). |
 
 Example:
@@ -69,10 +75,10 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
-| First `{string}` | Textarea locator name | Existing locator key (for example `notesTextarea`). |
-| Second `{string}` | Target variable key | New/existing variable name (for example `savedNotes`). |
+| Parameter         | Represents            | Expected data                                          |
+| ----------------- | --------------------- | ------------------------------------------------------ |
+| First `{string}`  | Textarea locator name | Existing locator key (for example `notesTextarea`).    |
+| Second `{string}` | Target variable key   | New/existing variable name (for example `savedNotes`). |
 
 Example:
 
@@ -80,7 +86,12 @@ Example:
 When the user stores the "notesTextarea" textarea input value inside the variable "savedNotes"
 ```
 
-## Failure behavior
+## Common failures
 
 - Step fails when locator cannot be resolved.
 - Stored values are only available within the current scenario world context.
+
+## Related steps
+
+- [Input Steps](/references/input_steps/)
+- [Random Data Steps](/references/random_data_steps/)

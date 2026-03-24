@@ -1,23 +1,37 @@
 ---
 title: Sync and Scripts
-description: Use the Sync dashboard for day-to-day reconciliation and scripts for maintenance workflows.
+description: Use the Sync dashboard first and keep scripts for advanced maintenance or automation.
 sidebar:
   order: 2
 ---
 
-The primary sync workflow is now available in the Appraise UI.
+This page is advanced on purpose. Beginners should start with [`Settings -> Sync`](/guides/settings/) unless the UI is unavailable.
 
-Open [`Settings -> Sync`](/guides/settings) to review pending differences and run synchronization directly from the app.
+## Use this page when
 
-## Sync from the UI
+- You need script-based maintenance.
+- You are automating project reconciliation outside the UI.
+- You need to understand the full dependency-aware sync order.
 
-The `Sync` dashboard is the fastest way to reconcile filesystem and database drift.
+## UI-first sync flow
+
+Open [`Settings -> Sync`](/guides/settings/) to review pending differences and run synchronization directly from the app.
 
 - Use per-target tiles to sync one area at a time.
 - Use `Sync All` to run the full reconciliation flow.
 - Review numeric badges to see how many differences Appraise detected for each target.
 - Let Appraise run prerequisites automatically when one sync depends on another.
 - Confirm completion from refreshed counts and success or failure messages.
+
+```nomnoml
+#direction: right
+#stroke: #64748b
+#fill: #f8fafc
+[Filesystem or DB drift] -> [Settings -> Sync]
+[Settings -> Sync] -> [Dependency-aware sync order]
+[Dependency-aware sync order] -> [Updated entities and artifacts]
+[Updated entities and artifacts] -> [Run tests again]
+```
 
 ## Dependency-aware sync order
 
@@ -42,7 +56,7 @@ The CLI scripts still matter for repository maintenance and automation:
 - Focused repair or debugging of one sync area
 - Feature regeneration preview with `npm run sync-features:dry-run`
 
-## Core setup and maintenance scripts
+## Core scripts
 
 - `npm run setup`: full initial bootstrap.
 - `npm run sync-all`: synchronizes entities and generated artifacts without using the UI.
@@ -52,18 +66,7 @@ The CLI scripts still matter for repository maintenance and automation:
 - `npm run sync-locators`: reconcile locator definitions and locator maps.
 - `npm run sync-template-steps`: resync template step definitions.
 
-## Locator creator and synchronization
+## Related pages
 
-Saving a locator from the UI is not just a form submission.
-
-- Appraise adds the locator to an existing locator group or creates a new group when needed.
-- Related locator group files are synchronized as part of that save flow.
-- The locator map is updated so the automation workspace stays aligned with what was authored in the UI.
-
-## Recommended operational sequence
-
-1. Pull latest changes.
-2. Open `Settings -> Sync` and run `Sync All` when the filesystem or database changed outside the UI.
-3. Run a focused smoke test run.
-4. Verify reports and dashboard health.
-5. Use CLI sync scripts only when you need automation, dry runs, or deeper maintenance.
+- [Settings](/guides/settings/)
+- [Synchronization Pipeline](/architecture/synchronization_pipeline/)

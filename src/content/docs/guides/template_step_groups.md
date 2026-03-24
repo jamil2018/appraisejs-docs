@@ -1,13 +1,17 @@
 ---
 title: Template Step Groups
-description: Categorize template steps by action/validation type.
+description: Keep the step library understandable by grouping reusable actions and validations.
 sidebar:
   order: 6
 ---
 
 Template step groups organize reusable steps for faster authoring.
 
-## Create a template step group
+## Workflow context
+
+Step groups are the top-level organization layer for the reusable behavior library behind the case editor.
+
+## Do this
 
 1. Go to `Template Step Groups -> Create`.
 2. Enter `Name` (min 3 chars).
@@ -15,12 +19,17 @@ Template step groups organize reusable steps for faster authoring.
 4. Select `Type` (`ACTION` or `VALIDATION`).
 5. Save.
 
-## Usage
+## Minimal example
 
-- Every template step must belong to exactly one template step group.
-- Group type (`ACTION` or `VALIDATION`) should match the behavior of contained steps.
+- Action groups: `navigation`, `input`, `click`, `store`, `wait`
+- Validation groups: `text assertion`, `visibility assertion`, `navigation assertion`
 
-## Recommended model
+## What good looks like
 
-- Action groups: `navigation`, `input`, `click`, `store`, `wait`.
-- Validation groups: `text assertion`, `visibility assertion`, `navigation assertion`.
+- Every template step belongs to exactly one clear group.
+- Group names match how authors naturally search for behavior.
+
+## Next step
+
+- [Template Steps](/guides/template_steps/)
+- [Reference](/reference/)

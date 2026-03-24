@@ -5,9 +5,15 @@ sidebar:
   order: 1
 ---
 
+> Beginners: start with [Creating Tests](/tutorials/creating_tests/) or [Template Steps](/guides/template_steps/) if you need the authoring workflow first. This page is the exact click-step reference.
+
 Source: `src/tests/steps/actions/click.step.ts`.
 
 See shared placeholder rules in [Step Parameter Conventions](/references/step_parameter_conventions).
+
+## Use this when
+
+Use click steps when the scenario needs a direct UI action against an existing locator.
 
 ## Step catalog
 
@@ -22,8 +28,8 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
+| Parameter  | Represents          | Expected data                                     |
+| ---------- | ------------------- | ------------------------------------------------- |
 | `{string}` | Target locator name | Existing locator key (for example `loginButton`). |
 
 Example:
@@ -43,8 +49,8 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
+| Parameter  | Represents          | Expected data                                 |
+| ---------- | ------------------- | --------------------------------------------- |
 | `{string}` | Target locator name | Existing locator key (for example `rowItem`). |
 
 Example:
@@ -64,8 +70,8 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
+| Parameter  | Represents          | Expected data                                           |
+| ---------- | ------------------- | ------------------------------------------------------- |
 | `{string}` | Target locator name | Existing locator key (for example `contextMenuTarget`). |
 
 Example:
@@ -74,7 +80,12 @@ Example:
 When the user right clicks on the "contextMenuTarget" element
 ```
 
-## Failure behavior
+## Common failures
 
 - Step fails if locator cannot be resolved.
 - Step fails if element is not interactable in current page state.
+
+## Related steps
+
+- [Hover Steps](/references/hover_steps/)
+- [Input Steps](/references/input_steps/)

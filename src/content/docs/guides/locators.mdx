@@ -1,0 +1,94 @@
+---
+title: Locators
+description: Capture stable selectors with the picker or create them manually with enough context to survive reruns.
+sidebar:
+  order: 5
+---
+
+import DocHero from "../../../components/DocHero.astro";
+import UIPath from "../../../components/UIPath.astro";
+import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
+
+<DocHero
+  eyebrow="Build tests"
+  summary="Use locators to give your steps stable element references. In AppraiseJS, the best path is usually route-aware capture through the Chromium picker, not typing selectors blind."
+  meta={[
+    "Job to be done: capture a selector that stays useful later",
+    "Best for: page-level UI interactions",
+    "Related workflow: locator groups and test steps",
+  ]}
+  actions={[
+    { label: "Open Locator Groups", href: "/guides/locator_groups/" },
+    {
+      label: "Open Creating Tests",
+      href: "/tutorials/creating_tests/",
+      variant: "secondary",
+    },
+  ]}
+/>
+
+## Workflow context
+
+```nomnoml
+#direction: right
+#stroke: #64748b
+#fill: #f8fafc
+[Locator Group] -> [Locator]
+[Locator] -> [Template Step Parameter]
+[Template Step Parameter] -> [Test Case]
+```
+
+The locator creator matters because it sits between page discovery and durable test authoring. A good locator makes the case editor faster and the rerun more reliable.
+
+## Do this
+
+<UIPath
+  steps={[
+    "Locators",
+    "Create",
+    "Launch Chromium Picker",
+    "Finalize Locator",
+    "Save",
+  ]}
+/>
+
+1. Open `Locators -> Create`.
+2. Choose whether to launch from a saved environment or a direct URL.
+3. Start the Chromium picker and navigate to the target page state if needed.
+4. Click `Start picking`, select the element, review the proposed selector, then confirm it.
+5. Review the autofilled locator name, selector value, route, and locator group suggestion.
+6. Save the locator to an existing group or create a new route-aware group before saving.
+
+<MediaPlaceholder
+  type="screenshot"
+  title="Create Locator page showing Launch Chromium Picker and Finalize Locator in the same screen"
+  why="This helps users understand that locator capture and locator definition are one connected workflow, not separate tools."
+/>
+
+<MediaPlaceholder
+  type="gif"
+  title="Locator picker flow from launching Chromium to confirming selector in the overlay"
+  why="The picker overlay is a short interaction loop that is much easier to learn from motion than from prose."
+/>
+
+<MediaPlaceholder
+  type="screenshot"
+  title="Autofill result showing suggested locator name, selector, route, and locator group before save"
+  why="This shows what a good prefilled state looks like and makes it easier to review before saving a brittle selector."
+/>
+
+## Minimal example
+
+- Group: `Login Page`
+- Route: `/login`
+- Locators: `emailInput`, `passwordInput`, `submitButton`, `welcomeBanner`
+
+## What good looks like
+
+- The locator name is readable and specific.
+- The selector is stable enough to survive layout changes.
+- The locator group route matches the page where the step actually uses the selector.
+
+## Next step
+
+Continue to [Test Cases](/guides/test_cases/) to see how locator references become executable steps.

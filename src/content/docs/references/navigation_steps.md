@@ -5,9 +5,15 @@ sidebar:
   order: 3
 ---
 
+> Beginners: start with [Quick Start](/getting-started/quick_start/) or [Running Tests](/tutorials/running_tests/) if you need the operational context first. This page is the exact navigation-step reference.
+
 Source: `src/tests/steps/actions/navigation.step.ts`.
 
 See shared placeholder rules in [Step Parameter Conventions](/references/step_parameter_conventions).
+
+## Use this when
+
+Use navigation steps when the scenario must move to a URL, use the selected environment base URL, reload, or move backward in browser history.
 
 ## Step catalog
 
@@ -22,8 +28,8 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
+| Parameter  | Represents      | Expected data                                           |
+| ---------- | --------------- | ------------------------------------------------------- |
 | `{string}` | Destination URL | Absolute URL (for example `https://example.com/login`). |
 
 Example:
@@ -90,7 +96,12 @@ Example:
 When the user goes back to the previous page
 ```
 
-## Failure behavior
+## Common failures
 
 - Environment-based step fails if environment is unset or unknown.
 - Navigation errors bubble up from Playwright as step failures.
+
+## Related steps
+
+- [Wait Steps](/references/wait_steps/)
+- [Assertion Steps](/references/assertion_steps/)

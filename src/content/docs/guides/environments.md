@@ -1,38 +1,36 @@
 ---
 title: Environments
-description: Configure run targets and credentials.
+description: Define the target system a run or locator capture should use.
 sidebar:
   order: 2
 ---
 
-Environments define where test runs execute.
+Environments define where AppraiseJS should run tests and where the locator picker should launch.
 
-## Create an environment
+## Workflow context
+
+An environment matters any time AppraiseJS needs a target URL and, optionally, credentials or API context.
+
+## Do this
 
 1. Go to `Environments -> Create`.
 2. Fill `Name` and `Base URL`.
 3. Optionally fill `API Base URL`, `Username`, and `Password`.
 4. Save.
 
-## Validation rules
+## Minimal example
 
-- `Name`: required.
-- `Base URL`: required and must be a valid URL.
-- `API Base URL`: optional; if provided, must be a valid URL.
+- `Local` -> `http://localhost:3000`
+- `Staging` -> `https://staging.example.com`
 
-## Usage in test runs
+## What good looks like
 
 - Each test run requires one selected environment.
 - Environment-aware navigation and wait steps read this configuration at runtime.
-- Environment data drives base URL resolution and target context for the run.
+- The locator creator can launch from a saved environment when you want route-aware selector capture.
+- Base URLs stay accurate enough that navigation failures are meaningful instead of random.
 
-## Usage in locator capture
+## Next step
 
-- The locator creator can launch its Chromium picker from a saved environment.
-- This is useful when you want to inspect a known application target without retyping the URL.
-- For one-off pages, the locator creator also supports launching directly from a URL without saving an environment first.
-
-## Tips
-
-- Use stable names like `Local`, `Staging`, `Prod-Snapshot`.
-- Keep secrets local; avoid committing sensitive `.env` values.
+- [Locators](/guides/locators/)
+- [Test Runs](/guides/test_runs/)

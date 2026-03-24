@@ -1,0 +1,22 @@
+---
+interface Props {
+  type: "screenshot" | "video" | "gif" | "graph";
+  title: string;
+  why: string;
+}
+
+const { type, title, why } = Astro.props as Props;
+
+const labels = {
+  screenshot: "Screenshot placeholder",
+  video: "Video placeholder",
+  gif: "GIF placeholder",
+  graph: "Graph placeholder",
+};
+---
+
+<section class={`media-placeholder media-placeholder--${type}`}>
+  <p class="media-placeholder__label">{labels[type]}</p>
+  <h3 class="media-placeholder__title">{title}</h3>
+  <p class="media-placeholder__body">{why}</p>
+</section>

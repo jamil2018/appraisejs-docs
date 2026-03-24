@@ -5,6 +5,8 @@ sidebar:
   order: 4
 ---
 
+> Beginners: start with [Creating Tests](/tutorials/creating_tests/) and [Viewing Reports](/tutorials/viewing_reports/) first. This page is the deep-dive entity and reporting map.
+
 AppraiseJS separates authored test design from execution telemetry.
 
 ## Authored model (design-time)

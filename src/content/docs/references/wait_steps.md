@@ -5,9 +5,15 @@ sidebar:
   order: 4
 ---
 
+> Beginners: start with [Running Tests](/tutorials/running_tests/) if you are still learning when waits are necessary. This page is the exact synchronization-step reference.
+
 Source: `src/tests/steps/actions/wait.step.ts`.
 
 See shared placeholder rules in [Step Parameter Conventions](/references/step_parameter_conventions).
+
+## Use this when
+
+Use wait steps when the scenario needs route or element synchronization and fixed-duration waiting is not enough or not appropriate.
 
 ## Step catalog
 
@@ -41,8 +47,8 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
+| Parameter  | Represents | Expected data                                             |
+| ---------- | ---------- | --------------------------------------------------------- |
 | `{string}` | Route path | Relative route (for example `/dashboard` or `dashboard`). |
 
 Example:
@@ -62,8 +68,8 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
+| Parameter  | Represents   | Expected data                                       |
+| ---------- | ------------ | --------------------------------------------------- |
 | `{string}` | Locator name | Existing locator key (for example `successBanner`). |
 
 Example:
@@ -83,8 +89,8 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
+| Parameter  | Represents   | Expected data                                        |
+| ---------- | ------------ | ---------------------------------------------------- |
 | `{string}` | Locator name | Existing locator key (for example `loadingSpinner`). |
 
 Example:
@@ -103,9 +109,9 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
-| `{int}` | Duration in seconds | Positive integer (for example `2`). |
+| Parameter | Represents          | Expected data                       |
+| --------- | ------------------- | ----------------------------------- |
+| `{int}`   | Duration in seconds | Positive integer (for example `2`). |
 
 Example:
 
@@ -113,7 +119,12 @@ Example:
 When the user waits for 2 seconds
 ```
 
-## Usage guidance
+## Common failures
 
 - Prefer route/element waits over fixed-duration waits where possible.
 - Fixed waits are best as last-resort stabilization steps.
+
+## Related steps
+
+- [Navigation Steps](/references/navigation_steps/)
+- [Assertion Steps](/references/assertion_steps/)

@@ -5,9 +5,15 @@ sidebar:
   order: 2
 ---
 
+> Beginners: start with [Creating Tests](/tutorials/creating_tests/) or [Locators](/guides/locators/) if you still need the workflow context. This page is the exact input-step reference.
+
 Source: `src/tests/steps/actions/input.step.ts`.
 
 See shared placeholder rules in [Step Parameter Conventions](/references/step_parameter_conventions).
+
+## Use this when
+
+Use input steps when the scenario must type, select, check, uncheck, or inject stored values into a form control.
 
 ## Step catalog
 
@@ -22,10 +28,10 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
-| First `{string}` | Input locator name | Existing locator key (for example `emailInput`). |
-| Second `{string}` | Value to type | Any text value (for example `qa@example.com`). |
+| Parameter         | Represents         | Expected data                                    |
+| ----------------- | ------------------ | ------------------------------------------------ |
+| First `{string}`  | Input locator name | Existing locator key (for example `emailInput`). |
+| Second `{string}` | Value to type      | Any text value (for example `qa@example.com`).   |
 
 Example:
 
@@ -44,8 +50,8 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
+| Parameter  | Represents         | Expected data                                   |
+| ---------- | ------------------ | ----------------------------------------------- |
 | `{string}` | Input locator name | Existing locator key (for example `searchBox`). |
 
 Example:
@@ -65,9 +71,9 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
-| First `{string}` | Option identifier | Option value/label (for example `admin`). |
+| Parameter         | Represents            | Expected data                                    |
+| ----------------- | --------------------- | ------------------------------------------------ |
+| First `{string}`  | Option identifier     | Option value/label (for example `admin`).        |
 | Second `{string}` | Dropdown locator name | Existing locator key (for example `roleSelect`). |
 
 Example:
@@ -87,8 +93,8 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
+| Parameter  | Represents            | Expected data                                       |
+| ---------- | --------------------- | --------------------------------------------------- |
 | `{string}` | Checkbox locator name | Existing locator key (for example `termsCheckbox`). |
 
 Example:
@@ -108,8 +114,8 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
+| Parameter  | Represents            | Expected data                                            |
+| ---------- | --------------------- | -------------------------------------------------------- |
 | `{string}` | Checkbox locator name | Existing locator key (for example `newsletterCheckbox`). |
 
 Example:
@@ -130,10 +136,10 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
-| First `{string}` | Input locator name | Existing locator key (for example `emailInput`). |
-| Second `{string}` | Variable key | Existing runtime variable name (for example `generatedEmail`). |
+| Parameter         | Represents         | Expected data                                                  |
+| ----------------- | ------------------ | -------------------------------------------------------------- |
+| First `{string}`  | Input locator name | Existing locator key (for example `emailInput`).               |
+| Second `{string}` | Variable key       | Existing runtime variable name (for example `generatedEmail`). |
 
 Example:
 
@@ -141,7 +147,12 @@ Example:
 When the user fills in the "emailInput" input with data from the stored variable "generatedEmail"
 ```
 
-## Failure behavior
+## Common failures
 
 - Any locator lookup failure throws immediately.
 - Stored-variable fill fails when variable key does not exist.
+
+## Related steps
+
+- [Storage Steps](/references/storage_steps/)
+- [Random Data Steps](/references/random_data_steps/)

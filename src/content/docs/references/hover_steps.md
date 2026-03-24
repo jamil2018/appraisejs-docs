@@ -5,9 +5,15 @@ sidebar:
   order: 6
 ---
 
+> Beginners: start with [Locators](/guides/locators/) if you still need the UI-element workflow first. This page is the exact hover-step reference.
+
 Source: `src/tests/steps/actions/hover.step.ts`.
 
 See shared placeholder rules in [Step Parameter Conventions](/references/step_parameter_conventions).
+
+## Use this when
+
+Use hover when the UI reveals state only after pointer movement, such as menus, tooltips, or nested controls.
 
 ## Step catalog
 
@@ -22,8 +28,8 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
+| Parameter  | Represents          | Expected data                                     |
+| ---------- | ------------------- | ------------------------------------------------- |
 | `{string}` | Target locator name | Existing locator key (for example `menuTrigger`). |
 
 Example:
@@ -32,7 +38,12 @@ Example:
 When the user hovers the cursor over the "menuTrigger" element
 ```
 
-## Failure behavior
+## Common failures
 
 - Step fails if locator is missing.
 - Step fails if hover action cannot be completed.
+
+## Related steps
+
+- [Click Steps](/references/click_steps/)
+- [Wait Steps](/references/wait_steps/)

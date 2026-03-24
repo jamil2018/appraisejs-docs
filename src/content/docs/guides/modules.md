@@ -1,37 +1,42 @@
 ---
 title: Modules
-description: Organize your test domain using module hierarchies.
+description: Start the asset model by grouping suites and locator work under a stable product area.
 sidebar:
   order: 1
 ---
 
-Modules are top-level containers for related test assets.
+Modules are the top-level product areas in AppraiseJS. They give suites and locator groups a stable home so the rest of the test model stays readable.
 
-## What modules control
+## Workflow context
 
-- Grouping of test suites by product area.
-- Parent-child hierarchy for large systems.
-- Association point for locator groups.
+```nomnoml
+#direction: right
+#stroke: #64748b
+#fill: #f8fafc
+[Module] -> [Test Suite]
+[Test Suite] -> [Test Case]
+[Module] -> [Locator Group]
+```
 
-## Create a module
+## Do this
 
 1. Go to `Modules -> Create`.
 2. Enter `Name` (required).
 3. Optionally select `Parent`.
 4. Save.
 
-## Field notes
+## Minimal example
 
-- `Name` is required.
-- `Parent` can be `Root (No Parent)`.
+- Top-level module: `Authentication`
+- Optional child module: `Authentication / Social Login`
 
-## Recommended structure
+## What good looks like
 
 - Keep top-level modules feature-oriented (`Auth`, `Checkout`, `Admin`).
 - Use one extra child level only when needed.
 - Avoid very broad “misc” modules.
 
-## Related pages
+## Next step
 
-- [Test Suites](/guides/test_suites)
-- [Locator Groups](/guides/locator_groups)
+- [Test Suites](/guides/test_suites/)
+- [Locator Groups](/guides/locator_groups/)

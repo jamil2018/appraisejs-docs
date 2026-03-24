@@ -1,22 +1,54 @@
 ---
 title: Installation
-description: Set up AppraiseJS
+description: Install AppraiseJS for the first time and confirm the local app is ready for onboarding.
 sidebar:
   order: 2
 ---
 
-import cliInstallVideo from "../../../assets/installation/cli-installation.mp4";
+import DocHero from "../../../components/DocHero.astro";
+import TaskChecklist from "../../../components/TaskChecklist.astro";
+import OutcomeCard from "../../../components/OutcomeCard.astro";
+import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 
-This page follows the setup model documented in `appraisejs-core`.
+<DocHero
+  eyebrow="Setup"
+  summary="Install AppraiseJS with the least ambiguous route possible, verify the app starts locally, and know what to do if setup does not end in a working UI."
+  meta={[
+    "Role: first-time local setup",
+    "Time: 10-15 minutes",
+    "Outcome: running local app",
+  ]}
+  actions={[
+    { label: "Open Quick Start", href: "/getting-started/quick_start/" },
+    {
+      label: "Open Troubleshooting",
+      href: "/operations/troubleshooting/",
+      variant: "secondary",
+    },
+  ]}
+/>
 
-## Prerequisites
+## Before you begin
 
-- Node.js 18+
-- npm
+<TaskChecklist
+  showTitle={false}
+  items={[
+    "Install Node.js 18 or later.",
+    "Confirm `npm` is available in your shell.",
+    "Decide whether you want a fresh scaffold or a direct `appraisejs-core` clone.",
+  ]}
+/>
 
-## Installation options
+## What you'll finish with
 
-### Option 1: Scaffold a new project (recommended)
+<OutcomeCard title="A known-good local launch" tone="success">
+  You should be able to run the local app, open it in the browser, and move
+  directly into Quick Start without guessing whether setup is complete.
+</OutcomeCard>
+
+## Step-by-step procedure
+
+### Option 1: Scaffold a new project
 
 ```bash
 npx create-appraisejs
@@ -25,18 +57,7 @@ npm run setup
 npm run dev
 ```
 
-Open `http://localhost:3000` after startup.
-
-#### See the CLI in action
-
-See the `create-appraisejs` CLI in action: scaffolding a new project, running setup, and setup browsers.
-
-<video controls width="100%" class="overview-demo-video">
-  <source src={cliInstallVideo} type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
-
-### Option 2: Clone appraisejs-core
+### Option 2: Clone `appraisejs-core`
 
 ```bash
 git clone https://github.com/jamil2018/appraisejs-core.git
@@ -45,19 +66,38 @@ npm run setup
 npm run dev
 ```
 
-## Common scripts
+After startup, open the local URL shown by the dev server.
 
-- `npm run dev`
-- `npm run build`
-- `npm run lint`
-- `npm run test`
+<MediaPlaceholder
+  type="video"
+  title="End-to-end first-run setup from project creation through opening the local app"
+  why="Installation is a multi-step flow, so continuity matters more than a single screenshot here."
+/>
 
-## First-run checklist
+<MediaPlaceholder
+  type="screenshot"
+  title="Successful installation state showing the AppraiseJS home page loaded after `npm run dev`"
+  why="This gives beginners a concrete success target for the end of setup."
+/>
 
-- Create an environment.
-- Create a module.
-- Create locators from `Locators -> Create` using either a saved environment or a direct URL.
-- Create a test suite and a test case.
-- Add case steps from template steps.
-- Create a test run and execute it.
-- Inspect reports and dashboard metrics.
+## Checkpoint
+
+- The local dev server starts without blocking setup errors.
+- The AppraiseJS UI loads in the browser.
+- You know whether to continue to [Quick Start](/getting-started/quick_start/) or jump to [Troubleshooting](/operations/troubleshooting/).
+
+## Common mistakes
+
+- Running `npm run dev` before `npm run setup` finishes.
+- Treating browser dependency errors as AppraiseJS UI bugs instead of installation issues.
+- Continuing into test authoring before confirming the app actually loads locally.
+
+## Recovery steps
+
+- Migration errors: run `npm run migrate-db`.
+- Browser dependency errors: run `npm run install-playwright`.
+- Stale or missing generated entities after setup: use `Settings -> Sync` after the UI loads, or run `npm run sync-all` if the UI is unavailable.
+
+## Next step
+
+Continue to [Quick Start](/getting-started/quick_start/) to create the smallest useful runnable flow.

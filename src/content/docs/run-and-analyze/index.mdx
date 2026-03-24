@@ -1,0 +1,44 @@
+---
+title: Run And Analyze
+description: The operational pages for execution, reports, dashboards, and sync.
+sidebar:
+  hidden: true
+---
+
+import DocHero from "../../../components/DocHero.astro";
+import CalloutGrid from "../../../components/CalloutGrid.astro";
+
+<DocHero
+  eyebrow="Section landing"
+  summary="Use this section after your tests exist and you need to execute them, inspect failures, track health, and recover from drift."
+  meta={[
+    "Audience: operators, QA leads, developers",
+    "Outcome: trusted run and report workflow",
+  ]}
+/>
+
+<CalloutGrid
+  items={[
+    {
+      title: "Test Runs",
+      body: "Choose scope, environment, browser, and worker count for a specific execution.",
+      href: "/guides/test_runs/",
+      cta: "Run tests",
+      tone: "accent",
+    },
+    {
+      title: "Reports",
+      body: "Inspect summary results, drill into scenario failures, and follow logs or traces.",
+      href: "/guides/reports/",
+      cta: "Inspect reports",
+      tone: "success",
+    },
+    {
+      title: "Settings/Sync",
+      body: "Recover from filesystem or database drift before you rerun.",
+      href: "/guides/settings/",
+      cta: "Open sync guide",
+      tone: "default",
+    },
+  ]}
+/>

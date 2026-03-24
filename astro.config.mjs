@@ -22,6 +22,10 @@ export default defineConfig({
     starlight({
       plugins: [starlightNomnoml()],
       title: "AppraiseJS",
+      logo: {
+        src: "./public/logo.svg",
+        alt: "AppraiseJS",
+      },
       description:
         "AppraiseJS documentation for visual test modeling, orchestration, execution, and reporting workflows.",
       customCss: [
@@ -53,34 +57,126 @@ export default defineConfig({
       ],
       sidebar: [
         {
-          label: "Getting Started",
+          label: "Start Here",
           collapsed: false,
-          autogenerate: { directory: "getting-started" },
+          items: [
+            { label: "Overview", link: "/getting-started/overview/" },
+            { label: "Installation", link: "/getting-started/installation/" },
+            { label: "Quick Start", link: "/getting-started/quick_start/" },
+            { label: "Creating Tests", link: "/tutorials/creating_tests/" },
+            { label: "Running Tests", link: "/tutorials/running_tests/" },
+            { label: "Viewing Reports", link: "/tutorials/viewing_reports/" },
+            { label: "Troubleshooting", link: "/operations/troubleshooting/" },
+          ],
         },
         {
-          label: "Architecture",
+          label: "Core Concepts",
           collapsed: false,
-          autogenerate: { directory: "architecture" },
+          items: [
+            {
+              label: "Why AppraiseJS",
+              link: "/getting-started/why_appraisejs/",
+            },
+            { label: "Comparison", link: "/getting-started/comparison/" },
+            { label: "Architecture Overview", link: "/architecture/overview/" },
+          ],
         },
         {
-          label: "Guides",
+          label: "Build Tests",
           collapsed: false,
-          autogenerate: { directory: "guides" },
+          items: [
+            { label: "Modules", link: "/guides/modules/" },
+            { label: "Environments", link: "/guides/environments/" },
+            { label: "Locator Groups", link: "/guides/locator_groups/" },
+            { label: "Locators", link: "/guides/locators/" },
+            { label: "Test Suites", link: "/guides/test_suites/" },
+            { label: "Test Cases", link: "/guides/test_cases/" },
+            {
+              label: "Template Step Groups",
+              link: "/guides/template_step_groups/",
+            },
+            { label: "Template Steps", link: "/guides/template_steps/" },
+            {
+              label: "Template Test Cases",
+              link: "/guides/template_test_cases/",
+            },
+            { label: "Tags", link: "/guides/tags/" },
+          ],
         },
         {
-          label: "References",
+          label: "Run And Analyze",
           collapsed: false,
-          autogenerate: { directory: "references" },
+          items: [
+            { label: "Test Runs", link: "/guides/test_runs/" },
+            { label: "Reports", link: "/guides/reports/" },
+            { label: "Dashboard", link: "/guides/dashboard/" },
+            { label: "Settings/Sync", link: "/guides/settings/" },
+          ],
         },
         {
-          label: "Tutorials",
+          label: "Reference",
           collapsed: false,
-          autogenerate: { directory: "tutorials" },
-        },
-        {
-          label: "Operations",
-          collapsed: false,
-          autogenerate: { directory: "operations" },
+          items: [
+            {
+              label: "Step References",
+              collapsed: true,
+              items: [
+                {
+                  label: "Parameter Conventions",
+                  link: "/references/step_parameter_conventions/",
+                },
+                { label: "Click Steps", link: "/references/click_steps/" },
+                { label: "Input Steps", link: "/references/input_steps/" },
+                {
+                  label: "Navigation Steps",
+                  link: "/references/navigation_steps/",
+                },
+                { label: "Wait Steps", link: "/references/wait_steps/" },
+                { label: "Storage Steps", link: "/references/storage_steps/" },
+                { label: "Hover Steps", link: "/references/hover_steps/" },
+                {
+                  label: "Random Data Steps",
+                  link: "/references/random_data_steps/",
+                },
+                {
+                  label: "Assertion Steps",
+                  link: "/references/assertion_steps/",
+                },
+              ],
+            },
+            {
+              label: "Advanced Architecture",
+              collapsed: true,
+              items: [
+                {
+                  label: "Execution Lifecycle",
+                  link: "/architecture/execution_lifecycle/",
+                },
+                {
+                  label: "Synchronization Pipeline",
+                  link: "/architecture/synchronization_pipeline/",
+                },
+                {
+                  label: "Data and Reporting Model",
+                  link: "/architecture/data_model_and_reporting/",
+                },
+                {
+                  label: "Runtime Services and APIs",
+                  link: "/architecture/runtime_services_and_apis/",
+                },
+              ],
+            },
+            {
+              label: "Advanced Operations",
+              collapsed: true,
+              items: [
+                {
+                  label: "Sync and Scripts",
+                  link: "/operations/sync_and_scripts/",
+                },
+              ],
+            },
+          ],
         },
       ],
     }),

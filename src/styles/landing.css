@@ -88,12 +88,34 @@ body:has(.landing-root) .landing-navbar__links a {
 .landing-navbar__brand {
   display: inline-flex;
   align-items: center;
+  gap: 0.45rem;
   min-height: 2.25rem;
   font-size: 0.95rem;
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.01em;
   color: hsl(var(--foreground));
+}
+
+.landing-navbar__logo {
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  display: block;
+}
+
+.landing-navbar__logo .ln {
+  stroke: hsl(var(--muted-foreground) / 0.6);
+}
+.landing-navbar__logo .dot {
+  fill: hsl(var(--muted-foreground) / 0.45);
+  stroke: hsl(var(--muted-foreground) / 0.6);
+}
+.landing-navbar__logo .ring {
+  stroke: hsl(var(--foreground));
+}
+.landing-navbar__logo .ck {
+  stroke: #5cb85c;
 }
 
 .landing-navbar__hamburger {

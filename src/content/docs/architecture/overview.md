@@ -1,47 +1,36 @@
 ---
 title: Overview
-description: High-level system architecture and where each responsibility lives.
+description: Read the AppraiseJS system in product language first, then follow links into the advanced internals.
 sidebar:
   order: 1
 ---
 
-AppraiseJS is a local-first Next.js platform that combines visual test authoring, orchestration, execution, and reporting in one runtime.
+AppraiseJS is a local-first platform that keeps four concerns connected: modeling test intent, generating executable artifacts, running tests, and inspecting results.
 
-## Architecture map
+## Simplified architecture map
 
-1. UI layer (`src/app`, `src/components`): authoring screens, the Settings sync dashboard, run dashboards, and report views.
-2. Server layer (`src/actions`, `src/app/api`): input validation, persistence, sync and run orchestration, streaming APIs.
-3. Core orchestration (`src/lib`, `scripts`): feature generation, sync logic, execution coordination, report parsing, and maintenance scripts.
-4. Data layer (`prisma` + SQLite): authoritative model for authored entities, runs, reports, and metrics.
-5. Runner layer (`src/tests`): Cucumber + Playwright execution, hooks, trace capture, step libraries.
-
-The following diagram illustrates the architecture flow.
+1. Product model: modules, suites, cases, locators, template steps, environments, and tags.
+2. Sync and generation: AppraiseJS turns the authored model into runnable artifacts and keeps files and database state aligned.
+3. Execution: test runs choose scope, environment, browser, and worker settings.
+4. Results: reports, logs, traces, and metrics feed the debugging and operational workflow.
 
 ```nomnoml
 #direction: right
 #stroke: #64748b
 #fill: #f8fafc
-[UI Pages] -> [Server Actions / API Routes]
-[Server Actions / API Routes] -> [Core Libs + Scripts]
-[Core Libs + Scripts] -> [Prisma + SQLite]
-[Core Libs + Scripts] -> [Cucumber + Playwright]
-[Cucumber + Playwright] -> [Cucumber JSON + Traces]
-[Cucumber JSON + Traces] -> [Core Libs + Scripts]
-[Server Actions / API Routes] -> [UI Pages]
+[Authored assets] -> [Sync and generated artifacts]
+[Sync and generated artifacts] -> [Test runs]
+[Test runs] -> [Reports, logs, traces]
+[Reports, logs, traces] -> [Author updates]
 ```
 
-## How to read this section
+## Read next
 
-- [Execution Lifecycle](/architecture/execution_lifecycle): request-to-result runtime flow.
-- [Synchronization Pipeline](/architecture/synchronization_pipeline): DB <-> filesystem parity and artifact generation.
-- [Data and Reporting Model](/architecture/data_model_and_reporting): run/report entities and matching logic.
-- [Runtime Services and APIs](/architecture/runtime_services_and_apis): process manager, SSE logs, traces, and downloads.
+- [Execution Lifecycle](/architecture/execution_lifecycle/) for request-to-result runtime flow.
+- [Synchronization Pipeline](/architecture/synchronization_pipeline/) for DB and filesystem parity.
+- [Data and Reporting Model](/architecture/data_model_and_reporting/) for report persistence and metrics.
+- [Runtime Services and APIs](/architecture/runtime_services_and_apis/) for process management, streaming, and artifacts.
 
-## Key implementation anchors
+## Advanced note
 
-- Test run execution: `src/lib/test-run/test-run-executor.ts`
-- Process lifecycle and events: `src/lib/test-run/process-manager.ts`
-- Report parsing and enum mapping: `src/lib/test-run/report-parser.ts`
-- Bidirectional sync: `src/lib/bidirectional-sync.ts`
-- Feature generation: `src/lib/feature-file-generator.ts`
-- Run orchestration action: `src/actions/test-run/test-run-actions.ts`
+If you are still working through the first-run path, you can stop here. The linked pages below this point are intentionally deep-dive material.

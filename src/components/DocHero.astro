@@ -1,0 +1,52 @@
+---
+interface Action {
+  href: string;
+  label: string;
+  variant?: "primary" | "secondary";
+}
+
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  summary: string;
+  meta?: string[];
+  actions?: Action[];
+}
+
+const {
+  eyebrow,
+  title,
+  summary,
+  meta = [],
+  actions = [],
+} = Astro.props as Props;
+---
+
+<section class="doc-hero">
+  {eyebrow && <p class="doc-hero__eyebrow">{eyebrow}</p>}
+  {title && <h2 class="doc-hero__title">{title}</h2>}
+  <p class="doc-hero__summary">{summary}</p>
+  {
+    meta.length > 0 && (
+      <div class="doc-hero__meta" aria-label="Page context">
+        {meta.map((item) => (
+          <span class="doc-hero__meta-item">{item}</span>
+        ))}
+      </div>
+    )
+  }
+  {
+    actions.length > 0 && (
+      <div class="doc-hero__actions">
+        {actions.map((action) => (
+          <a
+            class={`doc-hero__action doc-hero__action--${action.variant ?? "primary"}`}
+            href={action.href}
+          >
+            {action.label}
+          </a>
+        ))}
+      </div>
+    )
+  }
+</section>

@@ -5,6 +5,8 @@ sidebar:
   order: 2
 ---
 
+> Beginners: start with [Running Tests](/tutorials/running_tests/) and [Test Runs](/guides/test_runs/) first. This page is the deep-dive request-to-result runtime view.
+
 This page documents the runtime path used by `createTestRunAction`, `executeTestRun`, and `ProcessManager`.
 
 ## Request payload (`testRunSchema`)

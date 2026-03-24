@@ -1,28 +1,36 @@
 ---
 title: Reports
-description: Analyze run outcomes, scenario details, and execution metrics.
+description: Read execution outcomes quickly enough to decide what to fix next.
 sidebar:
   order: 12
 ---
 
 Reports are generated from Cucumber JSON output after run completion.
 
-## Report views
+## Workflow context
+
+Reports are the shortest route from a finished run to a useful debugging decision. Start here before you open raw logs or traces.
+
+## Do this
 
 - `Reports` list page: run-level summary table.
 - Report detail page: pass/fail totals, environment details, scenario-level breakdown.
 - Metric report: `/reports/test-cases`
 - Metric report: `/reports/test-suites`
 
-## What you can inspect
+## Minimal example
 
-- Total/passed/failed tests.
-- Step-level outcomes and durations.
-- Environment context used for the run.
-- Linked run state and logs.
+- Open the newest failed report.
+- Read summary totals and scenario rows.
+- Open logs or traces only for the failed scenario that still looks ambiguous.
 
-## Debug flow
+## What good looks like
 
 1. Start from failed report rows.
 2. Drill into scenario/step details.
 3. Open run logs and Playwright traces for root-cause analysis.
+
+## Next step
+
+- [Viewing Reports](/tutorials/viewing_reports/)
+- [Dashboard](/guides/dashboard/)

@@ -1,0 +1,24 @@
+---
+interface Props {
+  label?: string;
+  steps: string[];
+}
+
+const { label = "UI path", steps } = Astro.props as Props;
+---
+
+<section class="ui-path">
+  <p class="ui-path__label">{label}</p>
+  <div class="ui-path__steps" aria-label={label}>
+    {
+      steps.map((step, index) => (
+        <>
+          <span class="ui-path__step">{step}</span>
+          {index < steps.length - 1 && (
+            <span class="ui-path__separator">→</span>
+          )}
+        </>
+      ))
+    }
+  </div>
+</section>

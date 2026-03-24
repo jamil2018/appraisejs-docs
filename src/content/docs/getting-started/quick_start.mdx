@@ -1,0 +1,104 @@
+---
+title: Quick Start
+description: Build and run your first AppraiseJS scenario with a checklist you can follow end to end.
+sidebar:
+  order: 3
+---
+
+import DocHero from "../../../components/DocHero.astro";
+import TaskChecklist from "../../../components/TaskChecklist.astro";
+import OutcomeCard from "../../../components/OutcomeCard.astro";
+import UIPath from "../../../components/UIPath.astro";
+import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
+
+<DocHero
+  eyebrow="First run"
+  summary="This page is the fastest guided route from a running local app to a passing scenario with a report you can inspect."
+  meta={[
+    "Role: first-time QA authors",
+    "Time: 15 minutes",
+    "Outcome: one runnable login flow",
+  ]}
+  actions={[
+    { label: "Install first", href: "/getting-started/installation/" },
+    {
+      label: "Open Creating Tests",
+      href: "/tutorials/creating_tests/",
+      variant: "secondary",
+    },
+  ]}
+/>
+
+## Before you begin
+
+<TaskChecklist
+  showTitle={false}
+  items={[
+    "AppraiseJS is installed and `npm run dev` starts the local app.",
+    "You have a reachable application URL for a simple login or smoke scenario.",
+    "You can create local test data or use non-sensitive credentials.",
+  ]}
+/>
+
+## What you'll finish with
+
+<OutcomeCard title="First successful run" tone="success">
+  You will leave this page with an environment, a module, locators, a test
+  suite, a test case, one test run, and one report you can inspect.
+</OutcomeCard>
+
+## Step-by-step procedure
+
+<UIPath
+  steps={[
+    "Environments",
+    "Modules",
+    "Locators",
+    "Test Suites",
+    "Test Cases",
+    "Test Runs",
+    "Reports",
+  ]}
+/>
+
+1. Start AppraiseJS and confirm the local app opens in your browser.
+2. Create environment `Local` with the base URL of the application you want to test.
+3. Create module `Authentication` or another feature-oriented module name.
+4. Open `Locators -> Create` and launch the Chromium picker from the saved environment.
+5. Capture at least these locators: `emailInput`, `passwordInput`, `submitButton`, and one success-state locator such as `welcomeBanner`.
+6. Accept the suggested locator group if the route is already recognized, or create a new group such as `Login Page`.
+7. Create test suite `Auth Smoke`.
+8. Create test case `Valid login shows welcome banner`.
+9. Add these steps in order: navigate to selected environment base URL, fill email input, fill password input, click submit button, assert success-state visibility.
+10. Save the test case and open `Test Runs -> Create`.
+11. Create a run against `Local`, submit it, and watch status changes on the run details page.
+12. Open the linked report and confirm the scenario outcome matches what happened in the browser.
+
+<MediaPlaceholder
+  type="screenshot"
+  title="Completed Quick Start state showing created Environment, Module, Test Suite, and Test Case"
+  why="This gives new users a visual confirmation of what 'finished setup' looks like before they try to run anything."
+/>
+
+<MediaPlaceholder
+  type="gif"
+  title="Quick Start completion flow from saving the first test case to opening the first report"
+  why="This helps mixed teams follow the transition from authoring into execution without getting lost between screens."
+/>
+
+## Checkpoint
+
+- You can open one environment, one module, one locator group, one suite, and one case from the UI.
+- Your test run either completed successfully or failed with a report and logs you can inspect.
+- You know whether you need to continue to [Creating Tests](/tutorials/creating_tests/) or jump to [Troubleshooting](/operations/troubleshooting/).
+
+## Common mistakes
+
+- Launching the picker from the wrong base URL and saving locators for the wrong page.
+- Creating a run before the test case has all required step parameters.
+- Forgetting that AppraiseJS uses the selected environment during navigation and wait steps.
+- Skipping `Settings -> Sync` after editing generated files outside the UI.
+
+## Next step
+
+Continue to [Creating Tests](/tutorials/creating_tests/) to turn this short checklist into a repeatable authoring workflow.

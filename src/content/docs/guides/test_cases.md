@@ -1,13 +1,17 @@
 ---
 title: Test Cases
-description: Build executable visual scenarios with ordered steps.
+description: Compose one business outcome into an executable step flow.
 sidebar:
   order: 10
 ---
 
 A test case is a single scenario composed of ordered template steps.
 
-## Create a test case
+## Workflow context
+
+Test cases are where reusable assets become a specific business scenario. This is the point where modules, suites, locators, template steps, and tags come together.
+
+## Do this
 
 1. Go to `Test Cases -> Create`.
 2. Add title (min 3 chars) and description.
@@ -17,14 +21,19 @@ A test case is a single scenario composed of ordered template steps.
 6. Fill required parameters for each step.
 7. Save.
 
-## Validation behavior
+## Minimal example
 
-- At least one suite is required.
-- Missing mandatory step parameters block save.
-- Generated Gherkin preview reflects current step order.
+- Title: `Valid login shows welcome banner`
+- Suite: `Auth Smoke`
+- Steps: navigate, fill email, fill password, click submit, assert banner visible
 
-## Flow design tips
+## What good looks like
 
 - Keep one business outcome per test case.
 - Use clear step labels and stable locator references.
 - Use template test cases for repeated patterns.
+
+## Next step
+
+- [Test Runs](/guides/test_runs/)
+- [Template Test Cases](/guides/template_test_cases/)

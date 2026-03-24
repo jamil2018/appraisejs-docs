@@ -1,13 +1,17 @@
 ---
 title: Template Steps
-description: Build reusable action/assertion step definitions.
+description: Define reusable behavior blocks that test cases can compose without rewriting logic.
 sidebar:
   order: 7
 ---
 
 Template steps are reusable behavior units used inside test-case flows.
 
-## Create a template step
+## Workflow context
+
+Template steps are the reusable action and assertion definitions that keep case authoring consistent across the project.
+
+## Do this
 
 1. Go to `Template Steps -> Create`.
 2. Fill `Name`, `Description`, and `Icon`.
@@ -17,19 +21,21 @@ Template steps are reusable behavior units used inside test-case flows.
 6. Configure `Parameters` (type, order).
 7. Save.
 
-## Important behavior
+## Minimal example
 
-- Signature/parameter updates can regenerate function definition previews.
-- Generated definitions map to Cucumber `When`/`Then` style based on type.
+- Name: `Click element`
+- Type: `ACTION`
+- Signature: `the user clicks on the {string} element`
+- Parameter: locator name
 
-## Parameter types
+## What good looks like
 
 - `STRING`: free-text input.
 - `NUMBER`: numeric input.
 - `BOOLEAN`: true/false input.
 - `LOCATOR`: locator-name reference resolved at runtime.
 
-## Related
+## Next step
 
-- [Template Step Groups](/guides/template_step_groups)
-- [References](/references/click_steps)
+- [Template Step Groups](/guides/template_step_groups/)
+- [Click Steps](/references/click_steps/)

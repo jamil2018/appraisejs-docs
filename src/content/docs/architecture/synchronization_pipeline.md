@@ -5,6 +5,8 @@ sidebar:
   order: 3
 ---
 
+> Beginners: start with [Settings](/guides/settings/) first. This page explains the deeper pipeline behind the Sync dashboard and CLI reconciliation flow.
+
 AppraiseJS maintains bidirectional parity between database entities and test artifacts.
 
 The primary operator surface for this flow is the [`Settings -> Sync`](/guides/settings) dashboard. It exposes pending-difference counts in the UI, while the same underlying sync tasks remain available through CLI scripts for maintenance and automation.

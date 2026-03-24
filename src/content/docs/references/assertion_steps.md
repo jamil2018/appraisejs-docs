@@ -5,9 +5,15 @@ sidebar:
   order: 8
 ---
 
+> Beginners: start with [Viewing Reports](/tutorials/viewing_reports/) or [Creating Tests](/tutorials/creating_tests/) if you still need the workflow context first. This page is the exact assertion-step reference.
+
 Source: `src/tests/steps/validations/*.step.ts`.
 
 See shared placeholder rules in [Step Parameter Conventions](/references/step_parameter_conventions).
+
+## Use this when
+
+Use assertion steps when the scenario must validate page text, element state, or route state after an action.
 
 ## Text assertion steps
 
@@ -23,11 +29,11 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
-| First `{string}` | Element locator name | Existing locator key (for example `toastMessage`). |
-| `{boolean}` | Positive or negative assertion | `true` for must contain, `false` for must not contain. |
-| Second `{string}` | Target text | Expected literal/partial text value. |
+| Parameter         | Represents                     | Expected data                                          |
+| ----------------- | ------------------------------ | ------------------------------------------------------ |
+| First `{string}`  | Element locator name           | Existing locator key (for example `toastMessage`).     |
+| `{boolean}`       | Positive or negative assertion | `true` for must contain, `false` for must not contain. |
+| Second `{string}` | Target text                    | Expected literal/partial text value.                   |
 
 Example:
 
@@ -47,11 +53,11 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
-| First `{string}` | Element locator name | Existing locator key (for example `pageTitle`). |
-| `{boolean}` | Positive or negative assertion | `true` for must equal, `false` for must not equal. |
-| Second `{string}` | Expected exact text | Exact value expected in element. |
+| Parameter         | Represents                     | Expected data                                      |
+| ----------------- | ------------------------------ | -------------------------------------------------- |
+| First `{string}`  | Element locator name           | Existing locator key (for example `pageTitle`).    |
+| `{boolean}`       | Positive or negative assertion | `true` for must equal, `false` for must not equal. |
+| Second `{string}` | Expected exact text            | Exact value expected in element.                   |
 
 Example:
 
@@ -73,10 +79,10 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
-| `{string}` | Element locator name | Existing locator key. |
-| `{boolean}` | Expected visibility | `true` for visible, `false` for hidden/not visible. |
+| Parameter   | Represents           | Expected data                                       |
+| ----------- | -------------------- | --------------------------------------------------- |
+| `{string}`  | Element locator name | Existing locator key.                               |
+| `{boolean}` | Expected visibility  | `true` for visible, `false` for hidden/not visible. |
 
 Example:
 
@@ -96,9 +102,9 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
-| `{string}` | Element locator name | Existing locator key. |
+| Parameter   | Represents            | Expected data                                               |
+| ----------- | --------------------- | ----------------------------------------------------------- |
+| `{string}`  | Element locator name  | Existing locator key.                                       |
 | `{boolean}` | Expected active state | `true` for active/enabled, `false` for not active/disabled. |
 
 Example:
@@ -119,8 +125,8 @@ What it does:
 
 Parameters:
 
-| Parameter | Represents | Expected data |
-| --- | --- | --- |
+| Parameter  | Represents        | Expected data                          |
+| ---------- | ----------------- | -------------------------------------- |
 | `{string}` | Expected pathname | Route path (for example `/dashboard`). |
 
 Example:
@@ -128,6 +134,16 @@ Example:
 ```gherkin
 Then the url route should be equal to "/dashboard"
 ```
+
+## Common failures
+
+- Assertions fail when the locator is missing, the expected state is wrong, or the page has not reached the required state yet.
+- Route assertions can fail when the environment or navigation step did not land where you expected.
+
+## Related steps
+
+- [Navigation Steps](/references/navigation_steps/)
+- [Wait Steps](/references/wait_steps/)
 
 ## Known limitation
 

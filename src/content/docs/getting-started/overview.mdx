@@ -1,61 +1,82 @@
 ---
 title: Overview
-description: What AppraiseJS is and what it can do.
+description: Learn the AppraiseJS mental model before you start creating tests.
 sidebar:
   order: 1
 ---
 
-import demoVideo from "../../../assets/demo/demo.mp4";
+import DocHero from "../../../components/DocHero.astro";
+import OutcomeCard from "../../../components/OutcomeCard.astro";
+import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 
-AppraiseJS is a local-first, visual test development and execution platform.  
-It combines test authoring, orchestration, and reporting in a single Next.js app, while generating portable test artifacts (Gherkin + Cucumber/Playwright execution flow) behind the scenes.
+<DocHero
+  eyebrow="Orientation"
+  summary="Think of AppraiseJS as one local control plane for authoring, generating, running, and inspecting browser tests. You do the modeling in the UI, and AppraiseJS keeps the executable artifacts and results connected."
+  meta={[
+    "Role: first-time users",
+    "Goal: understand the product model before the clicks",
+    "Read time: 5 minutes",
+  ]}
+  actions={[
+    { label: "Open Installation", href: "/getting-started/installation/" },
+    {
+      label: "Open Why AppraiseJS",
+      href: "/getting-started/why_appraisejs/",
+      variant: "secondary",
+    },
+  ]}
+/>
 
-At a high level, you model test logic in the UI and AppraiseJS handles the pipeline:
+## Before you begin
 
-1. Define test assets (modules, suites, cases, steps, locators, environments).
-2. Generate and sync executable test artifacts, with reconciliation available from `Settings -> Sync`.
-3. Run tests with configurable execution options.
-4. Persist logs/results and expose detailed reports and metrics.
+- You do not need to know the full architecture yet.
+- You only need to understand the basic flow from modeling to execution to reports.
+- If you already installed the app and want to move faster, you can skip to [Quick Start](/getting-started/quick_start/).
 
-## See it in action
+## What you'll finish with
 
-See the AppraiseJS workflow: test scenario modeling, execution orchestration, and report visibility in one continuous flow.
+<OutcomeCard title="A usable mental model" tone="success">
+  You should leave this page knowing what AppraiseJS stores, what it generates,
+  how it runs tests, and where results show up when something passes or fails.
+</OutcomeCard>
 
-<video controls width="100%" class="overview-demo-video">
-  <source src={demoVideo} type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+## Step-by-step procedure
 
-## What AppraiseJS is built for
+1. Start with the authored assets: modules, suites, cases, template steps, locators, tags, and environments.
+2. Understand that AppraiseJS turns those authored assets into executable artifacts and keeps them aligned through sync.
+3. See test runs as the operational layer where you choose environment, browser, worker count, and scope.
+4. Treat reports, logs, traces, and dashboard metrics as the inspection layer that closes the feedback loop.
 
-- No-code or low-code test authoring for web automation.
-- Shared usage across QA, manual testers, and developers.
-- Local project ownership with inspectable files and schema-backed data.
-- Fast setup via `create-appraisejs` or direct repo setup scripts.
+```nomnoml
+#direction: right
+#stroke: #64748b
+#fill: #f8fafc
+[Author assets in UI] -> [Generate and sync artifacts]
+[Generate and sync artifacts] -> [Run tests]
+[Run tests] -> [Inspect reports and logs]
+[Inspect reports and logs] -> [Refine assets]
+```
 
-## Core capabilities
+<h2 id="see-it-in-action">See it in action</h2>
 
-- Visual test modeling: build a hierarchy of **Modules -> Test Suites -> Test Cases -> Steps**.
-- Visual test modeling: compose scenarios with reusable **Template Steps** (actions and assertions).
-- Reusable selector system: manage **Locator Groups** and **Locators** for stable element references, including live capture with the built-in Chromium picker.
-- Environment-aware execution: define environments (base URLs and credentials) and run against selected targets.
-- Tag-driven orchestration: use identifier/filter tags to select and organize execution scope.
-- Test run management: create named test runs, track lifecycle, and control worker concurrency.
-- Test run management: execute against multiple browser engines (Chromium, Firefox, WebKit).
-- Runtime visibility: stream/store run logs, access run artifacts, and inspect execution traces.
-- Report ingestion and analytics: parse Cucumber JSON into structured report entities.
-- Report ingestion and analytics: surface pass/fail outcomes, durations, and dashboard metrics.
-- Filesystem + database sync: review pending differences and run entity synchronization from `Settings -> Sync`.
-- Filesystem + database sync: regenerate `.feature` files from authored test data.
+<MediaPlaceholder
+  type="video"
+  title="Mental-model walkthrough from authored entities to run results"
+  why="A short orientation video helps new users connect the product areas before they start clicking through individual forms."
+/>
 
-## Mental model
+## Checkpoint
 
-Think of AppraiseJS as a test control plane with an integrated execution engine:
+- You can explain the difference between authored assets, generated artifacts, runs, and reports.
+- You know that `Settings -> Sync` is the recovery point when UI data and generated files drift apart.
+- You know the next practical page is [Installation](/getting-started/installation/).
 
-- Author in UI -> persist in DB.
-- Generate/sync Gherkin artifacts.
-- Execute with Cucumber + Playwright.
-- Parse and store results.
-- Explore logs, reports, and metrics in the app.
+## Common mistakes
 
-If you want to start using these capabilities immediately, continue to [Getting Started](/getting-started/getting_started) and then [Quick Start](/getting-started/quick_start).
+- Treating AppraiseJS like a pure reporting tool instead of a full authoring and execution workflow.
+- Assuming runs can succeed before environments, locators, and test cases exist.
+- Jumping into advanced architecture pages before you have a first successful run.
+
+## Next step
+
+Continue to [Installation](/getting-started/installation/) to get the local app into a known-good state.

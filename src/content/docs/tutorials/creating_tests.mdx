@@ -1,0 +1,102 @@
+---
+title: Creating Tests
+description: Create your first maintainable AppraiseJS scenario from module setup through saved case.
+sidebar:
+  order: 1
+---
+
+import DocHero from "../../../components/DocHero.astro";
+import TaskChecklist from "../../../components/TaskChecklist.astro";
+import OutcomeCard from "../../../components/OutcomeCard.astro";
+import UIPath from "../../../components/UIPath.astro";
+import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
+
+<DocHero
+  eyebrow="Hands-on tutorial"
+  summary="This tutorial is the canonical first success journey for AppraiseJS. It shows how authored entities fit together while you build one real scenario."
+  meta={[
+    "Role: QA authors first, developers second",
+    "Time: 20-30 minutes",
+    "Outcome: one reusable login smoke test",
+  ]}
+  actions={[
+    { label: "Open Quick Start", href: "/getting-started/quick_start/" },
+    {
+      label: "Open Running Tests",
+      href: "/tutorials/running_tests/",
+      variant: "secondary",
+    },
+  ]}
+/>
+
+## Before you begin
+
+<TaskChecklist
+  showTitle={false}
+  items={[
+    "AppraiseJS is running locally.",
+    "You have a reachable login page or another small smoke-test target.",
+    "You know which environment URL and credentials are safe to use locally.",
+  ]}
+/>
+
+## What you'll build
+
+<OutcomeCard title="A reusable smoke scenario" tone="success">
+  You will create one module, one environment, one locator group, four locators,
+  one suite, and one test case that can be rerun from the Test Runs screen.
+</OutcomeCard>
+
+## Step-by-step procedure
+
+<UIPath
+  steps={["Modules", "Environments", "Locators", "Test Suites", "Test Cases"]}
+/>
+
+1. Create module `Authentication` so the scenario has a clear home in the product model.
+2. Create environment `Local` with the application base URL you want to test.
+3. Open `Locators -> Create` and launch the Chromium picker from that saved environment.
+4. Capture locators for `emailInput`, `passwordInput`, `submitButton`, and `welcomeBanner`.
+5. Accept the suggested locator group for the login route, or create `Login Page` if nothing relevant exists yet.
+6. Create suite `Auth Smoke` under the `Authentication` module.
+7. Create case `Valid login shows welcome banner` and attach it to the `Auth Smoke` suite.
+8. Add the first step to navigate to the selected environment base URL so the case is portable across environments.
+9. Add input steps for email and password using the captured locators.
+10. Add a click step for the submit button.
+11. Add an assertion step that checks the `welcomeBanner` visibility is `true`.
+12. Save the case and re-open it once to confirm every parameter, locator reference, and suite relationship still looks correct.
+
+<MediaPlaceholder
+  type="screenshot"
+  title="Entity creation sequence showing Environment, Module, Test Suite, and Test Case forms in their saved state"
+  why="This reduces uncertainty about which entities must exist before the case editor becomes productive."
+/>
+
+<MediaPlaceholder
+  type="gif"
+  title="Locator picker flow from launching Chromium to confirming selector"
+  why="The locator picker is motion-heavy and easier to understand as a short loop than as prose alone."
+/>
+
+<MediaPlaceholder
+  type="gif"
+  title="Test case editor walkthrough showing ordered step creation, parameter entry, and save"
+  why="This helps new users recognize the visual editor state that corresponds to a valid, runnable case."
+/>
+
+## Checkpoint
+
+- The case opens with a complete ordered flow and no missing required parameters.
+- Every referenced locator exists and belongs to a route-aware locator group.
+- The suite, module, and environment names are clear enough that another team member could reuse them later.
+
+## Common mistakes
+
+- Creating locators before deciding which environment or route they should belong to.
+- Saving a case with literal values that should have been environment-driven or reusable.
+- Mixing multiple business outcomes into one case instead of one clear scenario.
+- Naming assets too generically, which makes future reuse harder.
+
+## Next step
+
+Move to [Running Tests](/tutorials/running_tests/) to execute the scenario either by tags or by explicit case selection.
