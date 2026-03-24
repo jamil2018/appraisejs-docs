@@ -18,7 +18,7 @@ AppraiseJS exists to remove the usual split between test management tools and au
 
 - One local app for authoring, execution, and reporting.
 - Visual-first test modeling with reusable template steps and locators.
-- Automatic generation/sync of executable artifacts.
+- Automatic generation/sync of executable artifacts with a built-in sync dashboard in `Settings`.
 - Built-in run orchestration (tags, workers, browser engine selection).
 - Structured report ingestion with test-case and suite-level metrics.
 

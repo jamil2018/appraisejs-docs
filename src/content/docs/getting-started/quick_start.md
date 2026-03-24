@@ -26,8 +26,8 @@ npm run dev
 
 1. Environment (`Local`)
 2. Module (`Login`)
-3. Locator Group (`Login Page`)
-4. Locators (`emailInput`, `passwordInput`, `submitButton`, `successBanner`)
+3. Create locators from `Locators -> Create`
+4. Let Appraise suggest an existing locator group or create a new one from the current route
 5. Test Suite (`Login flow`)
 6. Test Case (`User logs in with valid credentials`)
 
@@ -45,3 +45,5 @@ npm run dev
 2. Select environment and tests.
 3. Submit and monitor status.
 4. Open reports for outcomes and failures.
+
+If you later pull filesystem changes or edit automation artifacts outside the UI, open `Settings -> Sync` before running tests again.

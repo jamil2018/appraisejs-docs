@@ -7,15 +7,22 @@ sidebar:
 
 AppraiseJS maintains bidirectional parity between database entities and test artifacts.
 
+The primary operator surface for this flow is the [`Settings -> Sync`](/guides/settings) dashboard. It exposes pending-difference counts in the UI, while the same underlying sync tasks remain available through CLI scripts for maintenance and automation.
+
+The locator creator is part of that model: live selector capture happens in the UI, but saved locators still flow back into synchronized filesystem artifacts.
+
 ## Synchronization modes
 
-- Entity sync scripts (`sync-modules`, `sync-test-suites`, etc.) align DB records with source-of-truth files.
+- The `Settings -> Sync` UI compares filesystem state with database state and lets users trigger reconciliation from one place.
+- Entity sync scripts (`sync-modules`, `sync-test-suites`, etc.) remain available for scripted workflows and maintenance.
 - Feature regeneration (`sync-features`) performs DB <-> feature-file bidirectional sync.
 - Template step managers update step-definition files while preserving structure and JSDoc metadata.
 
-## `sync-all` orchestration
+## UI-driven sync orchestration
 
-`npm run sync-all` executes scripts in dependency-aware order:
+When a user starts a sync from the UI, Appraise can run prerequisite sync targets automatically before the requested target.
+
+`Sync All` in the UI and `npm run sync-all` both follow the same dependency-aware order:
 
 1. `sync-modules`
 2. `sync-environments`
@@ -26,6 +33,11 @@ AppraiseJS maintains bidirectional parity between database entities and test art
 7. `sync-locators`
 8. `sync-test-suites`
 9. `sync-test-cases`
+
+Examples:
+
+- Running `Sync Locators` triggers `sync-locator-groups` first.
+- Running `Sync Test Cases` may trigger suite, template-step, and tag sync prerequisites first.
 
 ## Bidirectional feature sync
 
@@ -47,5 +59,6 @@ AppraiseJS maintains bidirectional parity between database entities and test art
 ## Why this architecture helps
 
 - Supports visual-first authoring while keeping executable artifacts portable.
-- Enables teams to reconcile DB and filesystem changes after merges.
+- Lets teams capture selectors from a live page without breaking source-controlled parity.
+- Enables teams to reconcile DB and filesystem changes after merges from the UI or scripts.
 - Reduces manual sync drift across locators, steps, suites, and features.

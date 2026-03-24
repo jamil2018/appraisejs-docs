@@ -26,6 +26,12 @@ Environments define where test runs execute.
 - Environment-aware navigation and wait steps read this configuration at runtime.
 - Environment data drives base URL resolution and target context for the run.
 
+## Usage in locator capture
+
+- The locator creator can launch its Chromium picker from a saved environment.
+- This is useful when you want to inspect a known application target without retyping the URL.
+- For one-off pages, the locator creator also supports launching directly from a URL without saving an environment first.
+
 ## Tips
 
 - Use stable names like `Local`, `Staging`, `Prod-Snapshot`.

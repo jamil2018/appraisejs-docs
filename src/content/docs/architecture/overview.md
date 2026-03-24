@@ -9,9 +9,9 @@ AppraiseJS is a local-first Next.js platform that combines visual test authoring
 
 ## Architecture map
 
-1. UI layer (`src/app`, `src/components`): authoring screens, run dashboards, report views.
-2. Server layer (`src/actions`, `src/app/api`): input validation, persistence, run orchestration, streaming APIs.
-3. Core orchestration (`src/lib`, `scripts`): feature generation, sync logic, execution coordination, report parsing, metrics.
+1. UI layer (`src/app`, `src/components`): authoring screens, the Settings sync dashboard, run dashboards, and report views.
+2. Server layer (`src/actions`, `src/app/api`): input validation, persistence, sync and run orchestration, streaming APIs.
+3. Core orchestration (`src/lib`, `scripts`): feature generation, sync logic, execution coordination, report parsing, and maintenance scripts.
 4. Data layer (`prisma` + SQLite): authoritative model for authored entities, runs, reports, and metrics.
 5. Runner layer (`src/tests`): Cucumber + Playwright execution, hooks, trace capture, step libraries.
 
