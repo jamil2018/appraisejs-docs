@@ -1,6 +1,6 @@
 ---
 title: Installation
-description: Install AppraiseJS for the first time and confirm the local app is ready for onboarding.
+description: Install AppraiseJS with the official bootstrapper, complete the recommended production-first setup flow, and confirm the local app is ready.
 sidebar:
   order: 2
 ---
@@ -12,7 +12,7 @@ import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 
 <DocHero
   eyebrow="Setup"
-  summary="Install AppraiseJS with the least ambiguous route possible, verify the app starts locally, and know what to do if setup does not end in a working UI."
+  summary="Install AppraiseJS with the official bundled-template bootstrapper, use the recommended production-first flow, and verify the local app reaches a known-good first-run state."
   meta={[
     "Role: first-time local setup",
     "Time: 10-15 minutes",
@@ -34,61 +34,79 @@ import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
   showTitle={false}
   items={[
     "Install Node.js 18 or later.",
-    "Confirm `npm` is available in your shell.",
-    "Decide whether you want a fresh scaffold or a direct `appraisejs-core` clone.",
+    "Confirm your preferred package manager is available in your shell: `npm`, `pnpm`, `yarn`, or `bun`.",
+    "Use `create-appraisejs` unless you intentionally need a source-repo workflow.",
   ]}
 />
 
 ## What you'll finish with
 
-<OutcomeCard title="A known-good local launch" tone="success">
-  You should be able to run the local app, open it in the browser, and move
-  directly into Quick Start without guessing whether setup is complete.
+<OutcomeCard title="A production-ready local scaffold" tone="success">
+  You should be able to open the local app, keep the seeded SQLite database,
+  and start from a clean automation workspace without wondering whether demo
+  data or starter artifacts were bundled in.
 </OutcomeCard>
 
 ## Step-by-step procedure
 
-### Option 1: Scaffold a new project
+### Recommended path: scaffold with `create-appraisejs`
 
 ```bash
-npx create-appraisejs
+npx create-appraisejs@latest
 cd <your-project-name>
-npm run setup
-npm run dev
+npm run setup # only if you skipped setup during scaffolding
+npm run start
 ```
 
-### Option 2: Clone `appraisejs-core`
+The examples on this page use `npm`, but the scaffold rewrites scripts and
+printed next commands for the package manager you selected.
 
-```bash
-git clone https://github.com/jamil2018/appraisejs-core.git
-cd appraisejs-core
-npm run setup
-npm run dev
-```
+`create-appraisejs` is the official AppraiseJS bootstrapper. The default
+experience uses the bundled template shipped with the package, not a repo
+download step.
 
-After startup, open the local URL shown by the dev server.
+### What the scaffold does
+
+- Prompts for the target directory.
+- Prompts for the package manager: `npm`, `pnpm`, `yarn`, or `bun`.
+- Prompts for whether to run production setup immediately.
+- Prompts for which Playwright browsers to install.
+- Uses the bundled template by default.
+- Rewrites generated project scripts to match the selected package manager.
+- Preserves the seeded SQLite database at `prisma/dev.db`.
+- Resets the automation workspace so `automation/config/environments/environments.json` starts as `{}` and `automation/mapping/locator-map.json` starts as `[]`.
+- Includes reusable step definitions, but does not bundle starter features, locators, or reports.
+- Runs the project `setup` script and installs the selected Playwright browsers if you opt into setup during scaffolding.
+- Prints the exact next commands to run if you skip setup during scaffolding.
+
+After startup, open the local URL shown by the app. `npm run dev` is still
+available for local iteration, but it is not the primary onboarding path.
 
 <MediaPlaceholder
   type="video"
-  title="End-to-end first-run setup from project creation through opening the local app"
+  title="End-to-end first-run setup from scaffolding through opening the local app with the production-first flow"
   why="Installation is a multi-step flow, so continuity matters more than a single screenshot here."
 />
 
 <MediaPlaceholder
   type="screenshot"
-  title="Successful installation state showing the AppraiseJS home page loaded after `npm run dev`"
+  title="Successful installation state showing the AppraiseJS home page loaded after `npm run start`"
   why="This gives beginners a concrete success target for the end of setup."
 />
 
 ## Checkpoint
 
-- The local dev server starts without blocking setup errors.
+- The local app starts without blocking setup errors.
 - The AppraiseJS UI loads in the browser.
+- The project still contains the seeded `prisma/dev.db` database.
+- The automation workspace is clean rather than preloaded with starter artifacts.
 - You know whether to continue to [Quick Start](/getting-started/quick_start/) or jump to [Troubleshooting](/operations/troubleshooting/).
 
 ## Common mistakes
 
-- Running `npm run dev` before `npm run setup` finishes.
+- Skipping `npm run setup` and then starting the app without running the printed next commands.
+- Assuming the scaffold downloads a remote repo instead of using the bundled template.
+- Expecting starter features, locators, or reports to already exist in the generated project.
 - Treating browser dependency errors as AppraiseJS UI bugs instead of installation issues.
 - Continuing into test authoring before confirming the app actually loads locally.
 

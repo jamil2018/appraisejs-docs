@@ -1,6 +1,6 @@
 ---
 title: Quick Start
-description: Build and run your first AppraiseJS scenario with a checklist you can follow end to end.
+description: Build and run your first AppraiseJS scenario after completing the recommended production-first local setup flow.
 sidebar:
   order: 3
 ---
@@ -13,7 +13,7 @@ import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 
 <DocHero
   eyebrow="First run"
-  summary="This page is the fastest guided route from a running local app to a passing scenario with a report you can inspect."
+  summary="This page is the fastest guided route from a running local app and a clean scaffold to a passing scenario with a report you can inspect."
   meta={[
     "Role: first-time QA authors",
     "Time: 15 minutes",
@@ -34,7 +34,7 @@ import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 <TaskChecklist
   showTitle={false}
   items={[
-    "AppraiseJS is installed and `npm run dev` starts the local app.",
+    "AppraiseJS is installed and `npm run start` opens the local app.",
     "You have a reachable application URL for a simple login or smoke scenario.",
     "You can create local test data or use non-sensitive credentials.",
   ]}
@@ -46,6 +46,11 @@ import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
   You will leave this page with an environment, a module, locators, a test
   suite, a test case, one test run, and one report you can inspect.
 </OutcomeCard>
+
+New scaffolds start with a seeded local database and a clean automation
+workspace. That means the steps below create your first real environment,
+locator group, suite, and case instead of modifying bundled starter features or
+reports.
 
 ## Step-by-step procedure
 
@@ -61,7 +66,7 @@ import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
   ]}
 />
 
-1. Start AppraiseJS and confirm the local app opens in your browser.
+1. Start AppraiseJS with `npm run start` and confirm the local app opens in your browser. Use `npm run dev` only if you intentionally need the dev-server workflow while iterating locally.
 2. Create environment `Local` with the base URL of the application you want to test.
 3. Create module `Authentication` or another feature-oriented module name.
 4. Open `Locators -> Create` and launch the Chromium picker from the saved environment.
@@ -94,6 +99,7 @@ import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 
 ## Common mistakes
 
+- Expecting the scaffold to include starter environments, locators, test cases, or reports.
 - Launching the picker from the wrong base URL and saving locators for the wrong page.
 - Creating a run before the test case has all required step parameters.
 - Forgetting that AppraiseJS uses the selected environment during navigation and wait steps.
