@@ -11,6 +11,10 @@ The **Sync** page is available in `AppraiseJS 0.2` and later.
 
 Open `Settings -> Sync` to review what is out of sync between the filesystem and the database, then run the required synchronization directly from the UI.
 
+![Settings page showing the Sync dashboard with Sync All and individual sync tiles.](/docs/settings/settings.png)
+
+*The Settings page opens with a single Sync panel. In the idle state shown here, `Sync All` sits above the main grid and the per-target sync actions are grouped into color-coded tiles below it.*
+
 ## What it does
 
 Each sync tile represents one sync target:
@@ -29,7 +33,15 @@ Appraise compares the current filesystem state with the database state and shows
 
 The `Sync All` tile shows the total number of pending differences across all targets.
 
-> Screenshot placeholder: Settings page showing the Sync panel with `Sync All`, individual sync tiles, and pending-count badges.
+When there are no pending differences, the dashboard can appear without badges, as shown in the screenshot above.
+
+## Layout overview
+
+The Sync dashboard is arranged for quick scanning:
+
+- `Sync All` is pinned first because it is the broadest reconciliation action.
+- The remaining tiles are grouped in a left-to-right grid for focused sync runs.
+- The panel stays inside `Settings`, so maintenance tasks remain separate from entity authoring screens.
 
 ## How it works
 
