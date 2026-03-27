@@ -1,0 +1,61 @@
+---
+import { CodeXml, LayoutGrid, MapPin, Sparkles } from "@lucide/astro";
+
+const steps = [
+  {
+    title: "Visual Flow",
+    description:
+      "Design test scenarios and business flows in the browser with reusable nodes.",
+    icon: "spark",
+  },
+  {
+    title: "Generated Code",
+    description:
+      "AppraiseJS transforms visual flows into standard Playwright and Cucumber files.",
+    icon: "code",
+  },
+  {
+    title: "Local Execution",
+    description:
+      "Run directly in your repo, on your own machines, and in your existing CI stack.",
+    icon: "pin",
+  },
+  {
+    title: "Rich Reports",
+    description:
+      "Trace failures with logs, screenshots, and clear execution signals in one view.",
+    icon: "grid",
+  },
+];
+---
+
+<section
+  class="landing-steps landing-shell"
+  aria-labelledby="landing-steps-heading"
+>
+  <div class="landing-section-copy">
+    <h2 id="landing-steps-heading" class="landing-section-title">
+      How it Works
+    </h2>
+    <p class="landing-section-description">
+      From visual scenario builder to files your repository can actually own.
+    </p>
+  </div>
+
+  <div class="landing-steps__grid">
+    {
+      steps.map((step, index) => (
+        <article class="landing-step-card" style="margin-top: 0rem;">
+          <span class="landing-step-card__icon" aria-hidden="true">
+            {step.icon === "spark" && <Sparkles />}
+            {step.icon === "code" && <CodeXml />}
+            {step.icon === "pin" && <MapPin />}
+            {step.icon === "grid" && <LayoutGrid />}
+          </span>
+          <h3>{step.title}</h3>
+          <p>{step.description}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>

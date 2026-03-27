@@ -1,6 +1,6 @@
 ---
 title: Home
-description: Build browser test systems visually, generate production-grade artifacts, and ship trusted release signals.
+description: Design browser tests visually, generate real Playwright and Cucumber artifacts, and keep execution local-first.
 template: splash
 prev: false
 next: false
@@ -9,22 +9,16 @@ next: false
 import "../../styles/landing.css";
 import LandingNavbar from "../../components/LandingNavbar.astro";
 import Hero from "../../components/Hero.astro";
-import TrustStrip from "../../components/TrustStrip.astro";
-import ProblemSection from "../../components/ProblemSection.astro";
-import SolutionSection from "../../components/SolutionSection.astro";
-import FeatureGrid from "../../components/FeatureGrid.astro";
-import DemoSection from "../../components/DemoSection.astro";
-import FinalCtaSection from "../../components/FinalCtaSection.astro";
-import LandingMotion from "../../components/LandingMotion.astro";
+import HowItWorksSection from "../../components/HowItWorksSection.astro";
+import ToolingSection from "../../components/ToolingSection.astro";
+import GitSection from "../../components/GitSection.astro";
+import LandingFooterSection from "../../components/LandingFooterSection.astro";
 
 <div class="landing-root">
-  <LandingMotion />
   <LandingNavbar />
   <Hero />
-  <TrustStrip />
-  <ProblemSection />
-  <SolutionSection />
-  <DemoSection />
-  <FeatureGrid />
-  <FinalCtaSection />
+  <HowItWorksSection />
+  <ToolingSection />
+  <GitSection />
+  <LandingFooterSection />
 </div>

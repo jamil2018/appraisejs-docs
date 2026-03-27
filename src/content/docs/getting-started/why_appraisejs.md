@@ -1,37 +1,37 @@
 ---
 title: Why AppraiseJS
-description: Understand the collaboration and maintenance problems AppraiseJS is designed to solve.
+description: Why teams choose AppraiseJS for test development and execution.
 sidebar:
   order: 4
 ---
 
-AppraiseJS exists to remove the usual split between visual test authoring, execution infrastructure, and debugging output.
-
-## Use this page when
-
-You need the product rationale behind AppraiseJS before deciding whether to adopt it or roll your own framework stack.
+AppraiseJS exists to remove the usual split between test management tools and automation execution frameworks.
 
 ## The problem it solves
 
-- Traditional browser-test stacks force teams to stitch together authoring, execution, and reporting from different tools.
-- Test knowledge often lives mostly in code, which slows collaboration with QA-heavy teams.
-- Debug context gets fragmented across logs, CI output, and third-party dashboards.
-- Teams spend time maintaining sync glue instead of improving test coverage.
+- Traditional setups require stitching multiple tools together.
+- Test logic often lives only in code, slowing collaboration.
+- Reporting and execution context are fragmented.
+- Teams spend too much time maintaining framework glue.
 
 ## What AppraiseJS changes
 
-- One local app for authoring, execution, reports, dashboard metrics, and sync recovery.
-- A visual-first model built around reusable template steps, locator groups, suites, and cases.
-- Generated artifacts stay inspectable and portable instead of becoming hidden platform state.
-- Runs, reports, logs, traces, and metrics stay linked to the authored entities that produced them.
+- One local app for authoring, execution, and reporting.
+- Visual-first test modeling with reusable template steps and locators.
+- Automatic generation/sync of executable artifacts with a built-in sync dashboard in `Settings`.
+- Built-in run orchestration (tags, workers, browser engine selection).
+- Structured report ingestion with test-case and suite-level metrics.
 
-## What this means in practice
+## Who it is for
 
-- New QA contributors can reach a first successful run faster.
-- Developers still get generated artifacts and advanced internals when they need them.
-- Mixed teams share one workflow instead of translating between separate test-management and runner tools.
+- QA engineers building and scaling automation
+- Manual testers transitioning into automation
+- Developers who want a shared testing control plane
+- Teams that want fast setup and local ownership
 
-## Read next
+## Practical outcomes
 
-- [Comparison](/getting-started/comparison/)
-- [Architecture Overview](/architecture/overview/)
+- Faster onboarding and initial test creation
+- Better reuse through template steps and locator groups
+- Clear traceability from test definition to run result
+- Reduced framework plumbing for day-to-day QA work

@@ -1,141 +1,109 @@
 <section class="landing-final">
-  <div class="landing-panel landing-cta-panel" aria-labelledby="cta-heading">
-    <div
-      class="landing-cta-panel__glow landing-cta-panel__glow--primary"
-      aria-hidden="true"
-    >
-    </div>
-    <div
-      class="landing-cta-panel__glow landing-cta-panel__glow--accent"
-      aria-hidden="true"
-    >
-    </div>
-    <h2 id="cta-heading" class="landing-cta-panel__title">
-      Ship browser quality with the same confidence as backend code.
-    </h2>
-    <p class="landing-cta-panel__sub">
-      Start with one flow this week, then scale across teams with reusable
-      models, deterministic runs, and clear reporting.
-    </p>
-    <div class="landing-cta-panel__actions">
-      <a href="/getting-started/quick_start/" class="landing-cta-button">
-        Get Started
-      </a>
-      <a
-        href="/getting-started/overview/#see-it-in-action"
-        class="landing-secondary-button"
-      >
-        Watch Demo
-      </a>
+  <div class="landing-final__cta">
+    <div class="landing-final__cta-shell">
+      <h2>Ready to automate at the speed of thought?</h2>
+      <div class="landing-final__actions">
+        <a
+          href="/getting-started/quick_start/"
+          class="landing-cta-button landing-cta-button--large"
+        >
+          Start Building Tests in Minutes
+        </a>
+        <a
+          href="https://github.com/jamil2018/appraisejs-core"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="landing-secondary-button landing-secondary-button--large"
+        >
+          Talk to an Engineer
+        </a>
+      </div>
+      <p>Free to install, zero lock-in, built around real repos.</p>
     </div>
   </div>
-  <footer class="landing-footer">
-    <span>AppraiseJS</span>
-    <a href="/getting-started/quick_start/">Getting Started</a>
-    <a href="/architecture/overview/">Architecture</a>
-    <a
-      href="https://github.com/jamil2018/appraisejs-core"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      GitHub
-    </a>
+
+  <footer class="landing-footer landing-shell">
+    <div class="landing-footer__grid">
+      <div class="landing-footer__brand">
+        <h3>AppraiseJS</h3>
+        <p>
+          Visual test modeling, local-first execution, and production-grade
+          artifacts for engineering teams that want code ownership.
+        </p>
+      </div>
+
+      <div class="landing-footer__column">
+        <h4>Product</h4>
+        <a href="/getting-started/overview/">Documentation</a>
+        <a href="/references/navigation_steps/">API Reference</a>
+        <a
+          href="https://github.com/jamil2018/appraisejs-core/releases"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Changelog
+        </a>
+      </div>
+
+      <div class="landing-footer__column">
+        <h4>Community</h4>
+        <a
+          href="https://github.com/jamil2018/appraisejs-core"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>
+        <a
+          href="https://github.com/jamil2018/appraisejs-core/issues"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Issues
+        </a>
+        <a
+          href="https://github.com/jamil2018/appraisejs-core/discussions"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Discussions
+        </a>
+      </div>
+
+      <div class="landing-footer__column">
+        <h4>Legal</h4>
+        <a
+          href="https://github.com/jamil2018/appraisejs-core/blob/main/LICENSE"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          License
+        </a>
+        <a
+          href="https://github.com/jamil2018/appraisejs-core"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Terms
+        </a>
+        <a
+          href="https://www.githubstatus.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Status
+        </a>
+      </div>
+    </div>
+
+    <div class="landing-footer__meta">
+      <span>© 2026 AppraiseJS. Built for deterministic browser automation.</span
+      >
+      <div class="landing-footer__meta-links">
+        <a href="/getting-started/quick_start/">Quick Start</a>
+        <a href="/operations/troubleshooting/">Troubleshooting</a>
+        <a href="/architecture/overview/">Architecture</a>
+      </div>
+    </div>
   </footer>
 </section>
-
-<style is:global>
-  .landing-final {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .landing-cta-panel {
-    isolation: isolate;
-    text-align: center;
-    padding-top: clamp(2rem, 5vw, 3rem);
-    padding-bottom: clamp(2rem, 5vw, 3rem);
-  }
-
-  .landing-cta-panel__title {
-    margin: 0;
-    font-size: clamp(1.5rem, 3.5vw, 2rem);
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    color: hsl(var(--foreground));
-    position: relative;
-    z-index: 1;
-  }
-
-  .landing-cta-panel__sub {
-    margin: 0.5rem 0 1.25rem;
-    font-size: 0.96rem;
-    color: hsl(var(--muted-foreground));
-    max-width: 42ch;
-    margin-inline: auto;
-    line-height: 1.6;
-    position: relative;
-    z-index: 1;
-  }
-
-  .landing-cta-panel__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem 1rem;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-  }
-
-  .landing-cta-panel__glow {
-    position: absolute;
-    border-radius: 9999px;
-    filter: blur(80px);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .landing-cta-panel__glow--primary {
-    width: 20rem;
-    height: 20rem;
-    left: 5%;
-    top: -7rem;
-    background: hsl(var(--primary) / 0.22);
-  }
-
-  .landing-cta-panel__glow--accent {
-    width: 17rem;
-    height: 17rem;
-    right: 6%;
-    bottom: -6rem;
-    background: hsl(var(--accent) / 0.18);
-  }
-
-  .landing-cta-panel .landing-cta-button:hover {
-    box-shadow: 0 0 30px hsl(var(--primary) / 0.4);
-  }
-
-  .landing-footer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 0.7rem 1rem;
-    color: hsl(var(--muted-foreground));
-    font-size: 0.82rem;
-  }
-
-  .landing-footer span {
-    color: hsl(var(--foreground));
-    font-weight: 600;
-  }
-
-  .landing-footer a {
-    color: hsl(var(--muted-foreground));
-    text-decoration: none;
-  }
-
-  .landing-footer a:hover {
-    color: hsl(var(--foreground));
-  }
-</style>

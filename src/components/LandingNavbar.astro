@@ -57,31 +57,29 @@
     </a>
   </nav>
 </section>
+
 <script>
   const navbar = document.getElementById("landing-navbar");
   const hamburger = document.getElementById("landing-navbar-hamburger");
   const menu = document.getElementById("landing-navbar-menu");
 
-  if (hamburger && menu) {
+  if (navbar && hamburger && menu) {
+    const closeMenu = () => {
+      navbar.classList.remove("is-open");
+      hamburger.setAttribute("aria-expanded", "false");
+    };
+
     hamburger.addEventListener("click", () => {
-      const isOpen = navbar?.classList.toggle("is-open");
+      const isOpen = navbar.classList.toggle("is-open");
       hamburger.setAttribute("aria-expanded", String(isOpen));
     });
 
-    // Close menu when clicking a link (navigation)
     menu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        navbar?.classList.remove("is-open");
-        hamburger.setAttribute("aria-expanded", "false");
-      });
+      link.addEventListener("click", closeMenu);
     });
 
-    // Close menu on escape key
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        navbar?.classList.remove("is-open");
-        hamburger.setAttribute("aria-expanded", "false");
-      }
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeMenu();
     });
   }
 </script>
