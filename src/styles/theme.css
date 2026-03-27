@@ -3,6 +3,12 @@
   --navbar-glass-bg: hsl(var(--background) / 0.72);
   --navbar-border: 1px solid hsl(var(--border) / 0.65);
   --navbar-radius: var(--radius);
+  --doc-surface: 220 35% 11%;
+  --doc-surface-strong: 220 32% 14%;
+  --doc-surface-accent: 158 64% 52%;
+  --doc-text-soft: 215 20.2% 72%;
+  --doc-measure: 72ch;
+  --doc-measure-wide: 86ch;
 
   --background: 222.2 84% 4.9%;
   --foreground: 210 40% 98%;
