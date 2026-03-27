@@ -197,3 +197,21 @@ body:not(:has(.landing-root)) .social-icons a:hover {
   color: hsl(var(--foreground));
   background: hsl(var(--muted) / 0.4);
 }
+
+body:not(:has(.landing-root)) .site-title,
+body:not(:has(.landing-root)) a.site-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  line-height: 1;
+}
+
+body:not(:has(.landing-root)) .site-title::before,
+body:not(:has(.landing-root)) a.site-title::before {
+  content: "";
+  display: inline-block;
+  width: 2.5em;
+  height: 2.5em;
+  flex: 0 0 auto;
+  background: center / contain no-repeat url("/logo.svg");
+}

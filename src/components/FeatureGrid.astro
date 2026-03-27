@@ -1,125 +1,112 @@
----
-const features = [
-  {
-    title: "Visual-first authoring for complex journeys",
-    description:
-      "Model flows with reusable modules and clear test intent before writing any low-level automation glue.",
-    icon: "flow",
-  },
-  {
-    title: "Generated artifacts your team actually owns",
-    description:
-      "Produce Playwright + Cucumber output as versioned artifacts your engineers can review, evolve, and trust.",
-    icon: "artifacts",
-  },
-  {
-    title: "Deterministic runs and useful feedback loops",
-    description:
-      "Execute by tags or by test cases with controlled workers, then inspect structured reports to fix failures without guesswork.",
-    icon: "runtime",
-  },
-];
----
-
 <section
-  class="landing-panel landing-features"
-  aria-labelledby="features-heading"
+  class="landing-features landing-shell"
+  aria-labelledby="landing-features-heading"
 >
-  <p class="landing-kicker">Platform Pillars</p>
-  <h2 id="features-heading" class="landing-heading">
-    Product-grade test architecture from day one.
-  </h2>
-  <div class="landing-features-grid">
-    {
-      features.map((f) => (
-        <article class="landing-features-card" tabindex="0">
-          <div class="landing-features-card__icon" aria-hidden="true">
-            {f.icon === "flow" && (
-              <svg viewBox="0 0 24 24">
-                <path d="M4 6h6v4H4zM14 6h6v4h-6zM9 14h6v4H9z" />
-                <path d="M10 8h4M16 10v3M12 10v4" />
-              </svg>
-            )}
-            {f.icon === "artifacts" && (
-              <svg viewBox="0 0 24 24">
-                <path d="M7 4h10l3 3v13H4V7z" />
-                <path d="M7 4v4h4M8 13h8M8 17h8" />
-              </svg>
-            )}
-            {f.icon === "runtime" && (
-              <svg viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="8" />
-                <path d="M12 8v5l3 2" />
-              </svg>
-            )}
+  <div class="landing-section-copy landing-section-copy--center">
+    <h2 id="landing-features-heading" class="landing-section-title">
+      Precision-Engineered Tooling
+    </h2>
+  </div>
+
+  <div class="landing-feature-grid">
+    <article class="landing-feature-card landing-feature-card--builder">
+      <div class="landing-feature-card__copy">
+        <h3>Visual Test Builder</h3>
+        <p>
+          The most advanced node editor ever built for QA. Real-time sync,
+          branching logic, and reusable sub-flows.
+        </p>
+      </div>
+      <div class="landing-builder-visual" aria-hidden="true">
+        <div class="landing-builder-visual__frame">
+          <div class="landing-builder-node">
+            <span>NAVIGATE</span>
+            <strong>Base URL</strong>
           </div>
-          <h3>{f.title}</h3>
-          <p>{f.description}</p>
-        </article>
-      ))
-    }
+          <div class="landing-builder-node__line"></div>
+          <div class="landing-builder-node">
+            <span>INPUT</span>
+            <strong>Fill Email</strong>
+          </div>
+          <div class="landing-builder-node__line"></div>
+          <div class="landing-builder-node landing-builder-node--active">
+            <span>CLICK</span>
+            <strong>Login</strong>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="landing-feature-card landing-feature-card--compact">
+      <div class="landing-locator-visual" aria-hidden="true">
+        <span class="landing-locator-label">#btn</span>
+        <span class="landing-locator-target"></span>
+        <span class="landing-locator-label landing-locator-label--right">
+          .submit
+        </span>
+      </div>
+      <div class="landing-feature-card__copy">
+        <h3>Locator Creator</h3>
+        <p>Intelligent selector generation that survives DOM changes.</p>
+      </div>
+    </article>
+
+    <article class="landing-feature-card landing-feature-card--compact">
+      <div class="landing-sync-visual" aria-hidden="true">
+        <span class="landing-sync-visual__file"></span>
+        <span class="landing-sync-visual__line"></span>
+        <span class="landing-sync-visual__node"></span>
+      </div>
+      <div class="landing-feature-card__copy">
+        <h3>Sync Manager</h3>
+        <p>Bidirectional sync between visual UI and your code repo.</p>
+      </div>
+    </article>
+
+    <article class="landing-feature-card landing-feature-card--reporting">
+      <div class="landing-report-visual" aria-hidden="true">
+        <span
+          class="landing-report-visual__bar landing-report-visual__bar--short"
+        ></span>
+        <span
+          class="landing-report-visual__bar landing-report-visual__bar--medium"
+        ></span>
+        <span
+          class="landing-report-visual__bar landing-report-visual__bar--tall"
+        ></span>
+        <span
+          class="landing-report-visual__bar landing-report-visual__bar--full"
+        ></span>
+      </div>
+      <div class="landing-feature-card__copy">
+        <h3>Reporting &amp; Log Analysis</h3>
+        <p>
+          Deep-dive into test results with integrated log analysis and visual
+          diffs.
+        </p>
+      </div>
+    </article>
+
+    <article class="landing-feature-card landing-feature-card--terminal">
+      <div class="landing-terminal-list" aria-hidden="true">
+        <div class="landing-terminal-item">
+          <span>npm test</span>
+          <span class="landing-terminal-item__status"></span>
+        </div>
+        <div class="landing-terminal-item">
+          <span>npx playwright test</span>
+          <span
+            class="landing-terminal-item__status landing-terminal-item__status--bolt"
+          ></span>
+        </div>
+      </div>
+      <div class="landing-feature-card__copy">
+        <h3>Local-First Execution</h3>
+        <p>
+          No proprietary cloud runners required. Your hardware, your speed, your
+          privacy.
+        </p>
+      </div>
+    </article>
   </div>
 </section>
-
-<style is:global>
-  .landing-features-grid {
-    display: grid;
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-    gap: 0.85rem;
-    margin-top: 0.9rem;
-  }
-
-  .landing-features-card {
-    padding: 1.1rem;
-    border-color: hsl(var(--border) / 0.9);
-    background: hsl(var(--card) / 0.92);
-    transform: none;
-    height: 100%;
-    margin: 0;
-    border: 1px solid hsl(var(--border));
-    border-radius: 0.5rem;
-  }
-
-  .landing-features-card__icon {
-    width: 2.1rem;
-    height: 2.1rem;
-    display: grid;
-    place-items: center;
-    border-radius: 0.65rem;
-    border: 1px solid hsl(var(--border));
-    background: linear-gradient(
-      145deg,
-      hsl(var(--primary) / 0.18),
-      hsl(var(--accent) / 0.15)
-    );
-    margin-bottom: 0.85rem;
-  }
-
-  .landing-features-card__icon svg {
-    width: 1.1rem;
-    height: 1.1rem;
-    fill: none;
-    stroke: hsl(var(--foreground));
-    stroke-width: 1.7;
-  }
-
-  .landing-features-card h3 {
-    margin: 0 0 0.4rem;
-    font-size: 1.02rem;
-    font-weight: 600;
-    color: hsl(var(--card-foreground));
-  }
-
-  .landing-features-card p {
-    margin: 0;
-    color: hsl(var(--muted-foreground));
-    font-size: 0.9rem;
-    line-height: 1.55;
-  }
-
-  @media (min-width: 58rem) {
-    .landing-features-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
-</style>

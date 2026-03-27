@@ -1,60 +1,69 @@
-<section class="landing-navbar" aria-label="Landing navigation" id="landing-navbar">
-  <strong class="landing-navbar__brand">AppraiseJS</strong>
-  <button
-    type="button"
-    class="landing-navbar__hamburger"
-    aria-label="Toggle menu"
-    aria-expanded="false"
-    aria-controls="landing-navbar-menu"
-    id="landing-navbar-hamburger"
-  >
-    <span class="landing-navbar__hamburger-icon" aria-hidden="true">
-      <span></span>
-      <span></span>
-      <span></span>
-    </span>
-  </button>
-  <nav
-    class="landing-navbar__links"
-    id="landing-navbar-menu"
-    aria-label="Landing sections"
-  >
-    <a href="/getting-started/overview/">Product</a>
-    <a href="/architecture/overview/">Architecture</a>
-    <a href="/guides/dashboard/">Guides</a>
-    <a
-      href="/getting-started/quick_start/"
-      class="landing-cta-button text-white!"
+<section class="landing-navbar-shell" aria-label="Landing navigation">
+  <div class="landing-navbar" id="landing-navbar">
+    <a class="landing-navbar__brand" href="/getting-started/overview/">
+      <img class="landing-navbar__logo" src="/logo.svg" alt="" />
+      <span>AppraiseJS</span>
+    </a>
+
+    <button
+      type="button"
+      class="landing-navbar__hamburger"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+      aria-controls="landing-navbar-menu"
+      id="landing-navbar-hamburger"
     >
+      <span class="landing-navbar__hamburger-icon" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </button>
+
+    <nav
+      class="landing-navbar__links"
+      id="landing-navbar-menu"
+      aria-label="Primary"
+    >
+      <a href="/getting-started/overview/">Docs</a>
+      <a href="/references/navigation_steps/">API</a>
+      <a
+        href="https://github.com/jamil2018/appraisejs-core/releases"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Changelog
+      </a>
+    </nav>
+
+    <a href="/getting-started/quick_start/" class="landing-cta-button">
       Get Started
     </a>
-  </nav>
+  </div>
 </section>
+
 <script>
   const navbar = document.getElementById("landing-navbar");
   const hamburger = document.getElementById("landing-navbar-hamburger");
   const menu = document.getElementById("landing-navbar-menu");
 
-  if (hamburger && menu) {
+  if (navbar && hamburger && menu) {
+    const closeMenu = () => {
+      navbar.classList.remove("is-open");
+      hamburger.setAttribute("aria-expanded", "false");
+    };
+
     hamburger.addEventListener("click", () => {
-      const isOpen = navbar?.classList.toggle("is-open");
+      const isOpen = navbar.classList.toggle("is-open");
       hamburger.setAttribute("aria-expanded", String(isOpen));
     });
 
-    // Close menu when clicking a link (navigation)
     menu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        navbar?.classList.remove("is-open");
-        hamburger.setAttribute("aria-expanded", "false");
-      });
+      link.addEventListener("click", closeMenu);
     });
 
-    // Close menu on escape key
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        navbar?.classList.remove("is-open");
-        hamburger.setAttribute("aria-expanded", "false");
-      }
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeMenu();
     });
   }
 </script>

@@ -1,0 +1,134 @@
+---
+import { FolderSync, MousePointer2, Terminal, Zap } from "@lucide/astro";
+---
+
+<section
+  class="landing-tooling landing-shell"
+  aria-labelledby="landing-tooling-heading"
+>
+  <div class="landing-section-copy landing-section-copy--center">
+    <h2 id="landing-tooling-heading" class="landing-section-title">
+      Precision-Engineered Tooling
+    </h2>
+  </div>
+
+  <div class="landing-tooling__grid">
+    <article class="landing-tooling-card landing-tooling-card--builder">
+      <div class="landing-tooling-card__copy">
+        <h3>Visual Test Builder</h3>
+        <p>
+          The most advanced node editor ever built for QA. Real-time sync,
+          branching logic, and reusable sub-flows.
+        </p>
+      </div>
+
+      <div class="landing-tooling-builder" aria-hidden="true">
+        <div class="landing-tooling-builder__frame">
+          <div class="landing-tooling-node">
+            <span>Navigate</span>
+            <strong>Base URL</strong>
+          </div>
+          <span class="landing-tooling-node__line"></span>
+          <div class="landing-tooling-node">
+            <span>Input</span>
+            <strong>Fill Email</strong>
+          </div>
+          <span class="landing-tooling-node__line"></span>
+          <div class="landing-tooling-node landing-tooling-node--active">
+            <span>Click</span>
+            <strong>Login</strong>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <div class="landing-tooling__stack" style="margin-top: 0rem;">
+      <article class="landing-tooling-card landing-tooling-card--compact">
+        <div
+          class="landing-tooling-visual landing-tooling-visual--locator"
+          aria-hidden="true"
+        >
+          <div class="landing-tooling-locator-frame">
+            <span class="landing-tooling-icon landing-tooling-icon--pointer">
+              <MousePointer2 />
+            </span>
+            <span class="landing-tooling-locator-badge">#submit-btn</span>
+          </div>
+        </div>
+        <div class="landing-tooling-card__copy">
+          <h3>Locator Creator</h3>
+          <p>Intelligent selector generation that survives DOM changes.</p>
+        </div>
+      </article>
+
+      <article class="landing-tooling-card landing-tooling-card--compact">
+        <div
+          class="landing-tooling-visual landing-tooling-visual--sync"
+          aria-hidden="true"
+        >
+          <span class="landing-tooling-icon landing-tooling-icon--folder">
+            <FolderSync />
+          </span>
+          <span class="landing-tooling-sync-line"></span>
+          <span
+            class="landing-tooling-icon landing-tooling-icon--zap landing-tooling-icon--zap-ring"
+          >
+            <Zap />
+          </span>
+        </div>
+        <div class="landing-tooling-card__copy">
+          <h3>Sync Manager</h3>
+          <p>Bidirectional sync between visual UI and your code repo.</p>
+        </div>
+      </article>
+    </div>
+
+    <article class="landing-tooling-card landing-tooling-card--reporting">
+      <div class="landing-tooling-report" aria-hidden="true">
+        <span
+          class="landing-tooling-report__bar landing-tooling-report__bar--soft"
+        ></span>
+        <span
+          class="landing-tooling-report__bar landing-tooling-report__bar--mid"
+        ></span>
+        <span
+          class="landing-tooling-report__bar landing-tooling-report__bar--primary"
+        ></span>
+        <span
+          class="landing-tooling-report__bar landing-tooling-report__bar--accent"
+        ></span>
+      </div>
+      <div class="landing-tooling-card__copy">
+        <h3>Reporting &amp; Log Analysis</h3>
+        <p>
+          Deep-dive into test results with integrated log analysis and visual
+          diffs.
+        </p>
+      </div>
+    </article>
+
+    <article class="landing-tooling-card landing-tooling-card--terminal">
+      <div class="landing-tooling-terminal" aria-hidden="true">
+        <div class="landing-tooling-terminal__item">
+          <span>npm test</span>
+          <span class="landing-tooling-icon landing-tooling-icon--terminal">
+            <Terminal />
+          </span>
+        </div>
+        <div class="landing-tooling-terminal__item">
+          <span>npx playwright test</span>
+          <span class="landing-tooling-icon landing-tooling-icon--zap">
+            <Zap />
+          </span>
+        </div>
+      </div>
+      <div class="landing-tooling-card__copy">
+        <h3>Local-First Execution</h3>
+        <p>
+          No proprietary cloud runners required. Your hardware, your speed, your
+          privacy.
+        </p>
+      </div>
+    </article>
+  </div>
+</section>

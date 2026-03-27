@@ -1,270 +1,113 @@
+---
+import { CirclePlay } from "@lucide/astro";
+---
+
 <section
-  class="landing-hero landing-panel"
+  class="landing-hero landing-shell"
   aria-labelledby="landing-hero-heading"
 >
-  <div
-    class="landing-hero__aurora landing-hero__aurora--primary"
-    aria-hidden="true"
-  >
-  </div>
-  <div
-    class="landing-hero__aurora landing-hero__aurora--accent"
-    aria-hidden="true"
-  >
-  </div>
-  <div class="landing-hero__grid">
-    <div class="landing-hero__copy">
-      <p class="landing-kicker">Model. Generate. Ship.</p>
-      <h1 id="landing-hero-heading">
-        Browser test automation that feels like building product.
-      </h1>
-      <p class="landing-hero__description">
-        AppraiseJS helps engineering teams model test scenarios visually,
-        generate real Playwright + Cucumber artifacts, and keep quality
-        pipelines deterministic as test coverage scales.
-      </p>
-      <div class="landing-hero__actions">
-        <a class="landing-cta-button" href="/getting-started/quick_start/">
-          Get Started
-        </a>
-        <a
-          class="landing-secondary-button"
-          href="/getting-started/overview/#see-it-in-action"
-        >
-          Watch Demo
-        </a>
-      </div>
+  <div class="landing-hero__copy">
+    <p class="landing-badge">Visual Orchestration for Modern QA</p>
+    <h1 id="landing-hero-heading">
+      <span>Design Tests Visually.</span>
+      <span class="landing-accent-text">Execute with Real Code.</span>
+    </h1>
+    <p class="landing-hero__description">
+      Build end-to-end flows with an intuitive node editor. AppraiseJS emits
+      standard Playwright and Cucumber files directly to your repo. Zero
+      lock-in, pure engineering.
+    </p>
+    <div class="landing-hero__actions">
+      <a class="landing-cta-button" href="/getting-started/quick_start/">
+        Get Started
+      </a>
+      <a
+        class="landing-secondary-button"
+        href="/getting-started/overview/#see-it-in-action"
+      >
+        <span class="landing-play-icon" aria-hidden="true">
+          <CirclePlay />
+        </span>
+        Watch Demo
+      </a>
     </div>
-    <div class="landing-product-visual landing-card" aria-hidden="true">
-      <div class="landing-product-visual__header">
-        <div class="landing-product-visual__dots">
-          <span></span><span></span><span></span>
+  </div>
+
+  <div class="landing-hero__visual" aria-hidden="true">
+    <div class="landing-hero__visual-glow"></div>
+    <div class="landing-hero__visual-frame">
+      <div class="landing-hero__visual-side landing-hero__visual-side--flow">
+        <div class="landing-windowbar">
+          <span class="dot dot--rose"></span>
+          <span class="dot dot--mint"></span>
+          <span class="dot dot--green"></span>
+          <span class="landing-windowbar__label">VISUAL_NODE_EDITOR</span>
         </div>
-        <span class="landing-product-visual__label">AppraiseJS</span>
+        <div class="landing-flow">
+          <div class="landing-flow__connector"></div>
+          <div class="landing-flow__connector landing-flow__connector--middle">
+          </div>
+          <article class="landing-flow-card landing-flow-card--active">
+            <span class="landing-flow-card__kind">Trigger</span>
+            <strong>User Login</strong>
+            <span class="landing-flow-card__terminal"></span>
+          </article>
+          <article class="landing-flow-card">
+            <span
+              class="landing-flow-card__kind landing-flow-card__kind--muted"
+            >
+              Action
+            </span>
+            <strong>Click "Checkout"</strong>
+            <span class="landing-flow-card__terminal"></span>
+          </article>
+          <article class="landing-flow-card landing-flow-card--success">
+            <span
+              class="landing-flow-card__kind landing-flow-card__kind--success"
+            >
+              Assertion
+            </span>
+            <strong>{"Cart Total > $100"}</strong>
+          </article>
+        </div>
       </div>
-      <div class="landing-product-visual__body">
-        <div class="landing-product-visual__row">
-          <span>Test Run</span>
-          <strong>Checkout Flow Validation</strong>
+
+      <div class="landing-hero__visual-side landing-hero__visual-side--code">
+        <div class="landing-code__header">
+          <span class="landing-code__label">CUCUMBER_GHERKIN_OUTPUT</span>
+          <span class="landing-code__chip">checkout.feature</span>
         </div>
-        <div class="landing-product-visual__meter">
-          <span style="--fill: 82%;"></span>
+        <div class="landing-code">
+          <p class="landing-code-line">
+            <span class="syntax-keyword">Feature:</span>
+            <span class="syntax-text"> Checkout Validation</span>
+          </p>
+          <p class="landing-code-line landing-code-line--indent-1">
+            <span class="syntax-keyword">Scenario:</span>
+            <span class="syntax-text"> Verify high value cart checkout</span>
+          </p>
+          <p class="landing-code-line landing-code-line--indent-2">
+            <span class="syntax-accent">Given</span>
+            <span class="syntax-text">
+              the user is logged in as "test_user"</span
+            >
+          </p>
+          <p class="landing-code-line landing-code-line--indent-2">
+            <span class="syntax-accent">When</span>
+            <span class="syntax-text">
+              {" "}the user clicks the "Checkout" button
+            </span>
+          </p>
+          <p class="landing-code-line landing-code-line--indent-2">
+            <span class="syntax-accent">Then</span>
+            <span class="syntax-text">
+              {" "}the cart total should be greater than 100
+            </span>
+          </p>
+          <p class="landing-code-note"># Human readable specs derived</p>
+          <p class="landing-code-note"># directly from visual nodes.</p>
         </div>
-        <ul>
-          <li>
-            <span class="state success"></span>
-            <code>Validate cart contents</code>
-            <small>10 test cases</small>
-          </li>
-          <li>
-            <span class="state success"></span>
-            <code>Validate checkout process</code>
-            <small>13 test cases</small>
-          </li>
-          <li>
-            <span class="state pending"></span>
-            <code>Validate payment process</code>
-            <small>12 test cases</small>
-          </li>
-        </ul>
       </div>
     </div>
   </div>
 </section>
-
-<style is:global>
-  .landing-hero {
-    isolation: isolate;
-    margin-top: 0.2rem;
-  }
-
-  .landing-hero__grid {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr;
-    align-items: center;
-    gap: clamp(1.5rem, 5vw, 3rem);
-  }
-
-  .landing-hero__copy h1 {
-    margin: 0.75rem 0 1rem;
-    font-size: clamp(2.1rem, 6vw, 4.05rem);
-    font-weight: 750;
-    line-height: 1;
-    letter-spacing: -0.035em;
-    color: hsl(var(--foreground));
-    max-width: 14ch;
-  }
-
-  .landing-hero__description {
-    margin: 0;
-    max-width: 54ch;
-    color: hsl(var(--muted-foreground));
-    font-size: clamp(1rem, 2vw, 1.12rem);
-    line-height: 1.6;
-  }
-
-  .landing-hero__actions {
-    margin-top: 1.4rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.7rem;
-  }
-
-  .landing-product-visual {
-    position: relative;
-    overflow: hidden;
-    padding: 1rem;
-    border-color: hsl(var(--border) / 0.95);
-    box-shadow: 0 30px 60px hsl(var(--background) / 0.55);
-  }
-
-  .landing-product-visual::before {
-    content: "";
-    position: absolute;
-    inset: -40% -35% auto;
-    height: 15rem;
-    background: radial-gradient(
-      closest-side,
-      hsl(var(--primary) / 0.3),
-      transparent
-    );
-    pointer-events: none;
-  }
-
-  .landing-product-visual__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid hsl(var(--border));
-    padding-bottom: 0.8rem;
-  }
-
-  .landing-product-visual__dots {
-    display: inline-flex;
-    gap: 0.35rem;
-  }
-
-  .landing-product-visual__dots span {
-    width: 0.62rem;
-    height: 0.62rem;
-    border-radius: 9999px;
-    background: hsl(var(--muted-foreground) / 0.5);
-  }
-
-  .landing-product-visual__label {
-    font-size: 0.78rem;
-    color: hsl(var(--muted-foreground));
-  }
-
-  .landing-product-visual__body {
-    position: relative;
-    padding-top: 1rem;
-  }
-
-  .landing-product-visual__row {
-    display: flex;
-    justify-content: space-between;
-    gap: 0.6rem;
-    font-size: 0.83rem;
-    color: hsl(var(--muted-foreground));
-  }
-
-  .landing-product-visual__row strong {
-    color: hsl(var(--card-foreground));
-    font-weight: 600;
-  }
-
-  .landing-product-visual__meter {
-    margin: 0.95rem 0 1rem;
-    height: 0.48rem;
-    border-radius: 9999px;
-    background: hsl(var(--secondary));
-    overflow: hidden;
-  }
-
-  .landing-product-visual__meter span {
-    display: block;
-    height: 100%;
-    width: var(--fill);
-    background: linear-gradient(
-      to right,
-      hsl(var(--primary)),
-      hsl(var(--accent))
-    );
-  }
-
-  .landing-product-visual ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 0.52rem;
-  }
-
-  .landing-product-visual li {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: 0.55rem;
-    padding: 0.55rem 0.6rem;
-    border-radius: calc(var(--radius) - 0.3rem);
-    border: 1px solid hsl(var(--border) / 0.8);
-    background: hsl(var(--secondary) / 0.45);
-  }
-
-  .landing-product-visual li code {
-    font-size: 0.76rem;
-    color: hsl(var(--foreground));
-  }
-
-  .landing-product-visual li small {
-    color: hsl(var(--muted-foreground));
-    font-size: 0.72rem;
-  }
-
-  .landing-product-visual .state {
-    width: 0.52rem;
-    height: 0.52rem;
-    border-radius: 9999px;
-    display: inline-block;
-  }
-
-  .landing-product-visual .state.success {
-    background: hsl(var(--accent));
-  }
-
-  .landing-product-visual .state.pending {
-    background: hsl(var(--primary));
-  }
-
-  .landing-hero__aurora {
-    position: absolute;
-    border-radius: 9999px;
-    filter: blur(70px);
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  .landing-hero__aurora--primary {
-    width: 20rem;
-    height: 20rem;
-    top: -6rem;
-    left: -5rem;
-    background: hsl(var(--primary) / 0.25);
-  }
-
-  .landing-hero__aurora--accent {
-    width: 16rem;
-    height: 16rem;
-    right: -4rem;
-    bottom: -6rem;
-    background: hsl(var(--accent) / 0.2);
-  }
-
-  @media (min-width: 64rem) {
-    .landing-hero__grid {
-      grid-template-columns: minmax(0, 1.12fr) minmax(22rem, 0.88fr);
-    }
-  }
-</style>
