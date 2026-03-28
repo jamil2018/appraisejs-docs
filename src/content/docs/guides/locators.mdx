@@ -59,23 +59,43 @@ The locator creator matters because it sits between page discovery and durable t
 5. Review the autofilled locator name, selector value, route, and locator group suggestion.
 6. Save the locator to an existing group or create a new route-aware group before saving.
 
+The create screen itself should make it obvious that picker launch and final review belong to one workflow. Use the screenshot below to show both the entry point and the fields that matter after capture.
+
 <MediaPlaceholder
   type="screenshot"
-  title="Create Locator page showing Launch Chromium Picker and Finalize Locator in the same screen"
-  why="This helps users understand that locator capture and locator definition are one connected workflow, not separate tools."
+  title="Create Locator screen with picker launch and final review fields"
+  why="Where do I start the picker, and what parts of the locator form should still be visible after capture?"
+  priority="must-have"
+  context="Locators -> Create workflow"
+  capture="Capture the Create Locator page showing the picker launch entry point and the locator-definition fields that are reviewed before save."
+  successState="The viewer can see that picker launch and locator review are part of one connected workflow."
 />
+
+The picker interaction itself is still the most motion-heavy part of locator authoring. Keep the clip short and focused on the overlay, selection, and return path.
 
 <MediaPlaceholder
   type="gif"
-  title="Locator picker flow from launching Chromium to confirming selector in the overlay"
-  why="The picker overlay is a short interaction loop that is much easier to learn from motion than from prose."
+  title="Picker interaction from launched browser to confirmed selector"
+  why="What do I click in the picker overlay, and how does a successful pick behave?"
+  priority="must-have"
+  context="Locators -> Picker interaction"
+  capture="Record launching the picker, selecting an element, reviewing the selector in the overlay, and confirming the selection."
+  successState="The overlay state and the confirmation moment are both visible enough that a user could repeat the interaction."
 />
+
+After the pick returns, readers still need to know whether the autofilled state looks healthy or brittle. The final screenshot should make that review step explicit before save.
 
 <MediaPlaceholder
   type="screenshot"
-  title="Autofill result showing suggested locator name, selector, route, and locator group before save"
-  why="This shows what a good prefilled state looks like and makes it easier to review before saving a brittle selector."
+  title="Prefilled post-capture state with suggested name, selector, route, and group"
+  why="What should a good post-capture locator state look like before I save it?"
+  priority="must-have"
+  context="Locators -> Post-capture review"
+  capture="Capture the form immediately after a successful pick so the suggested name, selector, route, and locator group are all visible."
+  successState="The prefilled values look reviewable and route-aware, making it clear what should be checked before save."
 />
+
+If the prefilled state does not resemble this once captured, the user should stop and review selector quality before continuing to [Test Cases](/guides/test_cases/).
 
 ## Minimal example
 

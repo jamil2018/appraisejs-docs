@@ -79,17 +79,31 @@ reports.
 11. Create a run against `Local`, submit it, and watch status changes on the run details page.
 12. Open the linked report and confirm the scenario outcome matches what happened in the browser.
 
+Before the first run, users should be able to compare their authored setup against a known-good finished state. This prevents guessing about whether they created enough entities or saved them in the right places.
+
 <MediaPlaceholder
   type="screenshot"
-  title="Completed Quick Start state showing created Environment, Module, Test Suite, and Test Case"
-  why="This gives new users a visual confirmation of what 'finished setup' looks like before they try to run anything."
+  title="Completed Quick Start state with the first saved environment, module, locator group, suite, and case"
+  why="What should 'finished setup' look like before I create a run?"
+  priority="must-have"
+  context="Quick Start -> Step-by-step procedure after authoring"
+  capture="Capture a clean project state where the environment, module, locator group, suite, and case created in this tutorial are all visible and saved."
+  successState="Named entities are visible in the UI, clearly saved, and recognizable as the minimum complete setup for the first run."
 />
+
+After that state is confirmed, the next confusion point is the handoff from authoring to execution. The motion clip should make the screen transitions explicit instead of assuming users will infer them.
 
 <MediaPlaceholder
   type="gif"
-  title="Quick Start completion flow from saving the first test case to opening the first report"
-  why="This helps mixed teams follow the transition from authoring into execution without getting lost between screens."
+  title="Quick Start handoff from saved case to submitted run to opened report"
+  why="How do I move from a saved test case into a completed run and the first report without getting lost between screens?"
+  priority="must-have"
+  context="Quick Start -> Step-by-step procedure after run creation"
+  capture="Record saving the completed case, opening run creation, submitting the run, waiting through the first useful status change, and opening the resulting report."
+  successState="Each transition is visible enough that a new user can name the next screen to open after saving the case."
 />
+
+If the saved-state screenshot and the handoff clip match what the reader sees locally, they should be able to continue into [Creating Tests](/tutorials/creating_tests/) without guessing whether the scaffold is still in a healthy state.
 
 ## Checkpoint
 

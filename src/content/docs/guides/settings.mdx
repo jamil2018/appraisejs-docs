@@ -46,11 +46,19 @@ import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 4. Let AppraiseJS run prerequisites in the correct order.
 5. Re-open the page or affected entity list to confirm pending counts dropped.
 
+The page should show users exactly where the recovery controls live before they assume they need scripts. Keep the screenshot anchored here so the visual confirmation appears at the same moment as the recovery steps.
+
 <MediaPlaceholder
   type="screenshot"
-  title="Sync dashboard showing Sync All, individual asset tiles, and pending-count badges"
-  why="This helps users recognize the correct recovery screen before they fall back to scripts unnecessarily."
+  title="Sync dashboard with `Sync All`, asset tiles, and pending counts"
+  why="What should the recovery page look like before I fall back to CLI sync scripts?"
+  priority="must-have"
+  context="Settings -> Sync walkthrough"
+  capture="Capture the Sync dashboard with `Sync All`, multiple asset tiles, and visible pending-count badges."
+  successState="The page reads as the correct UI recovery path, and both broad sync and tile-level sync actions are visible."
 />
+
+Once that screen is available, users should be able to confirm success by watching the pending counts drop and then returning to the affected entities without leaving the UI flow.
 
 ## Minimal example
 

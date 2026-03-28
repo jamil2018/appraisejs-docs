@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 
-import demoVideo from "../../../assets/demo/demo.mp4";
+import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 
 AppraiseJS is a local-first, visual test development and execution platform.  
 It combines test authoring, orchestration, and reporting in a single Next.js app, while generating portable test artifacts (Gherkin + Cucumber/Playwright execution flow) behind the scenes.
@@ -19,12 +19,19 @@ At a high level, you model test logic in the UI and AppraiseJS handles the pipel
 
 ## See it in action
 
-See the AppraiseJS workflow: test scenario modeling, execution orchestration, and report visibility in one continuous flow.
+First-time users should be able to see one continuous path from authoring through execution and into reports before they commit to setup. Until the core-app walkthrough is captured, keep the request in-line so the expected flow stays obvious.
 
-<video controls width="100%" class="overview-demo-video">
-  <source src={demoVideo} type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<MediaPlaceholder
+  type="video"
+  title="Overview walkthrough from authored entities to finished report"
+  why="What does the full AppraiseJS flow look like before I install it?"
+  priority="must-have"
+  context="Overview -> See it in action"
+  capture="Start on the default app landing state, show creating or opening authored test assets, move through sync or generation, create a run, and finish on a report view without cutting away from the product flow."
+  successState="The final report is visible and the viewer can clearly connect authoring, execution, and reporting as one product experience."
+/>
+
+Use the walkthrough to anchor the rest of onboarding: if a reader cannot tell what screen families they will meet later, the introduction is still too abstract.
 
 ## What AppraiseJS is built for
 
@@ -57,5 +64,17 @@ Think of AppraiseJS as a test control plane with an integrated execution engine:
 - Execute with Cucumber + Playwright.
 - Parse and store results.
 - Explore logs, reports, and metrics in the app.
+
+If the product walkthrough still leaves the handoff points fuzzy, add a single diagram that names the same stages without introducing implementation detail.
+
+<MediaPlaceholder
+  type="diagram"
+  title="Mental-model diagram for authored assets, sync, execution, and report feedback"
+  why="How do the major AppraiseJS stages connect when I am still learning the product vocabulary?"
+  priority="nice-to-have"
+  context="Overview -> Mental model"
+  capture="Create a simple conceptual diagram that connects authored assets, sync/generation, test runs, and reports/logs/traces, then loops back to author updates."
+  successState="A first-time reader can map every later tutorial to one of the four stages without needing architecture-level detail."
+/>
 
 If you want to start using these capabilities immediately, continue to [Getting Started](/getting-started/getting_started) and then [Quick Start](/getting-started/quick_start).

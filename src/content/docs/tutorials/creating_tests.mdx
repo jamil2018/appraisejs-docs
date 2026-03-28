@@ -66,23 +66,43 @@ import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 11. Add an assertion step that checks the `welcomeBanner` visibility is `true`.
 12. Save the case and re-open it once to confirm every parameter, locator reference, and suite relationship still looks correct.
 
+The first visual checkpoint in this tutorial is the saved entity state. Readers need to see which records should already exist before the case editor becomes the main focus.
+
 <MediaPlaceholder
   type="screenshot"
-  title="Entity creation sequence showing Environment, Module, Test Suite, and Test Case forms in their saved state"
-  why="This reduces uncertainty about which entities must exist before the case editor becomes productive."
+  title="Saved entity setup with environment, module, suite, and case already created"
+  why="Which records need to exist before the test case editor becomes productive?"
+  priority="must-have"
+  context="Creating Tests -> Step-by-step procedure after entity creation"
+  capture="Capture the saved state of the environment, module, suite, and case created in this tutorial so the dependency chain is obvious."
+  successState="Each required entity is visibly saved, named, and connected closely enough that a reader can confirm they are ready to author steps."
 />
+
+The next ambiguity is the locator picker itself. Prose can explain the steps, but the overlay, pick confirmation, and return to the form are easier to trust when shown as motion.
 
 <MediaPlaceholder
   type="gif"
-  title="Locator picker flow from launching Chromium to confirming selector"
-  why="The locator picker is motion-heavy and easier to understand as a short loop than as prose alone."
+  title="Locator picker flow from launch to selector confirmation"
+  why="What exactly happens between launching the picker and returning with a confirmed locator?"
+  priority="must-have"
+  context="Creating Tests -> Locator capture flow"
+  capture="Record launching the Chromium picker from the saved environment, selecting an element, reviewing the selector in the overlay, and confirming the pick."
+  successState="The overlay, picked element state, and confirmation back into the locator workflow are all visible."
 />
+
+Once the locators exist, users need to recognize what a valid runnable case looks like while it is being assembled. The editor clip should make ordered steps, parameters, and the final save state concrete.
 
 <MediaPlaceholder
   type="gif"
-  title="Test case editor walkthrough showing ordered step creation, parameter entry, and save"
-  why="This helps new users recognize the visual editor state that corresponds to a valid, runnable case."
+  title="Case editor walkthrough with ordered steps, parameter entry, and save"
+  why="What visual state tells me this case is complete enough to save and run?"
+  priority="must-have"
+  context="Creating Tests -> Test case editing"
+  capture="Record adding the ordered login steps, filling required parameters, saving the case, and reopening it once to show the saved step flow."
+  successState="The case shows a complete ordered step sequence with filled parameters and a saved state that reads as runnable."
 />
+
+If all three checkpoints match, the reader should be able to move into [Running Tests](/tutorials/running_tests/) without wondering whether the failure is in authoring or execution.
 
 ## Checkpoint
 

@@ -1,9 +1,11 @@
 ---
 title: Overview
-description: Read the AppraiseJS system in product language first, then follow links into the advanced internals.
+description: Read the AppraiseJS system in product language after onboarding, then follow links into the advanced internals.
 sidebar:
   order: 1
 ---
+
+Read this page after the onboarding spine if you want the system story without dropping straight into implementation details.
 
 AppraiseJS is a local-first platform that keeps four concerns connected: modeling test intent, generating executable artifacts, running tests, and inspecting results.
 
@@ -33,4 +35,4 @@ AppraiseJS is a local-first platform that keeps four concerns connected: modelin
 
 ## Advanced note
 
-If you are still working through the first-run path, you can stop here. The linked pages below this point are intentionally deep-dive material.
+If you are still working through the first-run path, stop here and return to [Overview](/getting-started/overview/), [Installation](/getting-started/installation/), or [Quick Start](/getting-started/quick_start/). The linked pages below this point are intentionally deep-dive material.

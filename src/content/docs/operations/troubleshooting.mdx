@@ -77,11 +77,19 @@ import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 - What to do: open `Settings -> Sync` and run the specific sync tile or `Sync All`. If the UI is unavailable, run `npm run sync-all`.
 - What good looks like: pending counts drop and the expected entities appear consistently in the UI and generated artifacts.
 
+The sync dashboard is the main recovery screen that benefits from visual confirmation. Show it exactly where stale-data recovery is described so users can compare the page they see against the correct fix path.
+
 <MediaPlaceholder
   type="screenshot"
-  title="Sync dashboard showing pending-count badges and the correct tile to use after filesystem edits"
-  why="This helps users identify the fastest fix when the issue is stale data rather than a broken run."
+  title="Sync dashboard with pending counts, `Sync All`, and tile-level actions"
+  why="What recovery screen should I open when the UI and generated files look out of date?"
+  priority="must-have"
+  context="Troubleshooting -> Stale data recovery"
+  capture="Capture `Settings -> Sync` with pending-count badges, the `Sync All` action, and individual sync tiles visible in one stable view."
+  successState="A reader can identify `Sync All`, understand that tile-level actions exist, and recognize the page as the correct stale-data recovery screen."
 />
+
+If the screen does not look like this once captured, the user should follow the CLI recovery path instead of assuming they are already on the right page.
 
 ## Checkpoint
 

@@ -70,17 +70,31 @@ import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 7. Submit the run and open the run details page immediately.
 8. Watch live status, then confirm the final scope, status, and linked report after completion.
 
+The first decision on this page is the run-creation branch itself. Users should be able to compare the two input modes before they submit, especially when tags and explicit cases feel interchangeable in prose.
+
 <MediaPlaceholder
   type="screenshot"
-  title="Run creation screen showing branch-specific fields for tag selection and explicit case selection"
-  why="This helps users confirm they are on the correct run-creation branch before they submit."
+  title="Run creation modes showing `By Tags` and `By Test Cases`"
+  why="Which fields change when I choose `By Tags` instead of `By Test Cases`?"
+  priority="must-have"
+  context="Running Tests -> Run creation"
+  capture="Capture the run creation page with both selection modes represented clearly enough that the branch-specific fields are easy to compare."
+  successState="The difference between the two modes is obvious, including how scope is chosen before submission."
 />
+
+After submission, the main uncertainty becomes status changes and the route into reports. The monitoring clip should show what to watch and what action opens the next useful screen.
 
 <MediaPlaceholder
   type="video"
-  title="Execution monitoring flow from submitting a run to opening the completed report"
-  why="A short continuous clip makes the status-change and handoff into reports much easier to follow."
+  title="Run monitoring flow from submission through report handoff"
+  why="What should I watch after I submit the run, and where do I click when it is done?"
+  priority="should-have"
+  context="Running Tests -> Run details monitoring"
+  capture="Record submitting a run, opening the run details view, showing at least one status progression, and opening the completed report from that flow."
+  successState="The viewer can follow status progression and identify the exact handoff into reports."
 />
+
+With those visuals in place, the reader should be able to tell whether a problem is selection-related, execution-related, or something to debug later in [Viewing Reports](/tutorials/viewing_reports/).
 
 ## Checkpoint
 
