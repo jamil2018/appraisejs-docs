@@ -60,6 +60,7 @@ export default defineConfig({
           label: "Start Here",
           collapsed: false,
           items: [
+            { label: "Start Here Home", link: "/start-here/" },
             { label: "Overview", link: "/getting-started/overview/" },
             { label: "Installation", link: "/getting-started/installation/" },
             { label: "Quick Start", link: "/getting-started/quick_start/" },
@@ -73,6 +74,7 @@ export default defineConfig({
           label: "Core Concepts",
           collapsed: false,
           items: [
+            { label: "Core Concepts Home", link: "/core-concepts/" },
             {
               label: "Why AppraiseJS",
               link: "/getting-started/why_appraisejs/",
@@ -85,6 +87,7 @@ export default defineConfig({
           label: "Build Tests",
           collapsed: false,
           items: [
+            { label: "Build Tests Home", link: "/build-tests/" },
             { label: "Modules", link: "/guides/modules/" },
             { label: "Environments", link: "/guides/environments/" },
             { label: "Locator Groups", link: "/guides/locator_groups/" },
@@ -107,6 +110,7 @@ export default defineConfig({
           label: "Run And Analyze",
           collapsed: false,
           items: [
+            { label: "Run And Analyze Home", link: "/run-and-analyze/" },
             { label: "Test Runs", link: "/guides/test_runs/" },
             { label: "Reports", link: "/guides/reports/" },
             { label: "Dashboard", link: "/guides/dashboard/" },
@@ -117,6 +121,7 @@ export default defineConfig({
           label: "Reference",
           collapsed: false,
           items: [
+            { label: "Reference Home", link: "/reference/" },
             {
               label: "Step References",
               collapsed: true,
