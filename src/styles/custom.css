@@ -245,7 +245,7 @@ body:not(:has(.landing-root)) .content-panel {
 }
 
 .sl-markdown-content p {
-  margin-block: 0.9rem;
+  margin-block: 0.1rem;
 }
 
 .sl-markdown-content strong {
