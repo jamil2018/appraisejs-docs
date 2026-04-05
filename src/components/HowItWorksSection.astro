@@ -76,6 +76,7 @@
           <!-- Phase 0: Visual Flow Builder -->
           <div class="hiw__panel is-active" data-phase="0">
             <div class="hiw__panel-mobile-head">
+              <span class="hiw__mobile-step" aria-hidden="true">01</span>
               <h3>Design scenarios visually</h3>
               <p>
                 Build test flows in the browser with reusable, composable nodes.
@@ -110,6 +111,7 @@
           <!-- Phase 1: Code Generation -->
           <div class="hiw__panel" data-phase="1">
             <div class="hiw__panel-mobile-head">
+              <span class="hiw__mobile-step" aria-hidden="true">02</span>
               <h3>Transform flows into real code</h3>
               <p>
                 Generates standard Playwright + Cucumber output from your visual
@@ -205,6 +207,7 @@
           <!-- Phase 2: Execution -->
           <div class="hiw__panel" data-phase="2">
             <div class="hiw__panel-mobile-head">
+              <span class="hiw__mobile-step" aria-hidden="true">03</span>
               <h3>Run inside your environment</h3>
               <p>
                 Execute in your repo, on your machines, inside your CI stack.
@@ -274,6 +277,7 @@
           <!-- Phase 3: Reporting -->
           <div class="hiw__panel" data-phase="3">
             <div class="hiw__panel-mobile-head">
+              <span class="hiw__mobile-step" aria-hidden="true">04</span>
               <h3>Trace everything that happened</h3>
               <p>
                 Rich reports with logs, screenshots, and clear execution
@@ -419,7 +423,7 @@
   function showAll() {
     document
       .querySelectorAll(".hiw__panel")
-      .forEach((p) => p.classList.add("is-active", "is-revealed"));
+      .forEach((p) => p.classList.add("is-active", "is-revealed", "is-visible"));
     document
       .querySelectorAll(".hiw__copy")
       .forEach((c) => c.classList.add("is-active"));
@@ -587,19 +591,77 @@
     ev?.classList.toggle("is-visible", sub > 0.62);
   }
 
+  function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async function animateMobilePanel(panel) {
+    const phase = parseInt(panel.dataset.phase ?? "-1", 10);
+
+    if (phase === 0) {
+      const items = panel.querySelectorAll(".hiw-flow > *");
+      for (const item of items) {
+        item.classList.add("is-visible");
+        await delay(180);
+      }
+    }
+
+    if (phase === 1) {
+      const lines = panel.querySelectorAll(".hiw-codegen__line");
+      for (const line of lines) {
+        line.classList.add("is-visible");
+        await delay(90);
+      }
+    }
+
+    if (phase === 2) {
+      const steps = panel.querySelectorAll(".hiw-runner__step");
+      for (const step of steps) {
+        step.classList.add("is-running");
+        await delay(320);
+        step.classList.remove("is-running");
+        step.classList.add("is-passed");
+        await delay(100);
+      }
+      const logs = panel.querySelectorAll(".hiw-runner__term p");
+      for (const log of logs) {
+        log.classList.add("is-visible");
+        await delay(80);
+      }
+    }
+
+    if (phase === 3) {
+      const cards = panel.querySelectorAll(".hiw-report__card");
+      for (const card of cards) {
+        card.classList.add("is-visible");
+        await delay(100);
+      }
+      await delay(80);
+      const rows = panel.querySelectorAll(".hiw-report__row");
+      for (const row of rows) {
+        row.classList.add("is-visible");
+        await delay(110);
+      }
+      await delay(120);
+      panel.querySelector(".hiw-report__evidence")?.classList.add("is-visible");
+    }
+  }
+
   function initMobileFallback(section, panels) {
     panels.forEach((panel) => {
       panel.classList.add("is-active");
+
+      let triggered = false;
       inView(
         panel,
         () => {
+          if (triggered) return;
+          triggered = true;
+          // Fade the card in first, then start internal sequence
           panel.classList.add("is-revealed");
-          const items = panel.querySelectorAll(
-            ".hiw-flow > *, .hiw-codegen__line, .hiw-runner__step, .hiw-runner__term p, .hiw-report__card, .hiw-report__row, .hiw-report__evidence",
-          );
-          items.forEach((el) => el.classList.add("is-visible", "is-passed"));
+          delay(300).then(() => animateMobilePanel(panel));
         },
-        { amount: 0.2 },
+        { amount: 0.35 },
       );
     });
   }
