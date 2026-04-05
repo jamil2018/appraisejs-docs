@@ -1,134 +1,352 @@
 ---
-import { FolderSync, MousePointer2, Terminal, Zap } from "@lucide/astro";
+const builderNodes = [
+  {
+    kind: "Navigate",
+    title: "Open Workspace",
+    detail: "Environment ready",
+  },
+  {
+    kind: "Assert",
+    title: "Session Valid",
+    detail: "Anchor step",
+    active: true,
+  },
+  {
+    kind: "Click",
+    title: "Open Dashboard",
+    detail: "Flow continues",
+  },
+];
+
+const builderOutput = [
+  { keyword: "Given", value: "the workspace is open" },
+  {
+    keyword: "And",
+    value: "the OTP challenge is captured automatically",
+    inserted: true,
+  },
+  { keyword: "When", value: 'the user clicks "Dashboard"' },
+];
+
+const reportRows = [
+  { label: "Console signal", value: "OTP challenge resolved before click" },
+  { label: "Visual diff", value: "No unexpected UI drift detected" },
+  { label: "Trace link", value: "Scenario evidence attached" },
+];
+
+const executionRows = [
+  { label: "npm run test", state: "queue" },
+  { label: "checkout-recovery.feature", state: "run" },
+  { label: "step 1 passed 118ms", state: "pass" },
+  { label: "step 2 passed 94ms", state: "pass" },
+  { label: "scenario passed 436ms", state: "done" },
+];
+
+const selectorChips = ["#submit-order", 'role=button[name="Place order"]'];
+
+const syncFiles = [
+  "scenario.feature",
+  "steps/order.steps.ts",
+  "report-metadata.json",
+];
 ---
 
 <section
   class="landing-tooling landing-shell"
   aria-labelledby="landing-tooling-heading"
 >
-  <div class="landing-section-copy landing-section-copy--center">
+  <div
+    class="landing-section-copy landing-section-copy--center"
+    data-tooling-head
+  >
     <h2 id="landing-tooling-heading" class="landing-section-title">
       Precision-Engineered Tooling
     </h2>
+    <p class="landing-section-description">
+      A focused view of the capabilities that make Appraise adaptable,
+      executable, and deeply inspectable.
+    </p>
   </div>
 
   <div class="landing-tooling__grid">
-    <article class="landing-tooling-card landing-tooling-card--builder">
+    <article
+      class="landing-tooling-card landing-tooling-card--builder"
+      data-tooling-card
+    >
       <div class="landing-tooling-card__copy">
-        <h3>Visual Test Builder</h3>
+        <h3>Build and evolve test logic visually</h3>
         <p>
-          The most advanced node editor ever built for QA. Real-time sync,
-          branching logic, and reusable sub-flows.
+          Design reusable flows, branch where needed, and insert new steps into
+          live scenarios without rebuilding the logic downstream.
         </p>
       </div>
 
       <div class="landing-tooling-builder" aria-hidden="true">
-        <div class="landing-tooling-builder__frame">
-          <div class="landing-tooling-node">
-            <span>Navigate</span>
-            <strong>Base URL</strong>
+        <div class="landing-tooling-builder__surface">
+          <div class="landing-tooling-builder__eyebrow">
+            <span>Scenario Builder</span>
+            <span>Dynamic step addition</span>
           </div>
-          <span class="landing-tooling-node__line"></span>
-          <div class="landing-tooling-node">
-            <span>Input</span>
-            <strong>Fill Email</strong>
+
+          <div class="landing-tooling-builder__frame">
+            {
+              builderNodes.map((node, index) => (
+                <>
+                  <article
+                    class:list={[
+                      "landing-tooling-node",
+                      node.active && "landing-tooling-node--active",
+                    ]}
+                  >
+                    <span>{node.kind}</span>
+                    <strong>{node.title}</strong>
+                    <small>{node.detail}</small>
+                  </article>
+
+                  {index === 1 && (
+                    <>
+                      <span class="landing-tooling-node__line landing-tooling-node__line--insert" />
+                      <div class="landing-tooling-builder__insert">
+                        <span class="landing-tooling-builder__insert-label">
+                          inserted
+                        </span>
+                        <article class="landing-tooling-node landing-tooling-node--inserted">
+                          <span>Action</span>
+                          <strong>Capture OTP</strong>
+                          <small>Added in place</small>
+                        </article>
+                      </div>
+                    </>
+                  )}
+
+                  {index < builderNodes.length - 1 && (
+                    <span class="landing-tooling-node__line" />
+                  )}
+                </>
+              ))
+            }
           </div>
-          <span class="landing-tooling-node__line"></span>
-          <div class="landing-tooling-node landing-tooling-node--active">
-            <span>Click</span>
-            <strong>Login</strong>
+
+          <div class="landing-tooling-builder__output">
+            <div class="landing-tooling-builder__output-head">
+              <span>Generated output updates with the flow</span>
+            </div>
+            <div class="landing-tooling-builder__output-lines">
+              {
+                builderOutput.map((line, index) => (
+                  <p
+                    class:list={[
+                      "landing-tooling-builder__output-line",
+                      line.inserted &&
+                        "landing-tooling-builder__output-line--inserted",
+                    ]}
+                    style={`--tooling-delay:${index * 0.18}s;`}
+                  >
+                    <span>{line.keyword}</span>
+                    <strong>{line.value}</strong>
+                  </p>
+                ))
+              }
+            </div>
           </div>
         </div>
       </div>
     </article>
 
-    <div class="landing-tooling__stack" style="margin-top: 0rem;">
-      <article class="landing-tooling-card landing-tooling-card--compact">
+    <div class="landing-tooling__stack">
+      <article
+        class="landing-tooling-card landing-tooling-card--compact"
+        data-tooling-card
+      >
         <div
           class="landing-tooling-visual landing-tooling-visual--locator"
           aria-hidden="true"
         >
           <div class="landing-tooling-locator-frame">
-            <span class="landing-tooling-icon landing-tooling-icon--pointer">
-              <MousePointer2 />
-            </span>
-            <span class="landing-tooling-locator-badge">#submit-btn</span>
+            <span class="landing-tooling-locator-frame__scan"></span>
+            <span class="landing-tooling-locator-frame__target"></span>
+            <span class="landing-tooling-locator-frame__cursor"></span>
+          </div>
+          <div class="landing-tooling-locator-chips">
+            {
+              selectorChips.map((chip, index) => (
+                <span
+                  class="landing-tooling-locator-badge"
+                  style={`--tooling-delay:${index * 0.5}s;`}
+                >
+                  {chip}
+                </span>
+              ))
+            }
           </div>
         </div>
         <div class="landing-tooling-card__copy">
-          <h3>Locator Creator</h3>
-          <p>Intelligent selector generation that survives DOM changes.</p>
+          <h3>Target the UI with resilient selectors</h3>
+          <p>
+            Generate stable selectors that hold through DOM shifts and UI churn.
+          </p>
         </div>
       </article>
 
-      <article class="landing-tooling-card landing-tooling-card--compact">
+      <article
+        class="landing-tooling-card landing-tooling-card--compact"
+        data-tooling-card
+      >
         <div
           class="landing-tooling-visual landing-tooling-visual--sync"
           aria-hidden="true"
         >
-          <span class="landing-tooling-icon landing-tooling-icon--folder">
-            <FolderSync />
-          </span>
-          <span class="landing-tooling-sync-line"></span>
-          <span
-            class="landing-tooling-icon landing-tooling-icon--zap landing-tooling-icon--zap-ring"
-          >
-            <Zap />
-          </span>
+          <div class="landing-tooling-sync-column">
+            <span class="landing-tooling-sync-column__label">Builder</span>
+            <span class="landing-tooling-sync-column__node"></span>
+            <span
+              class="landing-tooling-sync-column__node landing-tooling-sync-column__node--active"
+            ></span>
+            <span class="landing-tooling-sync-column__node"></span>
+          </div>
+          <div class="landing-tooling-sync-bridge">
+            <span class="landing-tooling-sync-line"></span>
+            <span class="landing-tooling-sync-pulse"></span>
+            <span class="landing-tooling-sync-pulse"></span>
+            <span class="landing-tooling-sync-pulse"></span>
+          </div>
+          <div class="landing-tooling-sync-column">
+            <span class="landing-tooling-sync-column__label">Repo</span>
+            {
+              syncFiles.map((file) => (
+                <span class="landing-tooling-sync-column__file">{file}</span>
+              ))
+            }
+          </div>
         </div>
         <div class="landing-tooling-card__copy">
-          <h3>Sync Manager</h3>
-          <p>Bidirectional sync between visual UI and your code repo.</p>
+          <h3>Keep visual changes and code aligned</h3>
+          <p>
+            Bidirectional sync keeps the editor, output, and repo state moving
+            together.
+          </p>
         </div>
       </article>
     </div>
 
-    <article class="landing-tooling-card landing-tooling-card--reporting">
+    <article
+      class="landing-tooling-card landing-tooling-card--reporting"
+      data-tooling-card
+    >
       <div class="landing-tooling-report" aria-hidden="true">
-        <span
-          class="landing-tooling-report__bar landing-tooling-report__bar--soft"
-        ></span>
-        <span
-          class="landing-tooling-report__bar landing-tooling-report__bar--mid"
-        ></span>
-        <span
-          class="landing-tooling-report__bar landing-tooling-report__bar--primary"
-        ></span>
-        <span
-          class="landing-tooling-report__bar landing-tooling-report__bar--accent"
-        ></span>
+        <div class="landing-tooling-report__stats">
+          <span
+            class="landing-tooling-report__stat landing-tooling-report__stat--primary"
+          >
+            <strong>4/4</strong>
+            <small>steps passed</small>
+          </span>
+          <span class="landing-tooling-report__stat">
+            <strong>1</strong>
+            <small>trace linked</small>
+          </span>
+          <span class="landing-tooling-report__stat">
+            <strong>143ms</strong>
+            <small>slowest step</small>
+          </span>
+        </div>
+
+        <div class="landing-tooling-report__rows">
+          {
+            reportRows.map((row, index) => (
+              <div
+                class="landing-tooling-report__row"
+                style={`--tooling-delay:${index * 0.18}s;`}
+              >
+                <span>{row.label}</span>
+                <strong>{row.value}</strong>
+              </div>
+            ))
+          }
+        </div>
       </div>
       <div class="landing-tooling-card__copy">
-        <h3>Reporting &amp; Log Analysis</h3>
+        <h3>See failures with usable context</h3>
         <p>
-          Deep-dive into test results with integrated log analysis and visual
-          diffs.
+          Tie execution, logs, timing, and visual diffs together so debugging
+          starts with signal instead of guesswork.
         </p>
       </div>
     </article>
 
-    <article class="landing-tooling-card landing-tooling-card--terminal">
+    <article
+      class="landing-tooling-card landing-tooling-card--terminal"
+      data-tooling-card
+    >
       <div class="landing-tooling-terminal" aria-hidden="true">
-        <div class="landing-tooling-terminal__item">
-          <span>npm test</span>
-          <span class="landing-tooling-icon landing-tooling-icon--terminal">
-            <Terminal />
-          </span>
-        </div>
-        <div class="landing-tooling-terminal__item">
-          <span>npx playwright test</span>
-          <span class="landing-tooling-icon landing-tooling-icon--zap">
-            <Zap />
-          </span>
-        </div>
+        {
+          executionRows.map((row, index) => (
+            <div
+              class:list={[
+                "landing-tooling-terminal__item",
+                `landing-tooling-terminal__item--${row.state}`,
+              ]}
+              style={`--tooling-delay:${index * 0.18}s;`}
+            >
+              <span>{row.label}</span>
+              <span class="landing-tooling-terminal__state" />
+            </div>
+          ))
+        }
       </div>
       <div class="landing-tooling-card__copy">
-        <h3>Local-First Execution</h3>
+        <h3>Run locally with full control</h3>
         <p>
-          No proprietary cloud runners required. Your hardware, your speed, your
-          privacy.
+          Execute inside your repo and infrastructure with no proprietary
+          runners in the middle.
         </p>
       </div>
     </article>
   </div>
 </section>
+
+<script>
+  // @ts-nocheck
+  import { animate, inView, stagger } from "motion";
+
+  const section = document.querySelector(".landing-tooling");
+  const prefersReducedMotion =
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (section && !prefersReducedMotion) {
+    let hasRevealed = false;
+
+    inView(
+      section,
+      () => {
+        if (hasRevealed) return;
+        hasRevealed = true;
+
+        const header = section.querySelector("[data-tooling-head]");
+        const cards = section.querySelectorAll("[data-tooling-card]");
+
+        if (header) {
+          animate(
+            header,
+            { opacity: [0, 1], y: [14, 0] },
+            { duration: 0.42, ease: [0.25, 0.1, 0.25, 1] },
+          );
+        }
+
+        if (cards.length) {
+          animate(
+            cards,
+            { opacity: [0, 1], y: [16, 0] },
+            {
+              delay: stagger(0.06),
+              duration: 0.38,
+              ease: [0.25, 0.1, 0.25, 1],
+            },
+          );
+        }
+      },
+      { amount: 0.2 },
+    );
+  }
+</script>
