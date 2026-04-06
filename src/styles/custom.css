@@ -1,3 +1,9 @@
+/* Reserve space for the vertical scrollbar so centered layouts don’t shift
+   when overflow appears (e.g. during staged animations on the landing page). */
+html {
+  scrollbar-gutter: stable;
+}
+
 /* Token bridge: map AppraiseJS theme tokens to Starlight variables. */
 :root {
   --sl-font:
@@ -439,16 +445,25 @@ body:not(:has(.landing-root)) .content-panel {
 
 .callout-grid {
   display: grid;
-  gap: 0.9rem;
+  width: 100%;
   max-width: var(--doc-measure-wide);
+  box-sizing: border-box;
+  gap: 0.9rem;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: stretch;
   margin-block: 1.25rem 1.6rem;
 }
 
 .callout-grid__item {
+  margin: 0;
+  min-width: 0;
   border: 1px solid var(--sl-color-hairline-light);
   border-radius: 1rem;
   background: hsl(var(--doc-surface) / 0.78);
   padding: 1rem 1.05rem;
+  overflow-wrap: break-word;
+  display: flex;
+  flex-direction: column;
 }
 
 .callout-grid__item h3 {
@@ -477,6 +492,7 @@ body:not(:has(.landing-root)) .content-panel {
 }
 
 .callout-grid__link {
+  margin-top: auto;
   color: hsl(var(--accent));
   font-weight: 600;
   text-decoration: none;

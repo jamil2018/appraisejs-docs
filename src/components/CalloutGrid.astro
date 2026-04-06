@@ -17,7 +17,7 @@ const { items } = Astro.props as Props;
 <div class="callout-grid">
   {
     items.map((item) => (
-      <section
+      <div
         class={`callout-grid__item callout-grid__item--${item.tone ?? "default"}`}
       >
         <h3>{item.title}</h3>
@@ -27,7 +27,7 @@ const { items } = Astro.props as Props;
             {item.cta ?? "Open page"}
           </a>
         )}
-      </section>
+      </div>
     ))
   }
 </div>
