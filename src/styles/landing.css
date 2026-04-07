@@ -3258,11 +3258,9 @@ body:has(.landing-root) .sl-markdown-content {
 /* Step results */
 
 .hiw-report__list {
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  scrollbar-gutter: stable;
+  flex: 0 0 auto;
+  min-height: fit-content;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -3318,7 +3316,8 @@ body:has(.landing-root) .sl-markdown-content {
 /* Evidence / screenshot */
 
 .hiw-report__evidence {
-  flex-shrink: 0;
+  flex: 1 1 auto;
+  min-height: 0;
   padding: 1.25rem 1.5rem;
   opacity: 0;
   transform: translateY(8px);
