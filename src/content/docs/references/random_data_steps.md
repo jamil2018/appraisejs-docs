@@ -11,6 +11,9 @@ Source: `src/tests/steps/actions/random_data.step.ts`.
 
 See shared placeholder rules in [Step Parameter Conventions](/references/step_parameter_conventions).
 
+Prefer installing published steps with `npx appraisejs@latest add step ...`
+instead of adding the package to your project with `npm install`.
+
 ## Use this when
 
 Use random-data steps when the scenario needs throwaway values without hard-coding test data in the case itself.
@@ -22,6 +25,19 @@ All random-data steps share one parameter:
 | `{string}` | Variable key to store generated value | New/existing variable name (for example `generatedEmail`). |
 
 ## Step catalog
+
+### Install with CLI
+
+```bash
+npx appraisejs@latest add step random-data/generate-random-first-name-and-save-in-variable
+npx appraisejs@latest add step random-data/generate-random-last-name-and-save-in-variable
+npx appraisejs@latest add step random-data/generate-random-email-and-save-in-variable
+npx appraisejs@latest add step random-data/generate-random-password-and-save-in-variable
+npx appraisejs@latest add step random-data/generate-random-phone-and-save-in-variable
+npx appraisejs@latest add step random-data/generate-random-address-and-save-in-variable
+npx appraisejs@latest add step random-data/generate-random-unique-text-and-save-in-variable
+npx appraisejs@latest add step random-data/generate-random-full-name-and-save-in-variable
+```
 
 | Signature                                                                            | Generated value      | Example                                                                                           |
 | ------------------------------------------------------------------------------------ | -------------------- | ------------------------------------------------------------------------------------------------- |

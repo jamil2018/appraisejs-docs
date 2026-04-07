@@ -11,6 +11,9 @@ Source: `src/tests/steps/validations/*.step.ts`.
 
 See shared placeholder rules in [Step Parameter Conventions](/references/step_parameter_conventions).
 
+Prefer installing published steps with `npx appraisejs@latest add step ...`
+instead of adding the package to your project with `npm install`.
+
 ## Use this when
 
 Use assertion steps when the scenario must validate page text, element state, or route state after an action.
@@ -19,15 +22,23 @@ Use assertion steps when the scenario must validate page text, element state, or
 
 ### 1. Contains text assertion
 
-Signature: `the element {string} should {boolean} contain the text {string}`
+#### Signature
 
-What it does:
+`the element {string} should {boolean} contain the text {string}`
+
+#### Install with CLI
+
+```bash
+npx appraisejs@latest add step text-assertion/assert-element-contains-text
+```
+
+#### What it does
 
 - Resolves locator.
 - Reads `textContent()`.
 - Asserts contains or does-not-contain based on boolean flag.
 
-Parameters:
+#### Parameters
 
 | Parameter         | Represents                     | Expected data                                          |
 | ----------------- | ------------------------------ | ------------------------------------------------------ |
@@ -35,7 +46,7 @@ Parameters:
 | `{boolean}`       | Positive or negative assertion | `true` for must contain, `false` for must not contain. |
 | Second `{string}` | Target text                    | Expected literal/partial text value.                   |
 
-Example:
+#### Example
 
 ```gherkin
 Then the element "toastMessage" should true contain the text "Saved successfully"
@@ -43,15 +54,23 @@ Then the element "toastMessage" should true contain the text "Saved successfully
 
 ### 2. Equals text assertion
 
-Signature: `the element {string} should {boolean} equal the text {string}`
+#### Signature
 
-What it does:
+`the element {string} should {boolean} equal the text {string}`
+
+#### Install with CLI
+
+```bash
+npx appraisejs@latest add step text-assertion/assert-element-equals-text
+```
+
+#### What it does
 
 - Resolves locator.
 - Reads `textContent()`.
 - Asserts exact equality or inequality based on boolean flag.
 
-Parameters:
+#### Parameters
 
 | Parameter         | Represents                     | Expected data                                      |
 | ----------------- | ------------------------------ | -------------------------------------------------- |
@@ -59,7 +78,7 @@ Parameters:
 | `{boolean}`       | Positive or negative assertion | `true` for must equal, `false` for must not equal. |
 | Second `{string}` | Expected exact text            | Exact value expected in element.                   |
 
-Example:
+#### Example
 
 ```gherkin
 Then the element "pageTitle" should true equal the text "Dashboard"
@@ -69,22 +88,30 @@ Then the element "pageTitle" should true equal the text "Dashboard"
 
 ### 3. Visibility assertion
 
-Signature: `the visibility status of the {string} element should be {boolean}`
+#### Signature
 
-What it does:
+`the visibility status of the {string} element should be {boolean}`
+
+#### Install with CLI
+
+```bash
+npx appraisejs@latest add step visibility-assertion/assert-element-visible
+```
+
+#### What it does
 
 - Resolves locator.
 - Uses Playwright visibility check.
 - Asserts visible/non-visible state.
 
-Parameters:
+#### Parameters
 
 | Parameter   | Represents           | Expected data                                       |
 | ----------- | -------------------- | --------------------------------------------------- |
 | `{string}`  | Element locator name | Existing locator key.                               |
 | `{boolean}` | Expected visibility  | `true` for visible, `false` for hidden/not visible. |
 
-Example:
+#### Example
 
 ```gherkin
 Then the visibility status of the "successBanner" element should be true
@@ -92,22 +119,30 @@ Then the visibility status of the "successBanner" element should be true
 
 ### 4. Active/enabled assertion
 
-Signature: `the element {string} should have active status {boolean}`
+#### Signature
 
-What it does:
+`the element {string} should have active status {boolean}`
+
+#### Install with CLI
+
+```bash
+npx appraisejs@latest add step active-state-assertion/assert-element-active
+```
+
+#### What it does
 
 - Resolves locator.
 - Uses Playwright enabled-state check.
 - Asserts enabled/disabled expectation.
 
-Parameters:
+#### Parameters
 
 | Parameter   | Represents            | Expected data                                               |
 | ----------- | --------------------- | ----------------------------------------------------------- |
 | `{string}`  | Element locator name  | Existing locator key.                                       |
 | `{boolean}` | Expected active state | `true` for active/enabled, `false` for not active/disabled. |
 
-Example:
+#### Example
 
 ```gherkin
 Then the element "submitButton" should have active status true
@@ -115,21 +150,29 @@ Then the element "submitButton" should have active status true
 
 ### 5. URL route equality assertion
 
-Signature: `the url route should be equal to {string}`
+#### Signature
 
-What it does:
+`the url route should be equal to {string}`
+
+#### Install with CLI
+
+```bash
+npx appraisejs@latest add step navigation-assertion/assert-url-route-equals
+```
+
+#### What it does
 
 - Waits for network idle.
 - Extracts current pathname from URL.
 - Compares pathname to expected route.
 
-Parameters:
+#### Parameters
 
 | Parameter  | Represents        | Expected data                          |
 | ---------- | ----------------- | -------------------------------------- |
 | `{string}` | Expected pathname | Route path (for example `/dashboard`). |
 
-Example:
+#### Example
 
 ```gherkin
 Then the url route should be equal to "/dashboard"
@@ -150,3 +193,4 @@ Then the url route should be equal to "/dashboard"
 The signature below exists but is currently stubbed (no implementation body):
 
 - `the element {string} should contain the text inside the stored variable {string}`
+- Install with CLI: `npx appraisejs@latest add step text-assertion/assert-element-contains-stored-variable-text`

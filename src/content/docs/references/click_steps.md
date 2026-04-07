@@ -11,6 +11,9 @@ Source: `src/tests/steps/actions/click.step.ts`.
 
 See shared placeholder rules in [Step Parameter Conventions](/references/step_parameter_conventions).
 
+Prefer installing published steps with `npx appraisejs@latest add step ...`
+instead of adding the package to your project with `npm install`.
+
 ## Use this when
 
 Use click steps when the scenario needs a direct UI action against an existing locator.
@@ -19,20 +22,28 @@ Use click steps when the scenario needs a direct UI action against an existing l
 
 ### 1. Click element
 
-Signature: `the user clicks on the {string} element`
+#### Signature
 
-What it does:
+`the user clicks on the {string} element`
+
+#### Install with CLI
+
+```bash
+npx appraisejs@latest add step click/click
+```
+
+#### What it does
 
 - Resolves locator by name.
 - Performs a standard Playwright click.
 
-Parameters:
+#### Parameters
 
 | Parameter  | Represents          | Expected data                                     |
 | ---------- | ------------------- | ------------------------------------------------- |
 | `{string}` | Target locator name | Existing locator key (for example `loginButton`). |
 
-Example:
+#### Example
 
 ```gherkin
 When the user clicks on the "loginButton" element
@@ -40,20 +51,28 @@ When the user clicks on the "loginButton" element
 
 ### 2. Double click element
 
-Signature: `the user double clicks on the {string} element`
+#### Signature
 
-What it does:
+`the user double clicks on the {string} element`
+
+#### Install with CLI
+
+```bash
+npx appraisejs@latest add step click/double-click
+```
+
+#### What it does
 
 - Resolves locator by name.
 - Performs `dblclick()` on the matched element.
 
-Parameters:
+#### Parameters
 
 | Parameter  | Represents          | Expected data                                 |
 | ---------- | ------------------- | --------------------------------------------- |
 | `{string}` | Target locator name | Existing locator key (for example `rowItem`). |
 
-Example:
+#### Example
 
 ```gherkin
 When the user double clicks on the "rowItem" element
@@ -61,20 +80,28 @@ When the user double clicks on the "rowItem" element
 
 ### 3. Right click element
 
-Signature: `the user right clicks on the {string} element`
+#### Signature
 
-What it does:
+`the user right clicks on the {string} element`
+
+#### Install with CLI
+
+```bash
+npx appraisejs@latest add step click/right-click
+```
+
+#### What it does
 
 - Resolves locator by name.
 - Performs `click({ button: 'right' })`.
 
-Parameters:
+#### Parameters
 
 | Parameter  | Represents          | Expected data                                           |
 | ---------- | ------------------- | ------------------------------------------------------- |
 | `{string}` | Target locator name | Existing locator key (for example `contextMenuTarget`). |
 
-Example:
+#### Example
 
 ```gherkin
 When the user right clicks on the "contextMenuTarget" element

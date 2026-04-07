@@ -11,6 +11,9 @@ Source: `src/tests/steps/actions/hover.step.ts`.
 
 See shared placeholder rules in [Step Parameter Conventions](/references/step_parameter_conventions).
 
+Prefer installing published steps with `npx appraisejs@latest add step ...`
+instead of adding the package to your project with `npm install`.
+
 ## Use this when
 
 Use hover when the UI reveals state only after pointer movement, such as menus, tooltips, or nested controls.
@@ -19,20 +22,28 @@ Use hover when the UI reveals state only after pointer movement, such as menus, 
 
 ### Hover over element
 
-Signature: `the user hovers the cursor over the {string} element`
+#### Signature
 
-What it does:
+`the user hovers the cursor over the {string} element`
+
+#### Install with CLI
+
+```bash
+npx appraisejs@latest add step hover/hover
+```
+
+#### What it does
 
 - Resolves locator by name.
 - Runs Playwright `hover()` on the target element.
 
-Parameters:
+#### Parameters
 
 | Parameter  | Represents          | Expected data                                     |
 | ---------- | ------------------- | ------------------------------------------------- |
 | `{string}` | Target locator name | Existing locator key (for example `menuTrigger`). |
 
-Example:
+#### Example
 
 ```gherkin
 When the user hovers the cursor over the "menuTrigger" element

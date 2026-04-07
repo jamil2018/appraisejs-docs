@@ -11,6 +11,9 @@ Source: `src/tests/steps/actions/wait.step.ts`.
 
 See shared placeholder rules in [Step Parameter Conventions](/references/step_parameter_conventions).
 
+Prefer installing published steps with `npx appraisejs@latest add step ...`
+instead of adding the package to your project with `npm install`.
+
 ## Use this when
 
 Use wait steps when the scenario needs route or element synchronization and fixed-duration waiting is not enough or not appropriate.
@@ -19,17 +22,25 @@ Use wait steps when the scenario needs route or element synchronization and fixe
 
 ### 1. Wait for current page load
 
-Signature: `the user waits for the current page to be loaded`
+#### Signature
 
-What it does:
+`the user waits for the current page to be loaded`
+
+#### Install with CLI
+
+```bash
+npx appraisejs@latest add step wait/wait-for-page-load
+```
+
+#### What it does
 
 - Waits for current page to reach `domcontentloaded`.
 
-Parameters:
+#### Parameters
 
 - None.
 
-Example:
+#### Example
 
 ```gherkin
 When the user waits for the current page to be loaded
@@ -37,21 +48,29 @@ When the user waits for the current page to be loaded
 
 ### 2. Wait for route to load
 
-Signature: `the user waits for the route {string} to be loaded`
+#### Signature
 
-What it does:
+`the user waits for the route {string} to be loaded`
+
+#### Install with CLI
+
+```bash
+npx appraisejs@latest add step wait/wait-for-url-route
+```
+
+#### What it does
 
 - Reads selected environment base URL.
 - Combines base URL with provided route.
 - Waits for full URL match.
 
-Parameters:
+#### Parameters
 
 | Parameter  | Represents | Expected data                                             |
 | ---------- | ---------- | --------------------------------------------------------- |
 | `{string}` | Route path | Relative route (for example `/dashboard` or `dashboard`). |
 
-Example:
+#### Example
 
 ```gherkin
 When the user waits for the route "/dashboard" to be loaded
@@ -59,20 +78,28 @@ When the user waits for the route "/dashboard" to be loaded
 
 ### 3. Wait for element visibility
 
-Signature: `the user waits for the element {string} to become visible`
+#### Signature
 
-What it does:
+`the user waits for the element {string} to become visible`
+
+#### Install with CLI
+
+```bash
+npx appraisejs@latest add step wait/wait-for-element
+```
+
+#### What it does
 
 - Resolves locator by name.
 - Waits until selector state is `visible`.
 
-Parameters:
+#### Parameters
 
 | Parameter  | Represents   | Expected data                                       |
 | ---------- | ------------ | --------------------------------------------------- |
 | `{string}` | Locator name | Existing locator key (for example `successBanner`). |
 
-Example:
+#### Example
 
 ```gherkin
 When the user waits for the element "successBanner" to become visible
@@ -80,20 +107,28 @@ When the user waits for the element "successBanner" to become visible
 
 ### 4. Wait for element disappearance
 
-Signature: `the user waits for the {string} element to disappear`
+#### Signature
 
-What it does:
+`the user waits for the {string} element to disappear`
+
+#### Install with CLI
+
+```bash
+npx appraisejs@latest add step wait/wait-for-element-to-disappear
+```
+
+#### What it does
 
 - Resolves locator by name.
 - Waits until selector state is `hidden`.
 
-Parameters:
+#### Parameters
 
 | Parameter  | Represents   | Expected data                                        |
 | ---------- | ------------ | ---------------------------------------------------- |
 | `{string}` | Locator name | Existing locator key (for example `loadingSpinner`). |
 
-Example:
+#### Example
 
 ```gherkin
 When the user waits for the "loadingSpinner" element to disappear
@@ -101,19 +136,27 @@ When the user waits for the "loadingSpinner" element to disappear
 
 ### 5. Wait fixed duration
 
-Signature: `the user waits for {int} seconds`
+#### Signature
 
-What it does:
+`the user waits for {int} seconds`
+
+#### Install with CLI
+
+```bash
+npx appraisejs@latest add step wait/wait-for-specific-amount-of-seconds
+```
+
+#### What it does
 
 - Pauses execution for provided seconds.
 
-Parameters:
+#### Parameters
 
 | Parameter | Represents          | Expected data                       |
 | --------- | ------------------- | ----------------------------------- |
 | `{int}`   | Duration in seconds | Positive integer (for example `2`). |
 
-Example:
+#### Example
 
 ```gherkin
 When the user waits for 2 seconds

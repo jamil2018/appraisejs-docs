@@ -212,6 +212,11 @@ body:not(:has(.landing-root)) a.site-title {
   line-height: 1;
 }
 
+/* Normalize sidebar labels to title case rendering. */
+body:not(:has(.landing-root)) nav.sidebar .sidebar-content a {
+  text-transform: capitalize;
+}
+
 body:not(:has(.landing-root)) .content-panel {
   padding-top: 1.4rem;
 }
@@ -241,6 +246,46 @@ body:not(:has(.landing-root)) .content-panel {
   margin-top: 1.8rem;
   margin-bottom: 0.7rem;
   font-size: clamp(1.08rem, 1.8vw, 1.28rem);
+}
+
+.sl-markdown-content > h4 {
+  margin-top: 0.7rem;
+  margin-bottom: 0.2rem;
+  font-size: 0.6rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: hsl(var(--muted-foreground));
+}
+
+.sl-markdown-content > h5,
+.sl-markdown-content > h6 {
+  margin-top: 0.55rem;
+  margin-bottom: 0.2rem;
+  font-size: 0.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: hsl(var(--muted-foreground));
+}
+
+/* Step References pages: keep deep subheadings compact. */
+body:has(.sidebar-pane a[aria-current][href^="/references/"])
+  .sl-markdown-content
+  .sl-heading-wrapper.level-h4
+  > :where(h4) {
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+body:has(.sidebar-pane a[aria-current][href^="/references/"])
+  .sl-markdown-content
+  .sl-heading-wrapper.level-h5
+  > :where(h5),
+body:has(.sidebar-pane a[aria-current][href^="/references/"])
+  .sl-markdown-content
+  .sl-heading-wrapper.level-h6
+  > :where(h6) {
+  font-size: 0.8rem;
+  line-height: 1.2;
 }
 
 .sl-markdown-content p,

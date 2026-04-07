@@ -55,6 +55,7 @@ The CLI scripts still matter for repository maintenance and automation:
 - CI or scripted local maintenance
 - Focused repair or debugging of one sync area
 - Feature regeneration preview with `npm run sync-features:dry-run`
+- Pulling published reusable template steps into an existing scaffold with `npx appraisejs@latest add step ...`
 
 ## Core scripts
 
@@ -66,7 +67,21 @@ The CLI scripts still matter for repository maintenance and automation:
 - `npm run sync-locators`: reconcile locator definitions and locator maps.
 - `npm run sync-template-steps`: resync template step definitions.
 
+## Related CLI workflow
+
+Installing published steps is separate from the local `npm run ...` scripts:
+
+```bash
+npx appraisejs@latest add step <group-slug>/<step-slug>
+```
+
+Use that command when you want to merge a published step fragment into
+`automation/steps` and then run the template-step sync flow automatically.
+
+- Full guide: [Install Template Steps with CLI](/operations/install_template_steps_with_cli/)
+
 ## Related pages
 
 - [Settings](/guides/settings/)
+- [Install Template Steps with CLI](/operations/install_template_steps_with_cli/)
 - [Synchronization Pipeline](/architecture/synchronization_pipeline/)
