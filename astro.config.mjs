@@ -60,7 +60,6 @@ export default defineConfig({
           label: "Start Here",
           collapsed: false,
           items: [
-            { label: "glossary", link: "/start-here/" },
             { label: "Overview", link: "/getting-started/overview/" },
             { label: "Installation", link: "/getting-started/installation/" },
             { label: "Quick Start", link: "/getting-started/quick_start/" },

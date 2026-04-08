@@ -8,7 +8,6 @@ sidebar:
 import DocHero from "../../../components/DocHero.astro";
 import TaskChecklist from "../../../components/TaskChecklist.astro";
 import OutcomeCard from "../../../components/OutcomeCard.astro";
-import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 
 <DocHero
   eyebrow="Setup"
@@ -84,27 +83,22 @@ available for local iteration, but it is not the primary onboarding path.
 
 The setup flow is easiest to trust when users can watch the full continuity from scaffold creation to a working browser tab. Capture that sequence directly in the place where setup turns from terminal steps into a UI expectation.
 
-<MediaPlaceholder
-  type="video"
-  title="End-to-end first-run setup from scaffold to running local app"
-  why="If I follow these commands correctly, what full setup path should I expect from the terminal into the browser?"
-  priority="must-have"
-  context="Installation -> Step-by-step procedure"
-  capture="Record scaffold creation, package-manager selection, optional setup choice, browser installation choice, the first `npm run start`, and the browser opening to a working AppraiseJS app."
-  successState="The final loaded app is visible, usable, and clearly connected to the scaffolded project that was just created."
-/>
+### End-to-end first-run setup from scaffold to running local app
+
+<video
+  controls
+  preload="metadata"
+  playsinline
+  src="/docs/media/getting-started/installation/first-run-setup.mp4"
+>
+  Your browser does not support the installation video.
+</video>
 
 Once the app opens, users still need a stable target for the first page. The screenshot below should answer that before they wonder whether a seeded database or clean automation workspace changed what they were supposed to see.
 
-<MediaPlaceholder
-  type="screenshot"
-  title="First successful loaded app state after `npm run start`"
-  why="What exact screen tells me setup is complete and I can continue to Quick Start?"
-  priority="must-have"
-  context="Installation -> Step-by-step procedure"
-  capture="Capture the first stable AppraiseJS screen shown immediately after a successful startup on a clean scaffold."
-  successState="The page loads without setup blockers, and the state reads as a ready first-run screen rather than an error, empty crash state, or maintenance view."
-/>
+### First successful loaded app state after `npm run start`
+
+![First successful loaded AppraiseJS state in dark mode after startup on a clean scaffold.](/docs/media/getting-started/installation/first-loaded-app-state.png)
 
 When these assets exist, the user should be able to compare their local result against them before deciding whether to continue or switch to [Troubleshooting](/operations/troubleshooting/).
 
