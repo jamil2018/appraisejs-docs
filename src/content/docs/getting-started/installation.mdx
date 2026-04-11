@@ -11,7 +11,7 @@ import OutcomeCard from "../../../components/OutcomeCard.astro";
 
 <DocHero
   eyebrow="Setup"
-  summary="Set up AppraiseJS locally using the official bootstrapper, verify the app runs end-to-end, and confirm you’re starting from a clean, production-aligned workspace — not a demo."
+  summary="Install AppraiseJS with the official bootstrapper, complete the recommended production-first setup flow, and confirm the local app is ready. Alternatively, you can clone the repository and set up the project in development mode for contributing to the project."
   meta={[
     "Role: first-time local setup",
     "Time: 10-15 minutes",
@@ -48,9 +48,16 @@ import OutcomeCard from "../../../components/OutcomeCard.astro";
 
 ## Step-by-step procedure
 
-### Recommended path: scaffold with `create-appraisejs`
+AppraiseJS allows users to create a new project in two different ways:
 
-This is the only recommended way to get started. Do not clone the repo or try to assemble things manually unless you know exactly what you’re doing.
+1. Using the official bootstrapper: `npx create-appraisejs@latest`
+2. Cloning the repository: `git clone https://github.com/appraisejs/appraisejs.git`
+
+Using the official `create-appraisejs` bootstrapper is the recommended way to get started with AppraiseJS. It is not advisable to clone the repo unless you are trying to contribute to the project as it contains a lot of files that are not needed for a local development environment.
+
+#### Setting up a new project with the official bootstrapper
+
+Open a terminal and run the following commands:
 
 ```bash
 npx create-appraisejs@latest
@@ -59,10 +66,13 @@ npm run setup # only if you skipped setup during scaffolding
 npm run start
 ```
 
-The examples on this page use `npm`, but the scaffold rewrites scripts and
-printed next commands for the package manager you selected.
+<br />
+The examples on this page use `npm` and the bootstrapper package is optimized
+for npm. However, if you want you can use `pnpm`, `yarn`, or `bun` instead. The
+scaffold will rewrite the scripts and print the next commands for the package
+manager you selected.
 
-`create-appraisejs` is the official bootstrapper. It uses a bundled template — not a repo clone — so what you get is consistent, version-aligned, and ready to run.
+Create-AppraiseJS allows you to create a new AppraiseJS project with a bundled template and get you started with a running local app without having to endure the pain of setting up a new project from scratch.
 
 ### What the scaffold does
 
