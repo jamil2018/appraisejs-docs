@@ -38,6 +38,16 @@ import OutcomeCard from "../../../components/OutcomeCard.astro";
   ]}
 />
 
+## Quick install (for experienced users)
+
+```bash
+npx create-appraisejs@latest
+cd <your-project-name>
+npm run start
+```
+
+If this fails, follow the full setup guide below.
+
 ## What you'll finish with
 
 <OutcomeCard title="A production-ready local scaffold" tone="success">
@@ -54,6 +64,22 @@ AppraiseJS allows users to create a new project in two different ways:
 2. Cloning the repository: `git clone https://github.com/appraisejs/appraisejs.git`
 
 Using the official `create-appraisejs` bootstrapper is the recommended way to get started with AppraiseJS. It is not advisable to clone the repo unless you are trying to contribute to the project as it contains a lot of files that are not needed for a local development environment.
+
+## Why the bootstrapper is recommended
+
+AppraiseJS is designed to produce a **clean, production-ready automation workspace from the start**.
+
+Cloning the repository includes:
+
+- internal development tooling
+- example configurations not intended for end users
+- additional complexity that does not reflect real usage
+
+The bootstrapper ensures:
+
+- a minimal, production-aligned setup
+- a clean automation workspace (no demo artifacts)
+- correct dependency and script configuration for your environment
 
 #### Setting up a new project with the official bootstrapper
 
@@ -72,22 +98,33 @@ for npm. However, if you want you can use `pnpm`, `yarn`, or `bun` instead. The
 scaffold will rewrite the scripts and print the next commands for the package
 manager you selected.
 
-Create-AppraiseJS allows you to create a new AppraiseJS project with a bundled template and get you started with a running local app without having to endure the pain of setting up a new project from scratch.
+Create-AppraiseJS allows you to create a new AppraiseJS project with a bundled template and get you started with a running local app without manually configuring a project from scratch.
 
 ### What the scaffold does
+
+#### Project setup
 
 - Creates a runnable project — not a partially configured template.
 - Prompts for the target directory.
 - Prompts for the package manager: `npm`, `pnpm`, `yarn`, or `bun`.
+
+#### Environment setup
+
 - Prompts for whether to run production setup immediately.
 - Prompts for which Playwright browsers to install.
+- Runs the project `setup` script and installs the selected Playwright browsers if you opt into setup during scaffolding.
+- Prints the exact next commands to run if you skip setup during scaffolding.
+
+#### Automation workspace initialization
+
 - Uses the bundled template by default.
-- Rewrites generated project scripts to match the selected package manager.
 - Preserves the seeded SQLite database at `prisma/dev.db`.
 - Resets the automation workspace so `automation/config/environments/environments.json` starts as `{}` and `automation/mapping/locator-map.json` starts as `[]`.
 - Includes reusable step definitions, but does not bundle starter features, locators, or reports.
-- Runs the project `setup` script and installs the selected Playwright browsers if you opt into setup during scaffolding.
-- Prints the exact next commands to run if you skip setup during scaffolding.
+
+#### Configuration handling
+
+- Rewrites generated project scripts to match the selected package manager.
 
 Nothing in this step is “magic.” You should end up with a standard project structure you can inspect, modify, and run independently of AppraiseJS if needed.
 
@@ -131,6 +168,17 @@ When these assets exist, the user should be able to compare their local result a
 - Assuming missing browsers or dependencies are AppraiseJS bugs.
 - Expecting prebuilt test data or examples to exist.
 - Continuing forward without verifying the app actually works locally.
+
+## Where setups usually fail
+
+Most setup issues fall into one of these categories:
+
+- Environment issues (Node, package manager, PATH)
+- Skipped setup steps (Playwright, migrations)
+- Browser dependencies not installed
+- Misinterpreting a partially working UI as success
+
+If something feels off, assume setup is incomplete — not that AppraiseJS is broken.
 
 ## Recovery steps
 
