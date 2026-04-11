@@ -12,11 +12,11 @@ import UIPath from "../../../components/UIPath.astro";
 
 <DocHero
   eyebrow="First run"
-  summary="This page is the fastest guided route from a running local app and a clean scaffold to a passing scenario with a report you can inspect."
+  summary="Go from a fresh local setup to a fully executed test flow with a report you can inspect — without writing test code."
   meta={[
     "Role: first-time QA authors",
     "Time: 15 minutes",
-    "Outcome: one runnable login flow",
+    "Outcome: one runnable login validation flow",
   ]}
   actions={[
     { label: "Install first", href: "/getting-started/installation/" },
@@ -34,22 +34,22 @@ import UIPath from "../../../components/UIPath.astro";
   showTitle={false}
   items={[
     "AppraiseJS is installed and `npm run start` opens the local app.",
-    "You have a reachable application URL for a simple login or smoke scenario.",
-    "You can create local test data or use non-sensitive credentials.",
+    "You have a reachable application URL for a login flow.",
+    "You can use non-sensitive credentials for testing.",
   ]}
 />
 
 ## What you'll finish with
 
 <OutcomeCard title="First successful run" tone="success">
-  You will leave this page with an environment, a module, locators, a test
-  suite, a test case, one test run, and one report you can inspect.
+  A complete login validation flow that: - Navigates to your app - Logs in using
+  credentials - Verifies the user reached the home page via a welcome message -
+  Generates a report you can inspect
 </OutcomeCard>
 
-New scaffolds start with a seeded local database and a clean automation
-workspace. That means the steps below create your first real environment,
-locator group, suite, and case instead of modifying bundled starter features or
-reports.
+New scaffolds start clean. That means everything you create here — environments, locators, test cases — reflects how real projects are structured in AppraiseJS.
+
+---
 
 ## Step-by-step procedure
 
@@ -65,54 +65,243 @@ reports.
   ]}
 />
 
-1. Start AppraiseJS with `npm run start` and confirm the local app opens in your browser. Use `npm run dev` only if you intentionally need the dev-server workflow while iterating locally.
-2. Create environment `Local` with the base URL of the application you want to test.
-3. Create module `Authentication` or another feature-oriented module name.
-4. Open `Locators -> Create` and launch the Chromium picker from the saved environment.
-5. Capture at least these locators: `emailInput`, `passwordInput`, `submitButton`, and one success-state locator such as `welcomeBanner`.
-6. Accept the suggested locator group if the route is already recognized, or create a new group such as `Login Page`.
-7. Create test suite `Auth Smoke`.
-8. Create test case `Valid login shows welcome banner`.
-9. Add these steps in order: navigate to selected environment base URL, fill email input, fill password input, click submit button, assert success-state visibility.
-10. Save the test case and open `Test Runs -> Create`.
-11. Create a run against `Local`, submit it, and watch status changes on the run details page.
-12. Open the linked report and confirm the scenario outcome matches what happened in the browser.
+This quick start builds a login validation flow that confirms a successful login by asserting a welcome message on the home page.
 
-Before the first run, users should be able to compare their authored setup against a known-good finished state. This prevents guessing about whether they created enough entities or saved them in the right places.
+Each step below builds a part of a complete, executable test system.
 
-### Completed Quick Start state before the first run
+---
 
-![Completed Quick Start state in dark mode with the saved environment, module, locator groups, suite, and case.](/docs/media/getting-started/quick-start/completed-quick-start-state.png)
+### 1. Start the application
 
-After that state is confirmed, the next confusion point is the handoff from authoring to execution. The short video clip below makes the screen transitions explicit instead of assuming users will infer them.
+Start AppraiseJS with `npm run start` and confirm the app opens in your browser.
 
-### Quick Start handoff from saved case to submitted run to opened report
+> This is your control layer — everything from test design to execution happens here.
+
+<br />
 
 <video
   controls
   preload="metadata"
   playsinline
-  src="/docs/media/getting-started/quick-start/case-to-run-to-report.mp4"
+  src="/docs/media/getting-started/quick-start/starting-app.mp4"
 >
-  Your browser does not support the Quick Start video.
+  Your browser does not support the starting app video.
 </video>
 
-If the saved-state screenshot and the handoff clip match what the reader sees locally, they should be able to continue into [Creating Tests](/tutorials/creating_tests/) without guessing whether the scaffold is still in a healthy state.
+---
+
+### 2. Create an environment
+
+Create environment `Local` with your application’s base URL.
+
+> Environments define where your tests run.  
+> Appraise ties execution context directly to test intent — no external config files needed.
+
+<br />
+
+<video
+  controls
+  preload="metadata"
+  playsinline
+  src="/docs/media/getting-started/quick-start/creating-environments.mp4"
+>
+  Your browser does not support the creating environment video.
+</video>
+
+---
+
+### 3. Create a module
+
+Create module `Authentication`.
+
+> Modules are not just folders — they represent functional domains.  
+> This structure makes large test systems maintainable from day one.
+
+<br />
+
+<video
+  controls
+  preload="metadata"
+  playsinline
+  src="/docs/media/getting-started/quick-start/creating-modules.mp4"
+>
+  Your browser does not support the creating module video.
+</video>
+
+---
+
+### 4. Capture locators
+
+Open `Locators -> Create` and use the Chromium Locator Picker to capture:
+
+- Email input
+- Password input
+- Submit button
+- Welcome message element
+
+> Instead of manually crafting selectors, Appraise helps you capture stable locators tied to real UI state.
+
+<br />
+
+<video
+  controls
+  preload="metadata"
+  playsinline
+  src="/docs/media/getting-started/quick-start/creating-locators.mp4"
+>
+  Your browser does not support the capturing locators video.
+</video>
+
+---
+
+### 5. Create a test suite
+
+Create a test suite named `Login` under the `Authentication` module.
+
+> Test suites group related flows — keeping execution and reporting organized.
+
+<br />
+
+<video
+  controls
+  preload="metadata"
+  playsinline
+  src="/docs/media/getting-started/quick-start/creating-test-suites.mp4"
+>
+  Your browser does not support the creating test suite video.
+</video>
+
+---
+
+### 6. Create the test case
+
+Create a test case:
+
+- Title: `Login`
+- Description: `Login with valid credentials and verify home page`
+
+Build a flow that:
+
+1. Navigates to the environment URL
+2. Enters email and password
+3. Clicks submit
+4. Asserts that a welcome message is visible on the home page
+
+> You are defining behavior visually — Appraise translates this into executable logic behind the scenes.
+
+<br />
+
+<video
+  controls
+  preload="metadata"
+  playsinline
+  src="/docs/media/getting-started/quick-start/creating-test-cases.mp4"
+>
+  Your browser does not support the creating test case video.
+</video>
+
+---
+
+### 7. Run the test
+
+Open `Test Runs -> Create` and configure:
+
+- Test case: `Login`
+- Environment: `Local`
+- Browser: `CHROMIUM`
+- Workers: `1`
+
+Start the run.
+
+> No CLI commands. No runner setup. Execution is fully managed from the UI.
+
+---
+
+### 8. Observe execution
+
+Watch the run status update in real time.
+
+> You’re seeing the exact flow executed in a real browser.
+
+---
+
+### 9. Inspect the report
+
+Open the generated report and confirm:
+
+- Steps executed correctly
+- Login succeeded
+- Welcome message is present
+
+<br />
+
+Here is a demo of the run execution and the report inspection in action.
+
+<br />
+<video
+  controls
+  preload="metadata"
+  playsinline
+  src="/docs/media/getting-started/quick-start/running-tests-with-report.mp4"
+>
+  Your browser does not support the running test cases video.
+</video>
+
+---
+
+## 💡 What just happened
+
+<br />
+You just:
+
+- Defined a test flow visually
+- Generated executable automation logic
+- Ran it using a real browser engine
+- Validated application state
+- Produced a structured report
+
+All without writing test framework code or wiring tools together.
+
+---
+
+## ⏱️ What this replaces
+
+Traditionally, this flow requires:
+
+- Setting up a test framework (Playwright/Cypress)
+- Writing selectors manually
+- Writing test scripts
+- Configuring execution and reporting
+
+With AppraiseJS:
+
+> Design → Execute → Validate → Report — all in one system
+
+---
 
 ## Checkpoint
 
-- You can open one environment, one module, one locator group, one suite, and one case from the UI.
-- Your test run either completed successfully or failed with a report and logs you can inspect.
-- You know whether you need to continue to [Creating Tests](/tutorials/creating_tests/) or jump to [Troubleshooting](/operations/troubleshooting/).
+- You can create environments, modules, locators, suites, and test cases
+- You executed a real test flow
+- You validated application state using assertions
+- You generated and inspected a report
+
+---
 
 ## Common mistakes
 
-- Expecting the scaffold to include starter environments, locators, test cases, or reports.
-- Launching the picker from the wrong base URL and saving locators for the wrong page.
-- Creating a run before the test case has all required step parameters.
-- Forgetting that AppraiseJS uses the selected environment during navigation and wait steps.
-- Skipping `Settings -> Sync` after editing generated files outside the UI.
+- Expecting starter test data in a fresh scaffold
+- Capturing locators from the wrong page
+- Running tests before all steps are configured
+- Forgetting environment selection affects execution
+- Skipping `Settings -> Sync` after manual file edits
+
+---
 
 ## Next step
 
-Continue to [Creating Tests](/tutorials/creating_tests/) to turn this short checklist into a repeatable authoring workflow.
+You’ve created a complete test flow.
+
+Now learn how to scale this into real workflows:
+
+→ [Creating Tests](/tutorials/creating_tests/)
