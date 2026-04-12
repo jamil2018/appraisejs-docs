@@ -389,9 +389,18 @@
   // @ts-nocheck
   import { animate, inView, stagger } from "motion";
 
+  const howItWorksState = (window.__appraiseHowItWorks ??= {
+    cleanup: null,
+  });
+
   function init() {
+    howItWorksState.cleanup?.();
+
     const section = document.querySelector(".hiw");
-    if (!section) return;
+    if (!section) {
+      howItWorksState.cleanup = null;
+      return;
+    }
 
     const track = section.querySelector(".hiw__track");
     const panels = section.querySelectorAll(".hiw__panel");
@@ -403,47 +412,54 @@
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (prefersReduced) {
-      showAll();
+      showAll(section);
+      howItWorksState.cleanup = null;
       return;
     }
 
     const isDesktop = window.matchMedia("(min-width: 56rem)").matches;
 
     if (isDesktop && track) {
-      initDesktopScroll(section, track, panels, copies, progressSteps);
+      howItWorksState.cleanup = initDesktopScroll(
+        section,
+        track,
+        panels,
+        copies,
+        progressSteps,
+      );
     } else {
-      initMobileFallback(section, panels);
+      howItWorksState.cleanup = initMobileFallback(section, panels);
     }
   }
 
-  function showAll() {
-    document
+  function showAll(section) {
+    section
       .querySelectorAll(".hiw__panel")
       .forEach((p) =>
         p.classList.add("is-active", "is-revealed", "is-visible"),
       );
-    document
+    section
       .querySelectorAll(".hiw__copy")
       .forEach((c) => c.classList.add("is-active"));
-    document
+    section
       .querySelectorAll(".hiw-flow > *")
       .forEach((el) => el.classList.add("is-visible"));
-    document
+    section
       .querySelectorAll(".hiw-codegen__line")
       .forEach((el) => el.classList.add("is-visible"));
-    document
+    section
       .querySelectorAll(".hiw-runner__step")
       .forEach((el) => el.classList.add("is-passed"));
-    document
+    section
       .querySelectorAll(".hiw-runner__term p")
       .forEach((el) => el.classList.add("is-visible"));
-    document
+    section
       .querySelectorAll(".hiw-report__card")
       .forEach((el) => el.classList.add("is-visible"));
-    document
+    section
       .querySelectorAll(".hiw-report__row")
       .forEach((el) => el.classList.add("is-visible"));
-    document
+    section
       .querySelectorAll(".hiw-report__evidence")
       .forEach((el) => el.classList.add("is-visible"));
   }
@@ -451,6 +467,7 @@
   function initDesktopScroll(section, track, panels, copies, progressSteps) {
     let currentPhase = 0;
     let ticking = false;
+    let isObservingScroll = false;
 
     function onScroll() {
       if (ticking) return;
@@ -483,16 +500,30 @@
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            window.addEventListener("scroll", onScroll, { passive: true });
-            onScroll();
+            if (!isObservingScroll) {
+              isObservingScroll = true;
+              window.addEventListener("scroll", onScroll, { passive: true });
+              onScroll();
+            }
           } else {
-            window.removeEventListener("scroll", onScroll);
+            if (isObservingScroll) {
+              isObservingScroll = false;
+              window.removeEventListener("scroll", onScroll);
+            }
           }
         });
       },
       { threshold: 0 },
     );
     observer.observe(track);
+
+    return () => {
+      if (isObservingScroll) {
+        isObservingScroll = false;
+        window.removeEventListener("scroll", onScroll);
+      }
+      observer.disconnect();
+    };
   }
 
   function setActive(phase, panels, copies, progressSteps) {
@@ -646,23 +677,37 @@
   }
 
   function initMobileFallback(section, panels) {
+    const cleanup = [];
+
     panels.forEach((panel) => {
       panel.classList.add("is-active");
 
       let triggered = false;
-      inView(
-        panel,
-        () => {
-          if (triggered) return;
-          triggered = true;
-          // Fade the card in first, then start internal sequence
-          panel.classList.add("is-revealed");
-          delay(300).then(() => animateMobilePanel(panel));
-        },
-        { amount: 0.35 },
+      cleanup.push(
+        inView(
+          panel,
+          () => {
+            if (triggered) return;
+            triggered = true;
+            // Fade the card in first, then start internal sequence
+            panel.classList.add("is-revealed");
+            delay(300).then(() => animateMobilePanel(panel));
+          },
+          { amount: 0.35 },
+        ),
       );
     });
+
+    return () => {
+      cleanup.forEach((dispose) => dispose?.());
+    };
   }
+
+  document.addEventListener("astro:page-load", init);
+  document.addEventListener("astro:before-swap", () => {
+    howItWorksState.cleanup?.();
+    howItWorksState.cleanup = null;
+  });
 
   init();
 </script>

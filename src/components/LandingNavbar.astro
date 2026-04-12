@@ -37,27 +37,59 @@
 </section>
 
 <script>
-  const navbar = document.getElementById("landing-navbar");
-  const hamburger = document.getElementById("landing-navbar-hamburger");
-  const menu = document.getElementById("landing-navbar-menu");
+  const landingNavbarState = (window.__appraiseLandingNavbar ??= {
+    cleanup: null,
+  });
 
-  if (navbar && hamburger && menu) {
+  function initLandingNavbar() {
+    landingNavbarState.cleanup?.();
+
+    const navbar = document.getElementById("landing-navbar");
+    const hamburger = document.getElementById("landing-navbar-hamburger");
+    const menu = document.getElementById("landing-navbar-menu");
+
+    if (!(navbar && hamburger && menu)) {
+      landingNavbarState.cleanup = null;
+      return;
+    }
+
+    const controller = new AbortController();
+    const { signal } = controller;
+
     const closeMenu = () => {
       navbar.classList.remove("is-open");
       hamburger.setAttribute("aria-expanded", "false");
     };
 
-    hamburger.addEventListener("click", () => {
-      const isOpen = navbar.classList.toggle("is-open");
-      hamburger.setAttribute("aria-expanded", String(isOpen));
-    });
+    hamburger.addEventListener(
+      "click",
+      () => {
+        const isOpen = navbar.classList.toggle("is-open");
+        hamburger.setAttribute("aria-expanded", String(isOpen));
+      },
+      { signal },
+    );
 
     menu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", closeMenu);
+      link.addEventListener("click", closeMenu, { signal });
     });
 
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") closeMenu();
-    });
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        if (event.key === "Escape") closeMenu();
+      },
+      { signal },
+    );
+
+    landingNavbarState.cleanup = () => controller.abort();
   }
+
+  document.addEventListener("astro:page-load", initLandingNavbar);
+  document.addEventListener("astro:before-swap", () => {
+    landingNavbarState.cleanup?.();
+    landingNavbarState.cleanup = null;
+  });
+
+  initLandingNavbar();
 </script>
