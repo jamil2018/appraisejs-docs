@@ -13,11 +13,11 @@ import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 
 <DocHero
   eyebrow="Hands-on tutorial"
-  summary="This tutorial is the canonical first success journey for AppraiseJS. It shows how authored entities fit together while you build one real scenario."
+  summary="Build a reusable login test visually—generate executable test code automatically without writing scripts."
   meta={[
-    "Role: QA authors first, developers second",
-    "Time: 20-30 minutes",
-    "Outcome: one reusable login smoke test",
+    "Role: QA authors and developers",
+    "Time: 15-20 minutes",
+    "Outcome: a working, reusable login test with live Gherkin preview",
   ]}
   actions={[
     { label: "Open Quick Start", href: "/getting-started/quick-start/" },
@@ -43,8 +43,9 @@ import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 ## What you'll build
 
 <OutcomeCard title="A reusable smoke scenario" tone="success">
-  You will create one module, one environment, one locator group, four locators,
-  one suite, and one test case that can be rerun from the Test Runs screen.
+  You will create a reusable login test that: - Works across environments - Uses
+  centralized locators - Generates executable test code - Can be rerun anytime
+  from the Test Runs screen
 </OutcomeCard>
 
 ## Step-by-step procedure
@@ -53,62 +54,114 @@ import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
   steps={["Modules", "Environments", "Locators", "Test Suites", "Test Cases"]}
 />
 
-1. Create module `Authentication` so the scenario has a clear home in the product model.
-2. Create environment `Local` with the application base URL you want to test.
+## How to think about AppraiseJS
+
+Think of AppraiseJS like this:
+
+- **Modules & Suites** → organize your tests
+- **Locators** → define what to interact with
+- **Flow Builder** → define what happens
+- **Scenario Preview** → shows the generated test code in real time
+
+You are not writing scripts—you are designing test logic.
+
+Test cases are where your test logic comes to life. Instead of writing scripts, you visually assemble reusable steps into a complete scenario. Each step represents an action or validation, and together they form a flow that can be executed reliably across environments.
+
+<br />
+Enough theory, let's get hands-on.
+
+1. Create a module named `Authentication` so the scenario has a clear home in the product model.
+   <br />
+   <br />
+   <video
+     controls
+     preload="metadata"
+     playsinline
+     src="/docs/media/getting-started/quick-start/creating-modules.mp4"
+   >
+     Your browser does not support the creating module video.
+   </video>
+2. Create a new environment named `Local` with the application base URL you want to test.
+   <br />
+   <br />
+   <video
+     controls
+     preload="metadata"
+     playsinline
+     src="/docs/media/getting-started/quick-start/creating-environments.mp4"
+   >
+     Your browser does not support the creating environment video.
+   </video>
 3. Open `Locators -> Create` and launch the Chromium picker from that saved environment.
-4. Capture locators for `emailInput`, `passwordInput`, `submitButton`, and `welcomeBanner`.
-5. Accept the suggested locator group for the login route, or create `Login Page` if nothing relevant exists yet.
-6. Create suite `Auth Smoke` under the `Authentication` module.
-7. Create case `Valid login shows welcome banner` and attach it to the `Auth Smoke` suite.
-8. Add the first step to navigate to the selected environment base URL so the case is portable across environments.
-9. Add input steps for email and password using the captured locators.
-10. Add a click step for the submit button.
-11. Add an assertion step that checks the `welcomeBanner` visibility is `true`.
-12. Save the case and re-open it once to confirm every parameter, locator reference, and suite relationship still looks correct.
+   <br />
+   <br />
+   <video
+     controls
+     preload="metadata"
+     playsinline
+     src="/docs/media/getting-started/quick-start/creating-locators.mp4"
+   >
+     Your browser does not support the capturing locators video.
+   </video>
+4. Capture locators as per your needs.
+5. Create suite `Auth Smoke` under the `Authentication` module.
+   <br />
+   <br />
+   <video
+     controls
+     preload="metadata"
+     playsinline
+     src="/docs/media/getting-started/quick-start/creating-test-suites.mp4"
+   >
+     Your browser does not support the creating test suite video.
+   </video>
+6. Navigate to `Automate -> Test Cases -> Create` or click the `Create Test` button from the dashboard.
+7. Before building the flow, fill in the basics:
+   - **Title** → short identifier (e.g. `Login success`)
+   - **Description** → one sentence describing what this validates
+   - **Test Suite** → select `Auth Smoke` (required)
+   - **Tags (optional)** → useful later for filtering test runs
+8. This is where AppraiseJS becomes powerful.  
+   The flow builder lets you construct your test visually:
+   - Each node = one action or assertion
+   - Nodes connect to form a complete scenario
+   - Parameters make each step reusable
 
-The first visual checkpoint in this tutorial is the saved entity state. Readers need to see which records should already exist before the case editor becomes the main focus.
+   As you build, Appraise automatically generates the Gherkin scenario—so what you see is always aligned with what will run.
 
-<MediaPlaceholder
-  type="screenshot"
-  title="Saved entity setup with environment, module, suite, and case already created"
-  why="Which records need to exist before the test case editor becomes productive?"
-  priority="must-have"
-  context="Creating Tests -> Step-by-step procedure after entity creation"
-  capture="Capture the saved state of the environment, module, suite, and case created in this tutorial so the dependency chain is obvious."
-  successState="Each required entity is visibly saved, named, and connected closely enough that a reader can confirm they are ready to author steps."
+9. Another important component of test case creation form is the Scenario Preview panel. It shows a preview of the gherkin output that will be generated from the test case flow as you build it.
+10. Fill up the required fields by adding a test case title, description and assign the test case to the `Auth Smoke` suite.
+11. Click on the `Add Node` button to add the first step to navigate to the selected environment base URL so the case is portable across environments.
+12. Add input step nodes for email and password using the captured locators.
+13. Add a click step node for the submit button.
+14. Add an assertion step node that checks the `welcomeBanner` visibility is `true`.
+
+### Quick sanity check
+
+At this point, you should have:
+
+- A navigable flow (start → input → click → assertion)
+- No missing parameters
+- A live Gherkin preview updating on the right
+
+If you see this, you have already built a complete automated test.
+
+15. Save the case and re-open it once to confirm every parameter, locator reference, and suite relationship still looks correct.
+
+Here is a screenshot of the saved test case editor state with ordered steps and filled parameters.
+
+<img
+  src="/docs/media/getting-started/creating-tests/completed-test.png"
+  alt="Saved test case editor state with ordered steps and filled parameters"
 />
-
-The next ambiguity is the locator picker itself. Prose can explain the steps, but the overlay, pick confirmation, and return to the form are easier to trust when shown as motion.
-
-<MediaPlaceholder
-  type="gif"
-  title="Locator picker flow from launch to selector confirmation"
-  why="What exactly happens between launching the picker and returning with a confirmed locator?"
-  priority="must-have"
-  context="Creating Tests -> Locator capture flow"
-  capture="Record launching the Chromium picker from the saved environment, selecting an element, reviewing the selector in the overlay, and confirming the pick."
-  successState="The overlay, picked element state, and confirmation back into the locator workflow are all visible."
-/>
-
-Once the locators exist, users need to recognize what a valid runnable case looks like while it is being assembled. The editor clip should make ordered steps, parameters, and the final save state concrete.
-
-<MediaPlaceholder
-  type="gif"
-  title="Case editor walkthrough with ordered steps, parameter entry, and save"
-  why="What visual state tells me this case is complete enough to save and run?"
-  priority="must-have"
-  context="Creating Tests -> Test case editing"
-  capture="Record adding the ordered login steps, filling required parameters, saving the case, and reopening it once to show the saved step flow."
-  successState="The case shows a complete ordered step sequence with filled parameters and a saved state that reads as runnable."
-/>
-
-If all three checkpoints match, the reader should be able to move into [Running Tests](/getting-started/running-tests/) without wondering whether the failure is in authoring or execution.
 
 ## Checkpoint
 
 - The case opens with a complete ordered flow and no missing required parameters.
 - Every referenced locator exists and belongs to a route-aware locator group.
 - The suite, module, and environment names are clear enough that another team member could reuse them later.
+
+> AppraiseJS is designed so your test logic stays clear, reusable, and never buried inside scripts.
 
 ## Common mistakes
 
