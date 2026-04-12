@@ -2234,8 +2234,7 @@ body:has(.landing-root) .sl-markdown-content {
     overflow-x: clip;
   }
 
-  .landing-git,
-  .landing-final__cta {
+  .landing-git {
     display: none;
   }
 
@@ -2426,6 +2425,49 @@ body:has(.landing-root) .sl-markdown-content {
 
   .landing-footer {
     padding-bottom: 3rem;
+  }
+
+  .landing-final__cta {
+    display: block;
+    padding: 0 0 2.25rem;
+    background: none;
+  }
+
+  .landing-final__cta-shell {
+    gap: 1.25rem;
+    padding: 1.5rem 1.25rem;
+    border: 1px solid var(--landing-border-soft);
+    border-radius: 1.25rem;
+    background:
+      linear-gradient(180deg, rgba(11, 23, 48, 0.94), rgba(6, 14, 32, 0.9)),
+      radial-gradient(
+        18rem 10rem at 50% 0%,
+        rgba(16, 185, 129, 0.16),
+        transparent 78%
+      );
+    box-shadow: 0 24px 48px -32px rgba(0, 0, 0, 0.9);
+  }
+
+  .landing-final__cta h2 {
+    max-width: 20rem;
+    font-size: clamp(1.7rem, 8vw, 2.2rem);
+    line-height: 1.02;
+  }
+
+  .landing-final__actions {
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .landing-final__actions a {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .landing-final__cta p {
+    max-width: 22rem;
+    font-size: 0.8125rem;
+    line-height: 1.5;
   }
 
   .landing-footer__grid {

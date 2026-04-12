@@ -1,0 +1,112 @@
+---
+title: Viewing Reports
+description: Debug a run by moving from report summary to logs, traces, and likely root cause.
+sidebar:
+  order: 3
+---
+
+import DocHero from "../../../components/DocHero.astro";
+import TaskChecklist from "../../../components/TaskChecklist.astro";
+import OutcomeCard from "../../../components/OutcomeCard.astro";
+import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
+
+<DocHero
+  eyebrow="Failure triage"
+  summary="This tutorial turns the Reports area into a practical debugging flow instead of a passive summary screen."
+  meta={[
+    "Role: anyone triaging failures",
+    "Time: 10 minutes",
+    "Outcome: one repeatable failure triage routine",
+  ]}
+  actions={[
+    { label: "Open Reports guide", href: "/run-and-analyze/reports/" },
+    {
+      label: "Open Troubleshooting",
+      href: "/getting-started/troubleshooting/",
+      variant: "secondary",
+    },
+  ]}
+/>
+
+## Before you begin
+
+<TaskChecklist
+  showTitle={false}
+  items={[
+    "At least one run has completed.",
+    "You can open the Reports list and the linked run details page.",
+    "You are prepared to compare report output with logs or traces when needed.",
+  ]}
+/>
+
+## What you'll finish with
+
+<OutcomeCard title="A failure triage routine" tone="success">
+  You will know how to move from the report list to scenario detail, then out to
+  logs and traces only when the summary view stops being enough.
+</OutcomeCard>
+
+## Step-by-step procedure
+
+1. Open `Reports` and sort or scan for the newest failed or suspicious run.
+2. Open the report and start with the summary totals, environment metadata, and execution context.
+3. Drill into failed scenario rows before opening any external artifacts.
+4. Read the failed step names and durations to decide whether the issue looks like navigation, data setup, locator resolution, or assertion mismatch.
+5. Open linked run logs if you need timing or runtime detail.
+6. Open the trace artifact if you need to see exact browser state around the failure.
+7. Decide whether to fix the test, sync drift, adjust environment data, or escalate a likely product defect.
+
+The first report view needs a strong visual anchor because new users often skip straight to raw logs. The summary screenshot should show what "start here" looks like before deeper debugging begins.
+
+<MediaPlaceholder
+  type="screenshot"
+  title="Report summary view with totals, environment metadata, and failed scenario rows"
+  why="Where should I start reading a report before I open logs or traces?"
+  priority="must-have"
+  context="Viewing Reports -> Report summary"
+  capture="Capture a report view that shows summary totals, environment or execution metadata, and at least one failed scenario row in the same frame."
+  successState="A reader can immediately tell where summary context ends and scenario drill-down begins."
+/>
+
+Once the reader drills in, the scenario detail should reveal the first actionable debugging clues. Keep the failed step and timing visible so the screenshot answers whether the issue looks like navigation, data, selector, or assertion behavior.
+
+<MediaPlaceholder
+  type="screenshot"
+  title="Scenario detail view highlighting failed steps and durations"
+  why="What does the first useful debugging screen inside a failed report look like?"
+  priority="must-have"
+  context="Viewing Reports -> Scenario detail"
+  capture="Capture a failed scenario detail view with step outcomes, step names, and durations clearly visible."
+  successState="The failed step stands out, and the timing or status data is visible enough to support the next debugging decision."
+/>
+
+If the report itself still is not enough, the user needs an explicit handoff into deeper artifacts. This last screenshot should show that logs and traces are follow-on tools, not the first screen to read.
+
+<MediaPlaceholder
+  type="screenshot"
+  title="Report-to-artifact handoff with linked logs or traces"
+  why="Where do I go next when the report detail is still not enough?"
+  priority="should-have"
+  context="Viewing Reports -> Deeper debugging handoff"
+  capture="Capture a report detail view that includes the visible actions or links for opening run logs and traces."
+  successState="The relationship between the report detail and the deeper debugging artifacts is explicit."
+/>
+
+After these three views are represented, users should be able to decide whether to re-run, edit the test, sync drift, or move into [Troubleshooting](/getting-started/troubleshooting/) with a clear reason.
+
+## Checkpoint
+
+- You can explain the likely failure class before opening any deeper artifact.
+- You know when the report itself is enough and when you need logs or traces.
+- You can point to the next corrective action: edit the test, re-run, sync, or escalate an app issue.
+
+## Common mistakes
+
+- Treating every failure as a locator problem without reading step order and environment context first.
+- Jumping straight into raw logs before checking the scenario summary and failed step name.
+- Ignoring the selected environment when the route or data state looks wrong.
+- Re-running immediately without deciding whether the failure is deterministic or flaky.
+
+## Next step
+
+If the result still does not make sense, use [Troubleshooting](/getting-started/troubleshooting/) for symptom-to-fix guidance.

@@ -1,0 +1,77 @@
+---
+title: Settings
+description: Use the Sync dashboard to recover from drift before you reach for maintenance scripts.
+sidebar:
+  order: 14
+---
+
+import DocHero from "../../../components/DocHero.astro";
+import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
+
+<DocHero
+  eyebrow="Run and analyze"
+  summary="The most important Settings workflow for day-to-day use is Sync. Use it when files changed outside the UI, when entities look stale, or when generated artifacts and the database stopped agreeing."
+  meta={[
+    "Job to be done: recover from drift",
+    "Primary page: Settings -> Sync",
+    "Advanced alternative: CLI sync scripts",
+  ]}
+  actions={[
+    { label: "Open Troubleshooting", href: "/getting-started/troubleshooting/" },
+    {
+      label: "Open Sync and Scripts",
+      href: "/reference/operations/sync-and-scripts/",
+      variant: "secondary",
+    },
+  ]}
+/>
+
+## Workflow context
+
+```nomnoml
+#direction: right
+#stroke: #64748b
+#fill: #f8fafc
+[Filesystem changes] -> [Settings -> Sync]
+[Database drift] -> [Settings -> Sync]
+[Settings -> Sync] -> [Dependency-aware sync]
+[Dependency-aware sync] -> [Updated UI + generated artifacts]
+```
+
+## Do this
+
+1. Open `Settings -> Sync`.
+2. Review the pending-count badges to see which asset types are out of sync.
+3. Run a specific tile when you know the affected area, or use `Sync All` when the drift is broad.
+4. Let AppraiseJS run prerequisites in the correct order.
+5. Re-open the page or affected entity list to confirm pending counts dropped.
+
+The page should show users exactly where the recovery controls live before they assume they need scripts. Keep the screenshot anchored here so the visual confirmation appears at the same moment as the recovery steps.
+
+<MediaPlaceholder
+  type="screenshot"
+  title="Sync dashboard with `Sync All`, asset tiles, and pending counts"
+  why="What should the recovery page look like before I fall back to CLI sync scripts?"
+  priority="must-have"
+  context="Settings -> Sync walkthrough"
+  capture="Capture the Sync dashboard with `Sync All`, multiple asset tiles, and visible pending-count badges."
+  successState="The page reads as the correct UI recovery path, and both broad sync and tile-level sync actions are visible."
+/>
+
+Once that screen is available, users should be able to confirm success by watching the pending counts drop and then returning to the affected entities without leaving the UI flow.
+
+## Minimal example
+
+- You pull a branch that changed locator files and test case artifacts.
+- `Locators` and `Test Cases` show pending counts.
+- Running `Sync All` resolves the prerequisite order automatically.
+
+## What good looks like
+
+- Pending counts reflect real drift rather than staying stale.
+- Entities appear consistently in the UI and generated files after sync.
+- You only use CLI maintenance scripts when the UI is unavailable or automation requires it.
+
+## Next step
+
+Use [Test Runs](/run-and-analyze/test-runs/) or [Reports](/run-and-analyze/reports/) once the project is back in sync.

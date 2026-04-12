@@ -47,6 +47,26 @@ html {
   outline-offset: 2px;
 }
 
+/* "On this page" (desktop): Starlight uses --sl-color-text-accent for aria-current, which we
+   map to muted-foreground — nearly the same as default --sl-color-gray-3. Use full foreground
+   + weight so the active section is unmistakable next to inactive links. */
+body:not(:has(.landing-root))
+  .right-sidebar-panel
+  starlight-toc
+  nav
+  a[aria-current="true"] {
+  color: hsl(var(--foreground));
+  font-weight: 600;
+}
+
+body:not(:has(.landing-root))
+  .right-sidebar-panel
+  starlight-toc
+  nav
+  a[aria-current="true"]:hover {
+  color: hsl(var(--foreground));
+}
+
 /* GitHub icon for sidebar link */
 a.sidebar-link-github {
   display: inline-flex;
@@ -271,7 +291,7 @@ body:not(:has(.landing-root)) .content-panel {
 }
 
 /* Step References pages: keep deep subheadings compact. */
-body:has(.sidebar-pane a[aria-current][href^="/references/"])
+body:has(.sidebar-pane a[aria-current][href^="/reference/"])
   .sl-markdown-content
   .sl-heading-wrapper.level-h4
   > :where(h4) {
@@ -279,11 +299,11 @@ body:has(.sidebar-pane a[aria-current][href^="/references/"])
   line-height: 1.2;
 }
 
-body:has(.sidebar-pane a[aria-current][href^="/references/"])
+body:has(.sidebar-pane a[aria-current][href^="/reference/"])
   .sl-markdown-content
   .sl-heading-wrapper.level-h5
   > :where(h5),
-body:has(.sidebar-pane a[aria-current][href^="/references/"])
+body:has(.sidebar-pane a[aria-current][href^="/reference/"])
   .sl-markdown-content
   .sl-heading-wrapper.level-h6
   > :where(h6) {
