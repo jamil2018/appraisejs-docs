@@ -5,7 +5,6 @@ sidebar:
   order: 12
 ---
 
-import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 
 Reports are generated from Cucumber JSON output after run completion.
 
@@ -20,19 +19,12 @@ Reports are the shortest route from a finished run to a useful debugging decisio
 - Metric report: `/reports/test-cases`
 - Metric report: `/reports/test-suites`
 
-If a user lands on this guide without the full tutorial, they still need to know what the primary report screen should contain. Keep one summary screenshot request here rather than forcing them to imagine the layout from labels alone.
+Below is a screenshot of the reports summary screen.
 
-<MediaPlaceholder
-  type="screenshot"
-  title="Reports summary screen with totals and failed scenario rows"
-  why="Which report view should I read first before I open logs or traces?"
-  priority="should-have"
-  context="Reports guide -> Primary summary view"
-  capture="Capture a report summary screen with run-level totals, execution context, and at least one failed scenario row visible."
-  successState="A reader can identify the report summary as the first stop for debugging and can see where scenario drill-down begins."
+<img
+  src="/docs/media/getting-started/viewing-reports/report-overview.png"
+  alt="Reports summary screen"
 />
-
-Once that summary is recognizable, the rest of the guide should read as a decision flow: start with the report, then drill into detail, then escalate to deeper artifacts only when needed.
 
 ## Minimal example
 

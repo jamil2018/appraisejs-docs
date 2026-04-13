@@ -5,7 +5,6 @@ sidebar:
   order: 11
 ---
 
-import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 
 Test runs execute cases by tag selection or explicit case selection.
 
@@ -23,19 +22,12 @@ Test runs are the handoff from authored assets into execution. This is where you
 6. Select `Browser Engine` (`CHROMIUM`, `FIREFOX`, `WEBKIT`).
 7. Submit.
 
-If this guide is the reader's entry point, they still need one screen reference before they submit the run. Keep the capture brief here so the tutorial and the guide point to the same UI expectation.
+Below is a screenshot of the test runs creation screen.
 
-<MediaPlaceholder
-  type="screenshot"
-  title="Test Runs creation screen with selection mode, environment, and runtime settings"
-  why="What should the run setup screen look like before I submit?"
-  priority="should-have"
-  context="Test Runs guide -> Create flow"
-  capture="Capture the run creation screen with the selection mode control, environment field, worker count, browser engine, and submit action visible."
-  successState="A reader can recognize the main execution inputs and confirm they are on the correct screen before submitting."
+<img
+  src="/docs/media/run-and-analyze/test-runs/create-test-run.png"
+  alt="Test runs creation screen"
 />
-
-Once that screen is captured, readers should be able to confirm success by opening the details screen and matching the final scope to what they selected.
 
 ## Minimal example
 

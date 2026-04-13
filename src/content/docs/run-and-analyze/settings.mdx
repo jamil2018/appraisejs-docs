@@ -6,7 +6,6 @@ sidebar:
 ---
 
 import DocHero from "../../../components/DocHero.astro";
-import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 
 <DocHero
   eyebrow="Run and analyze"
@@ -17,7 +16,10 @@ import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
     "Advanced alternative: CLI sync scripts",
   ]}
   actions={[
-    { label: "Open Troubleshooting", href: "/getting-started/troubleshooting/" },
+    {
+      label: "Open Troubleshooting",
+      href: "/getting-started/troubleshooting/",
+    },
     {
       label: "Open Sync and Scripts",
       href: "/reference/operations/sync-and-scripts/",
@@ -48,14 +50,9 @@ import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 
 The page should show users exactly where the recovery controls live before they assume they need scripts. Keep the screenshot anchored here so the visual confirmation appears at the same moment as the recovery steps.
 
-<MediaPlaceholder
-  type="screenshot"
-  title="Sync dashboard with `Sync All`, asset tiles, and pending counts"
-  why="What should the recovery page look like before I fall back to CLI sync scripts?"
-  priority="must-have"
-  context="Settings -> Sync walkthrough"
-  capture="Capture the Sync dashboard with `Sync All`, multiple asset tiles, and visible pending-count badges."
-  successState="The page reads as the correct UI recovery path, and both broad sync and tile-level sync actions are visible."
+<img
+  src="/docs/media/run-and-analyze/settings/settings.png"
+  alt="Sync dashboard"
 />
 
 Once that screen is available, users should be able to confirm success by watching the pending counts drop and then returning to the affected entities without leaving the UI flow.

@@ -7,7 +7,6 @@ sidebar:
 
 import DocHero from "../../../components/DocHero.astro";
 import OutcomeCard from "../../../components/OutcomeCard.astro";
-import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 
 <DocHero
   eyebrow="Recovery"
@@ -44,7 +43,11 @@ import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 ### Symptom: Setup or first launch failed
 
 - Likely cause: database migrations or browser dependencies were not installed cleanly.
-- What to do: run `npm run migrate-db` for migration issues or `npm run install-playwright` for missing browser dependencies.
+- What to do:
+  1. Run `npm run migrate-db`.
+  2. If errors persist, run `npm run install-playwright`.
+  3. Restart the app after both steps.
+- If this did not fix it: delete the local `prisma/dev.db` file (if present), then re-run migrations.
 - What good looks like: AppraiseJS starts locally and the first page loads without setup warnings.
 
 ### Symptom: A run starts but no tests are selected
@@ -65,37 +68,41 @@ import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 - What to do: revisit [Locators](/build-tests/locators/), re-capture the selector, and confirm the locator group route still matches the page.
 - What good looks like: the same step can resolve the target element on a rerun.
 
+If the issue repeats after re-capturing locators, validate whether the page structure or route has changed significantly. In such cases, treat it as a test design issue rather than a locator issue.
+
 ### Symptom: Reports look empty or disconnected from the run
 
 - Likely cause: the run failed before producing usable Cucumber output, or the artifact path is missing.
-- What to do: open run logs first, then confirm the run reached report generation and that artifacts exist.
+- What to do:
+  1. Open run logs first and confirm whether execution actually started.
+  2. Check whether the run reached report generation.
+  3. Verify that report artifacts exist in the expected path.
+- If this did not fix it: re-run the same test with a minimal scope (single test case) to confirm whether the issue is with execution or reporting.
 - What good looks like: the report list contains a new entry linked to the run you just executed.
 
 ### Symptom: Entities look outdated after pulling or editing files
 
 - Likely cause: filesystem and database state drifted apart.
-- What to do: open `Settings -> Sync` and run the specific sync tile or `Sync All`. If the UI is unavailable, run `npm run sync-all`.
+- What to do:
+  1. Open `Settings -> Sync` and run the relevant sync tile or `Sync All`.
+  2. Wait for pending counts to stabilize.
+- If this did not fix it: run `npm run sync-all` from CLI and refresh the UI.
 - What good looks like: pending counts drop and the expected entities appear consistently in the UI and generated artifacts.
 
 The sync dashboard is the main recovery screen that benefits from visual confirmation. Show it exactly where stale-data recovery is described so users can compare the page they see against the correct fix path.
 
-<MediaPlaceholder
-  type="screenshot"
-  title="Sync dashboard with pending counts, `Sync All`, and tile-level actions"
-  why="What recovery screen should I open when the UI and generated files look out of date?"
-  priority="must-have"
-  context="Troubleshooting -> Stale data recovery"
-  capture="Capture `Settings -> Sync` with pending-count badges, the `Sync All` action, and individual sync tiles visible in one stable view."
-  successState="A reader can identify `Sync All`, understand that tile-level actions exist, and recognize the page as the correct stale-data recovery screen."
+<img
+  src="/docs/media/getting-started/troubleshooting/sync-view.png"
+  alt="Sync dashboard"
 />
 
-If the screen does not look like this once captured, the user should follow the CLI recovery path instead of assuming they are already on the right page.
+If the screen does not look like this once visited, the user should follow the CLI recovery path instead of assuming they are already on the right page.
 
 ## Checkpoint
 
 - You can describe the symptom in one of the categories above.
 - You know the first page or command to use for recovery.
-- You can re-run the failing workflow and compare it with the previous broken state.
+- You can re-run the failing workflow and confirm the issue is resolved (or narrowed down further).
 
 ## Common mistakes
 
@@ -103,7 +110,8 @@ If the screen does not look like this once captured, the user should follow the 
 - Re-running immediately after file edits without using `Settings -> Sync`.
 - Treating an empty report as a report bug before reading run logs.
 - Debugging the wrong environment because the record name looked familiar but the base URL changed.
+- Assuming a fix worked without re-running the exact same failing scenario.
 
 ## Next step
 
-Return to the page you were following in the starter path, or open [Sync and Scripts](/reference/operations/sync-and-scripts/) if you need the advanced maintenance workflow instead of the beginner-friendly fix.
+You have now completed the onboarding path and are ready to start creating and running tests. Alternatively, you can learn more about the architecture of AppraiseJS from the [Architecture Overview](/core-concepts/architecture-overview/) page. You can also view the step reference documentation for more details on the different steps and their parameters at [Step References](/reference/step-references/step-parameter-conventions/).
