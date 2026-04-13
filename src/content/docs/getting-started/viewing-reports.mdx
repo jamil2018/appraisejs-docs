@@ -1,0 +1,101 @@
+---
+title: Viewing Reports
+description: Debug a run by moving from report summary to screenshots, logs, and likely root cause.
+sidebar:
+  order: 3
+---
+
+import DocHero from "../../../components/DocHero.astro";
+import TaskChecklist from "../../../components/TaskChecklist.astro";
+import OutcomeCard from "../../../components/OutcomeCard.astro";
+
+<DocHero
+  eyebrow="Reviewing Reports"
+  summary="This tutorial shows you how to review reports and move from summary to screenshots and logs to understand failures."
+  meta={[
+    "Role: people trying to understand the results of their tests",
+    "Time: 5 minutes",
+    "Outcome: understanding the results of your tests",
+  ]}
+/>
+## Before you begin
+
+<TaskChecklist
+  showTitle={false}
+  items={[
+    "At least one run has completed.",
+    "You can open the Reports list and the linked run details page.",
+    "You are prepared to compare report output with screenshots or logs when needed.",
+  ]}
+/>
+## What you'll finish with
+
+<OutcomeCard title="Understanding the results of your tests" tone="success">
+  You will know how to move from the report list to scenario detail, then use
+  failed-step screenshots and logs only when the summary view stops being
+  enough.
+</OutcomeCard>
+
+## Report structure
+
+Every run produces a report. Your job is to turn that report into a decision.
+
+Think of the report in layers. Each layer answers a different question:
+
+- **Summary →** Did something fail?
+- **Configuration →** Could environment or setup explain it?
+- **Scenario details →** What exactly broke?
+- **Logs / screenshots →** What actually happened at runtime and what was visible at failure?
+
+Your goal is not to read everything — it is to move layer by layer until you can confidently explain the failure.
+
+## Step by step procedure for reviewing reports
+
+1. Open `Reports` and sort or scan for the newest failed or suspicious run.
+2. Open the report and start with the summary totals, environment metadata, and execution context.
+3. Drill into failed scenario rows before opening any external artifacts.
+4. Read the failed step names and durations to decide whether the issue looks like navigation, data setup, locator resolution, or assertion mismatch.
+
+Common failure patterns to classify quickly:
+
+- **Navigation issue →** page not loaded, wrong route, redirect problems
+- **Data/setup issue →** missing or incorrect test data
+- **Locator issue →** element not found, not visible, not interactable
+- **Assertion issue →** expected result does not match actual outcome
+
+5. Open linked run logs if you need timing or runtime detail.
+6. Open failed-step screenshots if you need visual context for what was on screen at the failure point.
+7. Decide whether to fix the test, sync drift, adjust environment data, or escalate a likely product defect.
+
+Below is a screenshot of how a typical report in AppraiseJS looks like.
+
+<img
+  src="/docs/media/getting-started/viewing-reports/report-overview.png"
+  alt="Report overview"
+/>
+
+> Notice how each scenario includes a view logs button that can be used to open the logs for the scenario.
+
+<img
+  src="/docs/media/getting-started/viewing-reports/report-log-view.png"
+  alt="Report log view"
+/>
+
+> Use logs to understand the runtime details of the scenario execution and also see browser state at the failure point through screenshots.
+
+## Checkpoint
+
+- You can explain the likely failure class before opening any deeper artifact.
+- You know when the report itself is enough and when you need screenshots or logs.
+- You can point to the next corrective action: edit the test, updated environment data, fix stale locators or simply rerun the test.
+
+## Common mistakes
+
+- Treating every failure as a locator problem without reading step order and environment context first.
+- Jumping straight into raw logs before checking the scenario summary and failed step name.
+- Ignoring the selected environment when the route or data state looks wrong.
+- Re-running immediately without first classifying whether the failure is deterministic or flaky.
+
+## Next step
+
+If you still cannot classify the failure, move to [Troubleshooting](/getting-started/troubleshooting/) for symptom-to-fix guidance.

@@ -1,0 +1,130 @@
+---
+title: Running Tests
+description: Run AppraiseJS scenarios by tags or explicit case selection and confirm what good execution looks like.
+sidebar:
+  order: 2
+---
+
+import DocHero from "../../../components/DocHero.astro";
+import TaskChecklist from "../../../components/TaskChecklist.astro";
+import OutcomeCard from "../../../components/OutcomeCard.astro";
+
+<DocHero
+  eyebrow="Execution walkthrough"
+  summary="This tutorial shows the two run-creation paths that matter most in AppraiseJS: broad selection by tags and precise selection by explicit test cases."
+  meta={[
+    "Role: anyone with saved test cases",
+    "Time: 10-15 minutes",
+    "Outcome: one completed run and report",
+  ]}
+  actions={[
+    { label: "Open Test Runs guide", href: "/run-and-analyze/test-runs/" },
+    {
+      label: "Open Viewing Reports",
+      href: "/getting-started/viewing-reports/",
+      variant: "secondary",
+    },
+  ]}
+/>
+
+## Before you begin
+
+<TaskChecklist
+  showTitle={false}
+  items={[
+    "At least one test case is saved.",
+    "A target environment exists.",
+    "You know whether you want broad selection by tags or precise selection by named cases.",
+  ]}
+/>
+
+## What you'll finish with
+
+<OutcomeCard title="A completed run with explainable scope" tone="success">
+  You will know when to choose `By Tags`, when to choose `By Test Cases`, and
+  how to verify that AppraiseJS ran the intended scope.
+</OutcomeCard>
+
+## Test run flows
+
+```nomnoml
+#direction: right
+#stroke: #64748b
+#fill: #f8fafc
+[Need a broad, repeatable slice?] -> [Use By Tags]
+[Need exact named cases?] -> [Use By Test Cases]
+[Use By Tags] -> [Select tags + environment + browser]
+[Use By Test Cases] -> [Select cases + environment + browser]
+[Select tags + environment + browser] -> [Create run]
+[Select cases + environment + browser] -> [Create run]
+[Create run] -> [Watch run details]
+```
+
+## Choosing a run type
+
+| Mode          | Use when                               | Example         |
+| ------------- | -------------------------------------- | --------------- |
+| By Tags       | You want a reusable group of scenarios | @smoke, @auth   |
+| By Test Cases | You need specific named test cases     | Login, Checkout |
+
+<br/>
+> ⚠️ **Key Decision**
+> Your choice between `By Tags` and `By Test Cases` defines the scope of your run. Make this decision before configuring the rest of the run.
+
+## Running a test
+
+1. Open `Test Runs -> Create`.
+2. Decide between `By Tags` and `By Test Cases`.
+3. Choose `By Tags` if you want a reusable slice such as `@smoke` or `@auth`.
+4. Choose `By Test Cases` if you need to run a very specific set of saved scenarios.
+5. Set a run name that will still make sense later in the reports list.
+6. Select the environment, browser engine, and worker count.
+7. Submit the run and open the run details page immediately.
+8. Watch live status, then confirm the final scope, status, and linked report after completion.
+
+AppraiseJS separates these modes so you can switch between repeatable regression runs and targeted debugging without restructuring your test suite.
+
+<br />
+Choosing between `By Tags` and `By Test Cases` upfront ensures your run scope is
+intentional and avoids confusion when reviewing results later.
+
+<br />
+Here is a demo of running tests by tags.
+<br />
+<video
+  controls
+  preload="metadata"
+  playsinline
+  src="/docs/media/getting-started/running-tests/running-tests-by-tags.mp4"
+>
+  Your browser does not support the running tests by tags video.
+</video>
+
+<br />
+Here is a demo of running tests by test cases.
+<br />
+<video
+  controls
+  preload="metadata"
+  playsinline
+  src="/docs/media/getting-started/running-tests/running-tests-by-test-cases.mp4"
+>
+  Your browser does not support the running tests by test cases video.
+</video>
+
+## Checkpoint
+
+- You can explain why this run used tags or explicit case selection.
+- The run details page shows the environment, browser, and current result clearly.
+- You can navigate from the run to the resulting report without losing context.
+
+## Common mistakes
+
+- Using `By Tags` without confirming the relevant cases actually carry the intended tags.
+- Choosing `By Test Cases` for a slice that should have been a reusable regression or smoke tag.
+- Interpreting a queued or running state as a failure before the process completes.
+- Ignoring environment mismatch when the run result is inconsistent with the expected application state.
+
+## Next step
+
+Continue to [Viewing Reports](/getting-started/viewing-reports/) to turn execution output into actionable debugging signals.

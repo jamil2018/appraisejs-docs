@@ -1,0 +1,675 @@
+---
+import {
+  BarChart3,
+  Blocks,
+  ChevronDown,
+  ChevronUp,
+  Crosshair,
+  Eye,
+  Layers,
+  LayoutTemplate,
+  Rocket,
+  Server,
+  Workflow,
+} from "@lucide/astro";
+
+const features = [
+  {
+    title: "Visual Test Modeling",
+    description:
+      "Build test flows using our visual node based workflow builder that is easy to understand, composable and reusable across various scenarios.",
+    Icon: Workflow,
+  },
+  {
+    title: "Test Templating",
+    description:
+      "Compose reusable templates that will allow you to quickly form test workflows for fast testing.",
+    Icon: LayoutTemplate,
+  },
+  {
+    title: "Reusable Selector System",
+    description:
+      "Traditional code based locator managements systems are clunky, difficult to remember where a particular locator lives in the codebase and requires users to import locators based on page navigation steps. Our intelligent locator resolver automatically resolves locators based on page route and hands over the exact selector to the executor when it needs it.",
+    Icon: Crosshair,
+  },
+  {
+    title: "Custom Test Node Generation",
+    description:
+      "Besides predefined nodes that are available to the AppraiseJS ecosystem by default, it is also possible to build your own custom workflow node using our template step builder. Easily define new test nodes for your workflow that suites your exact need.",
+    Icon: Blocks,
+  },
+  {
+    title: "Environment Aware Execution",
+    description:
+      "AppraiseJS maintains a centralized environment management system that can be used at our Test Runner at any time. No more loading environment configurations at tests or creating weird hacks for loading environment data for a particular test execution session.",
+    Icon: Server,
+  },
+  {
+    title: "Multi Config Test Orchestration",
+    description:
+      "The fluid test runner of AppraiseJS allows users to run tests on multiple different test configurations for seamless test execution during test runs. Users are able to formulate test runs that can be organized by tags, by test suites or even individual test scenarios under a test suite. You can formulate and own your test runs according to your necessity without any contradictions.",
+    Icon: Layers,
+  },
+  {
+    title: "State of the Art Test Run Management",
+    description:
+      "Create test runs using your preferred test scenario configurations, selected environments, preferred test execution surfaces, number of workers and so much with our Advanced test run manager.",
+    Icon: Rocket,
+  },
+  {
+    title: "Runtime visibility",
+    description:
+      "Our advanced Test Runner allows you to view live test run logs, access run artifacts, and inspect execution traces for failures all in one test place.",
+    Icon: Eye,
+  },
+  {
+    title: "Reporting",
+    description:
+      "View and analyze test results using our modern test reporter that allows you to view and analyze test execution metrics with the help of beautiful graphs, charts and data cards.",
+    Icon: BarChart3,
+  },
+] as const;
+---
+
+<div
+  class="ccc"
+  data-ccc
+  tabindex="0"
+  role="region"
+  aria-roledescription="carousel"
+  aria-label="Core capabilities"
+>
+  <div class="ccc__layout">
+    <div class="ccc__rail">
+      <button
+        type="button"
+        class="ccc__scroll-btn ccc__scroll-btn--up"
+        data-ccc-prev
+        aria-label="Scroll to previous slide"
+      >
+        <ChevronUp aria-hidden="true" size={16} stroke-width={2} />
+      </button>
+
+      <nav class="ccc__markers" data-ccc-markers aria-label="Slide markers">
+        {
+          features.map((_, i) => (
+            <button
+              type="button"
+              class="ccc__marker"
+              data-ccc-marker
+              data-index={i}
+              aria-current={i === 0 ? "true" : undefined}
+              aria-label={`Go to slide ${i + 1}`}
+            >
+              {i + 1}
+            </button>
+          ))
+        }
+      </nav>
+
+      <button
+        type="button"
+        class="ccc__scroll-btn ccc__scroll-btn--down"
+        data-ccc-next
+        aria-label="Scroll to next slide"
+      >
+        <ChevronDown aria-hidden="true" size={16} stroke-width={2} />
+      </button>
+    </div>
+
+    <div class="ccc__stage">
+      <ul
+        class="ccc__carousel"
+        data-ccc-scroll
+        tabindex="-1"
+        role="list"
+        aria-label="Capability slides"
+      >
+        {
+          features.map(({ title, description, Icon }, i) => (
+            <li
+              class:list={["ccc__slide", { "is-snapped": i === 0 }]}
+              data-ccc-slide
+              data-index={i}
+            >
+              <article class="ccc__card">
+                <div class="ccc__card-head">
+                  <span class="ccc__icon" aria-hidden="true">
+                    <Icon size={26} stroke-width={1.75} />
+                  </span>
+                  <h3 class="ccc__title">{title}</h3>
+                </div>
+                <p class="ccc__desc">{description}</p>
+              </article>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <p class="ccc__live" data-ccc-live aria-live="polite" />
+</div>
+
+<style>
+  .ccc {
+    --ccc-stage-h: 50svh;
+    --ccc-gap: 1.25rem;
+    box-sizing: border-box;
+    width: 100%;
+    max-inline-size: 100%;
+    margin-block: 1.25rem 1.5rem;
+    margin-inline: 0;
+    anchor-name: --ccc-carousel;
+  }
+
+  .ccc__layout {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: stretch;
+    gap: var(--ccc-gap);
+  }
+
+  /* Pagination rail: prev ↑, markers, next ↓ — grid + one row-gap so top/bottom spacing matches.
+     --ccc-hit must satisfy 11*h + 2*row-gap ≤ 100cqh (9 dots + 2 chevrons, same size) or nav overflows. */
+  .ccc__rail {
+    --ccc-rail-gap: clamp(0.12rem, 0.35cqh, 0.28rem);
+    --ccc-hit: min(
+      1.45rem,
+      max(0.85rem, calc((100cqh - 2 * var(--ccc-rail-gap)) / 11))
+    );
+    container-type: size;
+    container-name: ccc-rail;
+    display: grid;
+    grid-template-columns: var(--ccc-hit);
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    justify-items: center;
+    align-content: stretch;
+    row-gap: var(--ccc-rail-gap);
+    column-gap: 0;
+    align-self: stretch;
+    block-size: var(--ccc-stage-h);
+    min-block-size: 0;
+    min-height: 0;
+    flex-shrink: 0;
+    inline-size: var(--ccc-hit);
+    min-inline-size: 0;
+  }
+
+  @media (max-width: 520px) {
+    .ccc__layout {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: auto auto;
+    }
+
+    .ccc__rail {
+      --ccc-hit: 1.45rem;
+      container-type: inline-size;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--ccc-rail-gap, clamp(0.12rem, 0.35cqh, 0.28rem));
+      block-size: auto;
+      inline-size: auto;
+    }
+
+    .ccc__markers {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      flex: 0 1 auto;
+      height: auto;
+      min-height: auto;
+      max-block-size: none;
+      inline-size: 100%;
+      max-inline-size: 100%;
+      overflow-x: auto;
+      overflow-y: visible;
+      gap: 0.35rem;
+      mask: linear-gradient(
+        to right,
+        transparent 0,
+        black 10px,
+        black calc(100% - 10px),
+        transparent 100%
+      );
+    }
+
+    .ccc__marker {
+      font-size: 0.68rem;
+    }
+  }
+
+  /* Numbered markers — middle grid row; must not paint past row (was overlapping ↓ button) */
+  .ccc__markers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    align-content: stretch;
+    gap: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 0;
+    min-block-size: 0;
+    height: 100%;
+    max-height: 100%;
+    align-self: stretch;
+    justify-self: stretch;
+    inline-size: var(--ccc-hit);
+    max-inline-size: 100%;
+    overflow: hidden;
+    scrollbar-width: none;
+  }
+
+  .ccc__marker {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    inline-size: var(--ccc-hit);
+    block-size: var(--ccc-hit);
+    aspect-ratio: 1;
+    margin: 0;
+    padding: 0;
+    border: 1px solid hsl(var(--border));
+    border-radius: 999px;
+    background: hsl(var(--card));
+    color: hsl(var(--muted-foreground));
+    font-size: clamp(0.5rem, calc(var(--ccc-hit, 1rem) * 0.48), 0.72rem);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      color 0.35s cubic-bezier(0.25, 0.1, 0.25, 1),
+      border-color 0.35s cubic-bezier(0.25, 0.1, 0.25, 1),
+      background 0.35s cubic-bezier(0.25, 0.1, 0.25, 1),
+      box-shadow 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .ccc__marker:hover {
+    border-color: hsl(var(--primary) / 0.45);
+    color: hsl(var(--foreground));
+  }
+
+  .ccc__marker.is-active {
+    background: hsl(var(--primary));
+    border-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    box-shadow: 0 0 0 1px hsl(var(--primary) / 0.45);
+  }
+
+  .ccc__marker:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  .ccc__stage {
+    min-inline-size: 0;
+  }
+
+  /* Scroll-snap column — mirrors .carousel.--vertical */
+  .ccc__carousel {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-inline-start: 0;
+    width: 100%;
+    min-inline-size: 0;
+    block-size: var(--ccc-stage-h);
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior-y: contain;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--ccc-gap);
+    container-type: inline-size;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .ccc__carousel {
+      scroll-behavior: smooth;
+    }
+  }
+
+  .ccc__carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Top / bottom peek spacers — same idea as 85cqi blocks in the reference */
+  .ccc__carousel::before,
+  .ccc__carousel::after {
+    content: "";
+    display: block;
+    flex-shrink: 0;
+    block-size: 85cqi;
+    scroll-snap-align: none;
+    pointer-events: none;
+  }
+
+  .ccc__slide {
+    width: 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    flex: 0 0 auto;
+  }
+
+  .ccc__card {
+    box-sizing: border-box;
+    width: 100%;
+    min-block-size: min(36cqi, calc(var(--ccc-stage-h) - 2.5rem));
+    padding: 1.15rem 1.25rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    border-radius: 0.65rem;
+    border: 1px solid hsl(var(--border));
+    background: hsl(var(--card));
+    box-shadow:
+      0 1px 2px hsl(var(--foreground) / 0.04),
+      0 4px 12px hsl(var(--foreground) / 0.06);
+    transition:
+      filter 0.2s cubic-bezier(0.25, 0.1, 0.25, 1),
+      opacity 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .ccc__slide:not(.is-snapped) .ccc__card {
+    filter: blur(5px);
+    opacity: 0.82;
+  }
+
+  .ccc__slide.is-snapped .ccc__card {
+    filter: none;
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ccc__slide:not(.is-snapped) .ccc__card {
+      filter: none;
+      opacity: 0.75;
+    }
+  }
+
+  .ccc__slide.is-snapped .ccc__title {
+    color: hsl(var(--primary));
+  }
+
+  .ccc__card-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+  }
+
+  .ccc__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.55rem;
+    background: hsl(var(--primary) / 0.1);
+    color: hsl(var(--primary));
+    transition:
+      color 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+      transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .ccc__slide.is-snapped .ccc__icon {
+    transform: scale(1.04);
+  }
+
+  :global(.ccc__icon svg) {
+    display: block;
+  }
+
+  .ccc__title {
+    margin: 0;
+    font-size: clamp(1rem, 2.5cqi + 0.65rem, 1.35rem);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    color: hsl(var(--foreground));
+    transition:
+      color 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+      font-size 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .ccc__slide.is-snapped .ccc__title {
+    font-size: clamp(1.1rem, 3cqi + 0.65rem, 1.55rem);
+  }
+
+  .ccc__desc {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: hsl(var(--muted-foreground));
+    overflow: auto;
+    flex: 1;
+    max-block-size: min(18rem, 42vh);
+    padding-inline-end: 0.15rem;
+  }
+
+  .ccc__scroll-btn {
+    position: relative;
+    z-index: 2;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    inline-size: var(--ccc-hit);
+    block-size: var(--ccc-hit);
+    min-inline-size: 0;
+    aspect-ratio: 1;
+    margin: 0;
+    padding: 0;
+    border: 1px solid hsl(var(--border));
+    border-radius: 999px;
+    background: hsl(var(--card));
+    color: hsl(var(--foreground));
+    cursor: pointer;
+    box-shadow: 0 1px 2px hsl(var(--foreground) / 0.06);
+    transition:
+      background 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  :global(.ccc__scroll-btn svg) {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .ccc__scroll-btn:hover {
+    border-color: hsl(var(--primary) / 0.45);
+    color: hsl(var(--primary));
+    background: hsl(var(--card));
+  }
+
+  .ccc__scroll-btn:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  .ccc__scroll-btn--down {
+    margin-top: 2rem;
+  }
+
+  .ccc__scroll-btn:disabled {
+    opacity: 0.28;
+    cursor: not-allowed;
+  }
+
+  .ccc__live {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
+
+<script>
+  // @ts-nocheck
+  import { animate } from "motion";
+
+  const ease = [0.25, 0.1, 0.25, 1];
+
+  function setup(root) {
+    const scroller = root.querySelector("[data-ccc-scroll]");
+    const slides = [...root.querySelectorAll("[data-ccc-slide]")];
+    const markers = [...root.querySelectorAll("[data-ccc-marker]")];
+    const prevBtn = root.querySelector("[data-ccc-prev]");
+    const nextBtn = root.querySelector("[data-ccc-next]");
+    const live = root.querySelector("[data-ccc-live]");
+
+    if (!scroller || slides.length === 0) return;
+
+    let active = 0;
+    let lastSynced = -1;
+
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function slideTitle(i) {
+      return (
+        slides[i]?.querySelector(".ccc__title")?.textContent?.trim() ??
+        `Slide ${i + 1}`
+      );
+    }
+
+    function setSnapped(index) {
+      active = index;
+      slides.forEach((slide, i) => {
+        slide.classList.toggle("is-snapped", i === index);
+      });
+      markers.forEach((m, i) => {
+        m.classList.toggle("is-active", i === index);
+        if (i === index) m.setAttribute("aria-current", "true");
+        else m.removeAttribute("aria-current");
+      });
+
+      const n = slides.length;
+      if (live) {
+        live.textContent = `${slideTitle(index)}, ${index + 1} of ${n}`;
+      }
+
+      const changed = index !== lastSynced;
+      if (!prefersReducedMotion && changed) {
+        const card = slides[index]?.querySelector(".ccc__card");
+        if (card) {
+          animate(card, { scale: [0.996, 1] }, { duration: 0.14, ease });
+        }
+      }
+      lastSynced = index;
+
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === slides.length - 1;
+    }
+
+    /**
+     * Which slide is snapped to the scrollport. Do not use offsetTop vs scrollTop:
+     * offsetParent may not be the scroller, so sync breaks after layout/CSS changes.
+     * With scroll-snap-align:start, the active slide is the one whose top edge is
+     * closest to the scroller's visible top edge.
+     */
+    function nearestIndex() {
+      const scrollerRect = scroller.getBoundingClientRect();
+      const snapY = scrollerRect.top;
+      let best = 0;
+      let bestDist = Infinity;
+      slides.forEach((slide, i) => {
+        const top = slide.getBoundingClientRect().top;
+        const d = Math.abs(top - snapY);
+        if (d < bestDist) {
+          bestDist = d;
+          best = i;
+        }
+      });
+      return best;
+    }
+
+    let scrollSyncTimer;
+
+    function scrollToIndex(i) {
+      const clamped = Math.max(0, Math.min(slides.length - 1, i));
+      const el = slides[clamped];
+      if (!el) return;
+      clearTimeout(scrollSyncTimer);
+      el.scrollIntoView({
+        block: "start",
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+      });
+      /* scrollend is missing in some browsers; smooth scroll may omit final scroll event */
+      scrollSyncTimer = window.setTimeout(() => {
+        setSnapped(nearestIndex());
+      }, prefersReducedMotion ? 32 : 340);
+    }
+
+    function onScrollEnd() {
+      clearTimeout(scrollSyncTimer);
+      setSnapped(nearestIndex());
+    }
+
+    let scrollEndTimer;
+    function onScrollDebounced() {
+      clearTimeout(scrollEndTimer);
+      scrollEndTimer = window.setTimeout(onScrollEnd, 28);
+    }
+
+    scroller.addEventListener("scroll", onScrollDebounced, { passive: true });
+    scroller.addEventListener("scrollend", onScrollEnd);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(onScrollEnd);
+    });
+
+    const ro = new ResizeObserver(() => onScrollEnd());
+    ro.observe(scroller);
+
+    prevBtn?.addEventListener("click", () => scrollToIndex(active - 1));
+    nextBtn?.addEventListener("click", () => scrollToIndex(active + 1));
+
+    markers.forEach((m) => {
+      m.addEventListener("click", () => {
+        const i = Number(m.getAttribute("data-index"));
+        if (Number.isNaN(i)) return;
+        scrollToIndex(i);
+      });
+    });
+
+    root.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowUp") {
+        e.preventDefault();
+        scrollToIndex(active - 1);
+      } else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        scrollToIndex(active + 1);
+      }
+    });
+
+    return () => {
+      ro.disconnect();
+      scroller.removeEventListener("scroll", onScrollDebounced);
+      scroller.removeEventListener("scrollend", onScrollEnd);
+      clearTimeout(scrollEndTimer);
+      clearTimeout(scrollSyncTimer);
+    };
+  }
+
+  const root = document.querySelector("[data-ccc]");
+  if (root && !root.dataset.cccReady) {
+    root.dataset.cccReady = "true";
+    setup(root);
+  }
+</script>

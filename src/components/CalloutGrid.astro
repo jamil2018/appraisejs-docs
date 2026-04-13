@@ -1,0 +1,33 @@
+---
+interface Item {
+  title: string;
+  body: string;
+  href?: string;
+  cta?: string;
+  tone?: "default" | "accent" | "success";
+}
+
+interface Props {
+  items: Item[];
+}
+
+const { items } = Astro.props as Props;
+---
+
+<div class="callout-grid">
+  {
+    items.map((item) => (
+      <div
+        class={`callout-grid__item callout-grid__item--${item.tone ?? "default"}`}
+      >
+        <h3>{item.title}</h3>
+        <p>{item.body}</p>
+        {item.href && (
+          <a class="callout-grid__link" href={item.href}>
+            {item.cta ?? "Open page"}
+          </a>
+        )}
+      </div>
+    ))
+  }
+</div>

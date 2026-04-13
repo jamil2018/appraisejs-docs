@@ -1,63 +1,207 @@
 ---
 title: Installation
-description: Set up AppraiseJS
+description: Install AppraiseJS with the official bootstrapper, complete the recommended production-first setup flow, and confirm the local app is ready.
 sidebar:
   order: 2
 ---
 
-import cliInstallVideo from "../../../assets/installation/cli-installation.mp4";
+import DocHero from "../../../components/DocHero.astro";
+import TaskChecklist from "../../../components/TaskChecklist.astro";
+import OutcomeCard from "../../../components/OutcomeCard.astro";
 
-This page follows the setup model documented in `appraisejs-core`.
+<DocHero
+  eyebrow="Setup"
+  summary="Install AppraiseJS with the official bootstrapper, complete the recommended production-first setup flow, and confirm the local app is ready. Alternatively, you can clone the repository and set up the project in development mode for contributing to the project."
+  meta={[
+    "Role: first-time local setup",
+    "Time: 10-15 minutes",
+    "Outcome: verified working local environment",
+  ]}
+  actions={[
+    { label: "Open Quick Start", href: "/getting-started/quick-start/" },
+    {
+      label: "Open Troubleshooting",
+      href: "/getting-started/troubleshooting/",
+      variant: "secondary",
+    },
+  ]}
+/>
 
-## Prerequisites
+## Preconditions (don’t skip this)
 
-- Node.js 18+
-- npm
+<TaskChecklist
+  showTitle={false}
+  items={[
+    "Node.js 18+ is installed and available in your PATH.",
+    "You can run your package manager from terminal (`npm`, `pnpm`, `yarn`, or `bun`).",
+    "You are NOT trying to clone or manually assemble the project — use `create-appraisejs` unless you have a specific reason not to.",
+  ]}
+/>
 
-## Installation options
-
-### Option 1: Scaffold a new project (recommended)
+## Quick install (for experienced users)
 
 ```bash
-npx create-appraisejs
+npx create-appraisejs@latest
 cd <your-project-name>
-npm run setup
-npm run dev
+npm run start
 ```
 
-Open `http://localhost:3000` after startup.
+<br />
+If this fails, follow the full setup guide below.
 
-#### See the CLI in action
+## What you'll finish with
 
-See the `create-appraisejs` CLI in action: scaffolding a new project, running setup, and setup browsers.
+<OutcomeCard title="A production-ready local scaffold" tone="success">
+  A working local AppraiseJS instance that you have actually opened in the
+  browser, backed by a clean automation workspace (no demo artifacts), and a
+  known-good baseline you can trust before writing tests.
+</OutcomeCard>
 
-<video controls width="100%" class="overview-demo-video">
-  <source src={cliInstallVideo} type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+## Step-by-step procedure
 
-### Option 2: Clone appraisejs-core
+AppraiseJS allows users to create a new project in two different ways:
+
+1. Using the official bootstrapper: `npx create-appraisejs@latest`
+2. Cloning the repository: `git clone https://github.com/appraisejs/appraisejs.git`
+
+Using the official `create-appraisejs` bootstrapper is the recommended way to get started with AppraiseJS. It is not advisable to clone the repo unless you are trying to contribute to the project as it contains a lot of files that are not needed for a local development environment.
+
+## Why the bootstrapper is recommended
+
+AppraiseJS is designed to produce a **clean, production-ready automation workspace from the start**.
+
+<br />
+Cloning the repository includes:
+
+- internal development tooling
+- example configurations not intended for end users
+- additional complexity that does not reflect real usage
+
+The bootstrapper ensures:
+
+- a minimal, production-aligned setup
+- a clean automation workspace (no demo artifacts)
+- correct dependency and script configuration for your environment
+
+#### Setting up a new project with the official bootstrapper
+
+Open a terminal and run the following commands:
 
 ```bash
-git clone https://github.com/jamil2018/appraisejs-core.git
-cd appraisejs-core
-npm run setup
-npm run dev
+npx create-appraisejs@latest
+cd <your-project-name>
+npm run setup # only if you skipped setup during scaffolding
+npm run start
 ```
 
-## Common scripts
+<br />
+The examples on this page use `npm` and the bootstrapper package is optimized
+for npm. However, if you want you can use `pnpm`, `yarn`, or `bun` instead. The
+scaffold will rewrite the scripts and print the next commands for the package
+manager you selected.
+<br />
+Create-AppraiseJS allows you to create a new AppraiseJS project with a bundled
+template and get you started with a running local app without manually
+configuring a project from scratch.
 
-- `npm run dev`
-- `npm run build`
-- `npm run lint`
-- `npm run test`
+### What the scaffold does
 
-## First-run checklist
+#### Project setup
 
-- Create an environment.
-- Create a module.
-- Create locators from `Locators -> Create` using either a saved environment or a direct URL.
-- Create a test suite and a test case.
-- Add case steps from template steps.
-- Create a test run and execute it.
-- Inspect reports and dashboard metrics.
+- Creates a runnable project — not a partially configured template.
+- Prompts for the target directory.
+- Prompts for the package manager: `npm`, `pnpm`, `yarn`, or `bun`.
+
+#### Environment setup
+
+- Prompts for whether to run production setup immediately.
+- Prompts for which Playwright browsers to install.
+- Runs the project `setup` script and installs the selected Playwright browsers if you opt into setup during scaffolding.
+- Prints the exact next commands to run if you skip setup during scaffolding.
+
+#### Automation workspace initialization
+
+- Uses the bundled template by default.
+- Preserves the seeded SQLite database at `prisma/dev.db`.
+- Resets the automation workspace so `automation/config/environments/environments.json` starts as `{}` and `automation/mapping/locator-map.json` starts as `[]`.
+- Includes reusable step definitions, but does not bundle starter features, locators, or reports.
+
+#### Configuration handling
+
+- Rewrites generated project scripts to match the selected package manager.
+
+Nothing in this step is “magic.” You should end up with a standard project
+structure you can inspect, modify, and run independently of AppraiseJS if
+needed.
+
+<br />
+After startup, open the local URL shown in the terminal. If the app does not
+load in your browser, stop here and fix that before continuing. `npm run dev` is
+available for iteration, but onboarding assumes `npm run start` works first.
+<br />
+If you’re unsure what “success” looks like, watch the full flow below. Your
+setup should match this end-to-end without deviations.
+
+### End-to-end first-run setup from scaffold to running local app
+
+<video
+  controls
+  preload="metadata"
+  playsinline
+  src="/docs/media/getting-started/installation/first-run-setup.mp4"
+>
+  Your browser does not support the installation video.
+</video>
+<br />
+After startup, your UI should match the state below. If it doesn’t, do not
+continue — something is off in your setup.
+
+### First successful loaded app state after `npm run start`
+
+<br />
+![First successful loaded AppraiseJS state in dark mode after startup on a clean
+scaffold.](/docs/media/getting-started/installation/first-loaded-app-state.png)
+
+<br />
+When these assets exist, the user should be able to compare their local result
+against them before deciding whether to continue or switch to
+[Troubleshooting](/getting-started/troubleshooting/).
+
+## Checkpoint
+
+- The app starts without errors.
+- You can open the UI in your browser.
+- The UI is not blank, broken, or stuck loading.
+- `prisma/dev.db` exists.
+- Automation workspace files are empty (not prefilled with demo data).
+- You are confident this environment is stable enough to proceed.
+
+## Common mistakes
+
+- Skipping setup and assuming the app will still run.
+- Trying to debug UI issues before confirming the app even loads.
+- Assuming missing browsers or dependencies are AppraiseJS bugs.
+- Expecting prebuilt test data or examples to exist.
+- Continuing forward without verifying the app actually works locally.
+
+## Where setups usually fail
+
+Most setup issues fall into one of these categories:
+
+- Environment issues (Node, package manager, PATH)
+- Skipped setup steps (Playwright, migrations)
+- Browser dependencies not installed
+- Misinterpreting a partially working UI as success
+
+If something feels off, assume setup is incomplete — not that AppraiseJS is broken.
+
+## Recovery steps
+
+- If the app never loads: stop and re-run setup instead of continuing blindly.
+- Migration errors: run `npm run migrate-db`.
+- Browser dependency errors: run `npm run install-playwright`.
+- Stale or missing generated entities after setup: use `Settings -> Sync` after the UI loads, or run `npm run sync-all` if the UI is unavailable.
+
+## Next step
+
+Continue to [Quick Start](/getting-started/quick-start/) to create the smallest useful runnable flow.

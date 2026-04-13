@@ -1,5 +1,5 @@
 ---
-import { FolderSync, MousePointer2, Terminal, Zap } from "@lucide/astro";
+import { MousePointer2, Terminal, Zap } from "@lucide/astro";
 ---
 
 <section
@@ -10,6 +10,11 @@ import { FolderSync, MousePointer2, Terminal, Zap } from "@lucide/astro";
     <h2 id="landing-tooling-heading" class="landing-section-title">
       Precision-Engineered Tooling
     </h2>
+    <p class="landing-section-description">
+      Everything around the builder is designed to help teams ship faster:
+      resilient selectors, custom step nodes, debuggable reports, and execution
+      that stays in your environment.
+    </p>
   </div>
 
   <div class="landing-tooling__grid">
@@ -17,8 +22,8 @@ import { FolderSync, MousePointer2, Terminal, Zap } from "@lucide/astro";
       <div class="landing-tooling-card__copy">
         <h3>Visual Test Builder</h3>
         <p>
-          The most advanced node editor ever built for QA. Real-time sync,
-          branching logic, and reusable sub-flows.
+          Build complex browser journeys visually, reuse logic across
+          scenarios, and keep flows easy to evolve as your product changes.
         </p>
       </div>
 
@@ -57,7 +62,10 @@ import { FolderSync, MousePointer2, Terminal, Zap } from "@lucide/astro";
         </div>
         <div class="landing-tooling-card__copy">
           <h3>Locator Creator</h3>
-          <p>Intelligent selector generation that survives DOM changes.</p>
+          <p>
+            Generate resilient selectors faster so UI changes do not turn into
+            constant test rewrites.
+          </p>
         </div>
       </article>
 
@@ -67,7 +75,7 @@ import { FolderSync, MousePointer2, Terminal, Zap } from "@lucide/astro";
           aria-hidden="true"
         >
           <span class="landing-tooling-icon landing-tooling-icon--folder">
-            <FolderSync />
+            <Terminal />
           </span>
           <span class="landing-tooling-sync-line"></span>
           <span
@@ -77,8 +85,11 @@ import { FolderSync, MousePointer2, Terminal, Zap } from "@lucide/astro";
           </span>
         </div>
         <div class="landing-tooling-card__copy">
-          <h3>Sync Manager</h3>
-          <p>Bidirectional sync between visual UI and your code repo.</p>
+          <h3>Dynamic Step Integrator</h3>
+          <p>
+            Add the step nodes you need from the CLI and bring custom actions
+            straight into the visual builder.
+          </p>
         </div>
       </article>
     </div>
@@ -101,8 +112,8 @@ import { FolderSync, MousePointer2, Terminal, Zap } from "@lucide/astro";
       <div class="landing-tooling-card__copy">
         <h3>Reporting &amp; Log Analysis</h3>
         <p>
-          Deep-dive into test results with integrated log analysis and visual
-          diffs.
+          Move from failed run to root cause faster with logs, traces, and
+          visual evidence in one place.
         </p>
       </div>
     </article>
@@ -125,8 +136,8 @@ import { FolderSync, MousePointer2, Terminal, Zap } from "@lucide/astro";
       <div class="landing-tooling-card__copy">
         <h3>Local-First Execution</h3>
         <p>
-          No proprietary cloud runners required. Your hardware, your speed, your
-          privacy.
+          Run inside your repo, on your machines, and in your CI stack without
+          handing execution to a proprietary runner.
         </p>
       </div>
     </article>

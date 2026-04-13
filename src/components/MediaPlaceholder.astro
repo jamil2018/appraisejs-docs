@@ -1,0 +1,77 @@
+---
+interface Props {
+  type: "screenshot" | "video" | "gif" | "diagram";
+  title: string;
+  why: string;
+  priority: "must-have" | "should-have" | "nice-to-have";
+  context: string;
+  capture: string;
+  successState: string;
+  source?: string;
+}
+
+const {
+  type,
+  title,
+  why,
+  priority,
+  context,
+  capture,
+  successState,
+  source = "requires core app capture",
+} = Astro.props as Props;
+
+const typeLabels = {
+  screenshot: "Screenshot",
+  video: "Video",
+  gif: "GIF",
+  diagram: "Diagram",
+};
+
+const priorityLabels = {
+  "must-have": "Must have",
+  "should-have": "Should have",
+  "nice-to-have": "Nice to have",
+};
+---
+
+<section
+  class={`media-placeholder media-placeholder--${type} media-placeholder--priority-${priority}`}
+>
+  <div class="media-placeholder__header">
+    <p class="media-placeholder__label">Asset Needed</p>
+    <div class="media-placeholder__meta" aria-label="Asset request metadata">
+      <span class="media-placeholder__chip">{typeLabels[type]}</span>
+      <span class="media-placeholder__chip">{priorityLabels[priority]}</span>
+    </div>
+  </div>
+
+  <h3 class="media-placeholder__title">{title}</h3>
+
+  <dl class="media-placeholder__details">
+    <div class="media-placeholder__detail">
+      <dt>Page context</dt>
+      <dd>{context}</dd>
+    </div>
+
+    <div class="media-placeholder__detail">
+      <dt>User question answered</dt>
+      <dd>{why}</dd>
+    </div>
+
+    <div class="media-placeholder__detail">
+      <dt>Capture brief</dt>
+      <dd>{capture}</dd>
+    </div>
+
+    <div class="media-placeholder__detail">
+      <dt>Success state</dt>
+      <dd>{successState}</dd>
+    </div>
+
+    <div class="media-placeholder__detail">
+      <dt>Source</dt>
+      <dd>{source}</dd>
+    </div>
+  </dl>
+</section>

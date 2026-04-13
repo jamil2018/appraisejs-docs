@@ -10,15 +10,15 @@ import { CirclePlay } from "@lucide/astro";
     <p class="landing-badge">Visual Orchestration for Modern QA</p>
     <h1 id="landing-hero-heading">
       <span>Design Tests Visually.</span>
-      <span class="landing-accent-text">Execute with Real Code.</span>
+      <span class="landing-accent-text">Generate Real Code.</span>
     </h1>
     <p class="landing-hero__description">
-      Build end-to-end flows with an intuitive node editor. AppraiseJS emits
-      standard Playwright and Cucumber files directly to your repo. Zero
-      lock-in, pure engineering.
+      Build end-to-end flows in a visual editor, connect the critical steps, and
+      AppraiseJS emits standard Playwright and Cucumber files directly to your
+      repo. Zero lock-in, pure engineering.
     </p>
     <div class="landing-hero__actions">
-      <a class="landing-cta-button" href="/getting-started/quick_start/">
+      <a class="landing-cta-button" href="/getting-started/quick-start/">
         Get Started
       </a>
       <a
@@ -33,7 +33,7 @@ import { CirclePlay } from "@lucide/astro";
     </div>
   </div>
 
-  <div class="landing-hero__visual" aria-hidden="true">
+  <div class="landing-hero__visual" data-hero-visual aria-hidden="true">
     <div class="landing-hero__visual-glow"></div>
     <div class="landing-hero__visual-frame">
       <div class="landing-hero__visual-side landing-hero__visual-side--flow">
@@ -41,73 +41,255 @@ import { CirclePlay } from "@lucide/astro";
           <span class="dot dot--rose"></span>
           <span class="dot dot--mint"></span>
           <span class="dot dot--green"></span>
-          <span class="landing-windowbar__label">VISUAL_NODE_EDITOR</span>
+          <span class="landing-windowbar__label">VISUAL NODE EDITOR</span>
         </div>
         <div class="landing-flow">
-          <div class="landing-flow__connector"></div>
-          <div class="landing-flow__connector landing-flow__connector--middle">
-          </div>
-          <article class="landing-flow-card landing-flow-card--active">
-            <span class="landing-flow-card__kind">Trigger</span>
+          <article class="landing-flow-card" data-hero-node>
+            <div class="landing-flow-card__top">
+              <span class="landing-flow-card__kind">Trigger</span>
+              <span class="landing-flow-card__index">01</span>
+            </div>
             <strong>User Login</strong>
+            <span class="landing-flow-card__detail">Session bootstrap</span>
             <span class="landing-flow-card__terminal"></span>
           </article>
-          <article class="landing-flow-card">
-            <span
-              class="landing-flow-card__kind landing-flow-card__kind--muted"
-            >
-              Action
-            </span>
+          <div class="landing-flow__connector" data-hero-connector></div>
+          <article class="landing-flow-card" data-hero-node>
+            <div class="landing-flow-card__top">
+              <span
+                class="landing-flow-card__kind landing-flow-card__kind--muted"
+              >
+                Action
+              </span>
+              <span class="landing-flow-card__index">02</span>
+            </div>
             <strong>Click "Checkout"</strong>
+            <span class="landing-flow-card__detail">Primary CTA step</span>
             <span class="landing-flow-card__terminal"></span>
           </article>
-          <article class="landing-flow-card landing-flow-card--success">
-            <span
-              class="landing-flow-card__kind landing-flow-card__kind--success"
-            >
-              Assertion
-            </span>
-            <strong>{"Cart Total > $100"}</strong>
+          <div class="landing-flow__connector" data-hero-connector></div>
+          <article class="landing-flow-card" data-hero-node>
+            <div class="landing-flow-card__top">
+              <span
+                class="landing-flow-card__kind landing-flow-card__kind--success"
+              >
+                Assertion
+              </span>
+              <span class="landing-flow-card__index">03</span>
+            </div>
+            <strong>{"Cart Total > 100"}</strong>
+            <span class="landing-flow-card__detail">Business rule check</span>
+            <span class="landing-flow-card__terminal"></span>
           </article>
         </div>
       </div>
 
       <div class="landing-hero__visual-side landing-hero__visual-side--code">
-        <div class="landing-code__header">
-          <span class="landing-code__label">CUCUMBER_GHERKIN_OUTPUT</span>
-          <span class="landing-code__chip">checkout.feature</span>
-        </div>
-        <div class="landing-code">
-          <p class="landing-code-line">
-            <span class="syntax-keyword">Feature:</span>
-            <span class="syntax-text"> Checkout Validation</span>
-          </p>
-          <p class="landing-code-line landing-code-line--indent-1">
-            <span class="syntax-keyword">Scenario:</span>
-            <span class="syntax-text"> Verify high value cart checkout</span>
-          </p>
-          <p class="landing-code-line landing-code-line--indent-2">
-            <span class="syntax-accent">Given</span>
-            <span class="syntax-text">
-              the user is logged in as "test_user"</span
+        <div class="landing-code-panel" data-hero-code-panel>
+          <div class="landing-code__header">
+            <span class="landing-code__label">CUCUMBER_GHERKIN_OUTPUT</span>
+            <span class="landing-code__chip">checkout.feature</span>
+          </div>
+          <div class="landing-code__meta">
+            <span class="landing-code__meta-pill"
+              >Generated from visual flow</span
             >
-          </p>
-          <p class="landing-code-line landing-code-line--indent-2">
-            <span class="syntax-accent">When</span>
-            <span class="syntax-text">
-              {" "}the user clicks the "Checkout" button
-            </span>
-          </p>
-          <p class="landing-code-line landing-code-line--indent-2">
-            <span class="syntax-accent">Then</span>
-            <span class="syntax-text">
-              {" "}the cart total should be greater than 100
-            </span>
-          </p>
-          <p class="landing-code-note"># Human readable specs derived</p>
-          <p class="landing-code-note"># directly from visual nodes.</p>
+          </div>
+          <div class="landing-code">
+            <p class="landing-code-line" data-hero-code-line>
+              <span class="syntax-keyword">Feature:</span>
+              <span class="syntax-text"> Checkout Validation</span>
+            </p>
+            <p
+              class="landing-code-line landing-code-line--indent-1"
+              data-hero-code-line
+            >
+              <span class="syntax-keyword">Scenario:</span>
+              <span class="syntax-text"> Verify high value cart checkout</span>
+            </p>
+            <p
+              class="landing-code-line landing-code-line--indent-2"
+              data-hero-code-line
+            >
+              <span class="syntax-accent">Given</span>
+              <span class="syntax-text">
+                the user is logged in as "test_user"</span
+              >
+            </p>
+            <p
+              class="landing-code-line landing-code-line--indent-2"
+              data-hero-code-line
+            >
+              <span class="syntax-accent">When</span>
+              <span class="syntax-text">
+                {" "}the user clicks the "Checkout" button
+              </span>
+            </p>
+            <p
+              class="landing-code-line landing-code-line--indent-2"
+              data-hero-code-line
+            >
+              <span class="syntax-accent">Then</span>
+              <span class="syntax-text">
+                {" "}the cart total should be greater than 100
+              </span>
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  // @ts-nocheck
+  import { animate } from "motion";
+
+  const HERO_LOOP = {
+    leadIn: 150,
+    nodePause: 360,
+    connectorPause: 200,
+    panelPause: 260,
+    linePause: 120,
+    hold: 1650,
+    resetPause: 360,
+  };
+
+  const heroEase = [0.25, 0.1, 0.25, 1];
+  const sleep = (ms) =>
+    new Promise((resolve) => window.setTimeout(resolve, ms));
+
+  function setFinalState(root) {
+    root.querySelectorAll("[data-hero-node]").forEach((node, index, items) => {
+      node.classList.add("is-visible");
+      node.classList.toggle("is-active", index === items.length - 1);
+    });
+    root
+      .querySelectorAll("[data-hero-connector]")
+      .forEach((connector) => connector.classList.add("is-visible"));
+    root.querySelector("[data-hero-code-panel]")?.classList.add("is-visible");
+    root
+      .querySelectorAll("[data-hero-code-line]")
+      .forEach((line) => line.classList.add("is-visible"));
+  }
+
+  function resetState(root) {
+    root
+      .querySelectorAll(
+        "[data-hero-node], [data-hero-connector], [data-hero-code-panel], [data-hero-code-line]",
+      )
+      .forEach((item) => {
+        item.classList.remove("is-visible", "is-active");
+      });
+  }
+
+  async function runHeroLoop(root) {
+    const nodes = [...root.querySelectorAll("[data-hero-node]")];
+    const connectors = [...root.querySelectorAll("[data-hero-connector]")];
+    const lines = [...root.querySelectorAll("[data-hero-code-line]")];
+    const codePanel = root.querySelector("[data-hero-code-panel]");
+
+    while (root.isConnected) {
+      resetState(root);
+      await sleep(HERO_LOOP.leadIn);
+
+      for (const [index, node] of nodes.entries()) {
+        nodes.forEach((item, itemIndex) => {
+          item.classList.toggle("is-active", itemIndex === index);
+        });
+        node.classList.add("is-visible", "is-active");
+        animate(
+          node,
+          { opacity: [0, 1], y: [16, 0], filter: ["blur(8px)", "blur(0px)"] },
+          { duration: 0.34, ease: heroEase },
+        );
+        await sleep(HERO_LOOP.nodePause);
+
+        const connector = connectors[index];
+        if (connector) {
+          connector.classList.add("is-visible");
+          animate(
+            connector,
+            { opacity: [0, 1], scaleY: [0, 1] },
+            { duration: 0.2, ease: heroEase },
+          );
+          await sleep(HERO_LOOP.connectorPause);
+        }
+      }
+
+      codePanel?.classList.add("is-visible");
+      if (codePanel) {
+        animate(
+          codePanel,
+          {
+            opacity: [0, 1],
+            x: [20, 0],
+            scale: [0.985, 1],
+            filter: ["blur(10px)", "blur(0px)"],
+          },
+          { duration: 0.34, ease: heroEase },
+        );
+      }
+      await sleep(HERO_LOOP.panelPause);
+
+      for (const line of lines) {
+        line.classList.add("is-visible");
+        animate(
+          line,
+          { opacity: [0, 1], y: [10, 0] },
+          { duration: 0.2, ease: heroEase },
+        );
+        await sleep(HERO_LOOP.linePause);
+      }
+
+      await sleep(HERO_LOOP.hold);
+
+      animate(
+        [...lines].reverse(),
+        { opacity: [1, 0], y: [0, -8] },
+        { duration: 0.18, delay: 0.02, ease: heroEase },
+      );
+      if (codePanel) {
+        animate(
+          codePanel,
+          { opacity: [1, 0], x: [0, 12], scale: [1, 0.99] },
+          { duration: 0.24, ease: heroEase },
+        );
+      }
+      animate(
+        [...connectors].reverse(),
+        { opacity: [1, 0], scaleY: [1, 0] },
+        { duration: 0.18, delay: 0.03, ease: heroEase },
+      );
+      animate(
+        [...nodes].reverse(),
+        { opacity: [1, 0], y: [0, -10] },
+        { duration: 0.22, delay: 0.04, ease: heroEase },
+      );
+
+      await sleep(HERO_LOOP.resetPause);
+    }
+  }
+
+  function initHero() {
+    const root = document.querySelector("[data-hero-visual]");
+
+    if (!root || root.dataset.heroReady) return;
+
+    root.dataset.heroReady = "true";
+
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReducedMotion) {
+      setFinalState(root);
+    } else {
+      runHeroLoop(root);
+    }
+  }
+
+  document.addEventListener("astro:page-load", initHero);
+
+  initHero();
+</script>

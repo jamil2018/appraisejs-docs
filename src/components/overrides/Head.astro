@@ -1,6 +1,7 @@
 ---
 import Analytics from "@vercel/analytics/astro";
 import SpeedInsights from "@vercel/speed-insights/astro";
+import docsImageLightboxScript from "../../scripts/docs-image-lightbox.js?raw";
 
 const { head } = Astro.locals.starlightRoute;
 ---
@@ -13,6 +14,7 @@ const { head } = Astro.locals.starlightRoute;
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <Analytics />
 <SpeedInsights />
+<script is:inline set:html={docsImageLightboxScript}></script>
 <script type="module">
   import mermaid from "mermaid";
 

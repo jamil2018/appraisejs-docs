@@ -1,10 +1,9 @@
 <section class="landing-navbar-shell" aria-label="Landing navigation">
   <div class="landing-navbar" id="landing-navbar">
-    <a class="landing-navbar__brand" href="/getting-started/overview/">
-      <img class="landing-navbar__logo" src="/logo.svg" alt="" />
-      <span>AppraiseJS</span>
-    </a>
-
+    <strong class="landing-navbar__brand">
+      <img src="/logo.svg" alt="AppraiseJS Logo" class="landing-navbar__logo" />
+      AppraiseJS
+    </strong>
     <button
       type="button"
       class="landing-navbar__hamburger"
@@ -19,57 +18,78 @@
         <span></span>
       </span>
     </button>
-
     <nav
       class="landing-navbar__links"
       id="landing-navbar-menu"
-      aria-label="Primary"
+      aria-label="Landing sections"
     >
-      <a href="/getting-started/overview/">Docs</a>
-      <a href="/references/step_parameter_conventions/">API</a>
+      <a href="/getting-started/overview/">Product</a>
+      <a href="/core-concepts/architecture-overview/">Architecture</a>
+      <a href="/run-and-analyze/">Guides</a>
       <a
-        href="https://github.com/jamil2018/appraisejs-core/releases"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Changelog
-      </a>
-      <a
-        href="/getting-started/quick_start/"
-        class="landing-navbar__mobile-cta landing-cta-button"
+        href="/getting-started/quick-start/"
+        class="landing-cta-button text-white!"
       >
         Get Started
       </a>
     </nav>
-
-    <a href="/getting-started/quick_start/" class="landing-cta-button">
-      Get Started
-    </a>
   </div>
 </section>
 
 <script>
-  const navbar = document.getElementById("landing-navbar");
-  const hamburger = document.getElementById("landing-navbar-hamburger");
-  const menu = document.getElementById("landing-navbar-menu");
+  const landingNavbarState = (window.__appraiseLandingNavbar ??= {
+    cleanup: null,
+  });
 
-  if (navbar && hamburger && menu) {
+  function initLandingNavbar() {
+    landingNavbarState.cleanup?.();
+
+    const navbar = document.getElementById("landing-navbar");
+    const hamburger = document.getElementById("landing-navbar-hamburger");
+    const menu = document.getElementById("landing-navbar-menu");
+
+    if (!(navbar && hamburger && menu)) {
+      landingNavbarState.cleanup = null;
+      return;
+    }
+
+    const controller = new AbortController();
+    const { signal } = controller;
+
     const closeMenu = () => {
       navbar.classList.remove("is-open");
       hamburger.setAttribute("aria-expanded", "false");
     };
 
-    hamburger.addEventListener("click", () => {
-      const isOpen = navbar.classList.toggle("is-open");
-      hamburger.setAttribute("aria-expanded", String(isOpen));
-    });
+    hamburger.addEventListener(
+      "click",
+      () => {
+        const isOpen = navbar.classList.toggle("is-open");
+        hamburger.setAttribute("aria-expanded", String(isOpen));
+      },
+      { signal },
+    );
 
     menu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", closeMenu);
+      link.addEventListener("click", closeMenu, { signal });
     });
 
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") closeMenu();
-    });
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        if (event.key === "Escape") closeMenu();
+      },
+      { signal },
+    );
+
+    landingNavbarState.cleanup = () => controller.abort();
   }
+
+  document.addEventListener("astro:page-load", initLandingNavbar);
+  document.addEventListener("astro:before-swap", () => {
+    landingNavbarState.cleanup?.();
+    landingNavbarState.cleanup = null;
+  });
+
+  initLandingNavbar();
 </script>

@@ -1,0 +1,22 @@
+---
+interface Props {
+  title?: string;
+  showTitle?: boolean;
+  items: string[];
+}
+
+const { title = "Checklist", showTitle = true, items } = Astro.props as Props;
+---
+
+<section class="task-checklist">
+  {
+    showTitle && (
+      <div class="task-checklist__header">
+        <h3>{title}</h3>
+      </div>
+    )
+  }
+  <ul class="task-checklist__list">
+    {items.map((item) => <li>{item}</li>)}
+  </ul>
+</section>

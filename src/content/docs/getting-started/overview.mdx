@@ -5,57 +5,73 @@ sidebar:
   order: 1
 ---
 
-import demoVideo from "../../../assets/demo/demo.mp4";
+import CoreCapabilitiesCarousel from "../../../components/CoreCapabilitiesCarousel.astro";
 
-AppraiseJS is a local-first, visual test development and execution platform.  
-It combines test authoring, orchestration, and reporting in a single Next.js app, while generating portable test artifacts (Gherkin + Cucumber/Playwright execution flow) behind the scenes.
+Modern test automation is fragmented. <br/><br/>
 
-At a high level, you model test logic in the UI and AppraiseJS handles the pipeline:
+You write scripts in one place, manage test cases in another, run them through a separate pipeline, and debug failures somewhere else. **The more your system grows, the more fragile and disconnected everything becomes.** <br/><br/>
 
-1. Define test assets (modules, suites, cases, steps, locators, environments).
-2. Generate and sync executable test artifacts, with reconciliation available from `Settings -> Sync`.
-3. Run tests with configurable execution options.
-4. Persist logs/results and expose detailed reports and metrics.
+AppraiseJS fixes that. <br/><br/>
+
+It brings **test authoring, execution, and analysis** into a single visual system — **without locking you into a proprietary ecosystem**.
+
+---
+
+AppraiseJS is a local-first, visual test authoring, execution, and analysis platform. <br/><br/>
+
+Instead of writing and maintaining test code manually, you **model your test flows visually**. AppraiseJS handles the heavy lifting — from **generating test scripts** to **orchestrating execution** and **producing structured reports**.
+
+---
+
+> **Own your tests. Always.**  
+> AppraiseJS generates real, portable test artifacts (Gherkin + Playwright) that can run outside the platform. No lock-in. No proprietary formats.
+
+---
+
+## How it works
+
+At a high level, this is how you build and run tests in AppraiseJS:
+
+1. Configure your environment.
+2. Define locators using the intelligent locator picker (built for stability and best practices).
+3. Create test suites to organize your scenarios.
+4. Model test flows visually — no manual scripting required.
+5. Run tests with flexible selection (by suite, tags, or specific cases).
+6. Analyze results through a unified reporting system with all execution data in one place.
+
+---
 
 ## See it in action
 
-See the AppraiseJS workflow: test scenario modeling, execution orchestration, and report visibility in one continuous flow.
+See how easily a user can model test scenarios, run them, and analyze results — all within a single workflow.
 
-<video controls width="100%" class="overview-demo-video">
-  <source src={demoVideo} type="video/mp4" />
-  Your browser does not support the video tag.
+<video
+  class="overview-demo-video"
+  controls
+  preload="metadata"
+  playsinline
+  src="/docs/media/getting-started/overview/overview.mp4"
+>
+  Your browser does not support the overview walkthrough video.
 </video>
 
-## What AppraiseJS is built for
+---
 
-- No-code or low-code test authoring for web automation.
-- Shared usage across QA, manual testers, and developers.
-- Local project ownership with inspectable files and schema-backed data.
-- Fast setup via `create-appraisejs` or direct repo setup scripts.
+## Who AppraiseJS is for
+
+- QA engineers tired of maintaining brittle, code-heavy test suites
+- Developers who want fast test creation without boilerplate overhead
+- Teams that need shared ownership across QA, dev, and product
+- Organizations that want full control over their test artifacts (no vendor lock-in)
+
+---
 
 ## Core capabilities
 
-- Visual test modeling: build a hierarchy of **Modules -> Test Suites -> Test Cases -> Steps**.
-- Visual test modeling: compose scenarios with reusable **Template Steps** (actions and assertions).
-- Reusable selector system: manage **Locator Groups** and **Locators** for stable element references, including live capture with the built-in Chromium picker.
-- Environment-aware execution: define environments (base URLs and credentials) and run against selected targets.
-- Tag-driven orchestration: use identifier/filter tags to select and organize execution scope.
-- Test run management: create named test runs, track lifecycle, and control worker concurrency.
-- Test run management: execute against multiple browser engines (Chromium, Firefox, WebKit).
-- Runtime visibility: stream/store run logs, access run artifacts, and inspect execution traces.
-- Report ingestion and analytics: parse Cucumber JSON into structured report entities.
-- Report ingestion and analytics: surface pass/fail outcomes, durations, and dashboard metrics.
-- Filesystem + database sync: review pending differences and run entity synchronization from `Settings -> Sync`.
-- Filesystem + database sync: regenerate `.feature` files from authored test data.
+<CoreCapabilitiesCarousel />
+<br />
+<br />
+<br />
+<br />
 
-## Mental model
-
-Think of AppraiseJS as a test control plane with an integrated execution engine:
-
-- Author in UI -> persist in DB.
-- Generate/sync Gherkin artifacts.
-- Execute with Cucumber + Playwright.
-- Parse and store results.
-- Explore logs, reports, and metrics in the app.
-
-If you want to start using these capabilities immediately, continue to [Getting Started](/getting-started/getting_started) and then [Quick Start](/getting-started/quick_start).
+If you want to start using these capabilities immediately, continue to [Installation](/getting-started/installation) and then [Quick Start](/getting-started/quick-start).

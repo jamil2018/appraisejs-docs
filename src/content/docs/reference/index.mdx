@@ -1,0 +1,44 @@
+---
+title: Reference
+description: Concise implementation references for experienced users and maintainers.
+sidebar:
+  hidden: true
+---
+
+import DocHero from "../../../components/DocHero.astro";
+import CalloutGrid from "../../../components/CalloutGrid.astro";
+
+<DocHero
+  eyebrow="Overview"
+  summary="This section is intentionally concise. If you are still learning the product, use the tutorials and guides first and come back here when you need exact signatures, parameter rules, or deep internals."
+  meta={[
+    "Audience: experienced users",
+    "Focus: exact signatures and advanced mechanics",
+  ]}
+/>
+
+<CalloutGrid
+  items={[
+    {
+      title: "Step references",
+      body: "Exact built-in signatures, parameter meanings, examples, and common failures.",
+      href: "/reference/step-references/step-parameter-conventions/",
+      cta: "Open references",
+      tone: "accent",
+    },
+    {
+      title: "Advanced architecture",
+      body: "Execution lifecycle, sync pipeline, report persistence, and runtime services.",
+      href: "/reference/architecture/execution-lifecycle/",
+      cta: "Open internals",
+      tone: "default",
+    },
+    {
+      title: "Advanced operations",
+      body: "Scripted maintenance and sync workflows when the UI is not the right tool.",
+      href: "/reference/operations/sync-and-scripts/",
+      cta: "Open operations",
+      tone: "success",
+    },
+  ]}
+/>
