@@ -3,6 +3,8 @@ import {
   BarChart3,
   Blocks,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   ChevronUp,
   Crosshair,
   Eye,
@@ -87,7 +89,18 @@ const features = [
         data-ccc-prev
         aria-label="Scroll to previous slide"
       >
-        <ChevronUp aria-hidden="true" size={16} stroke-width={2} />
+        <span
+          class="ccc__scroll-icon ccc__scroll-icon--desktop"
+          aria-hidden="true"
+        >
+          <ChevronUp size={16} stroke-width={2} />
+        </span>
+        <span
+          class="ccc__scroll-icon ccc__scroll-icon--mobile"
+          aria-hidden="true"
+        >
+          <ChevronLeft size={16} stroke-width={2} />
+        </span>
       </button>
 
       <nav class="ccc__markers" data-ccc-markers aria-label="Slide markers">
@@ -113,7 +126,18 @@ const features = [
         data-ccc-next
         aria-label="Scroll to next slide"
       >
-        <ChevronDown aria-hidden="true" size={16} stroke-width={2} />
+        <span
+          class="ccc__scroll-icon ccc__scroll-icon--desktop"
+          aria-hidden="true"
+        >
+          <ChevronDown size={16} stroke-width={2} />
+        </span>
+        <span
+          class="ccc__scroll-icon ccc__scroll-icon--mobile"
+          aria-hidden="true"
+        >
+          <ChevronRight size={16} stroke-width={2} />
+        </span>
       </button>
     </div>
 
@@ -148,7 +172,7 @@ const features = [
     </div>
   </div>
 
-  <p class="ccc__live" data-ccc-live aria-live="polite" />
+  <p class="ccc__live" data-ccc-live aria-live="polite"></p>
 </div>
 
 <style>
@@ -194,50 +218,6 @@ const features = [
     flex-shrink: 0;
     inline-size: var(--ccc-hit);
     min-inline-size: 0;
-  }
-
-  @media (max-width: 520px) {
-    .ccc__layout {
-      grid-template-columns: minmax(0, 1fr);
-      grid-template-rows: auto auto;
-    }
-
-    .ccc__rail {
-      --ccc-hit: 1.45rem;
-      container-type: inline-size;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: var(--ccc-rail-gap, clamp(0.12rem, 0.35cqh, 0.28rem));
-      block-size: auto;
-      inline-size: auto;
-    }
-
-    .ccc__markers {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-evenly;
-      flex: 0 1 auto;
-      height: auto;
-      min-height: auto;
-      max-block-size: none;
-      inline-size: 100%;
-      max-inline-size: 100%;
-      overflow-x: auto;
-      overflow-y: visible;
-      gap: 0.35rem;
-      mask: linear-gradient(
-        to right,
-        transparent 0,
-        black 10px,
-        black calc(100% - 10px),
-        transparent 100%
-      );
-    }
-
-    .ccc__marker {
-      font-size: 0.68rem;
-    }
   }
 
   /* Numbered markers — middle grid row; must not paint past row (was overlapping ↓ button) */
@@ -485,6 +465,10 @@ const features = [
     flex-shrink: 0;
   }
 
+  .ccc__scroll-icon--mobile {
+    display: none;
+  }
+
   .ccc__scroll-btn:hover {
     border-color: hsl(var(--primary) / 0.45);
     color: hsl(var(--primary));
@@ -515,6 +499,93 @@ const features = [
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+  }
+
+  @media (max-width: 520px) {
+    .ccc {
+      --ccc-stage-h: auto;
+      --ccc-gap: 0.9rem;
+    }
+
+    .ccc__layout {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: auto auto;
+      gap: 0.9rem;
+    }
+
+    .ccc__rail {
+      --ccc-hit: 1.45rem;
+      --ccc-rail-gap: 0.5rem;
+      container-type: inline-size;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      grid-template-rows: auto;
+      align-items: center;
+      justify-items: stretch;
+      column-gap: var(--ccc-rail-gap);
+      row-gap: 0;
+      block-size: auto;
+      inline-size: 100%;
+    }
+
+    .ccc__scroll-btn {
+      align-self: center;
+      justify-self: center;
+    }
+
+    .ccc__scroll-icon--desktop {
+      display: none;
+    }
+
+    .ccc__scroll-icon--mobile {
+      display: inline-flex;
+    }
+
+    .ccc__markers {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0;
+      gap: 0.35rem;
+      width: auto;
+      height: auto;
+      min-height: auto;
+      max-height: none;
+      inline-size: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-inline: 0.15rem;
+      mask: linear-gradient(
+        to right,
+        transparent 0,
+        black 10px,
+        black calc(100% - 10px),
+        transparent 100%
+      );
+    }
+
+    .ccc__marker {
+      font-size: 0.68rem;
+    }
+
+    .ccc__carousel {
+      block-size: auto;
+      max-block-size: min(30rem, 65svh);
+    }
+
+    .ccc__carousel::before,
+    .ccc__carousel::after {
+      block-size: 0;
+    }
+
+    .ccc__card {
+      min-block-size: auto;
+    }
+
+    .ccc__scroll-btn--down {
+      margin-top: 0;
+    }
   }
 </style>
 
@@ -611,9 +682,12 @@ const features = [
         behavior: prefersReducedMotion ? "auto" : "smooth",
       });
       /* scrollend is missing in some browsers; smooth scroll may omit final scroll event */
-      scrollSyncTimer = window.setTimeout(() => {
-        setSnapped(nearestIndex());
-      }, prefersReducedMotion ? 32 : 340);
+      scrollSyncTimer = window.setTimeout(
+        () => {
+          setSnapped(nearestIndex());
+        },
+        prefersReducedMotion ? 32 : 340,
+      );
     }
 
     function onScrollEnd() {
