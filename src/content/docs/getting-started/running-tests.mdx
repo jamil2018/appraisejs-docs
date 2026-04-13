@@ -46,7 +46,7 @@ import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
   how to verify that AppraiseJS ran the intended scope.
 </OutcomeCard>
 
-## Step-by-step procedure
+## Test run flows
 
 ```nomnoml
 #direction: right
@@ -61,6 +61,19 @@ import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 [Create run] -> [Watch run details]
 ```
 
+## Choosing a run type
+
+| Mode          | Use when                               | Example         |
+| ------------- | -------------------------------------- | --------------- |
+| By Tags       | You want a reusable group of scenarios | @smoke, @auth   |
+| By Test Cases | You need specific named test cases     | Login, Checkout |
+
+<br/>
+> ⚠️ **Key Decision**
+> Your choice between `By Tags` and `By Test Cases` defines the scope of your run. Make this decision before configuring the rest of the run.
+
+## Running a test
+
 1. Open `Test Runs -> Create`.
 2. Decide between `By Tags` and `By Test Cases`.
 3. Choose `By Tags` if you want a reusable slice such as `@smoke` or `@auth`.
@@ -70,31 +83,35 @@ import MediaPlaceholder from "../../../components/MediaPlaceholder.astro";
 7. Submit the run and open the run details page immediately.
 8. Watch live status, then confirm the final scope, status, and linked report after completion.
 
-The first decision on this page is the run-creation branch itself. Users should be able to compare the two input modes before they submit, especially when tags and explicit cases feel interchangeable in prose.
+AppraiseJS separates these modes so you can switch between repeatable regression runs and targeted debugging without restructuring your test suite.
 
-<MediaPlaceholder
-  type="screenshot"
-  title="Run creation modes showing `By Tags` and `By Test Cases`"
-  why="Which fields change when I choose `By Tags` instead of `By Test Cases`?"
-  priority="must-have"
-  context="Running Tests -> Run creation"
-  capture="Capture the run creation page with both selection modes represented clearly enough that the branch-specific fields are easy to compare."
-  successState="The difference between the two modes is obvious, including how scope is chosen before submission."
-/>
+<br />
+Choosing between `By Tags` and `By Test Cases` upfront ensures your run scope is
+intentional and avoids confusion when reviewing results later.
 
-After submission, the main uncertainty becomes status changes and the route into reports. The monitoring clip should show what to watch and what action opens the next useful screen.
+<br />
+Here is a demo of running tests by tags.
+<br />
+<video
+  controls
+  preload="metadata"
+  playsinline
+  src="/docs/media/getting-started/running-tests/running-tests-by-tags.mp4"
+>
+  Your browser does not support the running tests by tags video.
+</video>
 
-<MediaPlaceholder
-  type="video"
-  title="Run monitoring flow from submission through report handoff"
-  why="What should I watch after I submit the run, and where do I click when it is done?"
-  priority="should-have"
-  context="Running Tests -> Run details monitoring"
-  capture="Record submitting a run, opening the run details view, showing at least one status progression, and opening the completed report from that flow."
-  successState="The viewer can follow status progression and identify the exact handoff into reports."
-/>
-
-With those visuals in place, the reader should be able to tell whether a problem is selection-related, execution-related, or something to debug later in [Viewing Reports](/getting-started/viewing-reports/).
+<br />
+Here is a demo of running tests by test cases.
+<br />
+<video
+  controls
+  preload="metadata"
+  playsinline
+  src="/docs/media/getting-started/running-tests/running-tests-by-test-cases.mp4"
+>
+  Your browser does not support the running tests by test cases video.
+</video>
 
 ## Checkpoint
 

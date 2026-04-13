@@ -349,8 +349,15 @@ body:not(:has(.landing-root)) .content-panel {
   padding-top: 1.4rem;
 }
 
-.sl-markdown-content > :where(p, ul, ol, blockquote, table) {
+.sl-markdown-content > :where(p, ul, ol, blockquote) {
   max-width: var(--doc-measure);
+}
+
+/* Tables: full content width (paragraph measure is too narrow for multi-column layouts). */
+.sl-markdown-content > table {
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .sl-markdown-content > :where(h1, h2, h3, h4, h5, h6) {
@@ -438,20 +445,29 @@ body:has(.sidebar-pane a[aria-current][href^="/reference/"])
   padding: 0.9rem 1rem;
 }
 
-.sl-markdown-content table {
+/* Match Starlight’s selector specificity so we override `display: block` (which prevents
+   columns from expanding to the content column width). */
+.sl-markdown-content table:not(:where(.not-content *)) {
+  display: table;
   width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  table-layout: fixed;
   border-collapse: separate;
   border-spacing: 0;
   overflow: hidden;
   border: 1px solid var(--sl-color-hairline-light);
   border-radius: 0.9rem;
   background: hsl(var(--doc-surface) / 0.75);
+  box-sizing: border-box;
 }
 
 .sl-markdown-content th,
 .sl-markdown-content td {
   padding: 0.75rem 0.9rem;
   vertical-align: top;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .sl-markdown-content th {
