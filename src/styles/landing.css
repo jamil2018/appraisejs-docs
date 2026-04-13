@@ -2325,7 +2325,7 @@ body:has(.landing-root) .sl-markdown-content {
   }
 
   .landing-hero__visual {
-    margin-top: 2.75rem;
+    display: none;
   }
 
   .landing-hero__visual-frame {

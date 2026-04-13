@@ -274,7 +274,13 @@ import { CirclePlay } from "@lucide/astro";
   function initHero() {
     const root = document.querySelector("[data-hero-visual]");
 
-    if (!root || root.dataset.heroReady) return;
+    if (!root) return;
+
+    const isMobileView =
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 48rem)").matches;
+
+    if (isMobileView || root.dataset.heroReady) return;
 
     root.dataset.heroReady = "true";
 
