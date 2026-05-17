@@ -1,9 +1,13 @@
+---
+import { ExternalLink, Menu, X } from "@lucide/astro";
+---
+
 <section class="landing-navbar-shell" aria-label="Landing navigation">
   <div class="landing-navbar" id="landing-navbar">
-    <strong class="landing-navbar__brand">
-      <img src="/logo.svg" alt="AppraiseJS Logo" class="landing-navbar__logo" />
-      AppraiseJS
-    </strong>
+    <a class="landing-navbar__brand" href="/" aria-label="AppraiseJS home">
+      <img src="/logo.svg" alt="" class="landing-navbar__logo" />
+      <span>AppraiseJS</span>
+    </a>
     <button
       type="button"
       class="landing-navbar__hamburger"
@@ -12,25 +16,21 @@
       aria-controls="landing-navbar-menu"
       id="landing-navbar-hamburger"
     >
-      <span class="landing-navbar__hamburger-icon" aria-hidden="true">
-        <span></span>
-        <span></span>
-        <span></span>
-      </span>
+      <Menu class="landing-navbar__menu-icon" aria-hidden="true" />
+      <X class="landing-navbar__close-icon" aria-hidden="true" />
     </button>
-    <nav
-      class="landing-navbar__links"
-      id="landing-navbar-menu"
-      aria-label="Landing sections"
-    >
-      <a href="/getting-started/overview/">Product</a>
-      <a href="/core-concepts/architecture-overview/">Architecture</a>
-      <a href="/run-and-analyze/">Guides</a>
+    <nav class="landing-navbar__links" id="landing-navbar-menu" aria-label="Landing links">
+      <a href="/getting-started/quick-start/">Get Started</a>
+      <a href="/getting-started/overview/">Explore Docs</a>
+      <a href="/getting-started/overview/#see-it-in-action">Watch Demo</a>
       <a
-        href="/getting-started/quick-start/"
-        class="landing-cta-button text-white!"
+        href="https://github.com/jamil2018/appraisejs-core"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="landing-navbar__github"
       >
-        Get Started
+        <ExternalLink aria-hidden="true" />
+        GitHub
       </a>
     </nav>
   </div>
@@ -48,14 +48,9 @@
     const hamburger = document.getElementById("landing-navbar-hamburger");
     const menu = document.getElementById("landing-navbar-menu");
 
-    if (!(navbar && hamburger && menu)) {
-      landingNavbarState.cleanup = null;
-      return;
-    }
+    if (!(navbar && hamburger && menu)) return;
 
     const controller = new AbortController();
-    const { signal } = controller;
-
     const closeMenu = () => {
       navbar.classList.remove("is-open");
       hamburger.setAttribute("aria-expanded", "false");
@@ -67,11 +62,11 @@
         const isOpen = navbar.classList.toggle("is-open");
         hamburger.setAttribute("aria-expanded", String(isOpen));
       },
-      { signal },
+      { signal: controller.signal },
     );
 
     menu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", closeMenu, { signal });
+      link.addEventListener("click", closeMenu, { signal: controller.signal });
     });
 
     document.addEventListener(
@@ -79,17 +74,13 @@
       (event) => {
         if (event.key === "Escape") closeMenu();
       },
-      { signal },
+      { signal: controller.signal },
     );
 
     landingNavbarState.cleanup = () => controller.abort();
   }
 
   document.addEventListener("astro:page-load", initLandingNavbar);
-  document.addEventListener("astro:before-swap", () => {
-    landingNavbarState.cleanup?.();
-    landingNavbarState.cleanup = null;
-  });
-
+  document.addEventListener("astro:before-swap", () => landingNavbarState.cleanup?.());
   initLandingNavbar();
 </script>

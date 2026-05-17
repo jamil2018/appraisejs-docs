@@ -1,145 +1,73 @@
 ---
-import { MousePointer2, Terminal, Zap } from "@lucide/astro";
+import { Crosshair, FileCode2, MousePointer2, TerminalSquare } from "@lucide/astro";
 ---
 
-<section
-  class="landing-tooling landing-shell"
-  aria-labelledby="landing-tooling-heading"
->
-  <div class="landing-section-copy landing-section-copy--center">
-    <h2 id="landing-tooling-heading" class="landing-section-title">
-      Precision-Engineered Tooling
+<section class="tool-showcase landing-shell" aria-labelledby="locator-heading">
+  <div class="tool-showcase__copy">
+    <p class="landing-kicker">Locator Creator</p>
+    <h2 id="locator-heading" class="landing-section-title">
+      Selectors captured with intent, not guesswork.
     </h2>
     <p class="landing-section-description">
-      Everything around the builder is designed to help teams ship faster:
-      resilient selectors, custom step nodes, debuggable reports, and execution
-      that stays in your environment.
+      Capture target elements, inspect candidate strategies, and keep locator
+      groups tied to the workflows that consume them.
     </p>
   </div>
 
-  <div class="landing-tooling__grid">
-    <article class="landing-tooling-card landing-tooling-card--builder">
-      <div class="landing-tooling-card__copy">
-        <h3>Visual Test Builder</h3>
-        <p>
-          Build complex browser journeys visually, reuse logic across
-          scenarios, and keep flows easy to evolve as your product changes.
-        </p>
+  <div class="locator-panel" data-reveal>
+    <div class="locator-panel__browser">
+      <div class="landing-panel__bar">
+        <span>checkout.local</span>
+        <span>inspect mode</span>
       </div>
-
-      <div class="landing-tooling-builder" aria-hidden="true">
-        <div class="landing-tooling-builder__frame">
-          <div class="landing-tooling-node">
-            <span>Navigate</span>
-            <strong>Base URL</strong>
-          </div>
-          <span class="landing-tooling-node__line"></span>
-          <div class="landing-tooling-node">
-            <span>Input</span>
-            <strong>Fill Email</strong>
-          </div>
-          <span class="landing-tooling-node__line"></span>
-          <div class="landing-tooling-node landing-tooling-node--active">
-            <span>Click</span>
-            <strong>Login</strong>
-          </div>
-        </div>
+      <div class="locator-panel__page" aria-hidden="true">
+        <span class="locator-panel__field"></span>
+        <span class="locator-panel__field locator-panel__field--short"></span>
+        <span class="locator-panel__target">
+          <Crosshair />
+        </span>
       </div>
-    </article>
-
-    <div class="landing-tooling__stack" style="margin-top: 0rem;">
-      <article class="landing-tooling-card landing-tooling-card--compact">
-        <div
-          class="landing-tooling-visual landing-tooling-visual--locator"
-          aria-hidden="true"
-        >
-          <div class="landing-tooling-locator-frame">
-            <span class="landing-tooling-icon landing-tooling-icon--pointer">
-              <MousePointer2 />
-            </span>
-            <span class="landing-tooling-locator-badge">#submit-btn</span>
-          </div>
-        </div>
-        <div class="landing-tooling-card__copy">
-          <h3>Locator Creator</h3>
-          <p>
-            Generate resilient selectors faster so UI changes do not turn into
-            constant test rewrites.
-          </p>
-        </div>
-      </article>
-
-      <article class="landing-tooling-card landing-tooling-card--compact">
-        <div
-          class="landing-tooling-visual landing-tooling-visual--sync"
-          aria-hidden="true"
-        >
-          <span class="landing-tooling-icon landing-tooling-icon--folder">
-            <Terminal />
-          </span>
-          <span class="landing-tooling-sync-line"></span>
-          <span
-            class="landing-tooling-icon landing-tooling-icon--zap landing-tooling-icon--zap-ring"
-          >
-            <Zap />
-          </span>
-        </div>
-        <div class="landing-tooling-card__copy">
-          <h3>Dynamic Step Integrator</h3>
-          <p>
-            Add the step nodes you need from the CLI and bring custom actions
-            straight into the visual builder.
-          </p>
-        </div>
-      </article>
     </div>
+    <div class="locator-panel__details">
+      <span class="tool-icon" aria-hidden="true"><MousePointer2 /></span>
+      <h3>Primary checkout button</h3>
+      <dl>
+        <div><dt>Role</dt><dd>button</dd></div>
+        <div><dt>Name</dt><dd>Complete order</dd></div>
+        <div><dt>Fallback</dt><dd>data-testid="submit-order"</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
 
-    <article class="landing-tooling-card landing-tooling-card--reporting">
-      <div class="landing-tooling-report" aria-hidden="true">
-        <span
-          class="landing-tooling-report__bar landing-tooling-report__bar--soft"
-        ></span>
-        <span
-          class="landing-tooling-report__bar landing-tooling-report__bar--mid"
-        ></span>
-        <span
-          class="landing-tooling-report__bar landing-tooling-report__bar--primary"
-        ></span>
-        <span
-          class="landing-tooling-report__bar landing-tooling-report__bar--accent"
-        ></span>
-      </div>
-      <div class="landing-tooling-card__copy">
-        <h3>Reporting &amp; Log Analysis</h3>
-        <p>
-          Move from failed run to root cause faster with logs, traces, and
-          visual evidence in one place.
-        </p>
-      </div>
-    </article>
+<section class="tool-showcase tool-showcase--reverse landing-shell" aria-labelledby="integrator-heading">
+  <div class="tool-showcase__copy">
+    <p class="landing-kicker">Dynamic Step Integrator</p>
+    <h2 id="integrator-heading" class="landing-section-title">
+      Custom automation steps become reusable visual building blocks.
+    </h2>
+    <p class="landing-section-description">
+      Bring domain-specific Playwright helpers into the builder without turning
+      the generated output into a black box.
+    </p>
+  </div>
 
-    <article class="landing-tooling-card landing-tooling-card--terminal">
-      <div class="landing-tooling-terminal" aria-hidden="true">
-        <div class="landing-tooling-terminal__item">
-          <span>npm test</span>
-          <span class="landing-tooling-icon landing-tooling-icon--terminal">
-            <Terminal />
-          </span>
-        </div>
-        <div class="landing-tooling-terminal__item">
-          <span>npx playwright test</span>
-          <span class="landing-tooling-icon landing-tooling-icon--zap">
-            <Zap />
-          </span>
-        </div>
-      </div>
-      <div class="landing-tooling-card__copy">
-        <h3>Local-First Execution</h3>
-        <p>
-          Run inside your repo, on your machines, and in your CI stack without
-          handing execution to a proprietary runner.
-        </p>
-      </div>
-    </article>
+  <div class="integrator-panel" data-reveal>
+    <div class="landing-panel__bar">
+      <span>dynamic-steps.ts</span>
+      <span>registered</span>
+    </div>
+    <pre><code><span class="token-key">registerStep</span>(&#123;
+  name: <span class="token-string">"Apply coupon"</span>,
+  inputs: [<span class="token-string">"code"</span>],
+  run: async (&#123; page, code &#125;) =&gt; &#123;
+    await page.getByLabel(<span class="token-string">"Coupon"</span>).fill(code);
+    await page.getByRole(<span class="token-string">"button"</span>, &#123; name: <span class="token-string">"Apply"</span> &#125;).click();
+  &#125;,
+&#125;);</code></pre>
+    <div class="integrator-panel__footer">
+      <span><FileCode2 aria-hidden="true" /> emitted as support code</span>
+      <span><TerminalSquare aria-hidden="true" /> runnable in CI</span>
+    </div>
   </div>
 </section>

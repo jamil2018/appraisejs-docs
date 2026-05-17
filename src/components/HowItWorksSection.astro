@@ -1,385 +1,95 @@
 ---
+import { Boxes, Braces, Code2, Database, GitFork, ShieldCheck } from "@lucide/astro";
 
+const features = [
+  {
+    title: "Flow Builder 2.0",
+    description: "Compose browser journeys as structured blocks, branches, and reusable step groups.",
+    icon: GitFork,
+  },
+  {
+    title: "Locator Creator",
+    description: "Capture resilient selectors with context instead of hand-maintaining brittle CSS paths.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Dynamic Integrator",
+    description: "Register custom steps and expose them inside the builder as first-class actions.",
+    icon: Boxes,
+  },
+  {
+    title: "Portable Output",
+    description: "Generate Playwright, Cucumber, and support files that stay readable in git.",
+    icon: Code2,
+  },
+  {
+    title: "Local-First",
+    description: "Run on developer machines and CI without routing execution through a hosted runner.",
+    icon: Database,
+  },
+  {
+    title: "Structured Engine",
+    description: "Keep workflows deterministic with explicit inputs, artifacts, and execution state.",
+    icon: Braces,
+  },
+];
 ---
 
-<section class="hiw" aria-labelledby="hiw-heading">
-  <div class="hiw__track">
-    <div class="hiw__sticky">
-      <div class="hiw__header landing-shell">
-        <h2 id="hiw-heading" class="landing-section-title">How it Works</h2>
-      </div>
+<section class="landing-features landing-shell" aria-labelledby="features-heading">
+  <div class="landing-section-copy">
+    <p class="landing-kicker">Operational surface</p>
+    <h2 id="features-heading" class="landing-section-title">
+      Designed for teams that need the visual layer and the code layer to agree.
+    </h2>
+  </div>
 
-      <div class="hiw__columns landing-shell">
-        <!-- Left: progress indicator + phase copy -->
-        <aside class="hiw__sidebar">
-          <nav class="hiw__nav" aria-label="Process steps">
-            <ol class="hiw__progress">
-              <li class="hiw__progress-step is-active" data-phase="0">
-                <span class="hiw__progress-dot" aria-hidden="true"></span>
-                <span class="hiw__progress-label">Visual Flow</span>
-              </li>
-              <li class="hiw__progress-step" data-phase="1">
-                <span class="hiw__progress-dot" aria-hidden="true"></span>
-                <span class="hiw__progress-label">Code Generation</span>
-              </li>
-              <li class="hiw__progress-step" data-phase="2">
-                <span class="hiw__progress-dot" aria-hidden="true"></span>
-                <span class="hiw__progress-label">Execution</span>
-              </li>
-              <li class="hiw__progress-step" data-phase="3">
-                <span class="hiw__progress-dot" aria-hidden="true"></span>
-                <span class="hiw__progress-label">Reports</span>
-              </li>
-            </ol>
-          </nav>
+  <div class="feature-grid" data-reveal-group>
+    {
+      features.map((feature) => {
+        const Icon = feature.icon;
+        return (
+          <article class="feature-card" data-reveal>
+            <span class="feature-card__icon" aria-hidden="true"><Icon /></span>
+            <h3>{feature.title}</h3>
+            <p>{feature.description}</p>
+          </article>
+        );
+      })
+    }
+  </div>
+</section>
 
-          <div class="hiw__copy-area">
-            <div class="hiw__copy is-active" data-phase="0">
-              <h3>Design scenarios visually</h3>
-              <p>
-                Build test flows in the browser with reusable, composable nodes.
-                No code required to get started.
-              </p>
-            </div>
-            <div class="hiw__copy" data-phase="1">
-              <h3>Transform flows into real code</h3>
-              <p>
-                AppraiseJS generates standard Playwright + Cucumber output
-                directly from your visual scenarios.
-              </p>
-            </div>
-            <div class="hiw__copy" data-phase="2">
-              <h3>Run inside your environment</h3>
-              <p>
-                Execute in your repo, on your machines, inside your CI stack.
-                Nothing leaves your infrastructure.
-              </p>
-            </div>
-            <div class="hiw__copy" data-phase="3">
-              <h3>Trace everything that happened</h3>
-              <p>
-                Rich reports with logs, screenshots, and clear execution signals
-                make debugging effortless.
-              </p>
-            </div>
-          </div>
-        </aside>
+<section class="landing-showcase landing-showcase--wide" aria-labelledby="workflow-heading">
+  <div class="landing-shell landing-shell--wide">
+    <div class="landing-section-copy">
+      <p class="landing-kicker">Execution model</p>
+      <h2 id="workflow-heading" class="landing-section-title">
+        Build the workflow once. Emit real automation every time.
+      </h2>
+    </div>
 
-        <!-- Right: animated visual panels -->
-        <div class="hiw__viewport">
-          <div class="hiw__viewport-glow" aria-hidden="true"></div>
-
-          <!-- Phase 0: Visual Flow Builder -->
-          <div class="hiw__panel is-active" data-phase="0">
-            <div class="hiw__panel-mobile-head">
-              <span class="hiw__mobile-step" aria-hidden="true">01</span>
-              <h3>Design scenarios visually</h3>
-              <p>
-                Build test flows in the browser with reusable, composable nodes.
-              </p>
-            </div>
-            <div class="hiw-panel__chrome">
-              <span class="hiw-panel__dot" aria-hidden="true"></span>
-              <span class="hiw-panel__title">SCENARIO BUILDER</span>
-            </div>
-            <div class="hiw-flow">
-              <div class="hiw-flow__node" data-seq="0">
-                <span class="hiw-flow__kind">ACTION</span>
-                <strong>Open App</strong>
-                <span class="hiw-flow__port" aria-hidden="true"></span>
-              </div>
-              <div class="hiw-flow__edge" data-seq="1" aria-hidden="true"></div>
-              <div class="hiw-flow__node" data-seq="2">
-                <span class="hiw-flow__kind">ACTION</span>
-                <strong>Click Login</strong>
-                <span class="hiw-flow__port" aria-hidden="true"></span>
-              </div>
-              <div class="hiw-flow__edge" data-seq="3" aria-hidden="true"></div>
-              <div class="hiw-flow__node hiw-flow__node--assert" data-seq="4">
-                <span class="hiw-flow__kind hiw-flow__kind--assert"
-                  >ASSERTION</span
-                >
-                <strong>See Dashboard</strong>
-              </div>
-            </div>
-          </div>
-
-          <!-- Phase 1: Code Generation -->
-          <div class="hiw__panel" data-phase="1">
-            <div class="hiw__panel-mobile-head">
-              <span class="hiw__mobile-step" aria-hidden="true">02</span>
-              <h3>Transform flows into real code</h3>
-              <p>
-                Generates standard Playwright + Cucumber output from your visual
-                scenarios.
-              </p>
-            </div>
-            <div class="hiw-codegen">
-              <div class="hiw-codegen__header">
-                <div class="hiw-codegen__header-half">
-                  <span class="hiw-panel__dot" aria-hidden="true"></span>
-                  <span class="hiw-panel__title">FLOW</span>
-                </div>
-                <div
-                  class="hiw-codegen__header-half hiw-codegen__header-half--code"
-                  style="margin-top: 0;"
-                >
-                  <span class="hiw-panel__dot" aria-hidden="true"></span>
-                  <span class="hiw-panel__title">scenario.feature</span>
-                  <span class="hiw-codegen__chip">.feature</span>
-                </div>
-              </div>
-              <div class="hiw-codegen__body">
-                <div class="hiw-codegen__flow-col">
-                  <div class="hiw-codegen__nodes">
-                    <div class="hiw-codegen__mini" data-link="3">
-                      <span class="hiw-codegen__mini-kind">ACTION</span>
-                      <strong>Open App</strong>
-                    </div>
-                    <div class="hiw-codegen__wire" aria-hidden="true"></div>
-                    <div class="hiw-codegen__mini" data-link="4">
-                      <span class="hiw-codegen__mini-kind">ACTION</span>
-                      <strong>Click Login</strong>
-                    </div>
-                    <div class="hiw-codegen__wire" aria-hidden="true"></div>
-                    <div
-                      class="hiw-codegen__mini hiw-codegen__mini--assert"
-                      data-link="5"
-                    >
-                      <span
-                        class="hiw-codegen__mini-kind hiw-codegen__mini-kind--assert"
-                        >ASSERT</span
-                      >
-                      <strong>See Dashboard</strong>
-                    </div>
-                  </div>
-                </div>
-                <div class="hiw-codegen__code-col" style="margin-top: 0;">
-                  <div class="hiw-codegen__lines">
-                    <p class="hiw-codegen__line" data-li="0">
-                      <span class="sk">Feature:</span>
-                      <span class="st">Login Flow</span>
-                    </p>
-                    <p
-                      class="hiw-codegen__line hiw-codegen__line--blank"
-                      data-li="1"
-                    >
-                      &nbsp;
-                    </p>
-                    <p
-                      class="hiw-codegen__line hiw-codegen__line--i1"
-                      data-li="2"
-                    >
-                      <span class="sk">Scenario:</span>
-                      <span class="st">User logs in successfully</span>
-                    </p>
-                    <p
-                      class="hiw-codegen__line hiw-codegen__line--i2"
-                      data-li="3"
-                    >
-                      <span class="sk">Given</span>
-                      <span class="st">I open the application</span>
-                    </p>
-                    <p
-                      class="hiw-codegen__line hiw-codegen__line--i2"
-                      data-li="4"
-                    >
-                      <span class="sk">When</span>
-                      <span class="st">I click the login button</span>
-                    </p>
-                    <p
-                      class="hiw-codegen__line hiw-codegen__line--i2"
-                      data-li="5"
-                    >
-                      <span class="sk">Then</span>
-                      <span class="st">I should see the dashboard</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Phase 2: Execution -->
-          <div class="hiw__panel" data-phase="2">
-            <div class="hiw__panel-mobile-head">
-              <span class="hiw__mobile-step" aria-hidden="true">03</span>
-              <h3>Run inside your environment</h3>
-              <p>
-                Execute in your repo, on your machines, inside your CI stack.
-              </p>
-            </div>
-            <div class="hiw-panel__chrome">
-              <span class="hiw-panel__dot" aria-hidden="true"></span>
-              <span class="hiw-panel__title">TEST RUNNER</span>
-              <span class="hiw-runner__file">login-flow.feature</span>
-            </div>
-            <div class="hiw-runner">
-              <div class="hiw-runner__steps">
-                <div class="hiw-runner__step" data-idx="0">
-                  <span class="hiw-runner__check" aria-hidden="true"></span>
-                  <span class="hiw-runner__label">
-                    <span class="sk">Given</span> I open the application
-                  </span>
-                  <span class="hiw-runner__badge">pending</span>
-                  <span class="hiw-runner__ms">120ms</span>
-                </div>
-                <div class="hiw-runner__step" data-idx="1">
-                  <span class="hiw-runner__check" aria-hidden="true"></span>
-                  <span class="hiw-runner__label">
-                    <span class="sk">When</span> I click the login button
-                  </span>
-                  <span class="hiw-runner__badge">pending</span>
-                  <span class="hiw-runner__ms">85ms</span>
-                </div>
-                <div class="hiw-runner__step" data-idx="2">
-                  <span class="hiw-runner__check" aria-hidden="true"></span>
-                  <span class="hiw-runner__label">
-                    <span class="sk">Then</span> I should see the dashboard
-                  </span>
-                  <span class="hiw-runner__badge">pending</span>
-                  <span class="hiw-runner__ms">210ms</span>
-                </div>
-              </div>
-              <div class="hiw-runner__term">
-                <p data-ti="0">
-                  <span class="hiw-runner__prompt">$</span> npm run test
-                </p>
-                <p data-ti="1">
-                  <span class="hiw-runner__arrow">▸</span> Running: login-flow.feature
-                </p>
-                <p data-ti="2">
-                  &nbsp;&nbsp;✓ Step 1/3 passed <span class="hiw-runner__dim"
-                    >(120ms)</span
-                  >
-                </p>
-                <p data-ti="3">
-                  &nbsp;&nbsp;✓ Step 2/3 passed <span class="hiw-runner__dim"
-                    >(85ms)</span
-                  >
-                </p>
-                <p data-ti="4">
-                  &nbsp;&nbsp;✓ Step 3/3 passed <span class="hiw-runner__dim"
-                    >(210ms)</span
-                  >
-                </p>
-                <p class="hiw-runner__ok" data-ti="5">
-                  ✓ Scenario passed <span class="hiw-runner__dim">(415ms)</span>
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Phase 3: Reporting -->
-          <div class="hiw__panel" data-phase="3">
-            <div class="hiw__panel-mobile-head">
-              <span class="hiw__mobile-step" aria-hidden="true">04</span>
-              <h3>Trace everything that happened</h3>
-              <p>
-                Rich reports with logs, screenshots, and clear execution
-                signals.
-              </p>
-            </div>
-            <div class="hiw-panel__chrome">
-              <span class="hiw-panel__dot" aria-hidden="true"></span>
-              <span class="hiw-panel__title">TEST REPORT</span>
-              <span class="hiw-report__scenario">Login Flow</span>
-            </div>
-            <div class="hiw-report">
-              <div class="hiw-report__cards">
-                <div class="hiw-report__card" data-ci="0">
-                  <span class="hiw-report__card-val hiw-report__card-val--pass"
-                    >3</span
-                  >
-                  <span class="hiw-report__card-lbl">Passed</span>
-                </div>
-                <div class="hiw-report__card" data-ci="1">
-                  <span class="hiw-report__card-val hiw-report__card-val--zero"
-                    >0</span
-                  >
-                  <span class="hiw-report__card-lbl">Failed</span>
-                </div>
-                <div class="hiw-report__card" data-ci="2">
-                  <span class="hiw-report__card-val">100%</span>
-                  <span class="hiw-report__card-lbl">Pass Rate</span>
-                </div>
-                <div class="hiw-report__card" data-ci="3">
-                  <span class="hiw-report__card-val">415ms</span>
-                  <span class="hiw-report__card-lbl">Duration</span>
-                </div>
-              </div>
-
-              <div class="hiw-report__list">
-                <div class="hiw-report__row" data-ri="0">
-                  <span class="hiw-report__row-ok" aria-hidden="true">✓</span>
-                  <span class="hiw-report__row-text"
-                    >Given I open the application</span
-                  >
-                  <span class="hiw-report__row-ms">120ms</span>
-                </div>
-                <div class="hiw-report__row" data-ri="1">
-                  <span class="hiw-report__row-ok" aria-hidden="true">✓</span>
-                  <span class="hiw-report__row-text"
-                    >When I click the login button</span
-                  >
-                  <span class="hiw-report__row-ms">85ms</span>
-                </div>
-                <div class="hiw-report__row" data-ri="2">
-                  <span class="hiw-report__row-ok" aria-hidden="true">✓</span>
-                  <span class="hiw-report__row-text"
-                    >Then I should see the dashboard</span
-                  >
-                  <span class="hiw-report__row-ms">210ms</span>
-                </div>
-              </div>
-
-              <div class="hiw-report__evidence">
-                <div class="hiw-report__ev-head">
-                  <span>SCREENSHOT</span>
-                  <span class="hiw-report__ev-step"
-                    >Step 3 — Dashboard view</span
-                  >
-                </div>
-                <div class="hiw-report__screenshot">
-                  <div class="hiw-report__ss-topbar">
-                    <span class="hiw-report__ss-dot" aria-hidden="true"></span>
-                    <span class="hiw-report__ss-dot" aria-hidden="true"></span>
-                    <span class="hiw-report__ss-dot" aria-hidden="true"></span>
-                    <span class="hiw-report__ss-url"
-                      >app.example.com/dashboard</span
-                    >
-                  </div>
-                  <div class="hiw-report__ss-body">
-                    <div class="hiw-report__ss-sidebar">
-                      <div class="hiw-report__ss-nav-item"></div>
-                      <div
-                        class="hiw-report__ss-nav-item hiw-report__ss-nav-item--active"
-                      >
-                      </div>
-                      <div class="hiw-report__ss-nav-item"></div>
-                      <div class="hiw-report__ss-nav-item"></div>
-                    </div>
-                    <div class="hiw-report__ss-main">
-                      <div class="hiw-report__ss-heading"></div>
-                      <div class="hiw-report__ss-grid">
-                        <div class="hiw-report__ss-tile"></div>
-                        <div class="hiw-report__ss-tile"></div>
-                        <div
-                          class="hiw-report__ss-tile hiw-report__ss-tile--wide"
-                        >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="hiw-report__total">
-                  <span>Total execution time</span>
-                  <strong>415ms</strong>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="workflow-canvas" data-reveal>
+      <div class="workflow-canvas__lane">
+        <article>
+          <span>Create</span>
+          <strong>Checkout Scenario</strong>
+          <p>Visual steps, grouped logic, and reusable test data.</p>
+        </article>
+        <article>
+          <span>Configure</span>
+          <strong>Locators + Parameters</strong>
+          <p>Selectors and runtime inputs stay explicit.</p>
+        </article>
+        <article>
+          <span>Execute</span>
+          <strong>Playwright Runner</strong>
+          <p>Runs locally, in CI, or anywhere your repo runs.</p>
+        </article>
+        <article>
+          <span>Generated Output</span>
+          <strong>.feature / .spec / reports</strong>
+          <p>Artifacts are readable, portable, and versioned.</p>
+        </article>
       </div>
     </div>
   </div>
@@ -389,325 +99,40 @@
   // @ts-nocheck
   import { animate, inView, stagger } from "motion";
 
-  const howItWorksState = (window.__appraiseHowItWorks ??= {
-    cleanup: null,
-  });
+  const revealState = (window.__appraiseLandingReveal ??= { cleanup: [] });
 
-  function init() {
-    howItWorksState.cleanup?.();
+  function initReveals() {
+    revealState.cleanup.forEach((cleanup) => cleanup?.());
+    revealState.cleanup = [];
 
-    const section = document.querySelector(".hiw");
-    if (!section) {
-      howItWorksState.cleanup = null;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const groups = document.querySelectorAll("[data-reveal-group]");
+    const singles = document.querySelectorAll("[data-reveal]:not([data-reveal-group] [data-reveal])");
+
+    if (reduce) {
+      document.querySelectorAll("[data-reveal]").forEach((item) => item.classList.add("is-visible"));
       return;
     }
 
-    const track = section.querySelector(".hiw__track");
-    const panels = section.querySelectorAll(".hiw__panel");
-    const copies = section.querySelectorAll(".hiw__copy");
-    const progressSteps = section.querySelectorAll(".hiw__progress-step");
-
-    const prefersReduced =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (prefersReduced) {
-      showAll(section);
-      howItWorksState.cleanup = null;
-      return;
-    }
-
-    const isDesktop = window.matchMedia("(min-width: 56rem)").matches;
-
-    if (isDesktop && track) {
-      howItWorksState.cleanup = initDesktopScroll(
-        section,
-        track,
-        panels,
-        copies,
-        progressSteps,
-      );
-    } else {
-      howItWorksState.cleanup = initMobileFallback(section, panels);
-    }
-  }
-
-  function showAll(section) {
-    section
-      .querySelectorAll(".hiw__panel")
-      .forEach((p) =>
-        p.classList.add("is-active", "is-revealed", "is-visible"),
-      );
-    section
-      .querySelectorAll(".hiw__copy")
-      .forEach((c) => c.classList.add("is-active"));
-    section
-      .querySelectorAll(".hiw-flow > *")
-      .forEach((el) => el.classList.add("is-visible"));
-    section
-      .querySelectorAll(".hiw-codegen__line")
-      .forEach((el) => el.classList.add("is-visible"));
-    section
-      .querySelectorAll(".hiw-runner__step")
-      .forEach((el) => el.classList.add("is-passed"));
-    section
-      .querySelectorAll(".hiw-runner__term p")
-      .forEach((el) => el.classList.add("is-visible"));
-    section
-      .querySelectorAll(".hiw-report__card")
-      .forEach((el) => el.classList.add("is-visible"));
-    section
-      .querySelectorAll(".hiw-report__row")
-      .forEach((el) => el.classList.add("is-visible"));
-    section
-      .querySelectorAll(".hiw-report__evidence")
-      .forEach((el) => el.classList.add("is-visible"));
-  }
-
-  function initDesktopScroll(section, track, panels, copies, progressSteps) {
-    let currentPhase = 0;
-    let ticking = false;
-    let isObservingScroll = false;
-
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        ticking = false;
-        const rect = track.getBoundingClientRect();
-        const totalScroll = track.offsetHeight - window.innerHeight;
-        if (totalScroll <= 0) return;
-        const scrolled = -rect.top;
-        const progress = Math.max(0, Math.min(1, scrolled / totalScroll));
-        update(progress);
-      });
-    }
-
-    function update(progress) {
-      const raw = progress * 4;
-      const phase = Math.min(3, Math.floor(raw));
-      const sub = Math.min(1, raw - phase);
-
-      if (phase !== currentPhase) {
-        setActive(phase, panels, copies, progressSteps);
-        currentPhase = phase;
-      }
-
-      drivePhase(section, phase, sub);
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (!isObservingScroll) {
-              isObservingScroll = true;
-              window.addEventListener("scroll", onScroll, { passive: true });
-              onScroll();
-            }
-          } else {
-            if (isObservingScroll) {
-              isObservingScroll = false;
-              window.removeEventListener("scroll", onScroll);
-            }
-          }
-        });
-      },
-      { threshold: 0 },
-    );
-    observer.observe(track);
-
-    return () => {
-      if (isObservingScroll) {
-        isObservingScroll = false;
-        window.removeEventListener("scroll", onScroll);
-      }
-      observer.disconnect();
-    };
-  }
-
-  function setActive(phase, panels, copies, progressSteps) {
-    panels.forEach((p, i) => {
-      const isTarget = i === phase;
-      p.classList.toggle("is-active", isTarget);
-    });
-    copies.forEach((c, i) => c.classList.toggle("is-active", i === phase));
-    progressSteps.forEach((s, i) => {
-      s.classList.toggle("is-active", i === phase);
-      s.classList.toggle("is-complete", i < phase);
-    });
-  }
-
-  function drivePhase(section, phase, sub) {
-    switch (phase) {
-      case 0:
-        driveFlow(section, sub);
-        break;
-      case 1:
-        driveCodegen(section, sub);
-        break;
-      case 2:
-        driveRunner(section, sub);
-        break;
-      case 3:
-        driveReport(section, sub);
-        break;
-    }
-  }
-
-  function driveFlow(section, sub) {
-    const items = section.querySelectorAll('[data-phase="0"] .hiw-flow > *');
-    const count = items.length;
-    items.forEach((item, i) => {
-      const t = (i / count) * 0.82;
-      item.classList.toggle("is-visible", sub > t);
-    });
-  }
-
-  function driveCodegen(section, sub) {
-    const lines = section.querySelectorAll(".hiw-codegen__line");
-    const minis = section.querySelectorAll(".hiw-codegen__mini");
-    const total = lines.length;
-
-    lines.forEach((line, i) => {
-      const t = (i / total) * 0.88;
-      line.classList.toggle("is-visible", sub > t);
+    groups.forEach((group) => {
+      const cleanup = inView(group, () => {
+        const items = group.querySelectorAll("[data-reveal]");
+        items.forEach((item) => item.classList.add("is-visible"));
+        animate(items, { opacity: [0, 1], y: [18, 0] }, { duration: 0.32, delay: stagger(0.06) });
+      }, { margin: "-15% 0px" });
+      revealState.cleanup.push(cleanup);
     });
 
-    minis.forEach((mini) => {
-      const linkIdx = parseInt(mini.dataset.link || "0", 10);
-      const tStart = (linkIdx / total) * 0.88;
-      const tEnd = tStart + 0.18;
-      mini.classList.toggle("is-highlight", sub > tStart && sub < tEnd);
-    });
-  }
-
-  function driveRunner(section, sub) {
-    const steps = section.querySelectorAll(".hiw-runner__step");
-    const count = steps.length;
-    steps.forEach((step, i) => {
-      const base = (i / count) * 0.65;
-      step.classList.remove("is-running", "is-passed");
-      if (sub > base + 0.18) {
-        step.classList.add("is-passed");
-      } else if (sub > base + 0.04) {
-        step.classList.add("is-running");
-      }
-    });
-
-    const logs = section.querySelectorAll(".hiw-runner__term p");
-    const lc = logs.length;
-    logs.forEach((log, i) => {
-      const t = (i / lc) * 0.88;
-      log.classList.toggle("is-visible", sub > t);
-    });
-  }
-
-  function driveReport(section, sub) {
-    const cards = section.querySelectorAll(".hiw-report__card");
-    cards.forEach((c, i) => {
-      const t = (i / cards.length) * 0.32;
-      c.classList.toggle("is-visible", sub > t);
-    });
-
-    const rows = section.querySelectorAll(".hiw-report__row");
-    rows.forEach((r, i) => {
-      const t = 0.28 + (i / rows.length) * 0.28;
-      r.classList.toggle("is-visible", sub > t);
-    });
-
-    const ev = section.querySelector(".hiw-report__evidence");
-    ev?.classList.toggle("is-visible", sub > 0.62);
-  }
-
-  function delay(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
-
-  async function animateMobilePanel(panel) {
-    const phase = parseInt(panel.dataset.phase ?? "-1", 10);
-
-    if (phase === 0) {
-      const items = panel.querySelectorAll(".hiw-flow > *");
-      for (const item of items) {
+    singles.forEach((item) => {
+      const cleanup = inView(item, () => {
         item.classList.add("is-visible");
-        await delay(180);
-      }
-    }
-
-    if (phase === 1) {
-      const lines = panel.querySelectorAll(".hiw-codegen__line");
-      for (const line of lines) {
-        line.classList.add("is-visible");
-        await delay(90);
-      }
-    }
-
-    if (phase === 2) {
-      const steps = panel.querySelectorAll(".hiw-runner__step");
-      for (const step of steps) {
-        step.classList.add("is-running");
-        await delay(320);
-        step.classList.remove("is-running");
-        step.classList.add("is-passed");
-        await delay(100);
-      }
-      const logs = panel.querySelectorAll(".hiw-runner__term p");
-      for (const log of logs) {
-        log.classList.add("is-visible");
-        await delay(80);
-      }
-    }
-
-    if (phase === 3) {
-      const cards = panel.querySelectorAll(".hiw-report__card");
-      for (const card of cards) {
-        card.classList.add("is-visible");
-        await delay(100);
-      }
-      await delay(80);
-      const rows = panel.querySelectorAll(".hiw-report__row");
-      for (const row of rows) {
-        row.classList.add("is-visible");
-        await delay(110);
-      }
-      await delay(120);
-      panel.querySelector(".hiw-report__evidence")?.classList.add("is-visible");
-    }
-  }
-
-  function initMobileFallback(section, panels) {
-    const cleanup = [];
-
-    panels.forEach((panel) => {
-      panel.classList.add("is-active");
-
-      let triggered = false;
-      cleanup.push(
-        inView(
-          panel,
-          () => {
-            if (triggered) return;
-            triggered = true;
-            // Fade the card in first, then start internal sequence
-            panel.classList.add("is-revealed");
-            delay(300).then(() => animateMobilePanel(panel));
-          },
-          { amount: 0.35 },
-        ),
-      );
+        animate(item, { opacity: [0, 1], y: [18, 0] }, { duration: 0.34 });
+      }, { margin: "-15% 0px" });
+      revealState.cleanup.push(cleanup);
     });
-
-    return () => {
-      cleanup.forEach((dispose) => dispose?.());
-    };
   }
 
-  document.addEventListener("astro:page-load", init);
-  document.addEventListener("astro:before-swap", () => {
-    howItWorksState.cleanup?.();
-    howItWorksState.cleanup = null;
-  });
-
-  init();
+  document.addEventListener("astro:page-load", initReveals);
+  document.addEventListener("astro:before-swap", () => revealState.cleanup.forEach((cleanup) => cleanup?.()));
+  initReveals();
 </script>
