@@ -1,11 +1,18 @@
 ---
-import { CirclePlay } from "@lucide/astro";
+import { Check, CirclePlay, Copy } from "@lucide/astro";
+
+const installCommand = "npx create-appraisejs@latest";
 ---
 
-<section class="landing-hero landing-shell" aria-labelledby="landing-hero-heading">
+<section
+  class="landing-hero landing-shell"
+  aria-labelledby="landing-hero-heading"
+>
   <div class="landing-hero__copy">
     <p class="landing-kicker">Open source automation workspace</p>
-    <h1 id="landing-hero-heading">Visual Workflows. Deterministic Automation.</h1>
+    <h1 id="landing-hero-heading">
+      Visual Workflows. Deterministic Automation.
+    </h1>
     <p class="landing-hero__description">
       AppraiseJS turns visual browser-test workflows into portable Playwright
       and Cucumber artifacts that run in your repository, your CI, and your
@@ -26,5 +33,65 @@ import { CirclePlay } from "@lucide/astro";
         Watch Demo
       </a>
     </div>
+    <div class="landing-hero__install" aria-label="Install command">
+      <pre
+        class="landing-hero__command"><code data-hero-install-command><span class="token-key">npx</span><span class="token-command"> create-appraisejs@latest</span></code></pre>
+      <button
+        type="button"
+        class="landing-hero__copy-button"
+        data-hero-copy-command
+        aria-label="Copy install command"
+      >
+        <Copy
+          class="landing-hero__copy-icon"
+          size={16}
+          stroke-width={2}
+          aria-hidden="true"
+        />
+        <Check
+          class="landing-hero__copy-icon landing-hero__copy-icon--success"
+          size={16}
+          stroke-width={2}
+          aria-hidden="true"
+        />
+      </button>
+    </div>
   </div>
 </section>
+
+<script define:vars={{ installCommand }}>
+  function initHeroCopy() {
+    const button = document.querySelector("[data-hero-copy-command]");
+    if (!button) return;
+
+    let resetTimer;
+
+    button.addEventListener("click", async () => {
+      window.clearTimeout(resetTimer);
+
+      try {
+        await navigator.clipboard.writeText(installCommand);
+      } catch {
+        const code = document.querySelector("[data-hero-install-command]");
+        const range = document.createRange();
+        range.selectNodeContents(code);
+        const selection = window.getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+        document.execCommand("copy");
+        selection?.removeAllRanges();
+      }
+
+      button.classList.add("is-copied");
+      button.setAttribute("aria-label", "Copied");
+
+      resetTimer = window.setTimeout(() => {
+        button.classList.remove("is-copied");
+        button.setAttribute("aria-label", "Copy install command");
+      }, 2000);
+    });
+  }
+
+  document.addEventListener("astro:page-load", initHeroCopy);
+  initHeroCopy();
+</script>

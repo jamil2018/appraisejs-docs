@@ -68,14 +68,20 @@ body:has(.landing-root) .sl-markdown-content {
 
 .landing-shell,
 .landing-navbar-shell {
-  width: min(100%, calc(var(--landing-shell-width) + (var(--landing-shell-padding) * 2)));
+  width: min(
+    100%,
+    calc(var(--landing-shell-width) + (var(--landing-shell-padding) * 2))
+  );
   margin-inline: auto;
   padding-inline: var(--landing-shell-padding);
 }
 
 .landing-shell--wide,
 .landing-showcase--wide .landing-shell {
-  width: min(100%, calc(var(--landing-showcase-width) + (var(--landing-shell-padding) * 2)));
+  width: min(
+    100%,
+    calc(var(--landing-showcase-width) + (var(--landing-shell-padding) * 2))
+  );
 }
 
 .landing-kicker {
@@ -294,6 +300,110 @@ body:has(.landing-root) .sl-markdown-content {
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.75rem;
+}
+
+.landing-hero__install {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 2.75rem;
+  align-items: stretch;
+  width: min(100%, 28rem);
+  margin-top: 0.25rem;
+  border: 1px solid var(--landing-border);
+  border-radius: var(--landing-radius);
+  background: rgba(19, 19, 19, 0.96);
+  overflow: hidden;
+}
+
+.landing-hero__command {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0.85rem 0.75rem 0.85rem 1.1rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-family: "Geist Mono", var(--sl-font-mono), monospace;
+  font-size: clamp(0.72rem, 0.9vw, 0.84rem);
+  line-height: 1.4;
+  text-align: left;
+  overflow-x: auto;
+}
+
+.landing-hero__command code {
+  font: inherit;
+  white-space: nowrap;
+}
+
+.landing-hero__command .token-command {
+  color: var(--landing-muted);
+}
+
+.landing-root .landing-hero__install .landing-hero__copy-button {
+  display: grid;
+  place-items: center;
+  align-self: stretch;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--landing-border);
+  border-radius: 0;
+  background: transparent;
+  color: var(--landing-muted);
+  font: inherit;
+  line-height: 0;
+  appearance: none;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.landing-root .landing-hero__install .landing-hero__copy-button:hover {
+  background: var(--landing-surface-2);
+  color: var(--landing-text);
+}
+
+.landing-root .landing-hero__install .landing-hero__copy-button.is-copied {
+  color: var(--landing-green);
+}
+
+.landing-hero__copy-button .landing-hero__copy-icon {
+  grid-area: 1 / 1;
+  display: grid;
+  place-items: center;
+  width: 1rem;
+  height: 1rem;
+}
+
+.landing-hero__copy-button .landing-hero__copy-icon :is(svg) {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+}
+
+.landing-hero__copy-icon--success {
+  opacity: 0;
+  visibility: hidden;
+  margin-top: 0rem;
+}
+
+.landing-root
+  .landing-hero__install
+  .landing-hero__copy-button.is-copied
+  .landing-hero__copy-icon:not(.landing-hero__copy-icon--success) {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.landing-root
+  .landing-hero__install
+  .landing-hero__copy-button.is-copied
+  .landing-hero__copy-icon--success {
+  opacity: 1;
+  visibility: visible;
 }
 
 .feature-card,
