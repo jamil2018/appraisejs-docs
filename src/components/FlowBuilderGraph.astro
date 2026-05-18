@@ -1,0 +1,392 @@
+---
+interface Props {
+  /** Expand to fill the parent card body above the title. */
+  fill?: boolean;
+}
+
+const { fill = false } = Astro.props;
+---
+
+<div
+  class:list={["flow-builder-graph", fill && "flow-builder-graph--fill"]}
+  data-flow-builder-graph
+  aria-hidden="true"
+>
+  <svg
+    class="flow-builder-graph__svg"
+    viewBox="0 0 200 64"
+    preserveAspectRatio="xMidYMid meet"
+    role="presentation"
+  >
+    <defs>
+      <filter id="flow-node-glow" x="-80%" y="-80%" width="260%" height="260%">
+        <feGaussianBlur stdDeviation="2.2" result="blur" />
+        <feMerge>
+          <feMergeNode in="blur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+
+    <g class="flow-builder-graph__edges">
+      <g class="flow-builder-graph__edge-group" data-edge="e01">
+        <line class="flow-builder-graph__edge-track" x1="31" y1="32" x2="51" y2="32" />
+        <line class="flow-builder-graph__edge-pulse" x1="31" y1="32" x2="51" y2="32" />
+      </g>
+      <g class="flow-builder-graph__edge-group" data-edge="e12">
+        <line class="flow-builder-graph__edge-track" x1="65" y1="32" x2="85" y2="32" />
+        <line class="flow-builder-graph__edge-pulse" x1="65" y1="32" x2="85" y2="32" />
+      </g>
+      <g class="flow-builder-graph__edge-group" data-edge="e23">
+        <line class="flow-builder-graph__edge-track" x1="99" y1="32" x2="119" y2="32" />
+        <line class="flow-builder-graph__edge-pulse" x1="99" y1="32" x2="119" y2="32" />
+      </g>
+      <g class="flow-builder-graph__edge-group" data-edge="e34">
+        <line class="flow-builder-graph__edge-track" x1="133" y1="32" x2="153" y2="32" />
+        <line class="flow-builder-graph__edge-pulse" x1="133" y1="32" x2="153" y2="32" />
+      </g>
+    </g>
+
+    <g class="flow-builder-graph__nodes">
+      <g class="flow-builder-graph__node" data-node="n0">
+        <circle class="flow-builder-graph__node-halo" cx="24" cy="32" r="10" />
+        <circle class="flow-builder-graph__node-core" cx="24" cy="32" r="5" />
+      </g>
+      <g class="flow-builder-graph__node" data-node="n1">
+        <circle class="flow-builder-graph__node-halo" cx="58" cy="32" r="10" />
+        <circle class="flow-builder-graph__node-core" cx="58" cy="32" r="5" />
+      </g>
+      <g class="flow-builder-graph__node" data-node="n2">
+        <circle class="flow-builder-graph__node-halo" cx="92" cy="32" r="10" />
+        <circle class="flow-builder-graph__node-core" cx="92" cy="32" r="5" />
+      </g>
+      <g class="flow-builder-graph__node" data-node="n3">
+        <circle class="flow-builder-graph__node-halo" cx="126" cy="32" r="10" />
+        <circle class="flow-builder-graph__node-core" cx="126" cy="32" r="5" />
+      </g>
+      <g class="flow-builder-graph__node" data-node="n4">
+        <circle class="flow-builder-graph__node-halo" cx="160" cy="32" r="10" />
+        <circle class="flow-builder-graph__node-core" cx="160" cy="32" r="5" />
+      </g>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .flow-builder-graph {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: clamp(4.5rem, 14vw, 5.75rem);
+    padding: 0.65rem 0.5rem;
+    border: 1px solid var(--landing-border);
+    border-radius: var(--landing-radius);
+    background: #101010;
+  }
+
+  .flow-builder-graph__svg {
+    display: block;
+    width: 100%;
+    max-width: 15rem;
+    height: auto;
+    overflow: visible;
+  }
+
+  .flow-builder-graph__edge-track,
+  .flow-builder-graph__edge-pulse {
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .flow-builder-graph__edge-track {
+    stroke: rgba(16, 185, 129, 0.16);
+    stroke-width: 3;
+  }
+
+  .flow-builder-graph__edge-track.is-complete {
+    stroke: rgba(16, 185, 129, 0.34);
+  }
+
+  .flow-builder-graph__edge-pulse {
+    stroke: #6ee7b7;
+    stroke-width: 2;
+    opacity: 0;
+    filter: drop-shadow(0 0 5px rgba(110, 231, 183, 0.85));
+  }
+
+  .flow-builder-graph__edge-pulse.is-traveling {
+    opacity: 1;
+  }
+
+  .flow-builder-graph__node-halo {
+    fill: rgba(16, 185, 129, 0);
+    stroke: none;
+  }
+
+  .flow-builder-graph__node-core {
+    fill: #1a1a1a;
+    stroke: rgba(16, 185, 129, 0.45);
+    stroke-width: 1.5;
+    vector-effect: non-scaling-stroke;
+    transition:
+      fill 0.2s ease,
+      stroke 0.2s ease;
+  }
+
+  .flow-builder-graph__node.is-active .flow-builder-graph__node-halo {
+    fill: rgba(16, 185, 129, 0.18);
+  }
+
+  .flow-builder-graph__node.is-complete .flow-builder-graph__node-core {
+    fill: rgba(16, 185, 129, 0.24);
+    stroke: rgba(110, 231, 183, 0.76);
+  }
+
+  .flow-builder-graph__node.is-active .flow-builder-graph__node-core {
+    fill: rgba(16, 185, 129, 0.35);
+    stroke: #6ee7b7;
+    filter: url(#flow-node-glow);
+  }
+
+  .flow-builder-graph--fill {
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    padding: clamp(0.75rem, 3vw, 1.25rem);
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .flow-builder-graph--fill .flow-builder-graph__svg {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    min-height: 6.5rem;
+  }
+
+  @media (max-width: 760px) {
+    .flow-builder-graph:not(.flow-builder-graph--fill) {
+      min-height: 4.25rem;
+      padding: 0.5rem 0.35rem;
+    }
+
+    .flow-builder-graph__svg {
+      max-width: 100%;
+    }
+
+    .flow-builder-graph--fill .flow-builder-graph__svg {
+      min-height: 5.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flow-builder-graph__edge-pulse {
+      display: none;
+    }
+
+    .flow-builder-graph__node[data-node="n2"] .flow-builder-graph__node-core {
+      fill: rgba(16, 185, 129, 0.35);
+      stroke: #6ee7b7;
+    }
+  }
+</style>
+
+<script>
+  // @ts-nocheck
+  import { animate } from "motion";
+
+  const NODE_COORDS = {
+    n0: { x: 24, y: 32 },
+    n1: { x: 58, y: 32 },
+    n2: { x: 92, y: 32 },
+    n3: { x: 126, y: 32 },
+    n4: { x: 160, y: 32 },
+  };
+
+  const EDGES = {
+    e01: { from: "n0", to: "n1" },
+    e12: { from: "n1", to: "n2" },
+    e23: { from: "n2", to: "n3" },
+    e34: { from: "n3", to: "n4" },
+  };
+
+  const STEPS = [
+    ["node", "n0"],
+    ["edge", "e01"],
+    ["node", "n1"],
+    ["edge", "e12"],
+    ["node", "n2"],
+    ["edge", "e23"],
+    ["node", "n3"],
+    ["edge", "e34"],
+    ["node", "n4"],
+  ];
+
+  function edgeLength(line) {
+    const x1 = Number(line.getAttribute("x1"));
+    const y1 = Number(line.getAttribute("y1"));
+    const x2 = Number(line.getAttribute("x2"));
+    const y2 = Number(line.getAttribute("y2"));
+    return Math.hypot(x2 - x1, y2 - y1);
+  }
+
+  const PULSE_SEGMENT = 9;
+
+  function setupGraph(root) {
+    const nodes = new Map(
+      [...root.querySelectorAll("[data-node]")].map((el) => [el.dataset.node, el]),
+    );
+    const edges = new Map(
+      [...root.querySelectorAll("[data-edge]")].map((group) => [
+        group.dataset.edge,
+        {
+          track: group.querySelector(".flow-builder-graph__edge-track"),
+          pulse: group.querySelector(".flow-builder-graph__edge-pulse"),
+        },
+      ]),
+    );
+
+    let running = true;
+    let activeNode = null;
+
+    function clearActiveNode() {
+      if (!activeNode) return;
+      nodes.get(activeNode)?.classList.remove("is-active");
+      activeNode = null;
+    }
+
+    function resetNodes() {
+      clearActiveNode();
+      nodes.forEach((node) => node.classList.remove("is-complete"));
+    }
+
+    function setActiveNode(id) {
+      clearActiveNode();
+      activeNode = id;
+      nodes.get(id)?.classList.add("is-active");
+    }
+
+    function resetEdges() {
+      edges.forEach(({ track, pulse }) => {
+        track?.classList.remove("is-complete");
+        pulse?.classList.remove("is-traveling");
+        if (pulse) {
+          pulse.removeAttribute("x1");
+          pulse.removeAttribute("x2");
+          pulse.removeAttribute("y1");
+          pulse.removeAttribute("y2");
+        }
+      });
+    }
+
+    async function pulseNode(id) {
+      const el = nodes.get(id);
+      if (!el) return;
+      setActiveNode(id);
+      const core = el.querySelector(".flow-builder-graph__node-core");
+      await animate(
+        core,
+        { r: [5, 7.1, 6.25] },
+        { duration: 0.28, ease: [0.25, 0.1, 0.25, 1] },
+      );
+      await new Promise((resolve) => setTimeout(resolve, 120));
+      clearActiveNode();
+      el.classList.add("is-complete");
+      await animate(
+        core,
+        { r: [6.25, 5] },
+        { duration: 0.18, ease: [0.4, 0, 1, 1] },
+      );
+      await new Promise((resolve) => setTimeout(resolve, 70));
+    }
+
+    async function travelEdge(edgeId) {
+      const edge = edges.get(edgeId);
+      const meta = EDGES[edgeId];
+      const pulse = edge?.pulse;
+      const track = edge?.track;
+      if (!pulse || !track || !meta) return;
+
+      const from = {
+        x: Number(track.getAttribute("x1")),
+        y: Number(track.getAttribute("y1")),
+      };
+      const to = {
+        x: Number(track.getAttribute("x2")),
+        y: Number(track.getAttribute("y2")),
+      };
+      const len = edgeLength(track);
+      const segment = Math.min(PULSE_SEGMENT, len * 0.45);
+      const unit = {
+        x: (to.x - from.x) / len,
+        y: (to.y - from.y) / len,
+      };
+
+      pulse.classList.add("is-traveling");
+      pulse.setAttribute("x1", String(from.x));
+      pulse.setAttribute("y1", String(from.y));
+      pulse.setAttribute("x2", String(from.x));
+      pulse.setAttribute("y2", String(from.y));
+
+      await animate(
+        pulse,
+        {
+          x1: [from.x, from.x, to.x - unit.x * segment, to.x],
+          y1: [from.y, from.y, to.y - unit.y * segment, to.y],
+          x2: [from.x, from.x + unit.x * segment, to.x, to.x],
+          y2: [from.y, from.y + unit.y * segment, to.y, to.y],
+        },
+        {
+          duration: 0.58,
+          ease: [0.35, 0, 0.2, 1],
+          times: [0, 0.18, 0.82, 1],
+        },
+      );
+
+      pulse.classList.remove("is-traveling");
+      track?.classList.add("is-complete");
+    }
+
+    async function runLoop() {
+      while (running) {
+        resetNodes();
+        resetEdges();
+        for (const [type, id] of STEPS) {
+          if (!running) break;
+          if (type === "node") await pulseNode(id);
+          else await travelEdge(id);
+        }
+        if (running) await new Promise((r) => setTimeout(r, 420));
+      }
+    }
+
+    runLoop();
+
+    return () => {
+      running = false;
+    };
+  }
+
+  const cleanups = [];
+
+  function init() {
+    cleanups.forEach((fn) => fn());
+    cleanups.length = 0;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+
+    document.querySelectorAll("[data-flow-builder-graph]").forEach((root) => {
+      cleanups.push(setupGraph(root));
+    });
+  }
+
+  document.addEventListener("astro:page-load", init);
+  document.addEventListener("astro:before-swap", () => {
+    cleanups.forEach((fn) => fn());
+    cleanups.length = 0;
+  });
+  init();
+</script>

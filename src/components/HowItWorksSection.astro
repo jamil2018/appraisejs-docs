@@ -1,4 +1,5 @@
 ---
+import FlowBuilderGraph from "./FlowBuilderGraph.astro";
 import { Boxes, Braces, Code2, Database, GitFork, ShieldCheck } from "@lucide/astro";
 
 const features = [
@@ -43,15 +44,31 @@ const features = [
     </h2>
   </div>
 
-  <div class="feature-grid" data-reveal-group>
+  <div class="feature-grid">
     {
-      features.map((feature) => {
+      features.map((feature, index) => {
         const Icon = feature.icon;
         return (
-          <article class="feature-card" data-reveal>
-            <span class="feature-card__icon" aria-hidden="true"><Icon /></span>
-            <h3>{feature.title}</h3>
-            <p>{feature.description}</p>
+          <article
+            class:list={[
+              "feature-card",
+              index === 0 && "feature-card--flow-builder",
+            ]}
+          >
+            {index === 0 ? (
+              <>
+                <FlowBuilderGraph fill />
+                <h3>{feature.title}</h3>
+              </>
+            ) : (
+              <>
+                <span class="feature-card__icon" aria-hidden="true">
+                  <Icon />
+                </span>
+                <h3>{feature.title}</h3>
+                <p>{feature.description}</p>
+              </>
+            )}
           </article>
         );
       })
@@ -68,7 +85,7 @@ const features = [
       </h2>
     </div>
 
-    <div class="workflow-canvas" data-reveal>
+    <div class="workflow-canvas">
       <div class="workflow-canvas__lane">
         <article>
           <span>Create</span>
@@ -94,45 +111,3 @@ const features = [
     </div>
   </div>
 </section>
-
-<script>
-  // @ts-nocheck
-  import { animate, inView, stagger } from "motion";
-
-  const revealState = (window.__appraiseLandingReveal ??= { cleanup: [] });
-
-  function initReveals() {
-    revealState.cleanup.forEach((cleanup) => cleanup?.());
-    revealState.cleanup = [];
-
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const groups = document.querySelectorAll("[data-reveal-group]");
-    const singles = document.querySelectorAll("[data-reveal]:not([data-reveal-group] [data-reveal])");
-
-    if (reduce) {
-      document.querySelectorAll("[data-reveal]").forEach((item) => item.classList.add("is-visible"));
-      return;
-    }
-
-    groups.forEach((group) => {
-      const cleanup = inView(group, () => {
-        const items = group.querySelectorAll("[data-reveal]");
-        items.forEach((item) => item.classList.add("is-visible"));
-        animate(items, { opacity: [0, 1], y: [18, 0] }, { duration: 0.32, delay: stagger(0.06) });
-      }, { margin: "-15% 0px" });
-      revealState.cleanup.push(cleanup);
-    });
-
-    singles.forEach((item) => {
-      const cleanup = inView(item, () => {
-        item.classList.add("is-visible");
-        animate(item, { opacity: [0, 1], y: [18, 0] }, { duration: 0.34 });
-      }, { margin: "-15% 0px" });
-      revealState.cleanup.push(cleanup);
-    });
-  }
-
-  document.addEventListener("astro:page-load", initReveals);
-  document.addEventListener("astro:before-swap", () => revealState.cleanup.forEach((cleanup) => cleanup?.()));
-  initReveals();
-</script>

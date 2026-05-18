@@ -470,14 +470,6 @@ pre {
   align-items: stretch;
 }
 
-[data-reveal] {
-  opacity: 0;
-}
-
-[data-reveal].is-visible {
-  opacity: 1;
-}
-
 .landing-root .sl-markdown-content .feature-card :is(h3, p) {
   margin: 0;
   max-width: none;
@@ -492,6 +484,18 @@ pre {
   margin: 0;
   padding: 1.25rem;
   align-self: stretch;
+}
+
+.feature-card--flow-builder {
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.feature-card--flow-builder h3 {
+  flex-shrink: 0;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--landing-border);
 }
 
 .feature-card__icon,
@@ -909,7 +913,4 @@ pre {
     transition-duration: 0.001ms !important;
   }
 
-  [data-reveal] {
-    opacity: 1;
-  }
 }
