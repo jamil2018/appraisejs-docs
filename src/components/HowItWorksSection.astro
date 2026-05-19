@@ -1,5 +1,6 @@
 ---
 import FlowBuilderGraph from "./FlowBuilderGraph.astro";
+import LocatorCreatorDemo from "./LocatorCreatorDemo.astro";
 import {
   Boxes,
   Braces,
@@ -13,7 +14,7 @@ const features = [
   {
     title: "Intuitive Test Flow Builder",
     description:
-      "Build test flows visually with a drag-and-drop interface that is easy to understand, compose and reuse across various scenarios.",
+      "Build test flows visually with an interface that is easy to understand, compose and reuse across various scenarios.",
     icon: GitFork,
   },
   {
@@ -64,16 +65,31 @@ const features = [
     {
       features.map((feature, index) => {
         const Icon = feature.icon;
+        const isFlowBuilder = index === 0;
+        const isLocatorCreator = index === 1;
+        const hasAnimation = isFlowBuilder || isLocatorCreator;
         return (
           <article
             class:list={[
               "feature-card",
-              index === 0 && "feature-card--flow-builder",
+              hasAnimation && "feature-card--with-animation",
+              isFlowBuilder && "feature-card--flow-builder",
+              isLocatorCreator && "feature-card--locator-creator",
             ]}
           >
-            {index === 0 ? (
+            {isFlowBuilder ? (
               <>
-                <FlowBuilderGraph fill />
+                <div class="feature-card__animation">
+                  <FlowBuilderGraph fill />
+                </div>
+                <h3>{feature.title}</h3>
+                <p>{feature.description}</p>
+              </>
+            ) : isLocatorCreator ? (
+              <>
+                <div class="feature-card__animation">
+                  <LocatorCreatorDemo fill />
+                </div>
                 <h3>{feature.title}</h3>
                 <p>{feature.description}</p>
               </>

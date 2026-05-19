@@ -492,16 +492,75 @@ pre {
   align-self: stretch;
 }
 
-.feature-card--flow-builder {
+.feature-card--with-animation {
   gap: 0;
+  min-height: 28rem;
   padding: 0;
   overflow: hidden;
 }
 
-.feature-card--flow-builder h3,
-.feature-card--flow-builder p {
+.feature-card__animation {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: clamp(14.5rem, 38vw, 17.5rem);
+  padding: clamp(0.65rem, 2.2vw, 1rem) clamp(0.85rem, 2.8vw, 1.15rem);
+  overflow: hidden;
+  border-bottom: 1px solid var(--landing-border);
+  background: #101010;
+}
+
+.feature-card__animation .flow-builder-graph--fill,
+.feature-card__animation .locator-creator-demo--fill {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.feature-card__animation .flow-builder-graph--fill .flow-builder-graph__svg {
+  width: 100%;
+  max-width: 17rem;
+  height: auto;
+  min-height: 5.5rem;
+  max-height: 100%;
+}
+
+.feature-card__animation .locator-creator-demo--fill .locator-creator-demo__panel {
+  width: 100%;
+  max-width: none;
+  max-height: 100%;
+}
+
+.feature-card__animation .locator-creator-demo--fill .locator-creator-demo__canvas {
+  min-height: 9.75rem;
+}
+
+.feature-card__animation .locator-creator-demo--fill .locator-creator-demo__canvas.is-form-step {
+  min-height: 0;
+}
+
+.feature-card--with-animation h3 {
   flex-shrink: 0;
-  padding: 1rem 1.25rem;
+  padding: 0.85rem 1.25rem 0.3rem;
+}
+
+.feature-card--with-animation p {
+  flex-shrink: 0;
+  flex-grow: 0;
+  padding: 0 1.25rem 1rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
 }
 
 .feature-card__icon,
@@ -887,6 +946,18 @@ pre {
   .locator-panel,
   .open-source {
     grid-template-columns: 1fr;
+  }
+
+  .feature-card--with-animation {
+    min-height: 24rem;
+  }
+
+  .feature-card__animation {
+    min-height: clamp(12.5rem, 48vw, 15rem);
+  }
+
+  .feature-card__animation .locator-creator-demo--fill .locator-creator-demo__canvas {
+    min-height: 8.75rem;
   }
 
   .locator-panel__browser {

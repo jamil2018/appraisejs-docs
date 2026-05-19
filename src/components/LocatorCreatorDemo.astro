@@ -1,0 +1,605 @@
+---
+interface Props {
+  /** Expand to fill the parent card body above the title. */
+  fill?: boolean;
+}
+
+const { fill = false } = Astro.props;
+---
+
+<div
+  class:list={["locator-creator-demo", fill && "locator-creator-demo--fill"]}
+  data-locator-creator-demo
+  aria-hidden="true"
+>
+  <div class="locator-creator-demo__panel">
+    <div class="locator-creator-demo__bar">
+      <span>checkout.local</span>
+      <span>inspect</span>
+    </div>
+    <div class="locator-creator-demo__canvas" data-canvas>
+      <div class="locator-creator-demo__view locator-creator-demo__view--page" data-page-view>
+        <div class="locator-creator-demo__page" data-page>
+          <div class="locator-creator-demo__page-content">
+            <div class="locator-creator-demo__block" data-block="header">
+              <span class="locator-creator-demo__block-line"></span>
+            </div>
+          <div class="locator-creator-demo__block" data-block="field-a"></div>
+          <div class="locator-creator-demo__block" data-block="field-b"></div>
+          <div
+            class="locator-creator-demo__block locator-creator-demo__block--cta"
+            data-target
+          ></div>
+          </div>
+          <div class="locator-creator-demo__cursor" data-cursor>
+            <svg
+            viewBox="0 0 24 24"
+            width="22"
+            height="22"
+            role="presentation"
+          >
+            <path
+              d="M5.5 3.5L18 11.5L12.2 13.1L10.5 19L5.5 3.5Z"
+              fill="#f4f4f5"
+              stroke="#0e0e0e"
+              stroke-width="1.2"
+              stroke-linejoin="round"></path>
+          </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="locator-creator-demo__view locator-creator-demo__view--form" data-form-view>
+        <div class="locator-creator-demo__form-heading">Create new locator</div>
+        <div class="locator-creator-demo__form-field" data-form-field="name">
+          <span class="locator-creator-demo__form-field-text" data-form-text></span>
+        </div>
+        <div class="locator-creator-demo__form-field" data-form-field="selector">
+          <span class="locator-creator-demo__form-field-text" data-form-text></span>
+        </div>
+        <div
+          class="locator-creator-demo__form-field locator-creator-demo__form-field--short"
+          data-form-field="page"
+        >
+          <span class="locator-creator-demo__form-field-text" data-form-text></span>
+        </div>
+        <div class="locator-creator-demo__form-button">Create locator</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .locator-creator-demo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: clamp(4.5rem, 14vw, 5.75rem);
+    padding: 0.65rem 0.5rem;
+    border: 1px solid var(--landing-border);
+    border-radius: var(--landing-radius);
+    background: #101010;
+  }
+
+  .locator-creator-demo__panel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 15rem;
+    overflow: hidden;
+    border: 1px solid var(--landing-border);
+    border-radius: var(--landing-radius);
+    background: #101010;
+  }
+
+  .locator-creator-demo__bar {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.4rem 0.5rem;
+    border-bottom: 1px solid var(--landing-border);
+    color: var(--landing-dim);
+    font-family: "Geist Mono", var(--sl-font-mono), monospace;
+    font-size: 0.5rem;
+    text-transform: lowercase;
+  }
+
+  .locator-creator-demo__canvas {
+    position: relative;
+    display: grid;
+    min-height: 7.5rem;
+    background: #0e0e0e;
+  }
+
+  .locator-creator-demo__view {
+    grid-area: 1 / 1;
+    transition: opacity 0.4s ease;
+  }
+
+  .locator-creator-demo__view--page {
+    z-index: 1;
+    position: relative;
+    opacity: 1;
+  }
+
+  .locator-creator-demo__view--form {
+    z-index: 2;
+    display: grid;
+    align-content: start;
+    justify-items: start;
+    gap: 0.28rem;
+    padding: 0.35rem 0.55rem 0.38rem;
+    background: #0e0e0e;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .locator-creator-demo__canvas.is-form-step .locator-creator-demo__view--page {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .locator-creator-demo__canvas.is-form-step .locator-creator-demo__view--form {
+    position: relative;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .locator-creator-demo__page {
+    position: relative;
+    height: 100%;
+    padding: 0.65rem;
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      #0e0e0e;
+    background-size: 18px 18px;
+  }
+
+  .locator-creator-demo__page-content {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .locator-creator-demo__block {
+    height: 1.35rem;
+    border: 1px solid var(--landing-border);
+    border-radius: 3px;
+    background: var(--landing-surface-2);
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .locator-creator-demo__block[data-block="header"] {
+    display: flex;
+    align-items: center;
+    height: 1.1rem;
+    padding: 0 0.4rem;
+  }
+
+  .locator-creator-demo__block-line {
+    display: block;
+    width: 42%;
+    height: 0.35rem;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .locator-creator-demo__block--cta {
+    width: 52%;
+    height: 1.25rem;
+    margin-top: 0.15rem;
+  }
+
+  .locator-creator-demo__block.is-active {
+    border-color: rgba(110, 231, 183, 0.85);
+    background: rgba(16, 185, 129, 0.14);
+    box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.2);
+  }
+
+  .locator-creator-demo__block--cta.is-selected {
+    border-style: dashed;
+    border-color: var(--landing-green);
+    background: rgba(16, 185, 129, 0.1);
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.22);
+  }
+
+  .locator-creator-demo__cursor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    width: 22px;
+    height: 22px;
+    pointer-events: none;
+    transform-origin: var(--cursor-hotspot-x, 5px) var(--cursor-hotspot-y, 3px);
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.55));
+    will-change: transform, opacity;
+  }
+
+  .locator-creator-demo__cursor svg {
+    display: block;
+    width: 22px;
+    height: 22px;
+  }
+
+  .locator-creator-demo__form-heading {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    font-size: 0.58rem;
+    font-weight: 620;
+    line-height: 1.2;
+    color: var(--landing-text);
+  }
+
+  .locator-creator-demo__form-field {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 0.9rem;
+    padding: 0 0.35rem;
+    overflow: hidden;
+    border: 1px solid var(--landing-border);
+    border-radius: 3px;
+    background: var(--landing-surface-2);
+  }
+
+  .locator-creator-demo__form-field-text {
+    overflow: hidden;
+    color: rgba(255, 255, 255, 0.82);
+    font-family: "Geist Mono", var(--sl-font-mono), monospace;
+    font-size: 0.48rem;
+    line-height: 1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .locator-creator-demo__form-field.is-typing .locator-creator-demo__form-field-text::after {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 0.75em;
+    margin-left: 1px;
+    vertical-align: -0.05em;
+    background: var(--landing-green);
+    animation: locator-form-caret 0.75s step-end infinite;
+  }
+
+  @keyframes locator-form-caret {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .locator-creator-demo__form-field--short {
+    width: 62%;
+  }
+
+  .locator-creator-demo__form-button {
+    display: grid;
+    place-items: center;
+    width: fit-content;
+    min-width: 5.5rem;
+    height: 1.1rem;
+    margin-top: 0.15rem;
+    padding: 0 0.5rem;
+    border: 1px solid rgba(16, 185, 129, 0.55);
+    border-radius: 3px;
+    background: rgba(16, 185, 129, 0.16);
+    color: #6ee7b7;
+    font-size: 0.48rem;
+    font-weight: 620;
+    letter-spacing: 0.01em;
+  }
+
+  .locator-creator-demo--fill {
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    width: 100%;
+    padding: clamp(0.75rem, 3vw, 1.25rem);
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .locator-creator-demo--fill .locator-creator-demo__panel {
+    width: 100%;
+    max-width: none;
+    height: auto;
+  }
+
+  .locator-creator-demo--fill .locator-creator-demo__canvas {
+    min-height: 6.5rem;
+  }
+
+  .locator-creator-demo--fill .locator-creator-demo__canvas.is-form-step {
+    min-height: 0;
+  }
+
+  .locator-creator-demo--fill .locator-creator-demo__page {
+    padding: 0.5rem 0.6rem;
+  }
+
+  .locator-creator-demo--fill .locator-creator-demo__page-content {
+    gap: 0.35rem;
+  }
+
+  .locator-creator-demo--fill .locator-creator-demo__view--form {
+    padding: 0.32rem 0.55rem 0.36rem;
+    gap: 0.26rem;
+  }
+
+  .locator-creator-demo--fill .locator-creator-demo__form-field {
+    height: 0.8rem;
+  }
+
+  .locator-creator-demo--fill .locator-creator-demo__form-button {
+    height: 1rem;
+    min-width: 5rem;
+    font-size: 0.46rem;
+  }
+
+  @media (max-width: 760px) {
+    .locator-creator-demo:not(.locator-creator-demo--fill) {
+      min-height: 4.25rem;
+      padding: 0.5rem 0.35rem;
+    }
+
+    .locator-creator-demo--fill .locator-creator-demo__canvas {
+      min-height: 6rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .locator-creator-demo__cursor {
+      display: none;
+    }
+
+    .locator-creator-demo__canvas.is-form-step .locator-creator-demo__view--page {
+      opacity: 0;
+    }
+
+    .locator-creator-demo__canvas.is-form-step .locator-creator-demo__view--form {
+      opacity: 1;
+    }
+
+    .locator-creator-demo__form-field.is-typing .locator-creator-demo__form-field-text::after {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  // @ts-nocheck
+  import { animate } from "motion";
+
+  const CURSOR_START = { left: 10, top: 8 };
+  const CURSOR_TARGET_NUDGE = { x: 0, y: -8 };
+
+  const FORM_FIELD_TEXT = [
+    { key: "name", text: "Checkout Button", charDelay: 52, typewriter: true },
+    { key: "selector", text: "button[test-id='checkout']", typewriter: false },
+    { key: "page", text: "Checkout Page", typewriter: false },
+  ];
+
+  /** Pointer tip in SVG user units (path starts at 5.5, 3.5 in a 24×24 viewBox). */
+  function getCursorHotspot(cursor) {
+    const path = cursor.querySelector("path");
+    const svg = cursor.querySelector("svg");
+    if (!path || !svg) return { x: 5, y: 3 };
+
+    const bbox = path.getBBox();
+    const scale = svg.getBoundingClientRect().width / 24;
+    return {
+      x: bbox.x * scale,
+      y: bbox.y * scale,
+    };
+  }
+
+  function targetPoint(page, target, cursor) {
+    const pageRect = page.getBoundingClientRect();
+    const rect = target.getBoundingClientRect();
+    const hotspot = getCursorHotspot(cursor);
+    const aimX =
+      rect.left - pageRect.left + rect.width * 0.55 + CURSOR_TARGET_NUDGE.x;
+    const aimY =
+      rect.top - pageRect.top + rect.height * 0.25 + CURSOR_TARGET_NUDGE.y;
+
+    return {
+      x: aimX - hotspot.x,
+      y: aimY - hotspot.y,
+    };
+  }
+
+  function setCursorTransform(cursor, x, y, scale = 1) {
+    cursor.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
+  }
+
+  function clearFormFields(root) {
+    root.querySelectorAll("[data-form-text]").forEach((el) => {
+      el.textContent = "";
+    });
+    root.querySelectorAll("[data-form-field]").forEach((field) => {
+      field.classList.remove("is-typing");
+    });
+  }
+
+  function setFormFieldsInstant(root) {
+    FORM_FIELD_TEXT.forEach(({ key, text }) => {
+      const el = root.querySelector(`[data-form-field="${key}"] [data-form-text]`);
+      if (el) el.textContent = text;
+    });
+  }
+
+  async function typeFormField(textEl, fieldEl, text, { charDelay, typewriter }, isRunning) {
+    fieldEl.classList.add("is-typing");
+    textEl.textContent = "";
+
+    if (!typewriter) {
+      await new Promise((resolve) => setTimeout(resolve, 180));
+      if (!isRunning()) return;
+      textEl.textContent = text;
+      fieldEl.classList.remove("is-typing");
+      await new Promise((resolve) => setTimeout(resolve, 160));
+      return;
+    }
+
+    for (let index = 1; index <= text.length; index += 1) {
+      if (!isRunning()) break;
+      textEl.textContent = text.slice(0, index);
+      if (index < text.length) {
+        await new Promise((resolve) => setTimeout(resolve, charDelay));
+      }
+    }
+
+    fieldEl.classList.remove("is-typing");
+    await new Promise((resolve) => setTimeout(resolve, 140));
+  }
+
+  async function animateFormFields(root, isRunning) {
+    for (const field of FORM_FIELD_TEXT) {
+      if (!isRunning()) break;
+
+      const fieldEl = root.querySelector(`[data-form-field="${field.key}"]`);
+      const textEl = fieldEl?.querySelector("[data-form-text]");
+      if (!fieldEl || !textEl) continue;
+
+      await typeFormField(textEl, fieldEl, field.text, field, isRunning);
+    }
+  }
+
+  function setupDemo(root) {
+    const canvas = root.querySelector("[data-canvas]");
+    const page = root.querySelector("[data-page]");
+    const target = root.querySelector("[data-target]");
+    const cursor = root.querySelector("[data-cursor]");
+
+    if (!canvas || !page || !target || !cursor) return () => {};
+
+    const hotspot = getCursorHotspot(cursor);
+    cursor.style.setProperty("--cursor-hotspot-x", `${hotspot.x}px`);
+    cursor.style.setProperty("--cursor-hotspot-y", `${hotspot.y}px`);
+
+    let running = true;
+    const isRunning = () => running;
+
+    function resetState() {
+      canvas.classList.remove("is-form-step");
+      target.classList.remove("is-active", "is-selected");
+      cursor.style.opacity = "1";
+      setCursorTransform(cursor, CURSOR_START.left, CURSOR_START.top);
+      clearFormFields(root);
+    }
+
+    async function selectTarget() {
+      await new Promise((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(resolve)),
+      );
+      const end = targetPoint(page, target, cursor);
+
+      await animate(
+        0,
+        1,
+        {
+          duration: 0.62,
+          ease: [0.35, 0, 0.2, 1],
+          onUpdate: (progress) => {
+            const x = CURSOR_START.left + (end.x - CURSOR_START.left) * progress;
+            const y = CURSOR_START.top + (end.y - CURSOR_START.top) * progress;
+            setCursorTransform(cursor, x, y);
+          },
+        },
+      );
+
+      setCursorTransform(cursor, end.x, end.y);
+      target.classList.add("is-active");
+      await new Promise((resolve) => setTimeout(resolve, 180));
+
+      await animate(
+        cursor,
+        {
+          transform: [
+            `translate3d(${end.x}px, ${end.y}px, 0) scale(1)`,
+            `translate3d(${end.x}px, ${end.y}px, 0) scale(0.88)`,
+            `translate3d(${end.x}px, ${end.y}px, 0) scale(1)`,
+          ],
+        },
+        {
+          duration: 0.24,
+          ease: [0.25, 0.1, 0.25, 1],
+          times: [0, 0.45, 1],
+        },
+      );
+
+      target.classList.remove("is-active");
+      target.classList.add("is-selected");
+      await animate(cursor, { opacity: 0 }, { duration: 0.2, ease: "easeOut" });
+    }
+
+    async function revealForm() {
+      canvas.classList.add("is-form-step");
+      await new Promise((resolve) => setTimeout(resolve, 280));
+      await animateFormFields(root, isRunning);
+    }
+
+    async function runLoop() {
+      setCursorTransform(cursor, CURSOR_START.left, CURSOR_START.top);
+
+      while (running) {
+        resetState();
+        await new Promise((resolve) => setTimeout(resolve, 300));
+
+        if (!running) break;
+        await selectTarget();
+
+        if (!running) break;
+        await revealForm();
+
+        if (!running) break;
+        await new Promise((resolve) => setTimeout(resolve, 1200));
+      }
+    }
+
+    runLoop();
+
+    return () => {
+      running = false;
+    };
+  }
+
+  const cleanups = [];
+
+  function init() {
+    cleanups.forEach((fn) => fn());
+    cleanups.length = 0;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) {
+      document.querySelectorAll("[data-locator-creator-demo]").forEach((root) => {
+        root.querySelector("[data-canvas]")?.classList.add("is-form-step");
+        setFormFieldsInstant(root);
+      });
+      return;
+    }
+
+    document.querySelectorAll("[data-locator-creator-demo]").forEach((root) => {
+      cleanups.push(setupDemo(root));
+    });
+  }
+
+  document.addEventListener("astro:page-load", init);
+  document.addEventListener("astro:before-swap", () => {
+    cleanups.forEach((fn) => fn());
+    cleanups.length = 0;
+  });
+  init();
+</script>
