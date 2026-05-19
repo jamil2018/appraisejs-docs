@@ -418,6 +418,12 @@ body:has(.landing-root) .sl-markdown-content {
   background: rgba(19, 19, 19, 0.96);
 }
 
+.feature-card__content {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.75rem;
+}
+
 .landing-panel__bar {
   display: flex;
   justify-content: space-between;
@@ -492,10 +498,10 @@ pre {
   overflow: hidden;
 }
 
-.feature-card--flow-builder h3 {
+.feature-card--flow-builder h3,
+.feature-card--flow-builder p {
   flex-shrink: 0;
   padding: 1rem 1.25rem;
-  border-top: 1px solid var(--landing-border);
 }
 
 .feature-card__icon,
@@ -912,5 +918,4 @@ pre {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-
 }

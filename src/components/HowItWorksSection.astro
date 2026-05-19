@@ -1,42 +1,58 @@
 ---
 import FlowBuilderGraph from "./FlowBuilderGraph.astro";
-import { Boxes, Braces, Code2, Database, GitFork, ShieldCheck } from "@lucide/astro";
+import {
+  Boxes,
+  Braces,
+  Code2,
+  Database,
+  GitFork,
+  ShieldCheck,
+} from "@lucide/astro";
 
 const features = [
   {
-    title: "Flow Builder 2.0",
-    description: "Compose browser journeys as structured blocks, branches, and reusable step groups.",
+    title: "Intuitive Test Flow Builder",
+    description:
+      "Build test flows visually with a drag-and-drop interface that is easy to understand, compose and reuse across various scenarios.",
     icon: GitFork,
   },
   {
     title: "Locator Creator",
-    description: "Capture resilient selectors with context instead of hand-maintaining brittle CSS paths.",
+    description:
+      "Capture resilient selectors with context instead of hand-maintaining brittle CSS paths.",
     icon: ShieldCheck,
   },
   {
     title: "Dynamic Integrator",
-    description: "Register custom steps and expose them inside the builder as first-class actions.",
+    description:
+      "Register custom steps and expose them inside the builder as first-class actions.",
     icon: Boxes,
   },
   {
     title: "Portable Output",
-    description: "Generate Playwright, Cucumber, and support files that stay readable in git.",
+    description:
+      "Generate Playwright, Cucumber, and support files that stay readable in git.",
     icon: Code2,
   },
   {
     title: "Local-First",
-    description: "Run on developer machines and CI without routing execution through a hosted runner.",
+    description:
+      "Run on developer machines and CI without routing execution through a hosted runner.",
     icon: Database,
   },
   {
     title: "Structured Engine",
-    description: "Keep workflows deterministic with explicit inputs, artifacts, and execution state.",
+    description:
+      "Keep workflows deterministic with explicit inputs, artifacts, and execution state.",
     icon: Braces,
   },
 ];
 ---
 
-<section class="landing-features landing-shell" aria-labelledby="features-heading">
+<section
+  class="landing-features landing-shell"
+  aria-labelledby="features-heading"
+>
   <div class="landing-section-copy">
     <p class="landing-kicker">Operational surface</p>
     <h2 id="features-heading" class="landing-section-title">
@@ -59,6 +75,7 @@ const features = [
               <>
                 <FlowBuilderGraph fill />
                 <h3>{feature.title}</h3>
+                <p>{feature.description}</p>
               </>
             ) : (
               <>
@@ -76,7 +93,10 @@ const features = [
   </div>
 </section>
 
-<section class="landing-showcase landing-showcase--wide" aria-labelledby="workflow-heading">
+<section
+  class="landing-showcase landing-showcase--wide"
+  aria-labelledby="workflow-heading"
+>
   <div class="landing-shell landing-shell--wide">
     <div class="landing-section-copy">
       <p class="landing-kicker">Execution model</p>
