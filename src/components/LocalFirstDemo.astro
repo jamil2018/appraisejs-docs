@@ -1,0 +1,493 @@
+---
+interface Props {
+  /** Expand to fill the parent card body above the title. */
+  fill?: boolean;
+}
+
+const { fill = false } = Astro.props;
+---
+
+<div
+  class:list={["local-first-demo", fill && "local-first-demo--fill"]}
+  aria-hidden="true"
+>
+  <div class="local-first-demo__stage">
+    <div class="local-first-demo__desktop">
+      <div class="local-first-demo__screen">
+        <div class="local-first-demo__screen-bar"></div>
+        <div
+          class="local-first-demo__screen-line local-first-demo__screen-line--one"
+        >
+        </div>
+        <div
+          class="local-first-demo__screen-line local-first-demo__screen-line--two"
+        >
+        </div>
+      </div>
+      <div class="local-first-demo__stand"></div>
+      <div class="local-first-demo__base"></div>
+    </div>
+
+    <div class="local-first-demo__window local-first-demo__window--launch">
+      <div class="local-first-demo__bar">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="local-first-demo__launch-content">
+        <div class="local-first-demo__launch-line"></div>
+        <div
+          class="local-first-demo__launch-line local-first-demo__launch-line--short"
+        >
+        </div>
+        <div class="local-first-demo__run-button">Run tests</div>
+      </div>
+    </div>
+
+    <div class="local-first-demo__window local-first-demo__window--running">
+      <div class="local-first-demo__bar">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="local-first-demo__running-content">
+        <strong>Running Selected Tests</strong>
+        <div class="local-first-demo__progress">
+          <span></span>
+        </div>
+        <div class="local-first-demo__status-lines">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="local-first-demo__window local-first-demo__window--results">
+      <div class="local-first-demo__bar">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="local-first-demo__results-content">
+        <strong>Test Results</strong>
+        <div class="local-first-demo__result-row">
+          <span></span>
+          <span></span>
+        </div>
+        <div
+          class="local-first-demo__result-row local-first-demo__result-row--wide"
+        >
+          <span></span>
+          <span></span>
+        </div>
+        <div
+          class="local-first-demo__result-row local-first-demo__result-row--short"
+        >
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .local-first-demo {
+    --local-cycle: 8.4s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: clamp(4.5rem, 14vw, 5.75rem);
+    padding: 0.65rem 0.5rem;
+    border: 1px solid var(--landing-border);
+    border-radius: var(--landing-radius);
+    background: #101010;
+  }
+
+  .local-first-demo__stage {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    max-width: 17rem;
+    min-height: 10.5rem;
+    overflow: hidden;
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      #0e0e0e;
+    background-size: 18px 18px;
+  }
+
+  .local-first-demo__stage::before {
+    content: "";
+    position: absolute;
+    inset: auto 13% 14% 13%;
+    height: 3.3rem;
+    border-radius: 999px;
+    background: radial-gradient(
+      ellipse,
+      rgba(16, 185, 129, 0.24),
+      transparent 68%
+    );
+    filter: blur(10px);
+    opacity: 0.82;
+  }
+
+  .local-first-demo__desktop {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    justify-items: center;
+    width: min(62%, 10.25rem);
+    margin-top: 1.6rem;
+    animation: local-first-desktop var(--local-cycle) ease-in-out infinite;
+  }
+
+  .local-first-demo__screen {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border: 1.5px solid rgba(110, 231, 183, 0.46);
+    border-radius: 0.58rem;
+    background:
+      linear-gradient(180deg, rgba(16, 185, 129, 0.12), transparent 42%),
+      rgba(13, 13, 13, 0.96);
+    box-shadow:
+      0 0 0 1px rgba(16, 185, 129, 0.08),
+      0 18px 34px rgba(0, 0, 0, 0.34);
+  }
+
+  .local-first-demo__screen-bar,
+  .local-first-demo__screen-line {
+    position: absolute;
+    left: 14%;
+    height: 0.38rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .local-first-demo__screen-bar {
+    top: 20%;
+    width: 72%;
+  }
+
+  .local-first-demo__screen-line--one {
+    top: 43%;
+    width: 48%;
+  }
+
+  .local-first-demo__screen-line--two {
+    top: 59%;
+    width: 62%;
+  }
+
+  .local-first-demo__stand {
+    width: 18%;
+    height: 1.08rem;
+    border-inline: 1.5px solid rgba(110, 231, 183, 0.4);
+    background: rgba(16, 185, 129, 0.1);
+  }
+
+  .local-first-demo__base {
+    width: 48%;
+    height: 0.42rem;
+    border: 1.5px solid rgba(110, 231, 183, 0.38);
+    border-radius: 999px;
+    background: rgba(16, 185, 129, 0.09);
+  }
+
+  .local-first-demo__window {
+    position: absolute;
+    top: 13%;
+    z-index: 2;
+    width: min(76%, 12.75rem);
+    min-height: 5.8rem;
+    overflow: hidden;
+    border: 1px solid rgba(110, 231, 183, 0.42);
+    border-radius: 0.48rem;
+    background: rgba(12, 12, 12, 0.96);
+    box-shadow:
+      0 0 18px rgba(16, 185, 129, 0.18),
+      0 16px 32px rgba(0, 0, 0, 0.36);
+    opacity: 0;
+    transform: translateY(0.35rem) scale(0.96);
+  }
+
+  .local-first-demo__window--launch {
+    animation: local-first-launch-window var(--local-cycle) ease-in-out infinite;
+  }
+
+  .local-first-demo__window--running {
+    animation: local-first-running-window var(--local-cycle) ease-in-out
+      infinite;
+  }
+
+  .local-first-demo__window--results {
+    animation: local-first-results-window var(--local-cycle) ease-in-out
+      infinite;
+  }
+
+  .local-first-demo__bar {
+    display: flex;
+    gap: 0.24rem;
+    padding: 0.42rem 0.5rem;
+    border-bottom: 1px solid var(--landing-border);
+  }
+
+  .local-first-demo__bar span {
+    width: 0.36rem;
+    height: 0.36rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  .local-first-demo__bar span:first-child {
+    background: rgba(110, 231, 183, 0.68);
+  }
+
+  .local-first-demo__launch-content,
+  .local-first-demo__running-content,
+  .local-first-demo__results-content {
+    display: grid;
+    gap: 0.48rem;
+    padding: 0.62rem;
+  }
+
+  .local-first-demo__launch-line,
+  .local-first-demo__status-lines span,
+  .local-first-demo__result-row span {
+    height: 0.42rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.13);
+  }
+
+  .local-first-demo__launch-line {
+    width: 78%;
+  }
+
+  .local-first-demo__launch-line--short {
+    width: 56%;
+  }
+
+  .local-first-demo__run-button {
+    display: grid;
+    place-items: center;
+    justify-self: start;
+    min-width: 5.4rem;
+    min-height: 1.45rem;
+    padding: 0 0.72rem;
+    border: 1px solid rgba(110, 231, 183, 0.7);
+    border-radius: 0.34rem;
+    background: rgba(16, 185, 129, 0.18);
+    color: #6ee7b7;
+    font-size: 0.56rem;
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+    animation: local-first-run-button var(--local-cycle) ease-in-out infinite;
+  }
+
+  .local-first-demo__running-content strong,
+  .local-first-demo__results-content strong {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.64rem;
+    font-weight: 720;
+    line-height: 1.2;
+  }
+
+  .local-first-demo__progress {
+    height: 0.54rem;
+    overflow: hidden;
+    border: 1px solid rgba(110, 231, 183, 0.36);
+    border-radius: 999px;
+    background: rgba(16, 185, 129, 0.08);
+  }
+
+  .local-first-demo__progress span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #10b981, #6ee7b7);
+    transform: scaleX(0);
+    transform-origin: left center;
+    animation: local-first-progress var(--local-cycle) ease-in-out infinite;
+  }
+
+  .local-first-demo__status-lines {
+    display: grid;
+    gap: 0.32rem;
+  }
+
+  .local-first-demo__status-lines span:nth-child(1) {
+    width: 88%;
+  }
+
+  .local-first-demo__status-lines span:nth-child(2) {
+    width: 70%;
+  }
+
+  .local-first-demo__status-lines span:nth-child(3) {
+    width: 52%;
+  }
+
+  .local-first-demo__results-content {
+    gap: 0.42rem;
+  }
+
+  .local-first-demo__result-row {
+    display: grid;
+    grid-template-columns: 32% 1fr;
+    gap: 0.38rem;
+    align-items: center;
+  }
+
+  .local-first-demo__result-row span:last-child {
+    background: linear-gradient(
+      90deg,
+      rgba(16, 185, 129, 0.78),
+      rgba(110, 231, 183, 0.24)
+    );
+  }
+
+  .local-first-demo__result-row--wide {
+    grid-template-columns: 24% 1fr;
+  }
+
+  .local-first-demo__result-row--short {
+    grid-template-columns: 38% 58%;
+  }
+
+  .local-first-demo--fill {
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .local-first-demo--fill .local-first-demo__stage {
+    max-width: none;
+    height: 100%;
+    min-height: 0;
+  }
+
+  @keyframes local-first-desktop {
+    0%,
+    16%,
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    28%,
+    86% {
+      opacity: 0.62;
+      transform: translateY(0.16rem) scale(0.96);
+    }
+  }
+
+  @keyframes local-first-launch-window {
+    0%,
+    10%,
+    28% {
+      opacity: 0;
+      transform: translateY(0.46rem) scale(0.95);
+    }
+
+    14%,
+    24% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes local-first-running-window {
+    0%,
+    26%,
+    60%,
+    100% {
+      opacity: 0;
+      transform: translateY(0.46rem) scale(0.95);
+    }
+
+    32%,
+    54% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes local-first-results-window {
+    0%,
+    58%,
+    100% {
+      opacity: 0;
+      transform: translateY(0.46rem) scale(0.95);
+    }
+
+    66%,
+    88% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes local-first-run-button {
+    0%,
+    18%,
+    100% {
+      border-color: rgba(110, 231, 183, 0.7);
+      background: rgba(16, 185, 129, 0.18);
+      box-shadow: 0 0 0 rgba(16, 185, 129, 0);
+      transform: scale(1);
+    }
+
+    22%,
+    24% {
+      border-color: rgba(110, 231, 183, 0.95);
+      background: rgba(16, 185, 129, 0.28);
+      box-shadow: 0 0 18px rgba(16, 185, 129, 0.24);
+      transform: scale(0.97);
+    }
+  }
+
+  @keyframes local-first-progress {
+    0%,
+    32% {
+      transform: scaleX(0);
+    }
+
+    52%,
+    100% {
+      transform: scaleX(0.92);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .local-first-demo__desktop,
+    .local-first-demo__window,
+    .local-first-demo__run-button,
+    .local-first-demo__progress span {
+      animation: none;
+    }
+
+    .local-first-demo__desktop {
+      opacity: 0.62;
+      transform: translateY(0.16rem) scale(0.96);
+    }
+
+    .local-first-demo__window--results {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .local-first-demo__progress span {
+      transform: scaleX(0.92);
+    }
+  }
+</style>

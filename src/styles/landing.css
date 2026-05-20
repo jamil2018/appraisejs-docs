@@ -523,7 +523,8 @@ pre {
 .feature-card__animation .flow-builder-graph--fill,
 .feature-card__animation .locator-creator-demo--fill,
 .feature-card__animation .dynamic-integrator-demo--fill,
-.feature-card__animation .portable-output-demo--fill {
+.feature-card__animation .portable-output-demo--fill,
+.feature-card__animation .local-first-demo--fill {
   display: flex;
   flex: 1 1 auto;
   align-items: center;
@@ -574,6 +575,14 @@ pre {
   margin: 0;
 }
 
+.feature-card__animation .local-first-demo--fill .local-first-demo__stage {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+}
+
 .feature-card__animation
   .locator-creator-demo--fill
   .locator-creator-demo__canvas {
@@ -601,7 +610,8 @@ pre {
 }
 
 .feature-card--dynamic-integrator .feature-card__animation,
-.feature-card--portable-output .feature-card__animation {
+.feature-card--portable-output .feature-card__animation,
+.feature-card--local-first .feature-card__animation {
   padding: 0;
 }
 

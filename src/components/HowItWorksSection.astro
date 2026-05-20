@@ -3,6 +3,7 @@ import FlowBuilderGraph from "./FlowBuilderGraph.astro";
 import LocatorCreatorDemo from "./LocatorCreatorDemo.astro";
 import DynamicIntegratorDemo from "./DynamicIntegratorDemo.astro";
 import PortableOutputDemo from "./PortableOutputDemo.astro";
+import LocalFirstDemo from "./LocalFirstDemo.astro";
 import {
   Blocks,
   Code,
@@ -71,11 +72,13 @@ const features = [
         const isLocatorCreator = index === 1;
         const isDynamicIntegrator = index === 2;
         const isPortableOutput = index === 3;
+        const isLocalFirst = index === 4;
         const hasAnimation =
           isFlowBuilder ||
           isLocatorCreator ||
           isDynamicIntegrator ||
-          isPortableOutput;
+          isPortableOutput ||
+          isLocalFirst;
         return (
           <article
             class:list={[
@@ -85,6 +88,7 @@ const features = [
               isLocatorCreator && "feature-card--locator-creator",
               isDynamicIntegrator && "feature-card--dynamic-integrator",
               isPortableOutput && "feature-card--portable-output",
+              isLocalFirst && "feature-card--local-first",
             ]}
           >
             {isFlowBuilder ? (
@@ -115,6 +119,14 @@ const features = [
               <>
                 <div class="feature-card__animation">
                   <PortableOutputDemo fill />
+                </div>
+                <h3>{feature.title}</h3>
+                <p>{feature.description}</p>
+              </>
+            ) : isLocalFirst ? (
+              <>
+                <div class="feature-card__animation">
+                  <LocalFirstDemo fill />
                 </div>
                 <h3>{feature.title}</h3>
                 <p>{feature.description}</p>
