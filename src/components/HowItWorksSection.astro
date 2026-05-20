@@ -15,36 +15,42 @@ import {
 
 const features = [
   {
+    id: "flow-builder",
     title: "Intuitive Test Flow Builder",
     description:
       "Build test flows visually with an interface that is easy to understand, compose and reuse across various scenarios.",
     icon: GitFork,
   },
   {
+    id: "locator-creator",
     title: "Locator Creator",
     description:
       "Capture resilient selectors with context instead of hand-maintaining brittle CSS paths.",
     icon: ShieldCheck,
   },
   {
+    id: "dynamic-node-builder",
     title: "Dynamic Node Builder",
     description:
-      "Build custom nodes and expose them inside the worflow builder as first-class actions and assertions.",
+      "Build custom nodes and expose them inside the workflow builder as first-class actions and assertions.",
     icon: Blocks,
   },
   {
+    id: "portable-output",
     title: "Portable Output",
     description:
       "Generate Playwright, Cucumber, and support files that stay readable in git and version controlled.",
     icon: Code,
   },
   {
+    id: "local-first",
     title: "Local-First",
     description:
       "Run on developer machines and CI without routing execution through a hosted runner.",
     icon: Database,
   },
   {
+    id: "all-in-one-workspace",
     title: "All In One Workspace",
     description:
       "Author, execute, and analyze tests from a singular location. No more context switching.",
@@ -64,88 +70,168 @@ const features = [
     </h2>
   </div>
 
-  <div class="feature-grid not-content">
-    {
-      features.map((feature, index) => {
-        const Icon = feature.icon;
-        const isFlowBuilder = index === 0;
-        const isLocatorCreator = index === 1;
-        const isDynamicIntegrator = index === 2;
-        const isPortableOutput = index === 3;
-        const isLocalFirst = index === 4;
-        const hasAnimation =
-          isFlowBuilder ||
-          isLocatorCreator ||
-          isDynamicIntegrator ||
-          isPortableOutput ||
-          isLocalFirst;
-        return (
-          <article
+  <div class="feature-carousel not-content" data-feature-carousel>
+    <div class="feature-carousel__rail" aria-label="Feature list">
+      {
+        features.map((feature, index) => (
+          <a
             class:list={[
-              "feature-card",
-              hasAnimation && "feature-card--with-animation",
-              isFlowBuilder && "feature-card--flow-builder",
-              isLocatorCreator && "feature-card--locator-creator",
-              isDynamicIntegrator && "feature-card--dynamic-integrator",
-              isPortableOutput && "feature-card--portable-output",
-              isLocalFirst && "feature-card--local-first",
+              "feature-carousel__link",
+              index === 0 && "is-active",
             ]}
+            href={`#feature-${feature.id}`}
+            data-feature-link={feature.id}
           >
-            {isFlowBuilder ? (
-              <>
-                <div class="feature-card__animation">
-                  <FlowBuilderGraph fill />
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            {feature.title}
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="feature-carousel__track">
+      {
+        features.map((feature, index) => {
+          const Icon = feature.icon;
+          const isFlowBuilder = index === 0;
+          const isLocatorCreator = index === 1;
+          const isDynamicIntegrator = index === 2;
+          const isPortableOutput = index === 3;
+          const isLocalFirst = index === 4;
+          const hasAnimation =
+            isFlowBuilder ||
+            isLocatorCreator ||
+            isDynamicIntegrator ||
+            isPortableOutput ||
+            isLocalFirst;
+          return (
+            <article
+              id={`feature-${feature.id}`}
+              class:list={[
+                "feature-carousel__item",
+                index === 0 && "is-active",
+              ]}
+              data-feature-panel={feature.id}
+            >
+              <div
+                class:list={[
+                  "feature-card",
+                  hasAnimation && "feature-card--with-animation",
+                  !hasAnimation && "feature-card--static",
+                  isFlowBuilder && "feature-card--flow-builder",
+                  isLocatorCreator && "feature-card--locator-creator",
+                  isDynamicIntegrator && "feature-card--dynamic-integrator",
+                  isPortableOutput && "feature-card--portable-output",
+                  isLocalFirst && "feature-card--local-first",
+                ]}
+              >
+                {hasAnimation ? (
+                  <div class="feature-card__desktop">
+                    <div class="feature-card__desktop-bar" aria-hidden="true">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                    <div class="feature-card__animation">
+                      {isFlowBuilder ? (
+                        <FlowBuilderGraph fill />
+                      ) : isLocatorCreator ? (
+                        <LocatorCreatorDemo fill />
+                      ) : isDynamicIntegrator ? (
+                        <DynamicIntegratorDemo fill />
+                      ) : isPortableOutput ? (
+                        <PortableOutputDemo fill />
+                      ) : (
+                        <LocalFirstDemo fill />
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <div class="feature-card__desktop feature-card__desktop--static">
+                    <div class="feature-card__desktop-bar" aria-hidden="true">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                    <div class="feature-card__workspace">
+                      <span class="feature-card__icon" aria-hidden="true">
+                        <Icon />
+                      </span>
+                      <div class="feature-card__workspace-lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <div class="feature-card__copy">
+                  <h3>{feature.title}</h3>
+                  <p>{feature.description}</p>
                 </div>
-                <h3>{feature.title}</h3>
-                <p>{feature.description}</p>
-              </>
-            ) : isLocatorCreator ? (
-              <>
-                <div class="feature-card__animation">
-                  <LocatorCreatorDemo fill />
-                </div>
-                <h3>{feature.title}</h3>
-                <p>{feature.description}</p>
-              </>
-            ) : isDynamicIntegrator ? (
-              <>
-                <div class="feature-card__animation">
-                  <DynamicIntegratorDemo fill />
-                </div>
-                <h3>{feature.title}</h3>
-                <p>{feature.description}</p>
-              </>
-            ) : isPortableOutput ? (
-              <>
-                <div class="feature-card__animation">
-                  <PortableOutputDemo fill />
-                </div>
-                <h3>{feature.title}</h3>
-                <p>{feature.description}</p>
-              </>
-            ) : isLocalFirst ? (
-              <>
-                <div class="feature-card__animation">
-                  <LocalFirstDemo fill />
-                </div>
-                <h3>{feature.title}</h3>
-                <p>{feature.description}</p>
-              </>
-            ) : (
-              <>
-                <span class="feature-card__icon" aria-hidden="true">
-                  <Icon />
-                </span>
-                <h3>{feature.title}</h3>
-                <p>{feature.description}</p>
-              </>
-            )}
-          </article>
-        );
-      })
-    }
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
   </div>
 </section>
+
+<script>
+  const carousels = document.querySelectorAll("[data-feature-carousel]");
+
+  carousels.forEach((carousel) => {
+    const links = Array.from(
+      carousel.querySelectorAll("[data-feature-link]"),
+    );
+    const panels = Array.from(
+      carousel.querySelectorAll("[data-feature-panel]"),
+    );
+
+    if (!("IntersectionObserver" in window) || panels.length === 0) return;
+
+    const activate = (id: string) => {
+      links.forEach((link) => {
+        const isActive = link.getAttribute("data-feature-link") === id;
+        link.classList.toggle("is-active", isActive);
+        if (isActive) {
+          link.setAttribute("aria-current", "true");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+
+      panels.forEach((panel) => {
+        panel.classList.toggle(
+          "is-active",
+          panel.getAttribute("data-feature-panel") === id,
+        );
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (!visible) return;
+
+        const id = visible.target.getAttribute("data-feature-panel");
+        if (id) activate(id);
+      },
+      {
+        root: null,
+        rootMargin: "-24% 0px -42% 0px",
+        threshold: [0.2, 0.45, 0.7],
+      },
+    );
+
+    panels.forEach((panel) => observer.observe(panel));
+    activate(panels[0].getAttribute("data-feature-panel") || "");
+  });
+</script>
 
 <section
   class="landing-showcase landing-showcase--wide"
