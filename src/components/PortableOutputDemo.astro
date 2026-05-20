@@ -1,0 +1,564 @@
+---
+interface Props {
+  /** Expand to fill the parent card body above the title. */
+  fill?: boolean;
+}
+
+const { fill = false } = Astro.props;
+---
+
+<div
+  class:list={["portable-output-demo", fill && "portable-output-demo--fill"]}
+  aria-hidden="true"
+>
+  <div class="portable-output-demo__panel">
+    <div class="portable-output-demo__bar">
+      <span>login.feature</span>
+      <span>generated</span>
+    </div>
+
+    <div class="portable-output-demo__stage">
+      <div class="portable-output-demo__canvas">
+        <div class="portable-output-demo__graph">
+          <div
+            class="portable-output-demo__node portable-output-demo__node--username"
+          >
+            <span>fill username</span>
+          </div>
+          <div
+            class="portable-output-demo__edge portable-output-demo__edge--one"
+          >
+          </div>
+          <div
+            class="portable-output-demo__node portable-output-demo__node--password"
+          >
+            <span>fill password</span>
+          </div>
+          <div
+            class="portable-output-demo__edge portable-output-demo__edge--two"
+          >
+          </div>
+          <div
+            class="portable-output-demo__node portable-output-demo__node--click"
+          >
+            <span>click login</span>
+          </div>
+          <div
+            class="portable-output-demo__edge portable-output-demo__edge--three"
+          >
+          </div>
+          <div
+            class="portable-output-demo__node portable-output-demo__node--assert"
+          >
+            <span>assert login</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="portable-output-demo__script">
+        <div><span class="token-key">Scenario:</span> User signs in</div>
+        <div><span class="token-key">When</span> I fill username</div>
+        <div><span class="token-key">And</span> I fill password</div>
+        <div><span class="token-key">And</span> I click login</div>
+        <div><span class="token-key">Then</span> I assert login</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .portable-output-demo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: clamp(4.5rem, 14vw, 5.75rem);
+    padding: 0.65rem 0.5rem;
+    border: 1px solid var(--landing-border);
+    border-radius: var(--landing-radius);
+    background: #101010;
+  }
+
+  .portable-output-demo__panel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 15rem;
+    height: auto;
+    overflow: hidden;
+    border: 1px solid var(--landing-border);
+    border-radius: var(--landing-radius);
+    background: #101010;
+  }
+
+  .portable-output-demo__bar {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.4rem 0.5rem;
+    border-bottom: 1px solid var(--landing-border);
+    color: var(--landing-dim);
+    font-family: "Geist Mono", var(--sl-font-mono), monospace;
+    font-size: 0.5rem;
+    text-transform: lowercase;
+  }
+
+  .portable-output-demo__stage {
+    position: relative;
+    display: grid;
+    flex: 1 1 auto;
+    min-height: 10.5rem;
+    overflow: hidden;
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      #0e0e0e;
+    background-size: 18px 18px;
+  }
+
+  .portable-output-demo__canvas,
+  .portable-output-demo__script {
+    grid-area: 1 / 1;
+    min-width: 0;
+  }
+
+  .portable-output-demo__canvas {
+    display: grid;
+    place-items: center;
+    padding: 0.9rem 0.7rem;
+    animation: portable-output-canvas 6.8s ease-in-out infinite;
+  }
+
+  .portable-output-demo__graph {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 1rem minmax(0, 1fr);
+    grid-template-areas:
+      "username edge-one password"
+      ". . edge-two"
+      "assert edge-three click";
+    align-items: center;
+    justify-items: center;
+    gap: 0.45rem 0.25rem;
+    width: 100%;
+    max-width: 17rem;
+  }
+
+  .portable-output-demo__node {
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    min-width: 0;
+    min-height: 2.25rem;
+    padding: 0.45rem 0.34rem;
+    border: 1.5px solid rgba(16, 185, 129, 0.48);
+    border-radius: 7px;
+    background: rgba(18, 18, 18, 0.97);
+    color: rgba(255, 255, 255, 0.88);
+    font-family: "Geist Mono", var(--sl-font-mono), monospace;
+    font-size: clamp(0.52rem, 1.45vw, 0.68rem);
+    font-weight: 620;
+    line-height: 1.15;
+    text-align: center;
+    opacity: 0;
+    transform: scale(0.86);
+    box-shadow: 0 0 0 rgba(16, 185, 129, 0);
+  }
+
+  .portable-output-demo__node span {
+    display: block;
+    overflow-wrap: anywhere;
+  }
+
+  .portable-output-demo__node--username {
+    grid-area: username;
+    animation: portable-output-node-username 6.8s ease-in-out infinite;
+  }
+
+  .portable-output-demo__node--password {
+    grid-area: password;
+    animation: portable-output-node-password 6.8s ease-in-out infinite;
+  }
+
+  .portable-output-demo__node--click {
+    grid-area: click;
+    animation: portable-output-node-click 6.8s ease-in-out infinite;
+  }
+
+  .portable-output-demo__node--assert {
+    grid-area: assert;
+    animation: portable-output-node-assert 6.8s ease-in-out infinite;
+  }
+
+  .portable-output-demo__edge {
+    width: 100%;
+    height: 3px;
+    border-radius: 999px;
+    background: #6ee7b7;
+    opacity: 0;
+    transform: scaleX(0);
+    box-shadow: 0 0 12px rgba(110, 231, 183, 0.68);
+  }
+
+  .portable-output-demo__edge--one {
+    grid-area: edge-one;
+    animation: portable-output-edge-one 6.8s ease-in-out infinite;
+  }
+
+  .portable-output-demo__edge--two {
+    grid-area: edge-two;
+    width: 3px;
+    height: 1.35rem;
+    transform: scaleY(0);
+    animation: portable-output-edge-two 6.8s ease-in-out infinite;
+  }
+
+  .portable-output-demo__edge--three {
+    grid-area: edge-three;
+    animation: portable-output-edge-three 6.8s ease-in-out infinite;
+  }
+
+  .portable-output-demo__script {
+    display: grid;
+    align-content: center;
+    gap: 0.24rem;
+    padding: 0.85rem;
+    opacity: 0;
+    transform: translateY(0.45rem);
+    animation: portable-output-script 6.8s ease-in-out infinite;
+  }
+
+  .portable-output-demo__script div {
+    position: relative;
+    overflow: hidden;
+    color: rgba(255, 255, 255, 0.82);
+    font-family: "Geist Mono", var(--sl-font-mono), monospace;
+    font-size: clamp(0.52rem, 1.5vw, 0.64rem);
+    line-height: 1.45;
+    white-space: nowrap;
+    clip-path: inset(0 100% 0 0);
+  }
+
+  .portable-output-demo__script div:nth-child(1) {
+    animation: portable-output-type-line-1 6.8s steps(29, end) infinite;
+  }
+
+  .portable-output-demo__script div:nth-child(2) {
+    animation: portable-output-type-line-2 6.8s steps(20, end) infinite;
+  }
+
+  .portable-output-demo__script div:nth-child(3) {
+    animation: portable-output-type-line-3 6.8s steps(19, end) infinite;
+  }
+
+  .portable-output-demo__script div:nth-child(4) {
+    animation: portable-output-type-line-4 6.8s steps(17, end) infinite;
+  }
+
+  .portable-output-demo__script div:nth-child(5) {
+    animation: portable-output-type-line-5 6.8s steps(19, end) infinite;
+  }
+
+  .portable-output-demo__script::after {
+    content: "";
+    justify-self: start;
+    width: 1px;
+    height: 0.75em;
+    background: var(--landing-green);
+    opacity: 0;
+    animation: portable-output-caret 6.8s step-end infinite;
+  }
+
+  .portable-output-demo--fill {
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    padding: clamp(0.75rem, 3vw, 1.25rem);
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .portable-output-demo--fill .portable-output-demo__panel {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+  }
+
+  .portable-output-demo--fill .portable-output-demo__stage {
+    min-height: 0;
+  }
+
+  @keyframes portable-output-canvas {
+    0%,
+    52% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    58%,
+    100% {
+      opacity: 0;
+      transform: translateY(-0.35rem);
+    }
+  }
+
+  @keyframes portable-output-node-username {
+    0%,
+    2%,
+    58%,
+    100% {
+      opacity: 0;
+      transform: scale(0.86);
+      box-shadow: 0 0 0 rgba(16, 185, 129, 0);
+    }
+    7%,
+    52% {
+      opacity: 1;
+      transform: scale(1);
+      box-shadow: 0 0 18px rgba(16, 185, 129, 0.2);
+    }
+  }
+
+  @keyframes portable-output-node-password {
+    0%,
+    7%,
+    58%,
+    100% {
+      opacity: 0;
+      transform: scale(0.86);
+      box-shadow: 0 0 0 rgba(16, 185, 129, 0);
+    }
+    12%,
+    52% {
+      opacity: 1;
+      transform: scale(1);
+      box-shadow: 0 0 18px rgba(16, 185, 129, 0.2);
+    }
+  }
+
+  @keyframes portable-output-node-click {
+    0%,
+    12%,
+    58%,
+    100% {
+      opacity: 0;
+      transform: scale(0.86);
+      box-shadow: 0 0 0 rgba(16, 185, 129, 0);
+    }
+    17%,
+    52% {
+      opacity: 1;
+      transform: scale(1);
+      box-shadow: 0 0 18px rgba(16, 185, 129, 0.2);
+    }
+  }
+
+  @keyframes portable-output-node-assert {
+    0%,
+    17%,
+    58%,
+    100% {
+      opacity: 0;
+      transform: scale(0.86);
+      box-shadow: 0 0 0 rgba(16, 185, 129, 0);
+    }
+    22%,
+    52% {
+      opacity: 1;
+      transform: scale(1);
+      box-shadow: 0 0 18px rgba(16, 185, 129, 0.2);
+    }
+  }
+
+  @keyframes portable-output-edge-one {
+    0%,
+    9%,
+    58%,
+    100% {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    14%,
+    52% {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+  }
+
+  @keyframes portable-output-edge-two {
+    0%,
+    14%,
+    58%,
+    100% {
+      opacity: 0;
+      transform: scaleY(0);
+    }
+    19%,
+    52% {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+  }
+
+  @keyframes portable-output-edge-three {
+    0%,
+    19%,
+    58%,
+    100% {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    24%,
+    52% {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+  }
+
+  @keyframes portable-output-script {
+    0%,
+    54%,
+    94%,
+    100% {
+      opacity: 0;
+      transform: translateY(0.45rem);
+    }
+    60%,
+    88% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes portable-output-type-line-1 {
+    0%,
+    60%,
+    94%,
+    100% {
+      clip-path: inset(0 100% 0 0);
+    }
+    66%,
+    88% {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @keyframes portable-output-type-line-2 {
+    0%,
+    66%,
+    94%,
+    100% {
+      clip-path: inset(0 100% 0 0);
+    }
+    71%,
+    88% {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @keyframes portable-output-type-line-3 {
+    0%,
+    71%,
+    94%,
+    100% {
+      clip-path: inset(0 100% 0 0);
+    }
+    76%,
+    88% {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @keyframes portable-output-type-line-4 {
+    0%,
+    76%,
+    94%,
+    100% {
+      clip-path: inset(0 100% 0 0);
+    }
+    81%,
+    88% {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @keyframes portable-output-type-line-5 {
+    0%,
+    81%,
+    94%,
+    100% {
+      clip-path: inset(0 100% 0 0);
+    }
+    86%,
+    88% {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @keyframes portable-output-caret {
+    0%,
+    60%,
+    94%,
+    100% {
+      opacity: 0;
+    }
+    62%,
+    66%,
+    70%,
+    74%,
+    78%,
+    82%,
+    86% {
+      opacity: 1;
+    }
+    64%,
+    68%,
+    72%,
+    76%,
+    80%,
+    84%,
+    88% {
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .portable-output-demo:not(.portable-output-demo--fill) {
+      min-height: 4.25rem;
+      padding: 0.5rem 0.35rem;
+    }
+
+    .portable-output-demo--fill .portable-output-demo__stage {
+      min-height: 9rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .portable-output-demo__canvas,
+    .portable-output-demo__script,
+    .portable-output-demo__node,
+    .portable-output-demo__edge,
+    .portable-output-demo__script div,
+    .portable-output-demo__script::after {
+      animation: none;
+    }
+
+    .portable-output-demo__canvas {
+      opacity: 0;
+    }
+
+    .portable-output-demo__script,
+    .portable-output-demo__node,
+    .portable-output-demo__edge {
+      opacity: 1;
+      transform: none;
+    }
+
+    .portable-output-demo__script div {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+</style>

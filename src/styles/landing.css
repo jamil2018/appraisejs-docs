@@ -522,7 +522,8 @@ pre {
 
 .feature-card__animation .flow-builder-graph--fill,
 .feature-card__animation .locator-creator-demo--fill,
-.feature-card__animation .dynamic-integrator-demo--fill {
+.feature-card__animation .dynamic-integrator-demo--fill,
+.feature-card__animation .portable-output-demo--fill {
   display: flex;
   flex: 1 1 auto;
   align-items: center;
@@ -545,13 +546,17 @@ pre {
   max-height: 100%;
 }
 
-.feature-card__animation .locator-creator-demo--fill .locator-creator-demo__panel {
+.feature-card__animation
+  .locator-creator-demo--fill
+  .locator-creator-demo__panel {
   width: 100%;
   max-width: none;
   max-height: 100%;
 }
 
-.feature-card__animation .dynamic-integrator-demo--fill .dynamic-integrator-demo__panel {
+.feature-card__animation
+  .dynamic-integrator-demo--fill
+  .dynamic-integrator-demo__panel {
   width: 100%;
   max-width: none;
   height: 100%;
@@ -559,24 +564,53 @@ pre {
   margin: 0;
 }
 
-.feature-card__animation .locator-creator-demo--fill .locator-creator-demo__canvas {
+.feature-card__animation
+  .portable-output-demo--fill
+  .portable-output-demo__panel {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: 100%;
+  margin: 0;
+}
+
+.feature-card__animation
+  .locator-creator-demo--fill
+  .locator-creator-demo__canvas {
   min-height: 9.75rem;
 }
 
-.feature-card__animation .locator-creator-demo--fill .locator-creator-demo__canvas.is-form-step {
+.feature-card__animation
+  .locator-creator-demo--fill
+  .locator-creator-demo__canvas.is-form-step {
   min-height: 0;
 }
 
-.feature-card__animation .dynamic-integrator-demo--fill .dynamic-integrator-demo__stage {
+.feature-card__animation
+  .dynamic-integrator-demo--fill
+  .dynamic-integrator-demo__stage {
   height: 100%;
   min-height: 0;
 }
 
-.feature-card--dynamic-integrator .feature-card__animation {
+.feature-card__animation
+  .portable-output-demo--fill
+  .portable-output-demo__stage {
+  height: 100%;
+  min-height: 0;
+}
+
+.feature-card--dynamic-integrator .feature-card__animation,
+.feature-card--portable-output .feature-card__animation {
   padding: 0;
 }
 
-.feature-card--dynamic-integrator .dynamic-integrator-demo--fill .dynamic-integrator-demo__panel {
+.feature-card--dynamic-integrator
+  .dynamic-integrator-demo--fill
+  .dynamic-integrator-demo__panel,
+.feature-card--portable-output
+  .portable-output-demo--fill
+  .portable-output-demo__panel {
   border: 0;
   border-radius: 0;
 }
@@ -989,11 +1023,15 @@ pre {
     min-height: clamp(12.5rem, 48vw, 15rem);
   }
 
-  .feature-card__animation .locator-creator-demo--fill .locator-creator-demo__canvas {
+  .feature-card__animation
+    .locator-creator-demo--fill
+    .locator-creator-demo__canvas {
     min-height: 8.75rem;
   }
 
-  .feature-card__animation .dynamic-integrator-demo--fill .dynamic-integrator-demo__stage {
+  .feature-card__animation
+    .dynamic-integrator-demo--fill
+    .dynamic-integrator-demo__stage {
     height: 100%;
     min-height: 0;
   }
