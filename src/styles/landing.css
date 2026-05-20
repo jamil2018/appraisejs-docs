@@ -481,6 +481,13 @@ pre {
   max-width: none;
 }
 
+.landing-root .feature-card__animation *,
+.landing-root .feature-card__animation * + *,
+.landing-root .feature-grid.not-content *,
+.landing-root .feature-grid.not-content * + * {
+  margin-top: 0;
+}
+
 .feature-card {
   display: flex;
   flex-direction: column;
@@ -501,10 +508,11 @@ pre {
 
 .feature-card__animation {
   display: flex;
-  flex: 1 1 auto;
+  flex: 0 0 clamp(14.5rem, 38vw, 17.5rem);
   align-items: center;
   justify-content: center;
   width: 100%;
+  height: clamp(14.5rem, 38vw, 17.5rem);
   min-height: clamp(14.5rem, 38vw, 17.5rem);
   padding: clamp(0.65rem, 2.2vw, 1rem) clamp(0.85rem, 2.8vw, 1.15rem);
   overflow: hidden;
@@ -513,7 +521,8 @@ pre {
 }
 
 .feature-card__animation .flow-builder-graph--fill,
-.feature-card__animation .locator-creator-demo--fill {
+.feature-card__animation .locator-creator-demo--fill,
+.feature-card__animation .dynamic-integrator-demo--fill {
   display: flex;
   flex: 1 1 auto;
   align-items: center;
@@ -542,12 +551,34 @@ pre {
   max-height: 100%;
 }
 
+.feature-card__animation .dynamic-integrator-demo--fill .dynamic-integrator-demo__panel {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: 100%;
+  margin: 0;
+}
+
 .feature-card__animation .locator-creator-demo--fill .locator-creator-demo__canvas {
   min-height: 9.75rem;
 }
 
 .feature-card__animation .locator-creator-demo--fill .locator-creator-demo__canvas.is-form-step {
   min-height: 0;
+}
+
+.feature-card__animation .dynamic-integrator-demo--fill .dynamic-integrator-demo__stage {
+  height: 100%;
+  min-height: 0;
+}
+
+.feature-card--dynamic-integrator .feature-card__animation {
+  padding: 0;
+}
+
+.feature-card--dynamic-integrator .dynamic-integrator-demo--fill .dynamic-integrator-demo__panel {
+  border: 0;
+  border-radius: 0;
 }
 
 .feature-card--with-animation h3 {
@@ -953,11 +984,18 @@ pre {
   }
 
   .feature-card__animation {
+    flex-basis: clamp(12.5rem, 48vw, 15rem);
+    height: clamp(12.5rem, 48vw, 15rem);
     min-height: clamp(12.5rem, 48vw, 15rem);
   }
 
   .feature-card__animation .locator-creator-demo--fill .locator-creator-demo__canvas {
     min-height: 8.75rem;
+  }
+
+  .feature-card__animation .dynamic-integrator-demo--fill .dynamic-integrator-demo__stage {
+    height: 100%;
+    min-height: 0;
   }
 
   .locator-panel__browser {

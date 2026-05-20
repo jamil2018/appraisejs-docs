@@ -1,13 +1,14 @@
 ---
 import FlowBuilderGraph from "./FlowBuilderGraph.astro";
 import LocatorCreatorDemo from "./LocatorCreatorDemo.astro";
+import DynamicIntegratorDemo from "./DynamicIntegratorDemo.astro";
 import {
-  Boxes,
-  Braces,
-  Code2,
+  Blocks,
+  Code,
   Database,
   GitFork,
   ShieldCheck,
+  Wrench,
 } from "@lucide/astro";
 
 const features = [
@@ -24,16 +25,16 @@ const features = [
     icon: ShieldCheck,
   },
   {
-    title: "Dynamic Integrator",
+    title: "Dynamic Node Builder",
     description:
-      "Register custom steps and expose them inside the builder as first-class actions.",
-    icon: Boxes,
+      "Build custom nodes and expose them inside the worflow builder as first-class actions and assertions.",
+    icon: Blocks,
   },
   {
     title: "Portable Output",
     description:
-      "Generate Playwright, Cucumber, and support files that stay readable in git.",
-    icon: Code2,
+      "Generate Playwright, Cucumber, and support files that stay readable in git and version controlled.",
+    icon: Code,
   },
   {
     title: "Local-First",
@@ -42,10 +43,10 @@ const features = [
     icon: Database,
   },
   {
-    title: "Structured Engine",
+    title: "All In One Workspace",
     description:
-      "Keep workflows deterministic with explicit inputs, artifacts, and execution state.",
-    icon: Braces,
+      "Author, execute, and analyze tests from a singular location. No more context switching.",
+    icon: Wrench,
   },
 ];
 ---
@@ -55,19 +56,21 @@ const features = [
   aria-labelledby="features-heading"
 >
   <div class="landing-section-copy">
-    <p class="landing-kicker">Operational surface</p>
+    <p class="landing-kicker">What is in AppraiseJS?</p>
     <h2 id="features-heading" class="landing-section-title">
-      Designed for teams that need the visual layer and the code layer to agree.
+      Everything you need to author reliable tests that scale with your project.
     </h2>
   </div>
 
-  <div class="feature-grid">
+  <div class="feature-grid not-content">
     {
       features.map((feature, index) => {
         const Icon = feature.icon;
         const isFlowBuilder = index === 0;
         const isLocatorCreator = index === 1;
-        const hasAnimation = isFlowBuilder || isLocatorCreator;
+        const isDynamicIntegrator = index === 2;
+        const hasAnimation =
+          isFlowBuilder || isLocatorCreator || isDynamicIntegrator;
         return (
           <article
             class:list={[
@@ -75,6 +78,7 @@ const features = [
               hasAnimation && "feature-card--with-animation",
               isFlowBuilder && "feature-card--flow-builder",
               isLocatorCreator && "feature-card--locator-creator",
+              isDynamicIntegrator && "feature-card--dynamic-integrator",
             ]}
           >
             {isFlowBuilder ? (
@@ -89,6 +93,14 @@ const features = [
               <>
                 <div class="feature-card__animation">
                   <LocatorCreatorDemo fill />
+                </div>
+                <h3>{feature.title}</h3>
+                <p>{feature.description}</p>
+              </>
+            ) : isDynamicIntegrator ? (
+              <>
+                <div class="feature-card__animation">
+                  <DynamicIntegratorDemo fill />
                 </div>
                 <h3>{feature.title}</h3>
                 <p>{feature.description}</p>

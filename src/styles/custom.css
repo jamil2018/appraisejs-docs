@@ -92,6 +92,9 @@ a.sidebar-link-github::before {
 }
 
 /* Restore list markers in markdown content (Tailwind preflight removes them). */
+.sl-markdown-content {
+  margin-top: 0;
+}
 .sl-markdown-content :where(ul, ol) {
   margin-block: 1rem;
   margin-inline-start: 1.25rem;
