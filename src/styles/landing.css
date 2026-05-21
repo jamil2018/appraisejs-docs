@@ -638,7 +638,8 @@ pre {
 .feature-card__animation .locator-creator-demo--fill,
 .feature-card__animation .dynamic-integrator-demo--fill,
 .feature-card__animation .portable-output-demo--fill,
-.feature-card__animation .local-first-demo--fill {
+.feature-card__animation .local-first-demo--fill,
+.feature-card__animation .all-in-one-demo--fill {
   display: flex;
   flex: 1 1 auto;
   align-items: center;
@@ -733,7 +734,8 @@ pre {
 
 .feature-card--dynamic-integrator .feature-card__animation,
 .feature-card--portable-output .feature-card__animation,
-.feature-card--local-first .feature-card__animation {
+.feature-card--local-first .feature-card__animation,
+.feature-card--all-in-one-workspace .feature-card__animation {
   padding: 0;
 }
 
@@ -742,7 +744,10 @@ pre {
   .dynamic-integrator-demo__panel,
 .feature-card--portable-output
   .portable-output-demo--fill
-  .portable-output-demo__panel {
+  .portable-output-demo__panel,
+.feature-card--all-in-one-workspace
+  .all-in-one-demo--fill
+  .all-in-one-demo__panel {
   border: 0;
   border-radius: 0;
 }

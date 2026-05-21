@@ -5,10 +5,12 @@ interface Props {
 }
 
 const { fill = false } = Astro.props;
+const cycle = "5.4s";
 ---
 
 <div
   class:list={["portable-output-demo", fill && "portable-output-demo--fill"]}
+  style={`--portable-output-cycle: ${cycle}`}
   aria-hidden="true"
 >
   <div class="portable-output-demo__panel">
@@ -126,7 +128,8 @@ const { fill = false } = Astro.props;
     display: grid;
     place-items: center;
     padding: 0.9rem 0.7rem;
-    animation: portable-output-canvas 6.8s ease-in-out infinite;
+    animation: portable-output-canvas var(--portable-output-cycle) ease-in-out
+      infinite;
   }
 
   .portable-output-demo__graph {
@@ -172,22 +175,26 @@ const { fill = false } = Astro.props;
 
   .portable-output-demo__node--username {
     grid-area: username;
-    animation: portable-output-node-username 6.8s ease-in-out infinite;
+    animation: portable-output-node-username var(--portable-output-cycle)
+      ease-in-out infinite;
   }
 
   .portable-output-demo__node--password {
     grid-area: password;
-    animation: portable-output-node-password 6.8s ease-in-out infinite;
+    animation: portable-output-node-password var(--portable-output-cycle)
+      ease-in-out infinite;
   }
 
   .portable-output-demo__node--click {
     grid-area: click;
-    animation: portable-output-node-click 6.8s ease-in-out infinite;
+    animation: portable-output-node-click var(--portable-output-cycle)
+      ease-in-out infinite;
   }
 
   .portable-output-demo__node--assert {
     grid-area: assert;
-    animation: portable-output-node-assert 6.8s ease-in-out infinite;
+    animation: portable-output-node-assert var(--portable-output-cycle)
+      ease-in-out infinite;
   }
 
   .portable-output-demo__edge {
@@ -202,7 +209,8 @@ const { fill = false } = Astro.props;
 
   .portable-output-demo__edge--one {
     grid-area: edge-one;
-    animation: portable-output-edge-one 6.8s ease-in-out infinite;
+    animation: portable-output-edge-one var(--portable-output-cycle) ease-in-out
+      infinite;
   }
 
   .portable-output-demo__edge--two {
@@ -210,12 +218,14 @@ const { fill = false } = Astro.props;
     width: 3px;
     height: 1.35rem;
     transform: scaleY(0);
-    animation: portable-output-edge-two 6.8s ease-in-out infinite;
+    animation: portable-output-edge-two var(--portable-output-cycle) ease-in-out
+      infinite;
   }
 
   .portable-output-demo__edge--three {
     grid-area: edge-three;
-    animation: portable-output-edge-three 6.8s ease-in-out infinite;
+    animation: portable-output-edge-three var(--portable-output-cycle)
+      ease-in-out infinite;
   }
 
   .portable-output-demo__script {
@@ -225,7 +235,8 @@ const { fill = false } = Astro.props;
     padding: 0.85rem;
     opacity: 0;
     transform: translateY(0.45rem);
-    animation: portable-output-script 6.8s ease-in-out infinite;
+    animation: portable-output-script var(--portable-output-cycle) ease-in-out
+      infinite;
   }
 
   .portable-output-demo__script div {
@@ -240,23 +251,28 @@ const { fill = false } = Astro.props;
   }
 
   .portable-output-demo__script div:nth-child(1) {
-    animation: portable-output-type-line-1 6.8s steps(29, end) infinite;
+    animation: portable-output-type-line-1 var(--portable-output-cycle)
+      steps(29, end) infinite;
   }
 
   .portable-output-demo__script div:nth-child(2) {
-    animation: portable-output-type-line-2 6.8s steps(20, end) infinite;
+    animation: portable-output-type-line-2 var(--portable-output-cycle)
+      steps(20, end) infinite;
   }
 
   .portable-output-demo__script div:nth-child(3) {
-    animation: portable-output-type-line-3 6.8s steps(19, end) infinite;
+    animation: portable-output-type-line-3 var(--portable-output-cycle)
+      steps(19, end) infinite;
   }
 
   .portable-output-demo__script div:nth-child(4) {
-    animation: portable-output-type-line-4 6.8s steps(17, end) infinite;
+    animation: portable-output-type-line-4 var(--portable-output-cycle)
+      steps(17, end) infinite;
   }
 
   .portable-output-demo__script div:nth-child(5) {
-    animation: portable-output-type-line-5 6.8s steps(19, end) infinite;
+    animation: portable-output-type-line-5 var(--portable-output-cycle)
+      steps(19, end) infinite;
   }
 
   .portable-output-demo__script::after {
@@ -266,7 +282,8 @@ const { fill = false } = Astro.props;
     height: 0.75em;
     background: var(--landing-green);
     opacity: 0;
-    animation: portable-output-caret 6.8s step-end infinite;
+    animation: portable-output-caret var(--portable-output-cycle) step-end
+      infinite;
   }
 
   .portable-output-demo--fill {

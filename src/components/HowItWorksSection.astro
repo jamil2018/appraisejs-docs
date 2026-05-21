@@ -4,6 +4,7 @@ import LocatorCreatorDemo from "./LocatorCreatorDemo.astro";
 import DynamicIntegratorDemo from "./DynamicIntegratorDemo.astro";
 import PortableOutputDemo from "./PortableOutputDemo.astro";
 import LocalFirstDemo from "./LocalFirstDemo.astro";
+import AllInOneWorkspaceDemo from "./AllInOneWorkspaceDemo.astro";
 import {
   Blocks,
   Code,
@@ -98,12 +99,14 @@ const features = [
           const isDynamicIntegrator = index === 2;
           const isPortableOutput = index === 3;
           const isLocalFirst = index === 4;
+          const isAllInOneWorkspace = index === 5;
           const hasAnimation =
             isFlowBuilder ||
             isLocatorCreator ||
             isDynamicIntegrator ||
             isPortableOutput ||
-            isLocalFirst;
+            isLocalFirst ||
+            isAllInOneWorkspace;
           return (
             <article
               id={`feature-${feature.id}`}
@@ -123,6 +126,7 @@ const features = [
                   isDynamicIntegrator && "feature-card--dynamic-integrator",
                   isPortableOutput && "feature-card--portable-output",
                   isLocalFirst && "feature-card--local-first",
+                  isAllInOneWorkspace && "feature-card--all-in-one-workspace",
                 ]}
               >
                 {hasAnimation ? (
@@ -141,8 +145,10 @@ const features = [
                         <DynamicIntegratorDemo fill />
                       ) : isPortableOutput ? (
                         <PortableOutputDemo fill />
-                      ) : (
+                      ) : isLocalFirst ? (
                         <LocalFirstDemo fill />
+                      ) : (
+                        <AllInOneWorkspaceDemo fill />
                       )}
                     </div>
                   </div>

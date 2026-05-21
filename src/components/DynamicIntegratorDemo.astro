@@ -5,10 +5,15 @@ interface Props {
 }
 
 const { fill = false } = Astro.props;
+const cycle = "5.4s";
 ---
 
 <div
-  class:list={["dynamic-integrator-demo", fill && "dynamic-integrator-demo--fill"]}
+  class:list={[
+    "dynamic-integrator-demo",
+    fill && "dynamic-integrator-demo--fill",
+  ]}
+  style={`--dynamic-integrator-cycle: ${cycle}`}
   aria-hidden="true"
 >
   <div class="dynamic-integrator-demo__panel">
@@ -18,28 +23,57 @@ const { fill = false } = Astro.props;
     </div>
 
     <div class="dynamic-integrator-demo__stage">
-      <div class="dynamic-integrator-demo__view dynamic-integrator-demo__view--editor">
+      <div
+        class="dynamic-integrator-demo__view dynamic-integrator-demo__view--editor"
+      >
         <label class="dynamic-integrator-demo__field">
           <span>Name</span>
           <strong><span>Fill</span></strong>
         </label>
 
         <div class="dynamic-integrator-demo__editor">
-          <div><span class="token-key">step</span>(<span class="token-string">"Fill"</span>, async () =&gt; &#123;</div>
-          <div>&nbsp;&nbsp;await page.<span class="token-fn">fill</span>(target, value);</div>
+          <div>
+            <span class="token-key">step</span>(<span class="token-string"
+              >"Fill"</span
+            >, async () =&gt; &#123;
+          </div>
+          <div>
+            &nbsp;&nbsp;await page.<span class="token-fn">fill</span>(target,
+            value);
+          </div>
           <div>});</div>
         </div>
 
         <div class="dynamic-integrator-demo__save">Save step</div>
       </div>
 
-      <div class="dynamic-integrator-demo__view dynamic-integrator-demo__view--canvas">
+      <div
+        class="dynamic-integrator-demo__view dynamic-integrator-demo__view--canvas"
+      >
         <div class="dynamic-integrator-demo__graph">
-          <div class="dynamic-integrator-demo__node dynamic-integrator-demo__node--existing"><span>Open</span></div>
-          <div class="dynamic-integrator-demo__edge dynamic-integrator-demo__edge--existing"></div>
-          <div class="dynamic-integrator-demo__node dynamic-integrator-demo__node--existing"><span>Type</span></div>
-          <div class="dynamic-integrator-demo__edge dynamic-integrator-demo__edge--new"></div>
-          <div class="dynamic-integrator-demo__node dynamic-integrator-demo__node--fill"><span>Fill</span></div>
+          <div
+            class="dynamic-integrator-demo__node dynamic-integrator-demo__node--existing"
+          >
+            <span>Open</span>
+          </div>
+          <div
+            class="dynamic-integrator-demo__edge dynamic-integrator-demo__edge--existing"
+          >
+          </div>
+          <div
+            class="dynamic-integrator-demo__node dynamic-integrator-demo__node--existing"
+          >
+            <span>Type</span>
+          </div>
+          <div
+            class="dynamic-integrator-demo__edge dynamic-integrator-demo__edge--new"
+          >
+          </div>
+          <div
+            class="dynamic-integrator-demo__node dynamic-integrator-demo__node--fill"
+          >
+            <span>Fill</span>
+          </div>
         </div>
       </div>
     </div>
@@ -106,7 +140,8 @@ const { fill = false } = Astro.props;
     align-content: start;
     gap: 0.35rem;
     padding: 0.55rem;
-    animation: dynamic-integrator-editor 6.8s ease-in-out infinite;
+    animation: dynamic-integrator-editor var(--dynamic-integrator-cycle)
+      ease-in-out infinite;
   }
 
   .dynamic-integrator-demo__field {
@@ -139,7 +174,8 @@ const { fill = false } = Astro.props;
     width: 0;
     overflow: hidden;
     white-space: nowrap;
-    animation: dynamic-integrator-name-text 6.8s steps(4, end) infinite;
+    animation: dynamic-integrator-name-text var(--dynamic-integrator-cycle)
+      steps(4, end) infinite;
   }
 
   .dynamic-integrator-demo__field strong::after {
@@ -151,7 +187,8 @@ const { fill = false } = Astro.props;
     margin-left: 2px;
     vertical-align: -0.05em;
     background: var(--landing-green);
-    animation: dynamic-integrator-field-caret 6.8s step-end infinite;
+    animation: dynamic-integrator-field-caret var(--dynamic-integrator-cycle)
+      step-end infinite;
   }
 
   .dynamic-integrator-demo__editor::after {
@@ -163,9 +200,9 @@ const { fill = false } = Astro.props;
     width: 1px;
     height: 0.75em;
     background: var(--landing-green);
-    animation: dynamic-integrator-code-caret 6.8s step-end infinite;
+    animation: dynamic-integrator-code-caret var(--dynamic-integrator-cycle)
+      step-end infinite;
   }
-
 
   .dynamic-integrator-demo__editor {
     position: relative;
@@ -189,15 +226,18 @@ const { fill = false } = Astro.props;
   }
 
   .dynamic-integrator-demo__editor div:nth-child(1) {
-    animation: dynamic-integrator-code-line-1 6.8s steps(32, end) infinite;
+    animation: dynamic-integrator-code-line-1 var(--dynamic-integrator-cycle)
+      steps(32, end) infinite;
   }
 
   .dynamic-integrator-demo__editor div:nth-child(2) {
-    animation: dynamic-integrator-code-line-2 6.8s steps(34, end) infinite;
+    animation: dynamic-integrator-code-line-2 var(--dynamic-integrator-cycle)
+      steps(34, end) infinite;
   }
 
   .dynamic-integrator-demo__editor div:nth-child(3) {
-    animation: dynamic-integrator-code-line-3 6.8s steps(4, end) infinite;
+    animation: dynamic-integrator-code-line-3 var(--dynamic-integrator-cycle)
+      steps(4, end) infinite;
   }
 
   .dynamic-integrator-demo__save {
@@ -213,7 +253,8 @@ const { fill = false } = Astro.props;
     color: #6ee7b7;
     font-size: 0.46rem;
     font-weight: 620;
-    animation: dynamic-integrator-save 6.8s ease-in-out infinite;
+    animation: dynamic-integrator-save var(--dynamic-integrator-cycle)
+      ease-in-out infinite;
   }
 
   .dynamic-integrator-demo__view--canvas {
@@ -221,7 +262,8 @@ const { fill = false } = Astro.props;
     place-items: center;
     padding: 0.9rem 0.65rem;
     opacity: 0;
-    animation: dynamic-integrator-canvas 6.8s ease-in-out infinite;
+    animation: dynamic-integrator-canvas var(--dynamic-integrator-cycle)
+      ease-in-out infinite;
   }
 
   .dynamic-integrator-demo__graph {
@@ -247,7 +289,8 @@ const { fill = false } = Astro.props;
     transform-origin: left center;
     background: #6ee7b7;
     box-shadow: 0 0 12px rgba(110, 231, 183, 0.76);
-    animation: dynamic-integrator-new-edge 6.8s ease-in-out infinite;
+    animation: dynamic-integrator-new-edge var(--dynamic-integrator-cycle)
+      ease-in-out infinite;
   }
 
   .dynamic-integrator-demo__node {
@@ -284,7 +327,8 @@ const { fill = false } = Astro.props;
   .dynamic-integrator-demo__node--fill {
     opacity: 0;
     transform-origin: center;
-    animation: dynamic-integrator-fill-node 6.8s ease-in-out infinite;
+    animation: dynamic-integrator-fill-node var(--dynamic-integrator-cycle)
+      ease-in-out infinite;
   }
 
   .dynamic-integrator-demo__node--fill {

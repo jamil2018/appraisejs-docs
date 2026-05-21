@@ -18,50 +18,58 @@ const { fill = false } = Astro.props;
       <span>inspect</span>
     </div>
     <div class="locator-creator-demo__canvas" data-canvas>
-      <div class="locator-creator-demo__view locator-creator-demo__view--page" data-page-view>
+      <div
+        class="locator-creator-demo__view locator-creator-demo__view--page"
+        data-page-view
+      >
         <div class="locator-creator-demo__page" data-page>
           <div class="locator-creator-demo__page-content">
             <div class="locator-creator-demo__block" data-block="header">
               <span class="locator-creator-demo__block-line"></span>
             </div>
-          <div class="locator-creator-demo__block" data-block="field-a"></div>
-          <div class="locator-creator-demo__block" data-block="field-b"></div>
-          <div
-            class="locator-creator-demo__block locator-creator-demo__block--cta"
-            data-target
-          ></div>
+            <div class="locator-creator-demo__block" data-block="field-a"></div>
+            <div class="locator-creator-demo__block" data-block="field-b"></div>
+            <div
+              class="locator-creator-demo__block locator-creator-demo__block--cta"
+              data-target
+            >
+            </div>
           </div>
           <div class="locator-creator-demo__cursor" data-cursor>
-            <svg
-            viewBox="0 0 24 24"
-            width="22"
-            height="22"
-            role="presentation"
-          >
-            <path
-              d="M5.5 3.5L18 11.5L12.2 13.1L10.5 19L5.5 3.5Z"
-              fill="#f4f4f5"
-              stroke="#0e0e0e"
-              stroke-width="1.2"
-              stroke-linejoin="round"></path>
-          </svg>
+            <svg viewBox="0 0 24 24" width="22" height="22" role="presentation">
+              <path
+                d="M5.5 3.5L18 11.5L12.2 13.1L10.5 19L5.5 3.5Z"
+                fill="#f4f4f5"
+                stroke="#0e0e0e"
+                stroke-width="1.2"
+                stroke-linejoin="round"></path>
+            </svg>
           </div>
         </div>
       </div>
 
-      <div class="locator-creator-demo__view locator-creator-demo__view--form" data-form-view>
+      <div
+        class="locator-creator-demo__view locator-creator-demo__view--form"
+        data-form-view
+      >
         <div class="locator-creator-demo__form-heading">Create new locator</div>
         <div class="locator-creator-demo__form-field" data-form-field="name">
-          <span class="locator-creator-demo__form-field-text" data-form-text></span>
+          <span class="locator-creator-demo__form-field-text" data-form-text
+          ></span>
         </div>
-        <div class="locator-creator-demo__form-field" data-form-field="selector">
-          <span class="locator-creator-demo__form-field-text" data-form-text></span>
+        <div
+          class="locator-creator-demo__form-field"
+          data-form-field="selector"
+        >
+          <span class="locator-creator-demo__form-field-text" data-form-text
+          ></span>
         </div>
         <div
           class="locator-creator-demo__form-field locator-creator-demo__form-field--short"
           data-form-field="page"
         >
-          <span class="locator-creator-demo__form-field-text" data-form-text></span>
+          <span class="locator-creator-demo__form-field-text" data-form-text
+          ></span>
         </div>
         <div class="locator-creator-demo__form-button">Create locator</div>
       </div>
@@ -261,7 +269,8 @@ const { fill = false } = Astro.props;
     text-overflow: ellipsis;
   }
 
-  .locator-creator-demo__form-field.is-typing .locator-creator-demo__form-field-text::after {
+  .locator-creator-demo__form-field.is-typing
+    .locator-creator-demo__form-field-text::after {
     content: "";
     display: inline-block;
     width: 1px;
@@ -364,15 +373,18 @@ const { fill = false } = Astro.props;
       display: none;
     }
 
-    .locator-creator-demo__canvas.is-form-step .locator-creator-demo__view--page {
+    .locator-creator-demo__canvas.is-form-step
+      .locator-creator-demo__view--page {
       opacity: 0;
     }
 
-    .locator-creator-demo__canvas.is-form-step .locator-creator-demo__view--form {
+    .locator-creator-demo__canvas.is-form-step
+      .locator-creator-demo__view--form {
       opacity: 1;
     }
 
-    .locator-creator-demo__form-field.is-typing .locator-creator-demo__form-field-text::after {
+    .locator-creator-demo__form-field.is-typing
+      .locator-creator-demo__form-field-text::after {
       animation: none;
     }
   }
@@ -386,7 +398,7 @@ const { fill = false } = Astro.props;
   const CURSOR_TARGET_NUDGE = { x: 0, y: -2 };
 
   const FORM_FIELD_TEXT = [
-    { key: "name", text: "Checkout Button", charDelay: 52, typewriter: true },
+    { key: "name", text: "Checkout Button", charDelay: 40, typewriter: true },
     { key: "selector", text: "button[test-id='checkout']", typewriter: false },
     { key: "page", text: "Checkout Page", typewriter: false },
   ];
@@ -435,21 +447,29 @@ const { fill = false } = Astro.props;
 
   function setFormFieldsInstant(root) {
     FORM_FIELD_TEXT.forEach(({ key, text }) => {
-      const el = root.querySelector(`[data-form-field="${key}"] [data-form-text]`);
+      const el = root.querySelector(
+        `[data-form-field="${key}"] [data-form-text]`,
+      );
       if (el) el.textContent = text;
     });
   }
 
-  async function typeFormField(textEl, fieldEl, text, { charDelay, typewriter }, isRunning) {
+  async function typeFormField(
+    textEl,
+    fieldEl,
+    text,
+    { charDelay, typewriter },
+    isRunning,
+  ) {
     fieldEl.classList.add("is-typing");
     textEl.textContent = "";
 
     if (!typewriter) {
-      await new Promise((resolve) => setTimeout(resolve, 180));
+      await new Promise((resolve) => setTimeout(resolve, 135));
       if (!isRunning()) return;
       textEl.textContent = text;
       fieldEl.classList.remove("is-typing");
-      await new Promise((resolve) => setTimeout(resolve, 160));
+      await new Promise((resolve) => setTimeout(resolve, 120));
       return;
     }
 
@@ -462,7 +482,7 @@ const { fill = false } = Astro.props;
     }
 
     fieldEl.classList.remove("is-typing");
-    await new Promise((resolve) => setTimeout(resolve, 140));
+    await new Promise((resolve) => setTimeout(resolve, 100));
   }
 
   async function animateFormFields(root, isRunning) {
@@ -506,23 +526,19 @@ const { fill = false } = Astro.props;
       );
       const end = targetPoint(page, target, cursor);
 
-      await animate(
-        0,
-        1,
-        {
-          duration: 0.62,
-          ease: [0.35, 0, 0.2, 1],
-          onUpdate: (progress) => {
-            const x = CURSOR_START.left + (end.x - CURSOR_START.left) * progress;
-            const y = CURSOR_START.top + (end.y - CURSOR_START.top) * progress;
-            setCursorTransform(cursor, x, y);
-          },
+      await animate(0, 1, {
+        duration: 0.48,
+        ease: [0.35, 0, 0.2, 1],
+        onUpdate: (progress) => {
+          const x = CURSOR_START.left + (end.x - CURSOR_START.left) * progress;
+          const y = CURSOR_START.top + (end.y - CURSOR_START.top) * progress;
+          setCursorTransform(cursor, x, y);
         },
-      );
+      });
 
       setCursorTransform(cursor, end.x, end.y);
       target.classList.add("is-active");
-      await new Promise((resolve) => setTimeout(resolve, 180));
+      await new Promise((resolve) => setTimeout(resolve, 130));
 
       await animate(
         cursor,
@@ -534,7 +550,7 @@ const { fill = false } = Astro.props;
           ],
         },
         {
-          duration: 0.24,
+          duration: 0.18,
           ease: [0.25, 0.1, 0.25, 1],
           times: [0, 0.45, 1],
         },
@@ -542,12 +558,16 @@ const { fill = false } = Astro.props;
 
       target.classList.remove("is-active");
       target.classList.add("is-selected");
-      await animate(cursor, { opacity: 0 }, { duration: 0.2, ease: "easeOut" });
+      await animate(
+        cursor,
+        { opacity: 0 },
+        { duration: 0.15, ease: "easeOut" },
+      );
     }
 
     async function revealForm() {
       canvas.classList.add("is-form-step");
-      await new Promise((resolve) => setTimeout(resolve, 280));
+      await new Promise((resolve) => setTimeout(resolve, 200));
       await animateFormFields(root, isRunning);
     }
 
@@ -556,7 +576,7 @@ const { fill = false } = Astro.props;
 
       while (running) {
         resetState();
-        await new Promise((resolve) => setTimeout(resolve, 300));
+        await new Promise((resolve) => setTimeout(resolve, 220));
 
         if (!running) break;
         await selectTarget();
@@ -565,7 +585,7 @@ const { fill = false } = Astro.props;
         await revealForm();
 
         if (!running) break;
-        await new Promise((resolve) => setTimeout(resolve, 1200));
+        await new Promise((resolve) => setTimeout(resolve, 900));
       }
     }
 
@@ -633,12 +653,16 @@ const { fill = false } = Astro.props;
     cleanups.forEach((fn) => fn());
     cleanups.length = 0;
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     if (reduced) {
-      document.querySelectorAll("[data-locator-creator-demo]").forEach((root) => {
-        root.querySelector("[data-canvas]")?.classList.add("is-form-step");
-        setFormFieldsInstant(root);
-      });
+      document
+        .querySelectorAll("[data-locator-creator-demo]")
+        .forEach((root) => {
+          root.querySelector("[data-canvas]")?.classList.add("is-form-step");
+          setFormFieldsInstant(root);
+        });
       return;
     }
 
