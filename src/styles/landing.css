@@ -1216,11 +1216,6 @@ pre {
     scroll-margin-top: 5rem;
   }
 
-  .feature-carousel__item:not(.is-active) .feature-card__animation *,
-  .feature-carousel__item:not(.is-active) .feature-card__desktop {
-    animation-play-state: running !important;
-  }
-
   .feature-card--with-animation {
     min-height: 26rem;
   }

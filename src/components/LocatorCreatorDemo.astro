@@ -576,6 +576,57 @@ const { fill = false } = Astro.props;
     };
   }
 
+  function manageVisibleLoop(root, setup) {
+    const panel = root.closest("[data-feature-panel]");
+    let cleanup = null;
+    let isVisible = false;
+
+    const stop = () => {
+      cleanup?.();
+      cleanup = null;
+    };
+
+    const update = () => {
+      const isActivePanel = !panel || panel.classList.contains("is-active");
+      const shouldRun = isVisible && isActivePanel;
+
+      if (shouldRun && !cleanup) {
+        cleanup = setup(root);
+      } else if (!shouldRun && cleanup) {
+        stop();
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = Boolean(entry?.isIntersecting);
+        update();
+      },
+      {
+        root: null,
+        rootMargin: "0px 0px -8% 0px",
+        threshold: [0, 0.2, 0.45],
+      },
+    );
+
+    observer.observe(root);
+
+    const mutationObserver = panel ? new MutationObserver(update) : null;
+
+    mutationObserver?.observe(panel, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    update();
+
+    return () => {
+      observer.disconnect();
+      mutationObserver?.disconnect();
+      stop();
+    };
+  }
+
   const cleanups = [];
 
   function init() {
@@ -592,7 +643,7 @@ const { fill = false } = Astro.props;
     }
 
     document.querySelectorAll("[data-locator-creator-demo]").forEach((root) => {
-      cleanups.push(setupDemo(root));
+      cleanups.push(manageVisibleLoop(root, setupDemo));
     });
   }
 
