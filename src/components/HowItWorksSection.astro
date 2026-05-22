@@ -325,6 +325,11 @@ const features = [
           class="execution-visual execution-visual--create is-active"
           data-execution-visual="create"
         >
+          <div class="execution-visual__mobile-copy">
+            <span>01</span>
+            <strong>Create</strong>
+            <p>Author the login journey as connected browser actions.</p>
+          </div>
           <div class="execution-window">
             <div class="execution-window__bar">
               <span>Create Test</span>
@@ -358,6 +363,11 @@ const features = [
           class="execution-visual execution-visual--configure"
           data-execution-visual="configure"
         >
+          <div class="execution-visual__mobile-copy">
+            <span>02</span>
+            <strong>Configure</strong>
+            <p>Add assertions from the page and attach them to the flow.</p>
+          </div>
           <div class="execution-window">
             <div class="execution-window__bar">
               <span>Create Test</span>
@@ -418,31 +428,40 @@ const features = [
           class="execution-visual execution-visual--execute"
           data-execution-visual="execute"
         >
-          <div class="execution-window execution-window--run">
-            <div class="execution-window__bar">
-              <span>Create Test Run</span>
-              <i aria-hidden="true"></i>
-            </div>
-            <div class="execution-run-form">
-              <span></span>
-              <span></span>
-              <span></span>
-              <button type="button"><Play /> Start Test Run</button>
-            </div>
+          <div class="execution-visual__mobile-copy">
+            <span>03</span>
+            <strong>Execute</strong>
+            <p>
+              Start a run, watch progress, and keep runtime context visible.
+            </p>
           </div>
-          <div class="execution-window execution-window--running">
-            <div class="execution-window__bar">
-              <span>Executing Tests</span>
-              <i aria-hidden="true"></i>
+          <div class="execution-run-stack">
+            <div class="execution-window execution-window--run">
+              <div class="execution-window__bar">
+                <span>Create Test Run</span>
+                <i aria-hidden="true"></i>
+              </div>
+              <div class="execution-run-form">
+                <span></span>
+                <span></span>
+                <span></span>
+                <button type="button"><Play /> Start Test Run</button>
+              </div>
             </div>
-            <div class="execution-progress">
-              <span></span>
-            </div>
-            <div class="execution-run-fields">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
+            <div class="execution-window execution-window--running">
+              <div class="execution-window__bar">
+                <span>Executing Tests</span>
+                <i aria-hidden="true"></i>
+              </div>
+              <div class="execution-progress">
+                <span></span>
+              </div>
+              <div class="execution-run-fields">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
             </div>
           </div>
         </article>
@@ -451,6 +470,11 @@ const features = [
           class="execution-visual execution-visual--output"
           data-execution-visual="output"
         >
+          <div class="execution-visual__mobile-copy">
+            <span>04</span>
+            <strong>Generated Output</strong>
+            <p>Review the report, trends, and evidence table in one place.</p>
+          </div>
           <div class="execution-window">
             <div class="execution-window__bar">
               <span>Test Report</span>
@@ -502,9 +526,55 @@ const features = [
 
     let activeIndex = -1;
     let animationFrame: number | undefined;
+    let mobileStackApplied = false;
+    let mobileVisualObserver: IntersectionObserver | undefined;
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
+    const mobileQuery = window.matchMedia("(max-width: 760px)");
+
+    const applyMobileStack = () => {
+      const isMobile = mobileQuery.matches;
+      model.classList.toggle("is-mobile-stack", isMobile);
+
+      if (!isMobile) {
+        if (mobileVisualObserver) {
+          mobileVisualObserver.disconnect();
+          mobileVisualObserver = undefined;
+        }
+        mobileStackApplied = false;
+        return false;
+      }
+
+      if (mobileStackApplied) return true;
+
+      mobileStackApplied = true;
+
+      steps.forEach((step, index) => {
+        step.classList.add("is-revealed");
+        step.classList.toggle("is-active", index === 0);
+        step.setAttribute("aria-pressed", String(index === 0));
+      });
+
+      visuals.forEach((visual) => visual.classList.remove("is-active"));
+
+      mobileVisualObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-active");
+            mobileVisualObserver?.unobserve(entry.target);
+          });
+        },
+        {
+          rootMargin: "-8% 0px -18% 0px",
+          threshold: 0.22,
+        },
+      );
+
+      visuals.forEach((visual) => mobileVisualObserver?.observe(visual));
+      return true;
+    };
 
     const activate = (index: number) => {
       if (
@@ -536,6 +606,7 @@ const features = [
     const updateFromScroll = () => {
       animationFrame = undefined;
 
+      if (applyMobileStack()) return;
       if (!section || prefersReducedMotion) return;
 
       const rect = section.getBoundingClientRect();
@@ -557,7 +628,7 @@ const features = [
     steps.forEach((step, index) => {
       step.addEventListener("click", () => {
         activate(index);
-        if (!section || prefersReducedMotion) return;
+        if (!section || prefersReducedMotion || mobileQuery.matches) return;
 
         const sectionTop = section.getBoundingClientRect().top + window.scrollY;
         const range = Math.max(1, section.clientHeight - window.innerHeight);
@@ -584,6 +655,7 @@ const features = [
 
     window.addEventListener("scroll", requestScrollUpdate, { passive: true });
     window.addEventListener("resize", requestScrollUpdate);
+    mobileQuery.addEventListener("change", requestScrollUpdate);
     activate(0);
     if (prefersReducedMotion) {
       steps.forEach((step) => step.classList.add("is-revealed"));
@@ -594,8 +666,10 @@ const features = [
       "astro:before-swap",
       () => {
         if (animationFrame) window.cancelAnimationFrame(animationFrame);
+        if (mobileVisualObserver) mobileVisualObserver.disconnect();
         window.removeEventListener("scroll", requestScrollUpdate);
         window.removeEventListener("resize", requestScrollUpdate);
+        mobileQuery.removeEventListener("change", requestScrollUpdate);
       },
       { once: true },
     );
