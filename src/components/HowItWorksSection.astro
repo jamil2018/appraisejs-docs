@@ -7,10 +7,19 @@ import LocalFirstDemo from "./LocalFirstDemo.astro";
 import AllInOneWorkspaceDemo from "./AllInOneWorkspaceDemo.astro";
 import {
   Blocks,
+  Check,
+  ChevronDown,
   Code,
   Database,
+  FileChartColumn,
   GitFork,
+  KeyRound,
+  MousePointerClick,
+  Navigation,
+  Play,
+  Plus,
   ShieldCheck,
+  Type,
   Wrench,
 } from "@lucide/astro";
 
@@ -240,8 +249,9 @@ const features = [
 </script>
 
 <section
-  class="landing-showcase landing-showcase--wide"
+  class="landing-showcase landing-showcase--wide landing-showcase--execution"
   aria-labelledby="workflow-heading"
+  data-execution-scroll
 >
   <div class="landing-shell landing-shell--wide">
     <div class="landing-section-copy">
@@ -251,29 +261,343 @@ const features = [
       </h2>
     </div>
 
-    <div class="workflow-canvas">
-      <div class="workflow-canvas__lane">
-        <article>
-          <span>Create</span>
-          <strong>Checkout Scenario</strong>
-          <p>Visual steps, grouped logic, and reusable test data.</p>
+    <div class="execution-model not-content" data-execution-model>
+      <div class="execution-model__copy" aria-label="Execution model steps">
+        <button
+          class="execution-step is-active is-revealed"
+          type="button"
+          data-execution-step="create"
+          data-execution-index="0"
+        >
+          <span class="execution-step__index">01</span>
+          <span>
+            <strong>Create</strong>
+            <small>Author the login journey as connected browser actions.</small
+            >
+          </span>
+        </button>
+        <button
+          class="execution-step"
+          type="button"
+          data-execution-step="configure"
+          data-execution-index="1"
+        >
+          <span class="execution-step__index">02</span>
+          <span>
+            <strong>Configure</strong>
+            <small
+              >Add assertions from the page and attach them to the flow.</small
+            >
+          </span>
+        </button>
+        <button
+          class="execution-step"
+          type="button"
+          data-execution-step="execute"
+          data-execution-index="2"
+        >
+          <span class="execution-step__index">03</span>
+          <span>
+            <strong>Execute</strong>
+            <small
+              >Start a run, watch progress, and keep runtime context visible.</small
+            >
+          </span>
+        </button>
+        <button
+          class="execution-step"
+          type="button"
+          data-execution-step="output"
+          data-execution-index="3"
+        >
+          <span class="execution-step__index">04</span>
+          <span>
+            <strong>Generated Output</strong>
+            <small
+              >Review the report, trends, and evidence table in one place.</small
+            >
+          </span>
+        </button>
+      </div>
+
+      <div class="execution-model__stage" aria-live="polite">
+        <article
+          class="execution-visual execution-visual--create is-active"
+          data-execution-visual="create"
+        >
+          <div class="execution-window">
+            <div class="execution-window__bar">
+              <span>Create Test</span>
+              <i aria-hidden="true"></i>
+            </div>
+            <div class="execution-canvas">
+              <div class="execution-node execution-node--navigate">
+                <strong>Navigate</strong>
+                <span><Navigation /></span>
+              </div>
+              <div class="execution-edge" aria-hidden="true"></div>
+              <div class="execution-node execution-node--username">
+                <strong>Fill Username</strong>
+                <span><Type /></span>
+              </div>
+              <div class="execution-edge" aria-hidden="true"></div>
+              <div class="execution-node execution-node--password">
+                <strong>Fill Password</strong>
+                <span><KeyRound /></span>
+              </div>
+              <div class="execution-edge" aria-hidden="true"></div>
+              <div class="execution-node execution-node--click">
+                <strong>Click Login</strong>
+                <span><MousePointerClick /></span>
+              </div>
+            </div>
+          </div>
         </article>
-        <article>
-          <span>Configure</span>
-          <strong>Locators + Parameters</strong>
-          <p>Selectors and runtime inputs stay explicit.</p>
+
+        <article
+          class="execution-visual execution-visual--configure"
+          data-execution-visual="configure"
+        >
+          <div class="execution-window">
+            <div class="execution-window__bar">
+              <span>Create Test</span>
+              <button type="button" aria-label="Add test step"><Plus /></button>
+            </div>
+            <div class="execution-configure">
+              <div class="execution-configure__canvas">
+                <div class="execution-mini-node is-ready">
+                  <strong>Navigate</strong>
+                  <span><Navigation /></span>
+                </div>
+                <div class="execution-mini-edge" aria-hidden="true"></div>
+                <div class="execution-mini-node is-ready">
+                  <strong>Fill Username</strong>
+                  <span><Type /></span>
+                </div>
+                <div class="execution-mini-edge" aria-hidden="true"></div>
+                <div class="execution-mini-node is-ready">
+                  <strong>Fill Password</strong>
+                  <span><KeyRound /></span>
+                </div>
+                <div class="execution-mini-edge" aria-hidden="true"></div>
+                <div class="execution-mini-node is-ready">
+                  <strong>Click Login</strong>
+                  <span><MousePointerClick /></span>
+                </div>
+                <div
+                  class="execution-mini-edge execution-mini-edge--assert"
+                  aria-hidden="true"
+                >
+                </div>
+                <div class="execution-mini-node execution-mini-node--assert">
+                  <strong>Assert Text</strong>
+                  <span><Check /></span>
+                </div>
+              </div>
+              <div class="execution-popover execution-popover--step">
+                <div class="execution-popover__title">Add Node</div>
+                <span></span>
+                <span></span>
+                <button type="button">
+                  Assert Text
+                  <ChevronDown />
+                </button>
+              </div>
+              <div class="execution-popover execution-popover--picker">
+                <div class="execution-popover__title">Extract Locator</div>
+                <div class="execution-page-block"></div>
+                <div class="execution-page-block is-selected"></div>
+                <div class="execution-page-block"></div>
+                <div class="execution-cursor"><MousePointerClick /></div>
+              </div>
+            </div>
+          </div>
         </article>
-        <article>
-          <span>Execute</span>
-          <strong>Playwright Runner</strong>
-          <p>Runs locally, in CI, or anywhere your repo runs.</p>
+
+        <article
+          class="execution-visual execution-visual--execute"
+          data-execution-visual="execute"
+        >
+          <div class="execution-window execution-window--run">
+            <div class="execution-window__bar">
+              <span>Create Test Run</span>
+              <i aria-hidden="true"></i>
+            </div>
+            <div class="execution-run-form">
+              <span></span>
+              <span></span>
+              <span></span>
+              <button type="button"><Play /> Start Test Run</button>
+            </div>
+          </div>
+          <div class="execution-window execution-window--running">
+            <div class="execution-window__bar">
+              <span>Executing Tests</span>
+              <i aria-hidden="true"></i>
+            </div>
+            <div class="execution-progress">
+              <span></span>
+            </div>
+            <div class="execution-run-fields">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
         </article>
-        <article>
-          <span>Generated Output</span>
-          <strong>.feature / .spec / reports</strong>
-          <p>Readable files, logs, and evidence stay in your review flow.</p>
+
+        <article
+          class="execution-visual execution-visual--output"
+          data-execution-visual="output"
+        >
+          <div class="execution-window">
+            <div class="execution-window__bar">
+              <span>Test Report</span>
+              <FileChartColumn />
+            </div>
+            <div class="execution-report">
+              <div class="execution-report__summary">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <div class="execution-report__graphs">
+                <i></i>
+                <i></i>
+                <i></i>
+              </div>
+              <div class="execution-report__table">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          </div>
         </article>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  const executionModels = document.querySelectorAll("[data-execution-model]");
+
+  executionModels.forEach((model) => {
+    const section = model.closest("[data-execution-scroll]");
+    const steps = Array.from(
+      model.querySelectorAll("[data-execution-step]"),
+    ) as HTMLButtonElement[];
+    const visuals = Array.from(
+      model.querySelectorAll("[data-execution-visual]"),
+    );
+
+    if (steps.length === 0 || visuals.length === 0) return;
+
+    let activeIndex = -1;
+    let animationFrame: number | undefined;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    const activate = (index: number) => {
+      if (
+        index === activeIndex &&
+        steps[index]?.classList.contains("is-active")
+      ) {
+        return;
+      }
+
+      activeIndex = index;
+      const id = steps[index]?.getAttribute("data-execution-step");
+      if (!id) return;
+
+      steps.forEach((step, stepIndex) => {
+        const isActive = step.getAttribute("data-execution-step") === id;
+        step.classList.toggle("is-active", isActive);
+        step.classList.toggle("is-revealed", stepIndex <= index);
+        step.setAttribute("aria-pressed", String(isActive));
+      });
+
+      visuals.forEach((visual) => {
+        visual.classList.toggle(
+          "is-active",
+          visual.getAttribute("data-execution-visual") === id,
+        );
+      });
+    };
+
+    const updateFromScroll = () => {
+      animationFrame = undefined;
+
+      if (!section || prefersReducedMotion) return;
+
+      const rect = section.getBoundingClientRect();
+      const range = Math.max(1, rect.height - window.innerHeight);
+      const progress = Math.min(1, Math.max(0, -rect.top / range));
+      const thresholds = [0, 0.16, 0.42, 0.69];
+      const index = thresholds.reduce((current, threshold, thresholdIndex) => {
+        return progress >= threshold ? thresholdIndex : current;
+      }, 0);
+
+      activate(index);
+    };
+
+    const requestScrollUpdate = () => {
+      if (animationFrame || prefersReducedMotion) return;
+      animationFrame = window.requestAnimationFrame(updateFromScroll);
+    };
+
+    steps.forEach((step, index) => {
+      step.addEventListener("click", () => {
+        activate(index);
+        if (!section || prefersReducedMotion) return;
+
+        const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+        const range = Math.max(1, section.clientHeight - window.innerHeight);
+        const target =
+          sectionTop + range * ((index + 0.5) / Math.max(1, steps.length));
+
+        window.scrollTo({ top: target, behavior: "smooth" });
+      });
+    });
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          requestScrollUpdate();
+        } else {
+          if (animationFrame) {
+            window.cancelAnimationFrame(animationFrame);
+            animationFrame = undefined;
+          }
+        }
+      },
+      { threshold: 0.35 },
+    );
+
+    window.addEventListener("scroll", requestScrollUpdate, { passive: true });
+    window.addEventListener("resize", requestScrollUpdate);
+    activate(0);
+    if (prefersReducedMotion) {
+      steps.forEach((step) => step.classList.add("is-revealed"));
+    }
+    observer.observe(model);
+    requestScrollUpdate();
+    document.addEventListener(
+      "astro:before-swap",
+      () => {
+        if (animationFrame) window.cancelAnimationFrame(animationFrame);
+        window.removeEventListener("scroll", requestScrollUpdate);
+        window.removeEventListener("resize", requestScrollUpdate);
+      },
+      { once: true },
+    );
+  });
+</script>
