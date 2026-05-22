@@ -1,5 +1,12 @@
 ---
-import { Check, CirclePlay, Copy } from "@lucide/astro";
+import {
+  Check,
+  CirclePlay,
+  Copy,
+  FileCode2,
+  GitBranch,
+  MousePointer2,
+} from "@lucide/astro";
 
 const installCommand = "npx create-appraisejs@latest";
 ---
@@ -14,9 +21,9 @@ const installCommand = "npx create-appraisejs@latest";
       Visual Workflows. Deterministic Automation.
     </h1>
     <p class="landing-hero__description">
-      AppraiseJS turns visual browser-test workflows into portable Playwright
-      and Cucumber artifacts that run in your repository, your CI, and your
-      execution environment.
+      Build browser tests visually, then commit readable Playwright and Cucumber
+      artifacts to your repository. The same workflow runs locally, in CI, and
+      anywhere your execution environment lives.
     </p>
     <div class="landing-hero__actions">
       <a class="landing-cta-button" href="/getting-started/quick-start/">
@@ -55,6 +62,32 @@ const installCommand = "npx create-appraisejs@latest";
           aria-hidden="true"
         />
       </button>
+    </div>
+    <div
+      class="landing-hero__proof"
+      aria-label="Visual workflow to generated automation"
+    >
+      <div class="landing-hero__proof-step">
+        <span class="landing-hero__proof-icon" aria-hidden="true">
+          <GitBranch />
+        </span>
+        <span>Visual flow</span>
+        <strong>Checkout scenario</strong>
+      </div>
+      <div class="landing-hero__proof-step">
+        <span class="landing-hero__proof-icon" aria-hidden="true">
+          <MousePointer2 />
+        </span>
+        <span>Locator intent</span>
+        <strong>button: Complete order</strong>
+      </div>
+      <div class="landing-hero__proof-step">
+        <span class="landing-hero__proof-icon" aria-hidden="true">
+          <FileCode2 />
+        </span>
+        <span>Repo output</span>
+        <strong>.feature + .spec.ts</strong>
+      </div>
     </div>
   </div>
 </section>

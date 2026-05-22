@@ -19,42 +19,42 @@ const features = [
     id: "flow-builder",
     title: "Intuitive Test Flow Builder",
     description:
-      "Build test flows visually with an interface that is easy to understand, compose and reuse across various scenarios.",
+      "Author browser journeys as readable flow nodes before they become code.",
     icon: GitFork,
   },
   {
     id: "locator-creator",
     title: "Locator Creator",
     description:
-      "Capture resilient selectors with context instead of hand-maintaining brittle CSS paths.",
+      "Capture resilient selectors with role, label, and fallback context attached.",
     icon: ShieldCheck,
   },
   {
     id: "dynamic-node-builder",
     title: "Dynamic Node Builder",
     description:
-      "Build custom nodes and expose them inside the workflow builder as first-class actions and assertions.",
+      "Turn project-specific Playwright helpers into reusable visual actions.",
     icon: Blocks,
   },
   {
     id: "portable-output",
     title: "Portable Output",
     description:
-      "Generate Playwright, Cucumber, and support files that stay readable in git and version controlled.",
+      "Emit Playwright, Cucumber, support code, and evidence your team can review.",
     icon: Code,
   },
   {
     id: "local-first",
     title: "Local-First",
     description:
-      "Run on developer machines and CI without routing execution through a hosted runner.",
+      "Run from developer machines and CI without routing through a hosted runner.",
     icon: Database,
   },
   {
     id: "all-in-one-workspace",
     title: "All In One Workspace",
     description:
-      "Author, execute, and analyze tests from a singular location. No more context switching.",
+      "Author, execute, and inspect results from one workspace instead of switching tools.",
     icon: Wrench,
   },
 ];
@@ -67,8 +67,13 @@ const features = [
   <div class="landing-section-copy">
     <p class="landing-kicker">What is in AppraiseJS?</p>
     <h2 id="features-heading" class="landing-section-title">
-      Everything you need to author reliable tests that scale with your project.
+      From visual intent to repo-owned automation.
     </h2>
+    <p class="landing-section-description">
+      Start with the workflow your team understands, enrich it with reliable
+      locators and reusable steps, then ship generated files that stay useful
+      outside the editor.
+    </p>
   </div>
 
   <div class="feature-carousel not-content" data-feature-carousel>
@@ -76,10 +81,7 @@ const features = [
       {
         features.map((feature, index) => (
           <a
-            class:list={[
-              "feature-carousel__link",
-              index === 0 && "is-active",
-            ]}
+            class:list={["feature-carousel__link", index === 0 && "is-active"]}
             href={`#feature-${feature.id}`}
             data-feature-link={feature.id}
           >
@@ -132,9 +134,9 @@ const features = [
                 {hasAnimation ? (
                   <div class="feature-card__desktop">
                     <div class="feature-card__desktop-bar" aria-hidden="true">
-                      <span></span>
-                      <span></span>
-                      <span></span>
+                      <span />
+                      <span />
+                      <span />
                     </div>
                     <div class="feature-card__animation">
                       {isFlowBuilder ? (
@@ -155,18 +157,18 @@ const features = [
                 ) : (
                   <div class="feature-card__desktop feature-card__desktop--static">
                     <div class="feature-card__desktop-bar" aria-hidden="true">
-                      <span></span>
-                      <span></span>
-                      <span></span>
+                      <span />
+                      <span />
+                      <span />
                     </div>
                     <div class="feature-card__workspace">
                       <span class="feature-card__icon" aria-hidden="true">
                         <Icon />
                       </span>
                       <div class="feature-card__workspace-lines">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                        <span />
+                        <span />
+                        <span />
                       </div>
                     </div>
                   </div>
@@ -188,9 +190,7 @@ const features = [
   const carousels = document.querySelectorAll("[data-feature-carousel]");
 
   carousels.forEach((carousel) => {
-    const links = Array.from(
-      carousel.querySelectorAll("[data-feature-link]"),
-    );
+    const links = Array.from(carousel.querySelectorAll("[data-feature-link]"));
     const panels = Array.from(
       carousel.querySelectorAll("[data-feature-panel]"),
     );
@@ -271,7 +271,7 @@ const features = [
         <article>
           <span>Generated Output</span>
           <strong>.feature / .spec / reports</strong>
-          <p>Artifacts are readable, portable, and versioned.</p>
+          <p>Readable files, logs, and evidence stay in your review flow.</p>
         </article>
       </div>
     </div>

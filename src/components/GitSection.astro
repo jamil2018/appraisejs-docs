@@ -17,10 +17,10 @@ import { BookOpen, ExternalLink, GitBranch, ShieldCheck } from "@lucide/astro";
         <span>source</span>
       </div>
       <ul>
-        <li><span>Node</span><strong>Open checkout</strong></li>
-        <li><span>Locator</span><strong>getByRole("button")</strong></li>
-        <li><span>Parameter</span><strong>couponCode</strong></li>
-        <li><span>Assertion</span><strong>total equals "$29"</strong></li>
+        <li><span>Flow node</span><strong>Open checkout</strong></li>
+        <li><span>Locator</span><strong>button: Complete order</strong></li>
+        <li><span>Parameter</span><strong>couponCode = SUMMER29</strong></li>
+        <li><span>Assertion</span><strong>Order total equals "$29"</strong></li>
       </ul>
     </article>
 
@@ -30,16 +30,25 @@ import { BookOpen, ExternalLink, GitBranch, ShieldCheck } from "@lucide/astro";
         <span>generated</span>
       </div>
       <ul>
-        <li><span>.feature</span><strong>Cucumber scenario</strong></li>
-        <li><span>.spec.ts</span><strong>Playwright execution</strong></li>
-        <li><span>steps.ts</span><strong>Reusable glue code</strong></li>
-        <li><span>reports</span><strong>Logs and evidence</strong></li>
+        <li><span>checkout.feature</span><strong>Cucumber scenario</strong></li>
+        <li>
+          <span>checkout.spec.ts</span><strong>Playwright execution</strong>
+        </li>
+        <li>
+          <span>checkout.steps.ts</span><strong>Reusable support code</strong>
+        </li>
+        <li>
+          <span>test-results/</span><strong>Logs, traces, and evidence</strong>
+        </li>
       </ul>
     </article>
   </div>
 </section>
 
-<section class="docs-preview landing-shell" aria-labelledby="docs-preview-heading">
+<section
+  class="docs-preview landing-shell"
+  aria-labelledby="docs-preview-heading"
+>
   <div class="docs-preview__copy">
     <p class="landing-kicker">Documentation preview</p>
     <h2 id="docs-preview-heading" class="landing-section-title">
@@ -65,7 +74,10 @@ import { BookOpen, ExternalLink, GitBranch, ShieldCheck } from "@lucide/astro";
   </div>
 </section>
 
-<section class="open-source landing-shell" aria-labelledby="open-source-heading">
+<section
+  class="open-source landing-shell"
+  aria-labelledby="open-source-heading"
+>
   <div class="open-source__copy">
     <p class="landing-kicker">Open source</p>
     <h2 id="open-source-heading" class="landing-section-title">
@@ -76,13 +88,18 @@ import { BookOpen, ExternalLink, GitBranch, ShieldCheck } from "@lucide/astro";
       artifacts that remain useful outside the visual editor.
     </p>
   </div>
-  <a
-    class="open-source__link"
-    href="https://github.com/jamil2018/appraisejs-core"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <ExternalLink aria-hidden="true" />
-    View GitHub Repository
-  </a>
+  <div class="open-source__actions">
+    <a class="landing-cta-button" href="/getting-started/quick-start/">
+      Start Quick Start
+    </a>
+    <a
+      class="open-source__link"
+      href="https://github.com/jamil2018/appraisejs-core"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <ExternalLink aria-hidden="true" />
+      View GitHub Repository
+    </a>
+  </div>
 </section>
