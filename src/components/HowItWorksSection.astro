@@ -533,6 +533,12 @@ const features = [
     ).matches;
     const mobileQuery = window.matchMedia("(max-width: 760px)");
 
+    const restartVisualAnimation = (visual: Element) => {
+      visual.classList.remove("is-active");
+      void (visual as HTMLElement).offsetWidth;
+      visual.classList.add("is-active");
+    };
+
     const applyMobileStack = () => {
       const isMobile = mobileQuery.matches;
       model.classList.toggle("is-mobile-stack", isMobile);
@@ -561,9 +567,12 @@ const features = [
       mobileVisualObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add("is-active");
-            mobileVisualObserver?.unobserve(entry.target);
+            if (entry.isIntersecting) {
+              restartVisualAnimation(entry.target);
+              return;
+            }
+
+            entry.target.classList.remove("is-active");
           });
         },
         {

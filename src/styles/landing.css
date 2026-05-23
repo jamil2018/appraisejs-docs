@@ -965,6 +965,11 @@ pre {
   align-items: stretch;
 }
 
+.sl-markdown-content .landing-root .landing-showcase,
+.sl-markdown-content .landing-root .execution-model.not-content {
+  margin-top: 0;
+}
+
 .landing-root .execution-model *,
 .landing-root .execution-model * + * {
   margin-top: 0;
@@ -2336,7 +2341,7 @@ pre {
     display: grid;
     align-content: start;
     gap: 0.85rem;
-    min-height: auto;
+    min-height: 46rem;
     padding: 1rem;
     overflow: hidden;
     border: 1px solid var(--landing-border);
@@ -2398,10 +2403,6 @@ pre {
     width: 100%;
   }
 
-  .execution-visual--execute {
-    min-height: auto;
-  }
-
   .execution-canvas {
     display: flex;
     flex-direction: column;
@@ -2416,6 +2417,11 @@ pre {
     display: grid;
     justify-items: center;
     gap: 0.18rem;
+  }
+
+  .execution-node > * {
+    grid-column: 1;
+    grid-row: auto;
   }
 
   .execution-edge {
@@ -2439,7 +2445,7 @@ pre {
   }
 
   .execution-node span {
-    width: 3.7rem;
+    width: 3.55rem;
   }
 
   .execution-configure {
@@ -2460,6 +2466,11 @@ pre {
     display: grid;
     justify-items: center;
     gap: 0.18rem;
+  }
+
+  .execution-configure__canvas .execution-mini-node > * {
+    grid-column: 1;
+    grid-row: auto;
   }
 
   .execution-mini-edge {
@@ -2495,7 +2506,7 @@ pre {
   }
 
   .execution-run-stack {
-    min-height: 18rem;
+    min-height: 22rem;
   }
 
   .execution-window--running {
@@ -2509,6 +2520,14 @@ pre {
 
   .execution-visual.is-active .execution-window--running {
     animation-name: execution-run-in-mobile;
+  }
+
+  .execution-window--running .execution-run-fields {
+    gap: 0.7rem;
+  }
+
+  .execution-window--running .execution-run-fields span {
+    height: 3.2rem;
   }
 
   .execution-run-fields,
