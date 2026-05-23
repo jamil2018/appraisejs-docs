@@ -164,6 +164,17 @@ const cycle = "7.2s";
     width: min(100%, 28rem);
     aspect-ratio: 16 / 5.2;
     justify-self: center;
+    --all-in-one-node-size: clamp(1.15rem, 4vw, 1.85rem);
+    --all-in-one-node-top: 42%;
+    --all-in-one-edge-top: calc(
+      var(--all-in-one-node-top) + clamp(0.48rem, 2vw, 0.8rem)
+    );
+    --all-in-one-edge-gap: clamp(0.18rem, 0.8vw, 0.28rem);
+    --all-in-one-node-1: 8%;
+    --all-in-one-node-2: 29%;
+    --all-in-one-node-3: 50%;
+    --all-in-one-node-4: 71%;
+    --all-in-one-node-5: 92%;
   }
 
   .all-in-one-demo__node,
@@ -174,7 +185,7 @@ const cycle = "7.2s";
   }
 
   .all-in-one-demo__node {
-    width: clamp(1.15rem, 4vw, 1.85rem);
+    width: var(--all-in-one-node-size);
     aspect-ratio: 1;
     border: 1px solid rgba(110, 231, 183, 0.68);
     border-radius: 6px;
@@ -203,60 +214,84 @@ const cycle = "7.2s";
   }
 
   .all-in-one-demo__node--start {
-    left: 2%;
-    top: 42%;
+    left: calc(var(--all-in-one-node-1) - var(--all-in-one-node-size) / 2);
+    top: var(--all-in-one-node-top);
     animation-delay: 0s;
   }
 
   .all-in-one-demo__edge--one {
-    left: 9.5%;
-    top: calc(40% + 0.85rem);
-    width: 15%;
+    left: calc(
+      var(--all-in-one-node-1) + var(--all-in-one-node-size) / 2 +
+        var(--all-in-one-edge-gap)
+    );
+    top: var(--all-in-one-edge-top);
+    width: calc(
+      var(--all-in-one-node-2) - var(--all-in-one-node-1) -
+        var(--all-in-one-node-size) - var(--all-in-one-edge-gap) * 2
+    );
     animation-delay: 0.2s;
   }
 
   .all-in-one-demo__node--open {
-    left: 26%;
-    top: 42%;
+    left: calc(var(--all-in-one-node-2) - var(--all-in-one-node-size) / 2);
+    top: var(--all-in-one-node-top);
     animation-delay: 0.38s;
   }
 
   .all-in-one-demo__edge--two {
-    left: 33.5%;
-    top: calc(40% + 0.85rem);
-    width: 15%;
+    left: calc(
+      var(--all-in-one-node-2) + var(--all-in-one-node-size) / 2 +
+        var(--all-in-one-edge-gap)
+    );
+    top: var(--all-in-one-edge-top);
+    width: calc(
+      var(--all-in-one-node-3) - var(--all-in-one-node-2) -
+        var(--all-in-one-node-size) - var(--all-in-one-edge-gap) * 2
+    );
     animation-delay: 0.58s;
   }
 
   .all-in-one-demo__node--fill {
-    left: 50%;
-    top: 42%;
+    left: calc(var(--all-in-one-node-3) - var(--all-in-one-node-size) / 2);
+    top: var(--all-in-one-node-top);
     animation-delay: 0.78s;
   }
 
   .all-in-one-demo__edge--three {
-    left: 57.5%;
-    top: calc(42% + 0.85rem);
-    width: 15%;
+    left: calc(
+      var(--all-in-one-node-3) + var(--all-in-one-node-size) / 2 +
+        var(--all-in-one-edge-gap)
+    );
+    top: var(--all-in-one-edge-top);
+    width: calc(
+      var(--all-in-one-node-4) - var(--all-in-one-node-3) -
+        var(--all-in-one-node-size) - var(--all-in-one-edge-gap) * 2
+    );
     animation-delay: 1.02s;
   }
 
   .all-in-one-demo__node--assert {
-    left: 74%;
-    top: 42%;
+    left: calc(var(--all-in-one-node-4) - var(--all-in-one-node-size) / 2);
+    top: var(--all-in-one-node-top);
     animation-delay: 1.24s;
   }
 
   .all-in-one-demo__edge--four {
-    left: 81.5%;
-    top: calc(42% + 0.85rem);
-    width: 8%;
+    left: calc(
+      var(--all-in-one-node-4) + var(--all-in-one-node-size) / 2 +
+        var(--all-in-one-edge-gap)
+    );
+    top: var(--all-in-one-edge-top);
+    width: calc(
+      var(--all-in-one-node-5) - var(--all-in-one-node-4) -
+        var(--all-in-one-node-size) - var(--all-in-one-edge-gap) * 2
+    );
     animation-delay: 1.44s;
   }
 
   .all-in-one-demo__node--done {
-    left: 91%;
-    top: 42%;
+    left: calc(var(--all-in-one-node-5) - var(--all-in-one-node-size) / 2);
+    top: var(--all-in-one-node-top);
     animation-delay: 1.64s;
   }
 
@@ -548,20 +583,68 @@ const cycle = "7.2s";
       padding: 0.5rem 0.35rem;
     }
 
+    .all-in-one-demo--fill .all-in-one-demo__panel,
+    .all-in-one-demo--fill .all-in-one-demo__stage {
+      min-height: 0;
+    }
+
     .all-in-one-demo__view {
       padding: 0.65rem;
+    }
+
+    .all-in-one-demo--fill .all-in-one-demo__view {
+      padding: clamp(0.45rem, 2vw, 0.65rem);
+    }
+
+    .all-in-one-demo--fill .all-in-one-demo__window {
+      gap: 0.42rem;
+      min-height: 0;
+      padding: clamp(0.52rem, 2.4vw, 0.7rem);
+    }
+
+    .all-in-one-demo--fill .all-in-one-demo__window--canvas {
+      grid-template-rows: auto minmax(0, 1fr);
+      min-height: 0;
+    }
+
+    .all-in-one-demo--fill .all-in-one-demo__canvas-grid {
+      aspect-ratio: 16 / 4.4;
+      align-self: center;
     }
 
     .all-in-one-demo__report-main {
       grid-template-columns: 1fr;
     }
 
+    .all-in-one-demo--fill .all-in-one-demo__report-main {
+      gap: 0.35rem;
+    }
+
+    .all-in-one-demo--fill .all-in-one-demo__form {
+      gap: 0.34rem;
+    }
+
+    .all-in-one-demo--fill .all-in-one-demo__form span,
+    .all-in-one-demo--fill .all-in-one-demo__report-list span,
+    .all-in-one-demo--fill .all-in-one-demo__table span {
+      min-height: clamp(0.68rem, 2.2vw, 0.9rem);
+    }
+
     .all-in-one-demo__chart {
       min-height: 3.4rem;
     }
 
+    .all-in-one-demo--fill .all-in-one-demo__chart {
+      min-height: clamp(2.45rem, 12vw, 3.25rem);
+    }
+
     .all-in-one-demo__table {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .all-in-one-demo--fill .all-in-one-demo__table,
+    .all-in-one-demo--fill .all-in-one-demo__report-list {
+      gap: 0.24rem;
     }
   }
 

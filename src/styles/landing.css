@@ -2296,6 +2296,18 @@ pre {
     min-height: clamp(14.5rem, 58vw, 17rem);
   }
 
+  .feature-card--all-in-one-workspace .feature-card__animation {
+    padding: 0.45rem;
+  }
+
+  .feature-card--all-in-one-workspace
+    .all-in-one-demo--fill
+    .all-in-one-demo__panel {
+    overflow: hidden;
+    border: 1px solid var(--landing-border);
+    border-radius: 6px;
+  }
+
   .feature-card__workspace {
     grid-template-columns: 1fr;
     justify-items: start;
