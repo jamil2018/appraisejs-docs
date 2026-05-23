@@ -2139,7 +2139,15 @@ pre {
   }
 
   .landing-hero__actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, auto));
+    justify-content: center;
     width: 100%;
+  }
+
+  .landing-hero__actions .landing-tertiary-button {
+    grid-column: 1 / -1;
+    justify-self: center;
   }
 
   .landing-hero__proof {
@@ -2273,17 +2281,30 @@ pre {
   }
 
   .feature-card--with-animation {
-    min-height: 26rem;
+    min-height: 22.5rem;
   }
 
   .feature-card--static {
-    min-height: 22rem;
+    min-height: 20rem;
+  }
+
+  .feature-card__copy {
+    order: -1;
+    padding: 1rem 1.05rem 1.05rem;
+    border-bottom: 1px solid var(--landing-border);
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  .feature-card__copy p,
+  .feature-card--with-animation p {
+    font-size: 0.88rem;
+    line-height: 1.5;
   }
 
   .feature-card__animation {
-    flex-basis: clamp(12.5rem, 48vw, 15rem);
-    height: clamp(12.5rem, 48vw, 15rem);
-    min-height: clamp(12.5rem, 48vw, 15rem);
+    flex-basis: clamp(11.25rem, 44vw, 13.5rem);
+    height: clamp(11.25rem, 44vw, 13.5rem);
+    min-height: clamp(11.25rem, 44vw, 13.5rem);
   }
 
   .feature-card__animation
@@ -2300,9 +2321,9 @@ pre {
   }
 
   .feature-card__desktop .feature-card__animation {
-    flex-basis: clamp(14.5rem, 58vw, 17rem);
-    height: clamp(14.5rem, 58vw, 17rem);
-    min-height: clamp(14.5rem, 58vw, 17rem);
+    flex-basis: clamp(12.5rem, 52vw, 15rem);
+    height: clamp(12.5rem, 52vw, 15rem);
+    min-height: clamp(12.5rem, 52vw, 15rem);
   }
 
   .feature-card--all-in-one-workspace .feature-card__animation {
