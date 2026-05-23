@@ -1,5 +1,6 @@
 ---
 import {
+  ArrowDown,
   ArrowRight,
   BookOpen,
   ExternalLink,
@@ -46,7 +47,7 @@ const codeMapRows = [
   <div class="landing-section-copy">
     <p class="landing-kicker">Built around real automation</p>
     <h2 id="code-map-heading" class="landing-section-title">
-      Every interaction generates physcial output that can be reviewed.
+      Every interaction generates physical output that can be reviewed.
     </h2>
   </div>
 
@@ -100,6 +101,29 @@ const codeMapRows = [
       </ul>
     </article>
   </div>
+
+  <ul
+    class="code-map__mobile-list"
+    aria-label="Visual workflow to repository output"
+  >
+    {
+      codeMapRows.map((row) => (
+        <li class="code-map__mobile-row">
+          <div class="code-map__mobile-cell">
+            <span>{row.source.type}</span>
+            <strong>{row.source.label}</strong>
+          </div>
+          <div class="code-map__mobile-arrow" aria-hidden="true">
+            <ArrowDown size={16} stroke-width={2} />
+          </div>
+          <div class="code-map__mobile-cell code-map__mobile-cell--output">
+            <span>{row.output.type}</span>
+            <strong>{row.output.label}</strong>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
 </section>
 
 <section
