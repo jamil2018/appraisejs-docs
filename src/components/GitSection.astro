@@ -1,12 +1,52 @@
 ---
-import { BookOpen, ExternalLink, GitBranch, ShieldCheck } from "@lucide/astro";
+import {
+  ArrowRight,
+  BookOpen,
+  ExternalLink,
+  GitBranch,
+  ShieldCheck,
+} from "@lucide/astro";
+
+const codeMapRows = [
+  {
+    source: { type: "Test Suite", label: "Validate Checkout" },
+    output: { type: "Checkout.Feature", label: "Cucumber Feature" },
+  },
+  {
+    source: { type: "Test Case", label: "Checkout With Valid Data" },
+    output: { type: "Valid Checkout.Scenario", label: "Cucumber Scenario" },
+  },
+  {
+    source: { type: "Locator", label: "button: Complete order" },
+    output: { type: "checkout.json", label: "JSON Locator Entry" },
+  },
+  {
+    source: { type: "Locator Group", label: "page: Checkout" },
+    output: { type: "Checkout.json", label: "Creation of JSON Locator File" },
+  },
+  {
+    source: { type: "Template Step Group", label: "Keyboard" },
+    output: {
+      type: "keyboard.step.ts",
+      label: "Create step definition file",
+    },
+  },
+  {
+    source: { type: "Template Step", label: "Fill" },
+    output: { type: "keyboard.step.ts", label: "Step definition function" },
+  },
+  {
+    source: { type: "Reports", label: "Checkout Test Report" },
+    output: { type: "report.json", label: "JSON Report Entry" },
+  },
+];
 ---
 
 <section class="code-map landing-shell" aria-labelledby="code-map-heading">
   <div class="landing-section-copy">
     <p class="landing-kicker">Built around real automation</p>
     <h2 id="code-map-heading" class="landing-section-title">
-      Every visual decision maps to a file your team can review.
+      Every interaction generates physcial output that can be reviewed.
     </h2>
   </div>
 
@@ -17,12 +57,31 @@ import { BookOpen, ExternalLink, GitBranch, ShieldCheck } from "@lucide/astro";
         <span>source</span>
       </div>
       <ul>
-        <li><span>Flow node</span><strong>Open checkout</strong></li>
-        <li><span>Locator</span><strong>button: Complete order</strong></li>
-        <li><span>Parameter</span><strong>couponCode = SUMMER29</strong></li>
-        <li><span>Assertion</span><strong>Order total equals "$29"</strong></li>
+        {
+          codeMapRows.map((row) => (
+            <li>
+              <span>{row.source.type}</span>
+              <strong>{row.source.label}</strong>
+            </li>
+          ))
+        }
       </ul>
     </article>
+
+    <div class="code-map__bridges" aria-hidden="true">
+      <div class="landing-panel__bar code-map__bridges-bar">
+        <span>&nbsp;</span>
+      </div>
+      <div class="code-map__bridge-list">
+        {
+          codeMapRows.map(() => (
+            <div class="code-map__bridge">
+              <ArrowRight size={14} stroke-width={2} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
 
     <article class="code-map__panel code-map__panel--output">
       <div class="landing-panel__bar">
@@ -30,16 +89,14 @@ import { BookOpen, ExternalLink, GitBranch, ShieldCheck } from "@lucide/astro";
         <span>generated</span>
       </div>
       <ul>
-        <li><span>checkout.feature</span><strong>Cucumber scenario</strong></li>
-        <li>
-          <span>checkout.spec.ts</span><strong>Playwright execution</strong>
-        </li>
-        <li>
-          <span>checkout.steps.ts</span><strong>Reusable support code</strong>
-        </li>
-        <li>
-          <span>test-results/</span><strong>Logs, traces, and evidence</strong>
-        </li>
+        {
+          codeMapRows.map((row) => (
+            <li>
+              <span>{row.output.type}</span>
+              <strong>{row.output.label}</strong>
+            </li>
+          ))
+        }
       </ul>
     </article>
   </div>
@@ -90,7 +147,7 @@ import { BookOpen, ExternalLink, GitBranch, ShieldCheck } from "@lucide/astro";
   </div>
   <div class="open-source__actions">
     <a class="landing-cta-button" href="/getting-started/quick-start/">
-      Start Quick Start
+      Quick Start
     </a>
     <a
       class="open-source__link"
