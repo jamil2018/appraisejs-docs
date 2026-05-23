@@ -1,129 +1,56 @@
 ---
 import {
-  ArrowDown,
-  ArrowRight,
   BookOpen,
   ExternalLink,
+  FileCode2,
   GitBranch,
+  MonitorPlay,
   ShieldCheck,
 } from "@lucide/astro";
-
-const codeMapRows = [
-  {
-    source: { type: "Test Suite", label: "Validate Checkout" },
-    output: { type: "Checkout.Feature", label: "Cucumber Feature" },
-  },
-  {
-    source: { type: "Test Case", label: "Checkout With Valid Data" },
-    output: { type: "Valid Checkout.Scenario", label: "Cucumber Scenario" },
-  },
-  {
-    source: { type: "Locator", label: "button: Complete order" },
-    output: { type: "checkout.json", label: "JSON Locator Entry" },
-  },
-  {
-    source: { type: "Locator Group", label: "page: Checkout" },
-    output: { type: "Checkout.json", label: "Creation of JSON Locator File" },
-  },
-  {
-    source: { type: "Template Step Group", label: "Keyboard" },
-    output: {
-      type: "keyboard.step.ts",
-      label: "Create step definition file",
-    },
-  },
-  {
-    source: { type: "Template Step", label: "Fill" },
-    output: { type: "keyboard.step.ts", label: "Step definition function" },
-  },
-  {
-    source: { type: "Reports", label: "Checkout Test Report" },
-    output: { type: "report.json", label: "JSON Report Entry" },
-  },
-];
 ---
 
-<section class="code-map landing-shell" aria-labelledby="code-map-heading">
+<section
+  class="engineer-trust landing-shell"
+  aria-labelledby="engineer-trust-heading"
+>
   <div class="landing-section-copy">
-    <p class="landing-kicker">Built around real automation</p>
-    <h2 id="code-map-heading" class="landing-section-title">
-      Every interaction generates physical output that can be reviewed.
+    <p class="landing-kicker">What engineers keep</p>
+    <h2 id="engineer-trust-heading" class="landing-section-title">
+      Visual authoring without giving up the engineering loop.
     </h2>
+    <p class="landing-section-description">
+      AppraiseJS should fit a serious test stack: artifacts stay portable,
+      execution stays local-first, and the evaluation path starts with one real
+      smoke test.
+    </p>
   </div>
 
-  <div class="code-map__grid">
-    <article class="code-map__panel">
-      <div class="landing-panel__bar">
-        <span>visual workflow</span>
-        <span>source</span>
-      </div>
-      <ul>
-        {
-          codeMapRows.map((row) => (
-            <li>
-              <span>{row.source.type}</span>
-              <strong>{row.source.label}</strong>
-            </li>
-          ))
-        }
-      </ul>
-    </article>
-
-    <div class="code-map__bridges" aria-hidden="true">
-      <div class="landing-panel__bar code-map__bridges-bar">
-        <span>&nbsp;</span>
-      </div>
-      <div class="code-map__bridge-list">
-        {
-          codeMapRows.map(() => (
-            <div class="code-map__bridge">
-              <ArrowRight size={14} stroke-width={2} />
-            </div>
-          ))
-        }
-      </div>
-    </div>
-
-    <article class="code-map__panel code-map__panel--output">
-      <div class="landing-panel__bar">
-        <span>repository output</span>
-        <span>generated</span>
-      </div>
-      <ul>
-        {
-          codeMapRows.map((row) => (
-            <li>
-              <span>{row.output.type}</span>
-              <strong>{row.output.label}</strong>
-            </li>
-          ))
-        }
-      </ul>
-    </article>
+  <div class="engineer-trust__grid">
+    <a href="/getting-started/creating-tests/">
+      <FileCode2 aria-hidden="true" />
+      <span>Real artifacts</span>
+      <strong
+        >Live Gherkin preview, generated step code, and locator data.</strong
+      >
+    </a>
+    <a href="/getting-started/running-tests/">
+      <MonitorPlay aria-hidden="true" />
+      <span>Local execution</span>
+      <strong
+        >Run the smoke flow locally and inspect the report before scaling.</strong
+      >
+    </a>
+    <a
+      href="https://github.com/jamil2018/appraisejs-core"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <GitBranch aria-hidden="true" />
+      <span>Open source</span>
+      <strong>Review the project instead of trusting a hosted black box.</strong
+      >
+    </a>
   </div>
-
-  <ul
-    class="code-map__mobile-list"
-    aria-label="Visual workflow to repository output"
-  >
-    {
-      codeMapRows.map((row) => (
-        <li class="code-map__mobile-row">
-          <div class="code-map__mobile-cell">
-            <span>{row.source.type}</span>
-            <strong>{row.source.label}</strong>
-          </div>
-          <div class="code-map__mobile-arrow" aria-hidden="true">
-            <ArrowDown size={16} stroke-width={2} />
-          </div>
-          <div class="code-map__mobile-cell code-map__mobile-cell--output">
-            <span>{row.output.type}</span>
-            <strong>{row.output.label}</strong>
-          </div>
-        </li>
-      ))
-    }
-  </ul>
 </section>
 
 <section
@@ -131,9 +58,9 @@ const codeMapRows = [
   aria-labelledby="docs-preview-heading"
 >
   <div class="docs-preview__copy">
-    <p class="landing-kicker">Documentation preview</p>
+    <p class="landing-kicker">Evaluate it</p>
     <h2 id="docs-preview-heading" class="landing-section-title">
-      Start from the workflow you need.
+      Evaluate it with one real smoke test.
     </h2>
   </div>
   <div class="docs-preview__grid">
@@ -165,13 +92,13 @@ const codeMapRows = [
       No vendor lock-in. No hidden runner. No black boxes.
     </h2>
     <p class="landing-section-description">
-      AppraiseJS is built around repositories, pull requests, and automation
+      AppraiseJS is built around local projects, pull requests, and automation
       artifacts that remain useful outside the visual editor.
     </p>
   </div>
   <div class="open-source__actions">
     <a class="landing-cta-button" href="/getting-started/quick-start/">
-      Quick Start
+      Try locally in 15 minutes
     </a>
     <a
       class="open-source__link"

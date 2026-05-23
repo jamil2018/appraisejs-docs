@@ -1,0 +1,176 @@
+---
+import {
+  ArrowDown,
+  ArrowRight,
+  CheckCircle2,
+  Code2,
+  GitPullRequestArrow,
+} from "@lucide/astro";
+
+const codeMapRows = [
+  {
+    source: { type: "Flow", label: "Login success path" },
+    output: { type: "login.feature", label: "Readable scenario" },
+  },
+  {
+    source: { type: "Locator", label: "button: Sign in" },
+    output: { type: "auth.locators.json", label: "Route-aware selector" },
+  },
+  {
+    source: { type: "Helper step", label: "fill credentials" },
+    output: { type: "auth.step.ts", label: "Step definition" },
+  },
+  {
+    source: { type: "Run", label: "Auth smoke / Chromium" },
+    output: { type: "report.json", label: "Execution evidence" },
+  },
+];
+---
+
+<section
+  class="code-map landing-shell"
+  id="generated-output"
+  aria-labelledby="code-map-heading"
+>
+  <div class="landing-section-copy">
+    <p class="landing-kicker">Generated output</p>
+    <h2 id="code-map-heading" class="landing-section-title">
+      Draw the flow. Commit the Playwright.
+    </h2>
+    <p class="landing-section-description">
+      AppraiseJS is for teams that want visual authoring without surrendering
+      code ownership. The editor produces reviewable artifacts your repo and CI
+      can keep using outside the visual workspace.
+    </p>
+  </div>
+
+  <div class="proof-stage">
+    <div class="code-map__grid">
+      <article class="code-map__panel">
+        <div class="landing-panel__bar">
+          <span>visual workflow</span>
+          <span>source</span>
+        </div>
+        <ul>
+          {
+            codeMapRows.map((row) => (
+              <li>
+                <span>{row.source.type}</span>
+                <strong>{row.source.label}</strong>
+              </li>
+            ))
+          }
+        </ul>
+      </article>
+
+      <div class="code-map__bridges" aria-hidden="true">
+        <div class="landing-panel__bar code-map__bridges-bar">
+          <span>&nbsp;</span>
+        </div>
+        <div class="code-map__bridge-list">
+          {
+            codeMapRows.map(() => (
+              <div class="code-map__bridge">
+                <ArrowRight size={14} stroke-width={2} />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <article class="code-map__panel code-map__panel--output">
+        <div class="landing-panel__bar">
+          <span>repository output</span>
+          <span>generated</span>
+        </div>
+        <ul>
+          {
+            codeMapRows.map((row) => (
+              <li>
+                <span>{row.output.type}</span>
+                <strong>{row.output.label}</strong>
+              </li>
+            ))
+          }
+        </ul>
+      </article>
+    </div>
+
+    <ul
+      class="code-map__mobile-list"
+      aria-label="Visual workflow to repository output"
+    >
+      {
+        codeMapRows.map((row) => (
+          <li class="code-map__mobile-row">
+            <div class="code-map__mobile-cell">
+              <span>{row.source.type}</span>
+              <strong>{row.source.label}</strong>
+            </div>
+            <div class="code-map__mobile-arrow" aria-hidden="true">
+              <ArrowDown size={16} stroke-width={2} />
+            </div>
+            <div class="code-map__mobile-cell code-map__mobile-cell--output">
+              <span>{row.output.type}</span>
+              <strong>{row.output.label}</strong>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+
+    <article
+      class="artifact-preview"
+      aria-labelledby="artifact-preview-heading"
+    >
+      <div class="landing-panel__bar">
+        <span>generated artifact preview</span>
+        <span>git-reviewable</span>
+      </div>
+      <div class="artifact-preview__body">
+        <div>
+          <h3 id="artifact-preview-heading">What lands in the repo</h3>
+          <p>
+            A visual login flow still resolves to explicit scenario text,
+            reusable step definitions, locator data, and run evidence.
+          </p>
+        </div>
+        <pre><code><span class="token-key">Feature:</span> Authentication smoke
+  <span class="token-key">Scenario:</span> Login with valid credentials
+    <span class="token-key">When</span> I fill "email" with test user
+    <span class="token-key">And</span> I click "Sign in"
+    <span class="token-key">Then</span> "welcomeBanner" should be visible</code></pre>
+      </div>
+    </article>
+  </div>
+
+  <div
+    class="positioning-grid"
+    aria-label="Why AppraiseJS fits engineering teams"
+  >
+    <article>
+      <CheckCircle2 aria-hidden="true" />
+      <h3>Less boilerplate, same ownership</h3>
+      <p>
+        QA authors model the flow visually while engineers keep generated files
+        in reviewable formats.
+      </p>
+    </article>
+    <article>
+      <Code2 aria-hidden="true" />
+      <h3>Built around existing habits</h3>
+      <p>
+        Locators, helpers, scenarios, and reports map to concrete artifacts
+        instead of a hidden hosted runner.
+      </p>
+    </article>
+    <article>
+      <GitPullRequestArrow aria-hidden="true" />
+      <h3>Designed for pull requests</h3>
+      <p>
+        The point is not to replace engineering review. It is to make visual
+        authoring produce something engineers can inspect.
+      </p>
+    </article>
+  </div>
+</section>
