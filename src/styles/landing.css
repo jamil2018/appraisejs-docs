@@ -19,7 +19,26 @@
 }
 
 body:has(.landing-root) {
-  background: var(--landing-bg);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    var(--landing-bg);
+  background-size: 48px 48px;
+}
+
+body:has(.landing-root) .main-frame,
+body:has(.landing-root) main,
+body:has(.landing-root) .content-panel:has(.landing-root),
+body:has(.landing-root) .content-panel:has(.landing-root) .sl-container,
+body:has(.landing-root) .sl-markdown-content {
+  background: transparent;
+}
+
+body:has(.landing-root) .content-panel:has(.landing-root),
+body:has(.landing-root) .content-panel:has(.landing-root) .sl-container {
+  max-width: none;
+  width: 100%;
+  padding-inline: 0;
 }
 
 body:has(.landing-root) header.header,
@@ -38,14 +57,11 @@ body:has(.landing-root) .sl-markdown-content {
 }
 
 .landing-root {
+  width: 100%;
   min-height: 100vh;
   overflow-x: clip;
   color: var(--landing-text);
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    var(--landing-bg);
-  background-size: 48px 48px;
+  background: transparent;
   font-family: "Geist Sans", var(--sl-font), system-ui, sans-serif;
 }
 
@@ -470,8 +486,8 @@ body:has(.landing-root) .sl-markdown-content {
 
 .landing-hero__proof {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  width: min(100%, 48rem);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  width: min(100%, 60rem);
   margin-top: 0;
   overflow: hidden;
   border: 1px solid var(--landing-border);
@@ -541,6 +557,11 @@ body:has(.landing-root) .sl-markdown-content {
   font-weight: 620;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.landing-root .landing-hero__proof *,
+.landing-root .landing-hero__proof * + * {
+  margin-top: 0;
 }
 
 .feature-card,
@@ -2653,7 +2674,7 @@ pre {
   }
 
   .landing-hero__proof {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     width: 100%;
   }
 
@@ -2668,20 +2689,31 @@ pre {
   }
 
   .landing-hero__proof-step:not(:last-child) {
-    border-right: 1px solid var(--landing-border);
-    border-bottom: 0;
-  }
-
-  .landing-hero__proof-step:nth-child(2n) {
     border-right: 0;
-  }
-
-  .landing-hero__proof-step:nth-child(-n + 2) {
     border-bottom: 1px solid var(--landing-border);
   }
 
   .landing-hero__proof-step:not(:last-child)::after {
-    display: none;
+    display: grid;
+    place-items: center;
+    right: auto;
+    left: 50%;
+    top: auto;
+    bottom: -0.62rem;
+    z-index: 2;
+    width: 1.24rem;
+    height: 1.24rem;
+    border: 1px solid rgba(16, 185, 129, 0.42);
+    border-radius: 999px;
+    color: var(--landing-green);
+    background: #10253a;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.08);
+    content: "v";
+    font-family: "Geist Mono", var(--sl-font-mono), monospace;
+    font-size: 0.76rem;
+    font-weight: 700;
+    line-height: 1;
+    transform: translateX(-50%);
   }
 
   .feature-carousel,

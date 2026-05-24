@@ -5,6 +5,7 @@ import {
   ExternalLink,
   FileCode2,
   GitBranch,
+  ShieldCheck,
   TerminalSquare,
 } from "@lucide/astro";
 
@@ -18,7 +19,7 @@ const installCommand = "npx create-appraisejs@latest";
   <div class="landing-hero__copy">
     <p class="landing-kicker">Open source visual test automation</p>
     <h1 id="landing-hero-heading">
-      Build browser tests visually. Review real Playwright in git.
+      Visual browser test automation with version controlled known artifacts
     </h1>
     <p class="landing-hero__description">
       AppraiseJS turns visual test authoring into reviewable Playwright/Cucumber
@@ -95,14 +96,21 @@ const installCommand = "npx create-appraisejs@latest";
         <span class="landing-hero__proof-icon" aria-hidden="true">
           <FileCode2 />
         </span>
-        <span>Scenario</span>
+        <span>Test Suite</span>
         <strong>.feature</strong>
+      </div>
+      <div class="landing-hero__proof-step">
+        <span class="landing-hero__proof-icon" aria-hidden="true">
+          <ShieldCheck />
+        </span>
+        <span>Test Case</span>
+        <strong>*.feature.scenario</strong>
       </div>
       <div class="landing-hero__proof-step">
         <span class="landing-hero__proof-icon" aria-hidden="true">
           <GitBranch />
         </span>
-        <span>Step code</span>
+        <span>Template Step</span>
         <strong>*.step.ts</strong>
       </div>
       <div class="landing-hero__proof-step">
