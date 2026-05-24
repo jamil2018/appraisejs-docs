@@ -247,6 +247,52 @@ const features = [
       </h2>
     </div>
 
+    <div class="workflow-node-map not-content" data-workflow-node-map>
+      <div class="workflow-node-map__nodes" aria-label="Visual builder nodes">
+        <button
+          type="button"
+          class="workflow-node-map__node is-active"
+          data-workflow-node="navigate"
+          aria-pressed="true"
+        >
+          <Navigation aria-hidden="true" />
+          <span>Navigate</span>
+        </button>
+        <button
+          type="button"
+          class="workflow-node-map__node"
+          data-workflow-node="username"
+          aria-pressed="false"
+        >
+          <Type aria-hidden="true" />
+          <span>Fill Username</span>
+        </button>
+        <button
+          type="button"
+          class="workflow-node-map__node"
+          data-workflow-node="password"
+          aria-pressed="false"
+        >
+          <KeyRound aria-hidden="true" />
+          <span>Fill Password</span>
+        </button>
+        <button
+          type="button"
+          class="workflow-node-map__node"
+          data-workflow-node="click"
+          aria-pressed="false"
+        >
+          <MousePointerClick aria-hidden="true" />
+          <span>Click Login</span>
+        </button>
+      </div>
+      <pre class="workflow-node-map__code" aria-label="Generated Playwright step mapping"><code><span class="token-comment">// generated from the selected visual node</span>
+<span class="workflow-code-line is-active" data-workflow-line="navigate">await page.goto(<span class="token-string">"/login"</span>);</span>
+<span class="workflow-code-line" data-workflow-line="username">await page.getByLabel(<span class="token-string">"Username"</span>).fill(user.email);</span>
+<span class="workflow-code-line" data-workflow-line="password">await page.getByLabel(<span class="token-string">"Password"</span>).fill(user.password);</span>
+<span class="workflow-code-line" data-workflow-line="click">await page.getByRole(<span class="token-string">"button"</span>, &#123; name: <span class="token-string">"Log in"</span> &#125;).click();</span></code></pre>
+    </div>
+
     <div class="execution-model not-content" data-execution-model>
       <div class="execution-model__copy" aria-label="Execution model steps">
         <button
@@ -492,6 +538,37 @@ const features = [
 </section>
 
 <script>
+  const workflowNodeMaps = document.querySelectorAll("[data-workflow-node-map]");
+
+  workflowNodeMaps.forEach((map) => {
+    const nodes = Array.from(
+      map.querySelectorAll("[data-workflow-node]"),
+    ) as HTMLElement[];
+    const lines = Array.from(
+      map.querySelectorAll("[data-workflow-line]"),
+    ) as HTMLElement[];
+
+    const activate = (id: string) => {
+      nodes.forEach((node) => {
+        const isActive = node.dataset.workflowNode === id;
+        node.classList.toggle("is-active", isActive);
+        node.setAttribute("aria-pressed", String(isActive));
+      });
+
+      lines.forEach((line) => {
+        line.classList.toggle("is-active", line.dataset.workflowLine === id);
+      });
+    };
+
+    nodes.forEach((node) => {
+      const id = node.dataset.workflowNode;
+      if (!id) return;
+      node.addEventListener("mouseenter", () => activate(id));
+      node.addEventListener("focus", () => activate(id));
+      node.addEventListener("click", () => activate(id));
+    });
+  });
+
   const executionModels = document.querySelectorAll("[data-execution-model]");
 
   executionModels.forEach((model) => {

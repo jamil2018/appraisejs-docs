@@ -4,14 +4,16 @@ import {
   ArrowRight,
   CheckCircle2,
   Code2,
+  Copy,
   ExternalLink,
-  FileCode2,
-  FileJson2,
-  FolderGit2,
   GitPullRequestArrow,
+  Check,
   ListChecks,
   TerminalSquare,
 } from "@lucide/astro";
+import GeneratedMockIde from "./GeneratedMockIde.astro";
+
+const installCommand = "npx create-appraisejs@latest";
 
 const codeMapRows = [
   {
@@ -44,29 +46,6 @@ const codeMapRows = [
       type: "reports/checkout-smoke/report.json",
       label: "Run, timing, and debug evidence",
     },
-  },
-];
-
-const artifactFiles = [
-  {
-    icon: FileCode2,
-    path: "tests/appraise/features/checkout-smoke.feature",
-  },
-  {
-    icon: Code2,
-    path: "tests/appraise/steps/checkout.steps.ts",
-  },
-  {
-    icon: FileJson2,
-    path: "tests/appraise/locators/checkout.locators.json",
-  },
-  {
-    icon: FileJson2,
-    path: "test-results/appraise/checkout-smoke/report.json",
-  },
-  {
-    icon: FileJson2,
-    path: "test-results/appraise/checkout-smoke/run-evidence.json",
   },
 ];
 
@@ -194,92 +173,7 @@ const inspectionItems = [
       }
     </ul>
 
-    <article
-      class="artifact-preview artifact-preview--sample"
-      aria-labelledby="artifact-preview-heading"
-    >
-      <div class="landing-panel__bar">
-        <span>sample repo output</span>
-        <span>static proof</span>
-      </div>
-      <div class="artifact-preview__body">
-        <div class="artifact-preview__intro">
-          <h3 id="artifact-preview-heading">What lands in the repo</h3>
-          <p>
-            The visual flow becomes normal project files. Treat this as an
-            adoption review: read the scenario, inspect selectors, and check
-            whether the run evidence is enough for your debugging loop.
-          </p>
-          <ul
-            class="artifact-file-tree"
-            aria-label="Sample generated file tree"
-          >
-            <li><FolderGit2 aria-hidden="true" /> appraisejs-sample/</li>
-            {
-              artifactFiles.map((file) => {
-                const Icon = file.icon;
-                return (
-                  <li>
-                    <Icon aria-hidden="true" />
-                    {file.path}
-                  </li>
-                );
-              })
-            }
-          </ul>
-        </div>
-        <div class="artifact-preview__snippets">
-          <pre><code><span class="token-comment"># tests/appraise/features/checkout-smoke.feature</span>
-<span class="token-key">Feature:</span> Checkout smoke
-  <span class="token-key">Background:</span>
-    <span class="token-key">Given</span> I open the storefront
-    <span class="token-key">And</span> I sign in as "returning_buyer"
-
-  <span class="token-key">Scenario:</span> Returning buyer completes a card checkout
-    <span class="token-key">When</span> I add "Everyday Hoodie" to the cart
-    <span class="token-key">And</span> I use the saved shipping address
-    <span class="token-key">And</span> I pay with "visa_success"
-    <span class="token-key">Then</span> the order confirmation should be visible
-    <span class="token-key">And</span> the confirmation total should equal "$64.00"</code></pre>
-          <pre><code><span class="token-comment">// tests/appraise/steps/checkout.steps.ts</span>
-<span class="token-key">import</span> &#123; expect &#125; <span class="token-key">from</span> <span class="token-string">"@playwright/test"</span>;
-<span class="token-key">import</span> locators <span class="token-key">from</span> <span class="token-string">"../locators/checkout.locators.json"</span>;
-
-When(<span class="token-string">"I add &#123;string&#125; to the cart"</span>, async (&#123; page &#125;, itemName) =&gt; &#123;
-  await page.getByRole(<span class="token-string">"link"</span>, &#123; name: itemName &#125;).click();
-  await page.locator(locators.product.addToCart.selector).click();
-  await expect(page.locator(locators.cart.summary.selector)).toBeVisible();
-&#125;);
-
-Then(<span class="token-string">"the confirmation total should equal &#123;string&#125;"</span>, async (&#123; page &#125;, total) =&gt; &#123;
-  await expect(page.locator(locators.order.total.selector)).toHaveText(total);
-&#125;);</code></pre>
-          <pre><code><span class="token-comment">// tests/appraise/locators/checkout.locators.json</span>
-&#123;
-  <span class="token-string">"product.addToCart"</span>: &#123;
-    <span class="token-string">"selector"</span>: <span class="token-string">"[data-testid='add-to-cart']"</span>,
-    <span class="token-string">"owner"</span>: <span class="token-string">"checkout-flow"</span>,
-    <span class="token-string">"fallback"</span>: <span class="token-string">"role=button[name='Add to cart']"</span>
-  &#125;,
-  <span class="token-string">"order.total"</span>: &#123;
-    <span class="token-string">"selector"</span>: <span class="token-string">"[data-testid='confirmation-total']"</span>,
-    <span class="token-string">"route"</span>: <span class="token-string">"/checkout/confirmation"</span>
-  &#125;
-&#125;</code></pre>
-          <pre><code><span class="token-comment">// test-results/appraise/checkout-smoke/report.json</span>
-&#123;
-  <span class="token-string">"status"</span>: <span class="token-string">"passed"</span>,
-  <span class="token-string">"browser"</span>: <span class="token-string">"chromium"</span>,
-  <span class="token-string">"durationMs"</span>: 18420,
-  <span class="token-string">"artifacts"</span>: [
-    <span class="token-string">"trace.zip"</span>,
-    <span class="token-string">"screenshots/order-confirmation.png"</span>,
-    <span class="token-string">"run-evidence.json"</span>
-  ]
-&#125;</code></pre>
-        </div>
-      </div>
-    </article>
+    <GeneratedMockIde />
   </div>
 
   <div class="proof-support-grid" aria-label="Generated output support">
@@ -351,17 +245,55 @@ Then(<span class="token-string">"the confirmation total should equal &#123;strin
   </div>
 </section>
 
-<div class="mobile-sticky-cta" aria-label="Mobile quick actions">
-  <a class="landing-cta-button" href="/getting-started/quick-start/">
-    Run quick start
-  </a>
-  <a
-    class="mobile-sticky-cta__github"
-    href="https://github.com/jamil2018/appraisejs-core"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="View GitHub repository"
+<div class="mobile-sticky-cta" aria-label="Mobile install command">
+  <code data-mobile-install-command>{installCommand}</code>
+  <button
+    type="button"
+    class="mobile-sticky-cta__copy"
+    data-mobile-copy-command
+    aria-label="Copy install command"
   >
-    <ExternalLink aria-hidden="true" />
-  </a>
+    <Copy class="mobile-sticky-cta__icon" aria-hidden="true" />
+    <Check
+      class="mobile-sticky-cta__icon mobile-sticky-cta__icon--success"
+      aria-hidden="true"
+    />
+  </button>
 </div>
+
+<script define:vars={{ installCommand }}>
+  function initMobileInstallCopy() {
+    const button = document.querySelector("[data-mobile-copy-command]");
+    const code = document.querySelector("[data-mobile-install-command]");
+    if (!button || !code) return;
+
+    let resetTimer;
+
+    button.addEventListener("click", async () => {
+      window.clearTimeout(resetTimer);
+
+      try {
+        await navigator.clipboard.writeText(installCommand);
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(code);
+        const selection = window.getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+        document.execCommand("copy");
+        selection?.removeAllRanges();
+      }
+
+      button.classList.add("is-copied");
+      button.setAttribute("aria-label", "Copied");
+
+      resetTimer = window.setTimeout(() => {
+        button.classList.remove("is-copied");
+        button.setAttribute("aria-label", "Copy install command");
+      }, 2000);
+    });
+  }
+
+  document.addEventListener("astro:page-load", initMobileInstallCopy);
+  initMobileInstallCopy();
+</script>
