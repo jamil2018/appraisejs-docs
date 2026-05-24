@@ -5,7 +5,7 @@ import {
   ExternalLink,
   FileCode2,
   GitBranch,
-  Timer,
+  TerminalSquare,
 } from "@lucide/astro";
 
 const installCommand = "npx create-appraisejs@latest";
@@ -21,18 +21,18 @@ const installCommand = "npx create-appraisejs@latest";
       Build browser tests visually. Review real Playwright in git.
     </h1>
     <p class="landing-hero__description">
-      AppraiseJS lets QA and SDET teams model browser flows visually, then
-      generates Playwright/Cucumber artifacts engineers can review, run locally,
-      and commit to CI.
+      AppraiseJS turns visual test authoring into reviewable Playwright/Cucumber
+      artifacts: scenarios, step definitions, locator maps, and local run
+      evidence your team can inspect before adopting.
     </p>
     <div class="landing-hero__actions">
-      <a class="landing-cta-button" href="/getting-started/quick-start/">
-        <Timer aria-hidden="true" />
-        Generate a local Playwright flow
-      </a>
-      <a class="landing-secondary-button" href="#generated-output">
+      <a class="landing-cta-button" href="#generated-output">
         <FileCode2 aria-hidden="true" />
-        Inspect generated files
+        Inspect generated sample
+      </a>
+      <a class="landing-secondary-button" href="/getting-started/quick-start/">
+        <TerminalSquare aria-hidden="true" />
+        Run quick start locally
       </a>
       <a
         class="landing-tertiary-button"
@@ -68,9 +68,9 @@ const installCommand = "npx create-appraisejs@latest";
       </button>
     </div>
     <p class="landing-hero__install-note">
-      Creates a local sample project. No signup. Review the generated
-      <code>.feature</code>, step code, locators, and report before adopting
-      anything.
+      After inspection, the quick start creates a local project with generated
+      <code>.feature</code> files, step definitions, locator maps, report JSON, and
+      local run evidence. No signup required.
     </p>
     <div
       class="landing-hero__proof"
@@ -99,7 +99,7 @@ const installCommand = "npx create-appraisejs@latest";
       </div>
       <div class="landing-hero__proof-step">
         <span class="landing-hero__proof-icon" aria-hidden="true">
-          <Timer />
+          <TerminalSquare />
         </span>
         <span>Evidence</span>
         <strong>report.json</strong>
@@ -107,21 +107,6 @@ const installCommand = "npx create-appraisejs@latest";
     </div>
   </div>
 </section>
-
-<div class="mobile-sticky-cta" aria-label="Mobile quick actions">
-  <a class="landing-cta-button" href="/getting-started/quick-start/">
-    Run quick start
-  </a>
-  <a
-    class="mobile-sticky-cta__github"
-    href="https://github.com/jamil2018/appraisejs-core"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="View GitHub repository"
-  >
-    <ExternalLink aria-hidden="true" />
-  </a>
-</div>
 
 <script define:vars={{ installCommand }}>
   function initHeroCopy() {

@@ -1,6 +1,8 @@
 ---
 import {
+  AlertTriangle,
   BookOpen,
+  Code2,
   ExternalLink,
   FileCode2,
   GitBranch,
@@ -8,7 +10,96 @@ import {
   MonitorPlay,
   Scale,
   ShieldCheck,
+  TerminalSquare,
 } from "@lucide/astro";
+
+const trustCards = [
+  {
+    icon: FileCode2,
+    href: "/getting-started/creating-tests/",
+    label: "Generated artifacts",
+    description: "Review Gherkin, Playwright step code, and locator data.",
+  },
+  {
+    icon: MonitorPlay,
+    href: "/getting-started/running-tests/",
+    label: "Local execution",
+    description: "Run the smoke flow locally before carrying it into CI.",
+  },
+  {
+    icon: GitBranch,
+    href: "https://github.com/jamil2018/appraisejs-core",
+    label: "Open source core",
+    description: "Inspect the implementation before scaffolding a project.",
+    external: true,
+  },
+];
+
+const comparisonRows = [
+  {
+    icon: Code2,
+    title: "Playwright alone",
+    useCurrent:
+      "Use it when engineers own all test authoring, locators, maintenance, and review.",
+    useAppraise:
+      "Use AppraiseJS when QA or SDET teams need visual authoring while engineers still review repo output.",
+  },
+  {
+    icon: GitPullRequestArrow,
+    title: "Cypress and recorders",
+    useCurrent:
+      "Use them when quick capture and a single-tool workflow are enough.",
+    useAppraise:
+      "Use AppraiseJS when generated Playwright/Cucumber files need to live in git instead of staying trapped in recorder state.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "TestRail and Gherkin",
+    useCurrent:
+      "Use them when planning, traceability, and scenario language are the main need.",
+    useAppraise:
+      "Use AppraiseJS when authoring, locators, execution, and reports must stay connected.",
+  },
+  {
+    icon: Scale,
+    title: "Custom frameworks",
+    useCurrent:
+      "Use them when your team already has mature authoring, locator, CI, and reporting infrastructure.",
+    useAppraise:
+      "Use AppraiseJS when fragmentation across those pieces is the problem you are trying to reduce.",
+  },
+];
+
+const notForYouItems = [
+  "You want a hosted test-management suite to replace your existing planning tool.",
+  "Your engineers prefer to hand-author every test and do not need visual collaboration.",
+  "Your team is not willing to inspect generated code and own it in the repo.",
+  "You need production usage metrics or customer logos before running a local evaluation.",
+];
+
+const evaluateSteps = [
+  {
+    icon: FileCode2,
+    title: "Inspect generated sample",
+    description:
+      "Read the sample `.feature`, steps, locators, and report JSON above.",
+    href: "#generated-output",
+  },
+  {
+    icon: TerminalSquare,
+    title: "Run `npx create-appraisejs@latest`",
+    description:
+      "Create the local project and confirm the generated files match the docs.",
+    href: "/getting-started/quick-start/",
+  },
+  {
+    icon: MonitorPlay,
+    title: "Build one smoke flow",
+    description:
+      "Run it locally, inspect the report, and decide whether the handoff works.",
+    href: "/getting-started/running-tests/",
+  },
+];
 ---
 
 <section
@@ -28,29 +119,22 @@ import {
   </div>
 
   <div class="engineer-trust__grid">
-    <a href="/getting-started/creating-tests/">
-      <FileCode2 aria-hidden="true" />
-      <span>Real artifacts</span>
-      <strong
-        >Live Gherkin preview, generated step code, and locator data.</strong
-      >
-    </a>
-    <a href="/getting-started/running-tests/">
-      <MonitorPlay aria-hidden="true" />
-      <span>Local execution</span>
-      <strong
-        >Run the smoke flow locally and inspect the report before scaling.</strong
-      >
-    </a>
-    <a
-      href="https://github.com/jamil2018/appraisejs-core"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <GitBranch aria-hidden="true" />
-      <span>Open source</span>
-      <strong>Review source before installing the local scaffold.</strong>
-    </a>
+    {
+      trustCards.map((card) => {
+        const Icon = card.icon;
+        return (
+          <a
+            href={card.href}
+            target={card.external ? "_blank" : undefined}
+            rel={card.external ? "noopener noreferrer" : undefined}
+          >
+            <Icon aria-hidden="true" />
+            <span>{card.label}</span>
+            <strong>{card.description}</strong>
+          </a>
+        );
+      })
+    }
   </div>
 
   <div
@@ -69,77 +153,73 @@ import {
   aria-labelledby="comparison-heading"
 >
   <div class="landing-section-copy">
-    <p class="landing-kicker">Why not just Playwright?</p>
+    <p class="landing-kicker">Tradeoffs</p>
     <h2 id="comparison-heading" class="landing-section-title">
-      Keep Playwright as the engine. Add visual authoring where it helps.
+      Use AppraiseJS when visual authoring and repo-owned automation both
+      matter.
     </h2>
     <p class="landing-section-description">
-      AppraiseJS is not trying to hide automation from engineers. It gives QA
-      and SDET teams a visual authoring path while keeping the output
-      inspectable in the repo.
+      It is not a replacement for every testing tool. It is a bridge for teams
+      that need non-code authoring without losing Playwright, Cucumber, git
+      review, and local execution.
     </p>
   </div>
 
-  <div class="comparison-grid">
-    <article>
-      <FileCode2 aria-hidden="true" />
-      <h3>Playwright</h3>
-      <p>
-        Great execution engine. AppraiseJS adds visual flow authoring and
-        generated artifacts that engineers can review.
-      </p>
-    </article>
-    <article>
-      <GitPullRequestArrow aria-hidden="true" />
-      <h3>Cypress and recorders</h3>
-      <p>
-        Useful for capture, but scripts can become trapped in tooling.
-        AppraiseJS keeps repo-owned files as the handoff.
-      </p>
-    </article>
-    <article>
-      <ShieldCheck aria-hidden="true" />
-      <h3>TestRail and Gherkin</h3>
-      <p>
-        Strong planning and language layers. AppraiseJS connects authoring,
-        locators, generated steps, and execution evidence.
-      </p>
-    </article>
+  <div class="comparison-grid comparison-grid--tradeoffs">
+    {
+      comparisonRows.map((row) => {
+        const Icon = row.icon;
+        return (
+          <article>
+            <Icon aria-hidden="true" />
+            <h3>{row.title}</h3>
+            <p>
+              <strong>Use the existing path:</strong> {row.useCurrent}
+            </p>
+            <p>
+              <strong>Use AppraiseJS:</strong> {row.useAppraise}
+            </p>
+          </article>
+        );
+      })
+    }
   </div>
 
-  <p class="known-boundaries">
-    <Scale aria-hidden="true" />
-    Best for browser workflow automation teams already using or evaluating Playwright.
-    Not a hosted test-management replacement.
-  </p>
+  <aside class="known-boundaries known-boundaries--not-for-you">
+    <AlertTriangle aria-hidden="true" />
+    <div>
+      <h3>Not for you if...</h3>
+      <ul>
+        {notForYouItems.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </aside>
 </section>
 
 <section
-  class="docs-preview landing-shell"
+  class="docs-preview evaluate-path landing-shell"
   aria-labelledby="docs-preview-heading"
 >
   <div class="docs-preview__copy">
-    <p class="landing-kicker">Evaluate it</p>
+    <p class="landing-kicker">Evaluate in 15 minutes</p>
     <h2 id="docs-preview-heading" class="landing-section-title">
-      Evaluate it with one real smoke test.
+      One sample, one scaffold, one smoke flow.
     </h2>
   </div>
-  <div class="docs-preview__grid">
-    <a href="/getting-started/quick-start/">
-      <BookOpen aria-hidden="true" />
-      <span>Quick Start</span>
-      <strong>Install, model, run, and inspect your first flow.</strong>
-    </a>
-    <a href="/build-tests/locators/">
-      <ShieldCheck aria-hidden="true" />
-      <span>Locator Builder</span>
-      <strong>Create locator groups that survive UI changes.</strong>
-    </a>
-    <a href="/reference/architecture/execution-lifecycle/">
-      <GitBranch aria-hidden="true" />
-      <span>Execution Lifecycle</span>
-      <strong>Understand generated files, runs, logs, and reports.</strong>
-    </a>
+  <div class="docs-preview__grid evaluate-path__grid">
+    {
+      evaluateSteps.map((step, index) => {
+        const Icon = step.icon;
+        return (
+          <a href={step.href}>
+            <Icon aria-hidden="true" />
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <strong>{step.title}</strong>
+            <p>{step.description}</p>
+          </a>
+        );
+      })
+    }
   </div>
 </section>
 
@@ -150,7 +230,7 @@ import {
   <div class="open-source__copy">
     <p class="landing-kicker">Open source</p>
     <h2 id="open-source-heading" class="landing-section-title">
-      No vendor lock-in. No hidden runner. No black boxes.
+      No hidden runner. No generated-code black box.
     </h2>
     <p class="landing-section-description">
       AppraiseJS is built around local projects, pull requests, and automation
@@ -158,8 +238,9 @@ import {
     </p>
   </div>
   <div class="open-source__actions">
-    <a class="landing-cta-button" href="/getting-started/quick-start/">
-      Run the quick start locally
+    <a class="landing-secondary-button" href="/getting-started/quick-start/">
+      <BookOpen aria-hidden="true" />
+      Run quick start locally
     </a>
     <a
       class="open-source__link"
