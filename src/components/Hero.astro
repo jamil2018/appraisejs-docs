@@ -1,11 +1,10 @@
 ---
 import {
   Check,
-  CirclePlay,
   Copy,
+  ExternalLink,
   FileCode2,
   GitBranch,
-  MousePointer2,
   Timer,
 } from "@lucide/astro";
 
@@ -19,27 +18,30 @@ const installCommand = "npx create-appraisejs@latest";
   <div class="landing-hero__copy">
     <p class="landing-kicker">Open source visual test automation</p>
     <h1 id="landing-hero-heading">
-      Build browser tests visually. Commit real Playwright code.
+      Build browser tests visually. Review real Playwright in git.
     </h1>
     <p class="landing-hero__description">
-      AppraiseJS turns visual flows, locators, and reusable helper steps into
-      Playwright, Cucumber, and run evidence your team can keep in git and run
-      locally or in CI.
+      AppraiseJS lets QA and SDET teams model browser flows visually, then
+      generates Playwright/Cucumber artifacts engineers can review, run locally,
+      and commit to CI.
     </p>
     <div class="landing-hero__actions">
       <a class="landing-cta-button" href="/getting-started/quick-start/">
         <Timer aria-hidden="true" />
-        Try locally in 15 minutes
+        Generate a local Playwright flow
+      </a>
+      <a class="landing-secondary-button" href="#generated-output">
+        <FileCode2 aria-hidden="true" />
+        Inspect generated files
       </a>
       <a
-        class="landing-secondary-button"
-        href="/getting-started/overview/#see-it-in-action"
+        class="landing-tertiary-button"
+        href="https://github.com/jamil2018/appraisejs-core"
+        target="_blank"
+        rel="noopener noreferrer"
       >
-        <CirclePlay aria-hidden="true" />
-        Watch workflow demo
-      </a>
-      <a class="landing-tertiary-button" href="#generated-output">
-        See generated output
+        <ExternalLink aria-hidden="true" />
+        View GitHub
       </a>
     </div>
     <div class="landing-hero__install" aria-label="Install command">
@@ -66,37 +68,60 @@ const installCommand = "npx create-appraisejs@latest";
       </button>
     </div>
     <p class="landing-hero__install-note">
-      Local scaffold. No account gate. Build one runnable flow and inspect the
-      report before changing your test stack.
+      Creates a local sample project. No signup. Review the generated
+      <code>.feature</code>, step code, locators, and report before adopting
+      anything.
     </p>
     <div
       class="landing-hero__proof"
-      aria-label="Visual workflow to generated automation"
+      aria-label="Generated files from the 15-minute result"
     >
+      <div class="landing-hero__proof-step">
+        <span class="landing-hero__proof-icon" aria-hidden="true">
+          <FileCode2 />
+        </span>
+        <span>Scenario</span>
+        <strong>.feature</strong>
+      </div>
       <div class="landing-hero__proof-step">
         <span class="landing-hero__proof-icon" aria-hidden="true">
           <GitBranch />
         </span>
-        <span>Design flow</span>
-        <strong>Checkout scenario</strong>
-      </div>
-      <div class="landing-hero__proof-step">
-        <span class="landing-hero__proof-icon" aria-hidden="true">
-          <MousePointer2 />
-        </span>
-        <span>Capture locator</span>
-        <strong>button: Complete order</strong>
+        <span>Step code</span>
+        <strong>*.step.ts</strong>
       </div>
       <div class="landing-hero__proof-step">
         <span class="landing-hero__proof-icon" aria-hidden="true">
           <FileCode2 />
         </span>
-        <span>Commit output</span>
-        <strong>.feature + step code</strong>
+        <span>Locators</span>
+        <strong>locators.json</strong>
+      </div>
+      <div class="landing-hero__proof-step">
+        <span class="landing-hero__proof-icon" aria-hidden="true">
+          <Timer />
+        </span>
+        <span>Evidence</span>
+        <strong>report.json</strong>
       </div>
     </div>
   </div>
 </section>
+
+<div class="mobile-sticky-cta" aria-label="Mobile quick actions">
+  <a class="landing-cta-button" href="/getting-started/quick-start/">
+    Run quick start
+  </a>
+  <a
+    class="mobile-sticky-cta__github"
+    href="https://github.com/jamil2018/appraisejs-core"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="View GitHub repository"
+  >
+    <ExternalLink aria-hidden="true" />
+  </a>
+</div>
 
 <script define:vars={{ installCommand }}>
   function initHeroCopy() {

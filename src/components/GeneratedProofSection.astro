@@ -4,6 +4,9 @@ import {
   ArrowRight,
   CheckCircle2,
   Code2,
+  FileCode2,
+  FileJson2,
+  FolderGit2,
   GitPullRequestArrow,
 } from "@lucide/astro";
 
@@ -35,12 +38,12 @@ const codeMapRows = [
   <div class="landing-section-copy">
     <p class="landing-kicker">Generated output</p>
     <h2 id="code-map-heading" class="landing-section-title">
-      Draw the flow. Commit the Playwright.
+      What the visual flow actually generates.
     </h2>
     <p class="landing-section-description">
-      AppraiseJS is for teams that want visual authoring without surrendering
-      code ownership. The editor produces reviewable artifacts your repo and CI
-      can keep using outside the visual workspace.
+      The visual editor is only the authoring layer. The evaluation path is a
+      local project with reviewable repo files: scenarios, step definitions,
+      locator maps, and run evidence.
     </p>
   </div>
 
@@ -124,22 +127,35 @@ const codeMapRows = [
       aria-labelledby="artifact-preview-heading"
     >
       <div class="landing-panel__bar">
-        <span>generated artifact preview</span>
-        <span>git-reviewable</span>
+        <span>reviewable repo files</span>
+        <span>generated</span>
       </div>
       <div class="artifact-preview__body">
-        <div>
+        <div class="artifact-preview__intro">
           <h3 id="artifact-preview-heading">What lands in the repo</h3>
           <p>
             A visual login flow still resolves to explicit scenario text,
             reusable step definitions, locator data, and run evidence.
           </p>
+          <ul class="artifact-file-tree" aria-label="Generated file tree">
+            <li><FolderGit2 aria-hidden="true" /> tests/generated/</li>
+            <li><FileCode2 aria-hidden="true" /> login.feature</li>
+            <li><Code2 aria-hidden="true" /> auth.step.ts</li>
+            <li><FileJson2 aria-hidden="true" /> auth.locators.json</li>
+            <li><FileJson2 aria-hidden="true" /> report.json</li>
+          </ul>
         </div>
-        <pre><code><span class="token-key">Feature:</span> Authentication smoke
+        <div class="artifact-preview__snippets">
+          <pre><code><span class="token-key">Feature:</span> Authentication smoke
   <span class="token-key">Scenario:</span> Login with valid credentials
     <span class="token-key">When</span> I fill "email" with test user
     <span class="token-key">And</span> I click "Sign in"
     <span class="token-key">Then</span> "welcomeBanner" should be visible</code></pre>
+          <pre><code><span class="token-key">When</span>(<span class="token-string">"I click &#123;string&#125;"</span>, async (&#123; page &#125;, name) => &#123;
+  const target = locators[name];
+  await page.locator(target.selector).click();
+&#125;);</code></pre>
+        </div>
       </div>
     </article>
   </div>
@@ -150,27 +166,33 @@ const codeMapRows = [
   >
     <article>
       <CheckCircle2 aria-hidden="true" />
-      <h3>Less boilerplate, same ownership</h3>
+      <h3>QA authors model flows</h3>
       <p>
-        QA authors model the flow visually while engineers keep generated files
-        in reviewable formats.
+        Browser journeys start as visual steps, locators, and assertions before
+        they become automation.
       </p>
     </article>
     <article>
       <Code2 aria-hidden="true" />
-      <h3>Built around existing habits</h3>
+      <h3>Engineers review generated code</h3>
       <p>
-        Locators, helpers, scenarios, and reports map to concrete artifacts
-        instead of a hidden hosted runner.
+        The output lands as repo-owned Playwright/Cucumber files instead of
+        trapped recorder scripts.
       </p>
     </article>
     <article>
       <GitPullRequestArrow aria-hidden="true" />
-      <h3>Designed for pull requests</h3>
+      <h3>CI runs normal automation</h3>
       <p>
-        The point is not to replace engineering review. It is to make visual
-        authoring produce something engineers can inspect.
+        Run locally first, then carry the same generated artifacts into your
+        existing CI loop.
       </p>
     </article>
+  </div>
+
+  <div class="section-cta">
+    <a class="landing-secondary-button" href="/getting-started/quick-start/">
+      Run the quick start and inspect these files
+    </a>
   </div>
 </section>

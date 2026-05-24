@@ -4,7 +4,6 @@ import LocatorCreatorDemo from "./LocatorCreatorDemo.astro";
 import DynamicIntegratorDemo from "./DynamicIntegratorDemo.astro";
 import PortableOutputDemo from "./PortableOutputDemo.astro";
 import LocalFirstDemo from "./LocalFirstDemo.astro";
-import AllInOneWorkspaceDemo from "./AllInOneWorkspaceDemo.astro";
 import {
   Blocks,
   Check,
@@ -20,7 +19,6 @@ import {
   Plus,
   ShieldCheck,
   Type,
-  Wrench,
 } from "@lucide/astro";
 
 const features = [
@@ -47,24 +45,17 @@ const features = [
   },
   {
     id: "portable-output",
-    title: "Portable Output",
+    title: "Generated repo output",
     description:
       "Emit Cucumber scenarios, step code, locator data, and evidence your team can review.",
     icon: Code,
   },
   {
     id: "local-first",
-    title: "Local-First",
+    title: "Local execution",
     description:
       "Run from developer machines and CI without routing through a hosted runner.",
     icon: Database,
-  },
-  {
-    id: "all-in-one-workspace",
-    title: "Author, run, debug, and review locally",
-    description:
-      "Create flows, execute runs, and inspect failures from one local workspace.",
-    icon: Wrench,
   },
 ];
 ---
@@ -74,14 +65,14 @@ const features = [
   aria-labelledby="features-heading"
 >
   <div class="landing-section-copy">
-    <p class="landing-kicker">What is in AppraiseJS?</p>
+    <p class="landing-kicker">Where AppraiseJS fits in your test workflow</p>
     <h2 id="features-heading" class="landing-section-title">
-      The visual layer is only the authoring surface.
+      Answer the adoption questions before changing your stack.
     </h2>
     <p class="landing-section-description">
-      The demos below explain the workspace, but the important constraint is
-      practical: every visual step must map back to test assets your team can
-      run, inspect, and improve.
+      AppraiseJS covers visual authoring, locator capture, reusable helper
+      steps, generated repo output, and local execution. The rest stays in your
+      existing review and CI loop.
     </p>
   </div>
 
@@ -110,14 +101,12 @@ const features = [
           const isDynamicIntegrator = index === 2;
           const isPortableOutput = index === 3;
           const isLocalFirst = index === 4;
-          const isAllInOneWorkspace = index === 5;
           const hasAnimation =
             isFlowBuilder ||
             isLocatorCreator ||
             isDynamicIntegrator ||
             isPortableOutput ||
-            isLocalFirst ||
-            isAllInOneWorkspace;
+            isLocalFirst;
           return (
             <article
               id={`feature-${feature.id}`}
@@ -137,7 +126,6 @@ const features = [
                   isDynamicIntegrator && "feature-card--dynamic-integrator",
                   isPortableOutput && "feature-card--portable-output",
                   isLocalFirst && "feature-card--local-first",
-                  isAllInOneWorkspace && "feature-card--all-in-one-workspace",
                 ]}
               >
                 {hasAnimation ? (
@@ -156,10 +144,8 @@ const features = [
                         <DynamicIntegratorDemo fill />
                       ) : isPortableOutput ? (
                         <PortableOutputDemo fill />
-                      ) : isLocalFirst ? (
-                        <LocalFirstDemo fill />
                       ) : (
-                        <AllInOneWorkspaceDemo fill />
+                        <LocalFirstDemo fill />
                       )}
                     </div>
                   </div>
@@ -255,9 +241,9 @@ const features = [
 >
   <div class="landing-shell landing-shell--wide">
     <div class="landing-section-copy">
-      <p class="landing-kicker">Execution model</p>
+      <p class="landing-kicker">Workflow proof</p>
       <h2 id="workflow-heading" class="landing-section-title">
-        Build the workflow once. Emit real automation every time.
+        One workflow, concrete artifacts at every step.
       </h2>
     </div>
 
@@ -271,9 +257,8 @@ const features = [
         >
           <span class="execution-step__index">01</span>
           <span>
-            <strong>Create</strong>
-            <small>Author the login journey as connected browser actions.</small
-            >
+            <strong>Create flow</strong>
+            <small>Author the login journey as a saved flow definition.</small>
           </span>
         </button>
         <button
@@ -284,10 +269,8 @@ const features = [
         >
           <span class="execution-step__index">02</span>
           <span>
-            <strong>Configure</strong>
-            <small
-              >Add assertions from the page and attach them to the flow.</small
-            >
+            <strong>Add locators/assertions</strong>
+            <small>Attach selectors and assertions to the locator map.</small>
           </span>
         </button>
         <button
@@ -298,9 +281,9 @@ const features = [
         >
           <span class="execution-step__index">03</span>
           <span>
-            <strong>Execute</strong>
+            <strong>Generate code</strong>
             <small
-              >Start a run, watch progress, and keep runtime context visible.</small
+              >Emit the `.feature` file and Playwright step definitions.</small
             >
           </span>
         </button>
@@ -312,9 +295,9 @@ const features = [
         >
           <span class="execution-step__index">04</span>
           <span>
-            <strong>Generated Output</strong>
+            <strong>Run locally</strong>
             <small
-              >Review the report, trends, and evidence table in one place.</small
+              >Run the flow and keep report/log evidence in the project.</small
             >
           </span>
         </button>
@@ -327,8 +310,8 @@ const features = [
         >
           <div class="execution-visual__mobile-copy">
             <span>01</span>
-            <strong>Create</strong>
-            <p>Author the login journey as connected browser actions.</p>
+            <strong>Create flow</strong>
+            <p>Author the login journey as a saved flow definition.</p>
           </div>
           <div class="execution-window">
             <div class="execution-window__bar">
@@ -365,8 +348,8 @@ const features = [
         >
           <div class="execution-visual__mobile-copy">
             <span>02</span>
-            <strong>Configure</strong>
-            <p>Add assertions from the page and attach them to the flow.</p>
+            <strong>Add locators/assertions</strong>
+            <p>Attach selectors and assertions to the locator map.</p>
           </div>
           <div class="execution-window">
             <div class="execution-window__bar">
@@ -430,10 +413,8 @@ const features = [
         >
           <div class="execution-visual__mobile-copy">
             <span>03</span>
-            <strong>Execute</strong>
-            <p>
-              Start a run, watch progress, and keep runtime context visible.
-            </p>
+            <strong>Generate code</strong>
+            <p>Emit the `.feature` file and Playwright step definitions.</p>
           </div>
           <div class="execution-run-stack">
             <div class="execution-window execution-window--run">
@@ -472,8 +453,8 @@ const features = [
         >
           <div class="execution-visual__mobile-copy">
             <span>04</span>
-            <strong>Generated Output</strong>
-            <p>Review the report, trends, and evidence table in one place.</p>
+            <strong>Run locally</strong>
+            <p>Run the flow and keep report/log evidence in the project.</p>
           </div>
           <div class="execution-window">
             <div class="execution-window__bar">

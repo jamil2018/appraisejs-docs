@@ -4,7 +4,9 @@ import {
   ExternalLink,
   FileCode2,
   GitBranch,
+  GitPullRequestArrow,
   MonitorPlay,
+  Scale,
   ShieldCheck,
 } from "@lucide/astro";
 ---
@@ -19,9 +21,9 @@ import {
       Visual authoring without giving up the engineering loop.
     </h2>
     <p class="landing-section-description">
-      AppraiseJS should fit a serious test stack: artifacts stay portable,
-      execution stays local-first, and the evaluation path starts with one real
-      smoke test.
+      AppraiseJS should fit a serious test stack: generated artifacts stay
+      portable, execution stays local-first, and the evaluation path starts with
+      one real smoke test.
     </p>
   </div>
 
@@ -47,10 +49,69 @@ import {
     >
       <GitBranch aria-hidden="true" />
       <span>Open source</span>
-      <strong>Review the project instead of trusting a hosted black box.</strong
-      >
+      <strong>Review source before installing the local scaffold.</strong>
     </a>
   </div>
+
+  <div
+    class="engineering-loop-strip"
+    aria-label="Built for existing engineering loops"
+  >
+    <span>Local project</span>
+    <span>Git-reviewed files</span>
+    <span>CI-compatible runs</span>
+    <span>Open source core</span>
+  </div>
+</section>
+
+<section
+  class="comparison-block landing-shell"
+  aria-labelledby="comparison-heading"
+>
+  <div class="landing-section-copy">
+    <p class="landing-kicker">Why not just Playwright?</p>
+    <h2 id="comparison-heading" class="landing-section-title">
+      Keep Playwright as the engine. Add visual authoring where it helps.
+    </h2>
+    <p class="landing-section-description">
+      AppraiseJS is not trying to hide automation from engineers. It gives QA
+      and SDET teams a visual authoring path while keeping the output
+      inspectable in the repo.
+    </p>
+  </div>
+
+  <div class="comparison-grid">
+    <article>
+      <FileCode2 aria-hidden="true" />
+      <h3>Playwright</h3>
+      <p>
+        Great execution engine. AppraiseJS adds visual flow authoring and
+        generated artifacts that engineers can review.
+      </p>
+    </article>
+    <article>
+      <GitPullRequestArrow aria-hidden="true" />
+      <h3>Cypress and recorders</h3>
+      <p>
+        Useful for capture, but scripts can become trapped in tooling.
+        AppraiseJS keeps repo-owned files as the handoff.
+      </p>
+    </article>
+    <article>
+      <ShieldCheck aria-hidden="true" />
+      <h3>TestRail and Gherkin</h3>
+      <p>
+        Strong planning and language layers. AppraiseJS connects authoring,
+        locators, generated steps, and execution evidence.
+      </p>
+    </article>
+  </div>
+
+  <p class="known-boundaries">
+    <Scale aria-hidden="true" />
+    Best for browser workflow automation teams already using or evaluating Playwright.
+    Not a hosted test-management replacement.
+  </p>
 </section>
 
 <section
@@ -98,7 +159,7 @@ import {
   </div>
   <div class="open-source__actions">
     <a class="landing-cta-button" href="/getting-started/quick-start/">
-      Try locally in 15 minutes
+      Run the quick start locally
     </a>
     <a
       class="open-source__link"
