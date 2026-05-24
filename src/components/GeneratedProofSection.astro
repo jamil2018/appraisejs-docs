@@ -245,8 +245,17 @@ const inspectionItems = [
   </div>
 </section>
 
-<div class="mobile-sticky-cta" aria-label="Mobile install command">
-  <code data-mobile-install-command>{installCommand}</code>
+<div class="mobile-sticky-cta" aria-label="Mobile quick start">
+  <a
+    class="mobile-sticky-cta__quick-start"
+    href="/getting-started/quick-start/"
+  >
+    <TerminalSquare aria-hidden="true" />
+    <span>Run quick start</span>
+  </a>
+  <span class="landing-visually-hidden" data-mobile-install-command
+    >{installCommand}</span
+  >
   <button
     type="button"
     class="mobile-sticky-cta__copy"

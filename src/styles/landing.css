@@ -53,6 +53,17 @@ body:has(.landing-root) .sl-markdown-content {
   box-sizing: border-box;
 }
 
+.landing-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .landing-root h1,
 .landing-root h2,
 .landing-root h3,
@@ -295,13 +306,13 @@ body:has(.landing-root) .sl-markdown-content {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding-top: clamp(4rem, 8vw, 7rem);
-  padding-bottom: clamp(3.5rem, 7vw, 6rem);
+  padding-top: clamp(3rem, 6vw, 5.25rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
 }
 
 .landing-hero__copy {
   display: grid;
-  gap: 1.5rem;
+  gap: 1.1rem;
   justify-items: center;
   width: 100%;
   min-width: 0;
@@ -313,10 +324,10 @@ body:has(.landing-root) .sl-markdown-content {
 
 .landing-hero h1 {
   width: 100%;
-  font-size: clamp(2.75rem, 5.5vw, 5.25rem);
+  font-size: clamp(2.75rem, 5.1vw, 4.85rem);
   font-weight: 650;
   letter-spacing: 0;
-  line-height: 0.98;
+  line-height: 1;
 }
 
 .landing-hero__description {
@@ -339,23 +350,16 @@ body:has(.landing-root) .sl-markdown-content {
   grid-template-columns: minmax(0, 1fr) 2.75rem;
   align-items: stretch;
   width: min(100%, 28rem);
-  margin-top: 0.25rem;
+  margin-top: 0;
   border: 1px solid var(--landing-border);
   border-radius: var(--landing-radius);
   background: rgba(19, 19, 19, 0.96);
   overflow: hidden;
 }
 
-.landing-hero__install-note {
-  width: min(100%, 32rem);
-  color: var(--landing-dim);
-  font-size: 0.86rem;
-  line-height: 1.55;
-}
-
 .landing-hero__video-card {
   width: min(100%, 58rem);
-  margin: 0.35rem 0 0;
+  margin: 0;
   overflow: hidden;
   border: 1px solid var(--landing-border);
   border-radius: var(--landing-radius);
@@ -372,20 +376,11 @@ body:has(.landing-root) .sl-markdown-content {
   object-fit: contain;
 }
 
-.landing-hero__video-caption {
-  margin: 0;
-  padding: 0.75rem 0.9rem;
-  border-top: 1px solid var(--landing-border);
-  color: var(--landing-muted);
-  font-size: 0.86rem;
-  line-height: 1.5;
-}
-
 .landing-hero__command {
   display: flex;
   align-items: center;
   margin: 0;
-  padding: 0.85rem 0.75rem 0.85rem 1.1rem;
+  padding: 0.68rem 0.75rem 0.68rem 1rem;
   border: 0;
   border-radius: 0;
   background: transparent;
@@ -476,8 +471,8 @@ body:has(.landing-root) .sl-markdown-content {
 .landing-hero__proof {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  width: min(100%, 54rem);
-  margin-top: 0.25rem;
+  width: min(100%, 48rem);
+  margin-top: 0;
   overflow: hidden;
   border: 1px solid var(--landing-border);
   border-radius: var(--landing-radius);
@@ -492,7 +487,7 @@ body:has(.landing-root) .sl-markdown-content {
   gap: 0.2rem 0.65rem;
   align-items: center;
   min-width: 0;
-  padding: 0.9rem 1rem;
+  padding: 0.68rem 0.8rem;
 }
 
 .landing-hero__proof-step:not(:last-child) {
@@ -2628,12 +2623,12 @@ pre {
   }
 
   .landing-hero {
-    padding-top: 2.35rem;
-    padding-bottom: 2.5rem;
+    padding-top: 2rem;
+    padding-bottom: 2.35rem;
   }
 
   .landing-hero__copy {
-    gap: 1rem;
+    gap: 0.85rem;
   }
 
   .landing-hero h1 {
@@ -2665,7 +2660,7 @@ pre {
   .landing-hero__proof-step {
     grid-template-columns: minmax(0, 1fr);
     gap: 0.25rem;
-    padding: 0.7rem;
+    padding: 0.6rem;
   }
 
   .landing-hero__proof-icon {
@@ -2703,6 +2698,10 @@ pre {
 
   .code-map__grid {
     display: none;
+  }
+
+  .proof-stage .mock-ide {
+    order: -1;
   }
 
   .artifact-preview__body {
@@ -3188,16 +3187,39 @@ pre {
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.36);
   }
 
-  .mobile-sticky-cta code {
-    display: flex;
+  .mobile-sticky-cta__quick-start {
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     min-width: 0;
-    overflow-x: auto;
+    min-height: 2.75rem;
     padding-inline: 0.75rem;
+    border: 1px solid rgba(16, 185, 129, 0.42);
+    border-radius: var(--landing-radius);
+    background: var(--landing-green);
+    color: #06150f;
+    font-size: 0.92rem;
+    font-weight: 700;
+  }
+
+  .mobile-sticky-cta__quick-start svg {
+    flex: 0 0 auto;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .mobile-sticky-cta__quick-start span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .mobile-sticky-cta [data-mobile-install-command] {
     color: var(--landing-text);
     font-family: "Geist Mono", var(--sl-font-mono), monospace;
     font-size: 0.72rem;
-    white-space: nowrap;
   }
 
   .mobile-sticky-cta__copy {
