@@ -4,8 +4,6 @@ import {
   Copy,
   ExternalLink,
   FileCode2,
-  GitBranch,
-  ShieldCheck,
   TerminalSquare,
 } from "@lucide/astro";
 
@@ -19,12 +17,13 @@ const installCommand = "npx create-appraisejs@latest";
   <div class="landing-hero__copy">
     <p class="landing-kicker">Open source visual test automation</p>
     <h1 id="landing-hero-heading">
-      Visual browser test automation with version controlled known artifacts
+      Deterministic visual test automation for everyone
     </h1>
     <p class="landing-hero__description">
-      AppraiseJS turns visual test authoring into reviewable Playwright/Cucumber
-      artifacts: scenarios, step definitions, locator maps, and local run
-      evidence your team can inspect before adopting.
+      AppraiseJS is a visual test authoring platform that turns visually authored
+      tests into reviewable artifacts such as: scenarios, step definitions,
+      locator maps, and report evidence that your engineering team can inspect
+      and version control.
     </p>
     <div class="landing-hero__actions">
       <a class="landing-cta-button" href="#generated-output">
@@ -87,46 +86,6 @@ const installCommand = "npx create-appraisejs@latest";
           aria-hidden="true"
         />
       </button>
-    </div>
-    <div
-      class="landing-hero__proof"
-      aria-label="Generated files from the 15-minute result"
-    >
-      <div class="landing-hero__proof-step">
-        <span class="landing-hero__proof-icon" aria-hidden="true">
-          <FileCode2 />
-        </span>
-        <span>Test Suite</span>
-        <strong>.feature</strong>
-      </div>
-      <div class="landing-hero__proof-step">
-        <span class="landing-hero__proof-icon" aria-hidden="true">
-          <ShieldCheck />
-        </span>
-        <span>Test Case</span>
-        <strong>*.feature.scenario</strong>
-      </div>
-      <div class="landing-hero__proof-step">
-        <span class="landing-hero__proof-icon" aria-hidden="true">
-          <GitBranch />
-        </span>
-        <span>Template Step</span>
-        <strong>*.step.ts</strong>
-      </div>
-      <div class="landing-hero__proof-step">
-        <span class="landing-hero__proof-icon" aria-hidden="true">
-          <FileCode2 />
-        </span>
-        <span>Locators</span>
-        <strong>locators.json</strong>
-      </div>
-      <div class="landing-hero__proof-step">
-        <span class="landing-hero__proof-icon" aria-hidden="true">
-          <TerminalSquare />
-        </span>
-        <span>Evidence</span>
-        <strong>report.json</strong>
-      </div>
     </div>
   </div>
 </section>
