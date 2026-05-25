@@ -17,10 +17,10 @@ const installCommand = "npx create-appraisejs@latest";
 
 const codeMapRows = [
   {
-    source: { type: "Visual flow", label: "Checkout smoke path" },
+    source: { type: "Visual flow", label: "Checkout smoke test" },
     output: {
-      type: "features/checkout-smoke.feature",
-      label: "Readable Gherkin scenario",
+      type: "features/checkout.feature",
+      label: "Readable Gherkin feature file with scenario",
     },
   },
   {
@@ -30,21 +30,22 @@ const codeMapRows = [
     },
     output: {
       type: "locators/checkout.locators.json",
-      label: "Repo-owned selector map",
+      label: "Repo-owned locators with mapping to page routes",
     },
   },
   {
-    source: { type: "Reusable action", label: "Sign in and complete purchase" },
+    source: { type: "Reusable step", label: "Sign in and complete purchase" },
     output: {
       type: "steps/checkout.steps.ts",
-      label: "Playwright step definitions",
+      label: "Playwright step definition with reusable parameters",
     },
   },
   {
-    source: { type: "Local run", label: "Chromium smoke execution" },
+    source: { type: "Local run", label: "Chromium execution" },
     output: {
-      type: "reports/checkout-smoke/report.json",
-      label: "Run, timing, and debug evidence",
+      type: "/reports/checkout/report.json",
+      label:
+        "Cucumber report with timing, debug evidence, and scenario details",
     },
   },
 ];
@@ -53,7 +54,7 @@ const docsLinks = [
   {
     href: "/getting-started/creating-tests/",
     label: "Creating tests",
-    description: "How visual flows become saved test cases.",
+    description: "See how visual flows transforms into test scenarios.",
   },
   {
     href: "/run-and-analyze/reports/",
@@ -63,7 +64,7 @@ const docsLinks = [
   {
     href: "/reference/architecture/execution-lifecycle/",
     label: "Execution lifecycle",
-    description: "How generated files move through a run.",
+    description: "Understand how generated files are used by a test run",
   },
   {
     href: "/reference/architecture/synchronization-pipeline/",
@@ -87,14 +88,15 @@ const inspectionItems = [
   aria-labelledby="code-map-heading"
 >
   <div class="landing-section-copy">
-    <p class="landing-kicker">Generated sample</p>
+    <p class="landing-kicker">Generated Output</p>
     <h2 id="code-map-heading" class="landing-section-title">
-      Inspect the repo output before you install anything.
+      Inspect what gets committed to your repo beforehand
     </h2>
     <p class="landing-section-description">
-      AppraiseJS is easiest to evaluate by looking at the files it would put in
-      your project. This static sample shows the shape of a realistic checkout
-      smoke flow: Gherkin, Playwright steps, locator data, and run evidence.
+      Evaluate AppraiseJS by looking into the artifacts it generates for your
+      codebase. This example shows the shape of a realistic checkout smoke test
+      flow that generates version controllable objects: Gherkin, Cucumber steps
+      using Playwright, Locator data, and Reports.
     </p>
   </div>
 
@@ -102,8 +104,8 @@ const inspectionItems = [
     <div class="code-map__grid">
       <article class="code-map__panel">
         <div class="landing-panel__bar">
-          <span>visual authoring</span>
-          <span>source</span>
+          <span>AppraiseJS Entity Authoring</span>
+          <span>Source</span>
         </div>
         <ul>
           {
@@ -134,8 +136,8 @@ const inspectionItems = [
 
       <article class="code-map__panel code-map__panel--output">
         <div class="landing-panel__bar">
-          <span>repository output</span>
-          <span>generated</span>
+          <span>AppraiseJS Engine Generated Artifacts</span>
+          <span>Output</span>
         </div>
         <ul>
           {

@@ -10,9 +10,6 @@ const files = [
     kind: "Gherkin",
     code: `<span class="token-comment"># tests/appraise/features/checkout-smoke.feature</span>
 <span class="token-key">Feature:</span> Checkout smoke
-  <span class="token-key">Background:</span>
-    <span class="token-key">Given</span> I open the storefront
-    <span class="token-key">And</span> I sign in as <span class="token-string">"returning_buyer"</span>
 
   <span class="token-key">Scenario:</span> Returning buyer completes a card checkout
     <span class="token-key">When</span> I add <span class="token-string">"Everyday Hoodie"</span> to the cart
@@ -52,20 +49,9 @@ Then(<span class="token-string">"the confirmation total should equal &#123;strin
     path: "tests/appraise/locators/checkout.locators.json",
     kind: "JSON",
     code: `&#123;
-  <span class="token-string">"product.addToCart"</span>: &#123;
-    <span class="token-string">"selector"</span>: <span class="token-string">"[data-testid='add-to-cart']"</span>,
-    <span class="token-string">"owner"</span>: <span class="token-string">"checkout-flow"</span>,
-    <span class="token-string">"fallback"</span>: <span class="token-string">"role=button[name='Add to cart']"</span>
-  &#125;,
-  <span class="token-string">"payment.submit"</span>: &#123;
-    <span class="token-string">"selector"</span>: <span class="token-string">"[data-testid='submit-payment']"</span>,
-    <span class="token-string">"route"</span>: <span class="token-string">"/checkout/payment"</span>,
-    <span class="token-string">"fallback"</span>: <span class="token-string">"role=button[name='Pay now']"</span>
-  &#125;,
-  <span class="token-string">"order.total"</span>: &#123;
-    <span class="token-string">"selector"</span>: <span class="token-string">"[data-testid='confirmation-total']"</span>,
-    <span class="token-string">"route"</span>: <span class="token-string">"/checkout/confirmation"</span>
-  &#125;
+  <span class="token-string">"addToCart"</span>: <span class="token-string">"[data-testid='add-to-cart']"</span>,
+  <span class="token-string">"paymentSubmit"</span>: <span class="token-string">"[data-testid='submit-payment']"</span>,
+  <span class="token-string">"orderTotal"</span>: <span class="token-string">"[data-testid='confirmation-total']"</span>
 &#125;`,
   },
   {
