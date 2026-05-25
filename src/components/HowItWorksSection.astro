@@ -38,9 +38,9 @@ const features = [
   },
   {
     id: "dynamic-node-builder",
-    title: "Reusable Playwright helper steps",
+    title: "Build reusable workflow nodes",
     description:
-      "Turn project-specific Playwright helpers into visual actions QA authors can reuse.",
+      "Tailor AppraiseJS to your domain by turning team-specific actions into reusable visual nodes anyone can compose without rewriting automation.",
     icon: Blocks,
   },
   {
@@ -65,14 +65,14 @@ const features = [
   aria-labelledby="features-heading"
 >
   <div class="landing-section-copy">
-    <p class="landing-kicker">Where AppraiseJS fits in your test workflow</p>
+    <p class="landing-kicker">AppraiseJS toolset</p>
     <h2 id="features-heading" class="landing-section-title">
-      Answer the adoption questions before changing your stack.
+      Precision tools for teams that care about test quality.
     </h2>
     <p class="landing-section-description">
-      AppraiseJS covers visual authoring, locator capture, reusable helper
-      steps, generated repo output, and local execution. The rest stays in your
-      existing review and CI loop.
+      AppraiseJS ships with focused tools for visual flow building, locator
+      capture, reusable workflow nodes, generated repo output, and local
+      execution.
     </p>
   </div>
 
@@ -245,52 +245,10 @@ const features = [
       <h2 id="workflow-heading" class="landing-section-title">
         One workflow, concrete artifacts at every step.
       </h2>
-    </div>
-
-    <div class="workflow-node-map not-content" data-workflow-node-map>
-      <div class="workflow-node-map__nodes" aria-label="Visual builder nodes">
-        <button
-          type="button"
-          class="workflow-node-map__node is-active"
-          data-workflow-node="navigate"
-          aria-pressed="true"
-        >
-          <Navigation aria-hidden="true" />
-          <span>Navigate</span>
-        </button>
-        <button
-          type="button"
-          class="workflow-node-map__node"
-          data-workflow-node="username"
-          aria-pressed="false"
-        >
-          <Type aria-hidden="true" />
-          <span>Fill Username</span>
-        </button>
-        <button
-          type="button"
-          class="workflow-node-map__node"
-          data-workflow-node="password"
-          aria-pressed="false"
-        >
-          <KeyRound aria-hidden="true" />
-          <span>Fill Password</span>
-        </button>
-        <button
-          type="button"
-          class="workflow-node-map__node"
-          data-workflow-node="click"
-          aria-pressed="false"
-        >
-          <MousePointerClick aria-hidden="true" />
-          <span>Click Login</span>
-        </button>
-      </div>
-      <pre class="workflow-node-map__code" aria-label="Generated Playwright step mapping"><code><span class="token-comment">// generated from the selected visual node</span>
-<span class="workflow-code-line is-active" data-workflow-line="navigate">await page.goto(<span class="token-string">"/login"</span>);</span>
-<span class="workflow-code-line" data-workflow-line="username">await page.getByLabel(<span class="token-string">"Username"</span>).fill(user.email);</span>
-<span class="workflow-code-line" data-workflow-line="password">await page.getByLabel(<span class="token-string">"Password"</span>).fill(user.password);</span>
-<span class="workflow-code-line" data-workflow-line="click">await page.getByRole(<span class="token-string">"button"</span>, &#123; name: <span class="token-string">"Log in"</span> &#125;).click();</span></code></pre>
+      <p class="landing-section-description">
+        Follow a single visual flow as it becomes locator context, generated
+        test files, and local run evidence.
+      </p>
     </div>
 
     <div class="execution-model not-content" data-execution-model>
@@ -538,37 +496,6 @@ const features = [
 </section>
 
 <script>
-  const workflowNodeMaps = document.querySelectorAll("[data-workflow-node-map]");
-
-  workflowNodeMaps.forEach((map) => {
-    const nodes = Array.from(
-      map.querySelectorAll("[data-workflow-node]"),
-    ) as HTMLElement[];
-    const lines = Array.from(
-      map.querySelectorAll("[data-workflow-line]"),
-    ) as HTMLElement[];
-
-    const activate = (id: string) => {
-      nodes.forEach((node) => {
-        const isActive = node.dataset.workflowNode === id;
-        node.classList.toggle("is-active", isActive);
-        node.setAttribute("aria-pressed", String(isActive));
-      });
-
-      lines.forEach((line) => {
-        line.classList.toggle("is-active", line.dataset.workflowLine === id);
-      });
-    };
-
-    nodes.forEach((node) => {
-      const id = node.dataset.workflowNode;
-      if (!id) return;
-      node.addEventListener("mouseenter", () => activate(id));
-      node.addEventListener("focus", () => activate(id));
-      node.addEventListener("click", () => activate(id));
-    });
-  });
-
   const executionModels = document.querySelectorAll("[data-execution-model]");
 
   executionModels.forEach((model) => {

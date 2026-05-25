@@ -1,0 +1,127 @@
+---
+import {
+  ArrowRight,
+  Check,
+  Copy,
+  FileCode2,
+  MonitorPlay,
+  TerminalSquare,
+} from "@lucide/astro";
+
+const installCommand = "npx create-appraisejs@latest";
+
+const evaluateSteps = [
+  {
+    icon: TerminalSquare,
+    title: "Run `npx create-appraisejs@latest`",
+    description: "Scaffold the local project and open the generated workspace.",
+    href: "/getting-started/quick-start/",
+    primary: true,
+  },
+  {
+    icon: MonitorPlay,
+    title: "Build one visual smoke flow",
+    description: "Author a small browser journey with locators and assertions.",
+    href: "/getting-started/creating-tests/",
+    resourceLabel: "Open creating-tests guide",
+  },
+  {
+    icon: FileCode2,
+    title: "Inspect generated Playwright/Cucumber output",
+    description:
+      "Review the feature, step code, locator data, and report shape.",
+    href: "#generated-output",
+    resourceLabel: "Open generated output sample",
+  },
+];
+---
+
+<section
+  class="evaluate-path landing-shell"
+  aria-labelledby="evaluate-path-heading"
+>
+  <div class="docs-preview__copy">
+    <p class="landing-kicker">Evaluate in 15 minutes</p>
+    <h2 id="evaluate-path-heading" class="landing-section-title">
+      Prove it to yourself in 15 minutes.
+    </h2>
+  </div>
+
+  <div class="docs-preview__grid evaluate-path__grid">
+    {
+      evaluateSteps.map((step, index) => {
+        const Icon = step.icon;
+        return (
+          <a
+            href={step.href}
+            class:list={[step.primary && "evaluate-path__step--primary"]}
+          >
+            <Icon aria-hidden="true" />
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <strong>{step.title}</strong>
+            <p>{step.description}</p>
+            {step.primary && (
+              <div class="evaluate-path__command" aria-label="Install command">
+                <code>{installCommand}</code>
+                <button
+                  type="button"
+                  data-evaluate-copy-command
+                  aria-label="Copy install command"
+                >
+                  <Copy aria-hidden="true" />
+                  <Check
+                    class="evaluate-path__copy-icon--success"
+                    aria-hidden="true"
+                  />
+                </button>
+              </div>
+            )}
+            {step.resourceLabel && (
+              <span class="evaluate-path__resource-link">
+                {step.resourceLabel}
+                <ArrowRight aria-hidden="true" />
+              </span>
+            )}
+          </a>
+        );
+      })
+    }
+  </div>
+</section>
+
+<script define:vars={{ installCommand }}>
+  function initEvaluateCopy() {
+    const button = document.querySelector("[data-evaluate-copy-command]");
+    if (!button) return;
+
+    let resetTimer;
+
+    button.addEventListener("click", async (event) => {
+      event.preventDefault();
+      window.clearTimeout(resetTimer);
+
+      try {
+        await navigator.clipboard.writeText(installCommand);
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(button.previousElementSibling);
+        const selection = window.getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+        document.execCommand("copy");
+        selection?.removeAllRanges();
+      }
+
+      button.classList.add("is-copied");
+      button.setAttribute("aria-label", "Copied");
+
+      resetTimer = window.setTimeout(() => {
+        button.classList.remove("is-copied");
+        button.setAttribute("aria-label", "Copy install command");
+      }, 2000);
+    });
+  }
+
+  document.addEventListener("astro:page-load", initEvaluateCopy);
+  initEvaluateCopy();
+</script>

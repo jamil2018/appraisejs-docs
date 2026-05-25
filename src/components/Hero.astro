@@ -1,11 +1,5 @@
 ---
-import {
-  Check,
-  Copy,
-  ExternalLink,
-  FileCode2,
-  TerminalSquare,
-} from "@lucide/astro";
+import { Check, Copy } from "@lucide/astro";
 
 const installCommand = "npx create-appraisejs@latest";
 ---
@@ -17,53 +11,13 @@ const installCommand = "npx create-appraisejs@latest";
   <div class="landing-hero__copy">
     <p class="landing-kicker">Open source visual test automation</p>
     <h1 id="landing-hero-heading">
-      Deterministic visual test automation for everyone
+      Bridge QA and Engineering with visual tests you can actually version
+      control.
     </h1>
     <p class="landing-hero__description">
-      AppraiseJS is a visual test authoring platform that turns visually authored
-      tests into reviewable artifacts such as: scenarios, step definitions,
-      locator maps, and report evidence that your engineering team can inspect
-      and version control.
+      Visually author browser flows and generate reviewable Playwright/Cucumber
+      artifacts your team can run locally, inspect in git, and carry into CI.
     </p>
-    <div class="landing-hero__actions">
-      <a class="landing-cta-button" href="#generated-output">
-        <FileCode2 aria-hidden="true" />
-        Inspect generated output
-      </a>
-      <a class="landing-secondary-button" href="/getting-started/quick-start/">
-        <TerminalSquare aria-hidden="true" />
-        Run quick start locally
-      </a>
-      <a
-        class="landing-tertiary-button"
-        href="https://github.com/jamil2018/appraisejs-core"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <ExternalLink aria-hidden="true" />
-        View GitHub
-      </a>
-    </div>
-    <figure
-      class="landing-hero__video-card"
-      aria-label="Visual editor generating Playwright artifacts"
-    >
-      <div class="landing-panel__bar">
-        <span>visual editor preview</span>
-        <span>autoplay loop</span>
-      </div>
-      <video
-        class="landing-hero__video"
-        src="/landing/media/hero/hero-section-video.mp4"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-      >
-        Your browser does not support embedded video.
-      </video>
-    </figure>
     <div class="landing-hero__install" aria-label="Install command">
       <pre
         class="landing-hero__command"><code data-hero-install-command><span class="token-key">npx</span><span class="token-command"> create-appraisejs@latest</span></code></pre>
@@ -87,6 +41,29 @@ const installCommand = "npx create-appraisejs@latest";
         />
       </button>
     </div>
+    <a class="landing-hero__output-link" href="#generated-output"
+      >Or see the generated output first -&gt;</a
+    >
+    <figure
+      class="landing-hero__video-card"
+      aria-label="Visual editor generating Playwright artifacts"
+    >
+      <div class="landing-panel__bar">
+        <span>visual editor preview</span>
+        <span>generates repo artifacts</span>
+      </div>
+      <video
+        class="landing-hero__video"
+        src="/landing/media/hero/hero-section-video.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+      >
+        Your browser does not support embedded video.
+      </video>
+    </figure>
   </div>
 </section>
 

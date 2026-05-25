@@ -61,24 +61,12 @@ const docsLinks = [
     label: "Reports",
     description: "Where local run evidence and report data live.",
   },
-  {
-    href: "/reference/architecture/execution-lifecycle/",
-    label: "Execution lifecycle",
-    description: "Understand how generated files are used by a test run",
-  },
-  {
-    href: "/reference/architecture/synchronization-pipeline/",
-    label: "Sync behavior",
-    description: "How project data and generated artifacts stay aligned.",
-  },
 ];
 
 const inspectionItems = [
-  "Can engineers read and review the generated Gherkin and step code?",
-  "Does locator ownership stay explicit enough for your app?",
-  "Can the generated Playwright run in your existing CI shape?",
-  "Do reports expose enough evidence for failed-run debugging?",
-  "Does sync behavior match how your team maintains tests in git?",
+  "Review the generated Gherkin, step code, and locator data.",
+  "Confirm the Playwright output fits your existing CI shape.",
+  "Check reports for enough failed-run debugging evidence.",
 ];
 ---
 
@@ -93,10 +81,9 @@ const inspectionItems = [
       Inspect what gets committed to your repo beforehand
     </h2>
     <p class="landing-section-description">
-      Evaluate AppraiseJS by looking into the artifacts it generates for your
-      codebase. This example shows the shape of a realistic checkout smoke test
-      flow that generates version controllable objects: Gherkin, Cucumber steps
-      using Playwright, Locator data, and Reports.
+      Start with the files. A visual checkout smoke test becomes Gherkin,
+      Cucumber steps using Playwright, locator data, and report evidence your
+      team can review before adopting the tool.
     </p>
   </div>
 
@@ -215,7 +202,7 @@ const inspectionItems = [
   >
     <article>
       <CheckCircle2 aria-hidden="true" />
-      <h3>QA authors model flows</h3>
+      <h3>Anyone can model flows</h3>
       <p>
         Browser journeys start as visual steps, locators, and assertions before
         they become automation.
@@ -242,7 +229,7 @@ const inspectionItems = [
   <div class="section-cta">
     <a class="landing-secondary-button" href="/getting-started/quick-start/">
       <TerminalSquare aria-hidden="true" />
-      Run the quick start after inspection
+      Run quick start locally
     </a>
   </div>
 </section>
@@ -253,7 +240,7 @@ const inspectionItems = [
     href="/getting-started/quick-start/"
   >
     <TerminalSquare aria-hidden="true" />
-    <span>Run quick start</span>
+    <span>Quick start</span>
   </a>
   <span class="landing-visually-hidden" data-mobile-install-command
     >{installCommand}</span

@@ -2,71 +2,53 @@
 import {
   AlertTriangle,
   BookOpen,
-  Code2,
   ExternalLink,
-  FileCode2,
-  GitBranch,
-  GitPullRequestArrow,
-  MonitorPlay,
-  Scale,
-  ShieldCheck,
-  TerminalSquare,
+  CheckCircle2,
 } from "@lucide/astro";
 
 const trustCards = [
   {
-    icon: FileCode2,
-    href: "/getting-started/creating-tests/",
-    label: "Generated artifacts",
-    description: "Review Gherkin, Playwright step code, and locator data.",
-  },
-  {
-    icon: MonitorPlay,
-    href: "/getting-started/running-tests/",
     label: "Local execution",
-    description: "Run the smoke flow locally before carrying it into CI.",
+    description: "Run the generated project on your machine before CI.",
   },
   {
-    icon: GitBranch,
-    href: "https://github.com/jamil2018/appraisejs-core",
+    label: "Git-reviewed files",
+    description: "Review feature files, steps, locators, and reports in PRs.",
+  },
+  {
+    label: "CI-compatible runs",
+    description:
+      "Carry the generated Playwright/Cucumber output into pipelines.",
+  },
+  {
     label: "Open source core",
-    description: "Inspect the implementation before scaffolding a project.",
-    external: true,
+    description: "Inspect the implementation instead of trusting a black box.",
   },
 ];
 
 const comparisonRows = [
   {
-    icon: Code2,
-    title: "Playwright alone",
-    useCurrent:
-      "Use it when engineers own all test authoring, locators, maintenance, and review.",
-    useAppraise:
-      "Use AppraiseJS when QA or SDET teams need visual authoring while engineers still review repo output.",
+    current: "Playwright alone",
+    keep: "Engineers own all authoring, locators, maintenance, and review.",
+    appraise:
+      "Product, test, or engineering teammates need visual authoring while engineers still review repo output.",
   },
   {
-    icon: GitPullRequestArrow,
-    title: "Cypress and recorders",
-    useCurrent:
-      "Use them when quick capture and a single-tool workflow are enough.",
-    useAppraise:
-      "Use AppraiseJS when generated Playwright/Cucumber files need to live in git instead of staying trapped in recorder state.",
+    current: "Cypress and recorders",
+    keep: "Quick capture and a single-tool workflow are enough.",
+    appraise:
+      "Generated Playwright/Cucumber files need to live in git, not recorder state.",
   },
   {
-    icon: ShieldCheck,
-    title: "TestRail and Gherkin",
-    useCurrent:
-      "Use them when planning, traceability, and scenario language are the main need.",
-    useAppraise:
-      "Use AppraiseJS when authoring, locators, execution, and reports must stay connected.",
+    current: "TestRail and Gherkin",
+    keep: "Planning, traceability, and scenario language are the main need.",
+    appraise:
+      "Authoring, locators, execution, and reports must stay connected.",
   },
   {
-    icon: Scale,
-    title: "Custom frameworks",
-    useCurrent:
-      "Use them when your team already has mature authoring, locator, CI, and reporting infrastructure.",
-    useAppraise:
-      "Use AppraiseJS when fragmentation across those pieces is the problem you are trying to reduce.",
+    current: "Custom frameworks",
+    keep: "Your team already has mature authoring, locator, CI, and reporting infrastructure.",
+    appraise: "Fragmentation across those pieces is the problem to reduce.",
   },
 ];
 
@@ -74,31 +56,6 @@ const notForYouItems = [
   "You want a hosted test-management suite to replace your existing planning tool.",
   "Your engineers prefer to hand-author every test and do not need visual collaboration.",
   "Your team is not willing to inspect generated code and own it in the repo.",
-  "You need production usage metrics or customer logos before running a local evaluation.",
-];
-
-const evaluateSteps = [
-  {
-    icon: FileCode2,
-    title: "Inspect generated sample",
-    description:
-      "Read the sample `.feature`, steps, locators, and report JSON above.",
-    href: "#generated-output",
-  },
-  {
-    icon: TerminalSquare,
-    title: "Run `npx create-appraisejs@latest`",
-    description:
-      "Create the local project and confirm the generated files match the docs.",
-    href: "/getting-started/quick-start/",
-  },
-  {
-    icon: MonitorPlay,
-    title: "Build one smoke flow",
-    description:
-      "Run it locally, inspect the report, and decide whether the handoff works.",
-    href: "/getting-started/running-tests/",
-  },
 ];
 ---
 
@@ -118,33 +75,16 @@ const evaluateSteps = [
     </p>
   </div>
 
-  <div class="engineer-trust__grid">
+  <div class="engineer-trust__list">
     {
-      trustCards.map((card) => {
-        const Icon = card.icon;
-        return (
-          <a
-            href={card.href}
-            target={card.external ? "_blank" : undefined}
-            rel={card.external ? "noopener noreferrer" : undefined}
-          >
-            <Icon aria-hidden="true" />
-            <span>{card.label}</span>
-            <strong>{card.description}</strong>
-          </a>
-        );
-      })
+      trustCards.map((card) => (
+        <article>
+          <CheckCircle2 aria-hidden="true" />
+          <span>{card.label}</span>
+          <strong>{card.description}</strong>
+        </article>
+      ))
     }
-  </div>
-
-  <div
-    class="engineering-loop-strip"
-    aria-label="Built for existing engineering loops"
-  >
-    <span>Local project</span>
-    <span>Git-reviewed files</span>
-    <span>CI-compatible runs</span>
-    <span>Open source core</span>
   </div>
 </section>
 
@@ -165,23 +105,24 @@ const evaluateSteps = [
     </p>
   </div>
 
-  <div class="comparison-grid comparison-grid--tradeoffs">
+  <div
+    class="comparison-table"
+    role="table"
+    aria-label="Testing tool tradeoffs"
+  >
+    <div class="comparison-table__header" role="row">
+      <span role="columnheader">Current path</span>
+      <span role="columnheader">Keep it when</span>
+      <span role="columnheader">Use AppraiseJS when</span>
+    </div>
     {
-      comparisonRows.map((row) => {
-        const Icon = row.icon;
-        return (
-          <article>
-            <Icon aria-hidden="true" />
-            <h3>{row.title}</h3>
-            <p>
-              <strong>Use the existing path:</strong> {row.useCurrent}
-            </p>
-            <p>
-              <strong>Use AppraiseJS:</strong> {row.useAppraise}
-            </p>
-          </article>
-        );
-      })
+      comparisonRows.map((row) => (
+        <div class="comparison-table__row" role="row">
+          <strong role="cell">{row.current}</strong>
+          <span role="cell">{row.keep}</span>
+          <span role="cell">{row.appraise}</span>
+        </div>
+      ))
     }
   </div>
 
@@ -194,33 +135,6 @@ const evaluateSteps = [
       </ul>
     </div>
   </aside>
-</section>
-
-<section
-  class="docs-preview evaluate-path landing-shell"
-  aria-labelledby="docs-preview-heading"
->
-  <div class="docs-preview__copy">
-    <p class="landing-kicker">Evaluate in 15 minutes</p>
-    <h2 id="docs-preview-heading" class="landing-section-title">
-      One sample, one scaffold, one smoke flow.
-    </h2>
-  </div>
-  <div class="docs-preview__grid evaluate-path__grid">
-    {
-      evaluateSteps.map((step, index) => {
-        const Icon = step.icon;
-        return (
-          <a href={step.href}>
-            <Icon aria-hidden="true" />
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            <strong>{step.title}</strong>
-            <p>{step.description}</p>
-          </a>
-        );
-      })
-    }
-  </div>
 </section>
 
 <section
