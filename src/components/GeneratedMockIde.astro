@@ -1,22 +1,24 @@
 ---
 import { Code2, FileCode2, FileJson2, FolderGit2 } from "@lucide/astro";
+import { highlightCodeInner } from "../utils/highlightMockIdeCode";
 
-const files = [
+const fileDefinitions = [
   {
     id: "feature",
     icon: FileCode2,
     label: "checkout-smoke.feature",
     path: "tests/appraise/features/checkout-smoke.feature",
     kind: "Gherkin",
-    code: `<span class="token-comment"># tests/appraise/features/checkout-smoke.feature</span>
-<span class="token-key">Feature:</span> Checkout smoke
+    lang: "gherkin",
+    source: `# tests/appraise/features/checkout-smoke.feature
+Feature: Checkout smoke
 
-  <span class="token-key">Scenario:</span> Returning buyer completes a card checkout
-    <span class="token-key">When</span> I add <span class="token-string">"Everyday Hoodie"</span> to the cart
-    <span class="token-key">And</span> I use the saved shipping address
-    <span class="token-key">And</span> I pay with <span class="token-string">"visa_success"</span>
-    <span class="token-key">Then</span> the order confirmation should be visible
-    <span class="token-key">And</span> the confirmation total should equal <span class="token-string">"$64.00"</span>`,
+  Scenario: Returning buyer completes a card checkout
+    When I add "Everyday Hoodie" to the cart
+    And I use the saved shipping address
+    And I pay with "visa_success"
+    Then the order confirmation should be visible
+    And the confirmation total should equal "$64.00"`,
   },
   {
     id: "steps",
@@ -24,23 +26,24 @@ const files = [
     label: "checkout.steps.ts",
     path: "tests/appraise/steps/checkout.steps.ts",
     kind: "TypeScript",
-    code: `<span class="token-key">import</span> &#123; expect &#125; <span class="token-key">from</span> <span class="token-string">"@playwright/test"</span>;
-<span class="token-key">import</span> locators <span class="token-key">from</span> <span class="token-string">"../locators/checkout.locators.json"</span>;
+    lang: "typescript",
+    source: `import { expect } from "@playwright/test";
+import locators from "../locators/checkout.locators.json";
 
-When(<span class="token-string">"I add &#123;string&#125; to the cart"</span>, async (&#123; page &#125;, itemName) =&gt; &#123;
-  await page.getByRole(<span class="token-string">"link"</span>, &#123; name: itemName &#125;).click();
+When("I add {string} to the cart", async ({ page }, itemName) => {
+  await page.getByRole("link", { name: itemName }).click();
   await page.locator(locators.product.addToCart.selector).click();
   await expect(page.locator(locators.cart.summary.selector)).toBeVisible();
-&#125;);
+});
 
-When(<span class="token-string">"I pay with &#123;string&#125;"</span>, async (&#123; page &#125;, cardName) =&gt; &#123;
+When("I pay with {string}", async ({ page }, cardName) => {
   await page.locator(locators.payment.savedCard.selector).selectOption(cardName);
   await page.locator(locators.payment.submit.selector).click();
-&#125;);
+});
 
-Then(<span class="token-string">"the confirmation total should equal &#123;string&#125;"</span>, async (&#123; page &#125;, total) =&gt; &#123;
+Then("the confirmation total should equal {string}", async ({ page }, total) => {
   await expect(page.locator(locators.order.total.selector)).toHaveText(total);
-&#125;);`,
+});`,
   },
   {
     id: "locators",
@@ -48,11 +51,12 @@ Then(<span class="token-string">"the confirmation total should equal &#123;strin
     label: "checkout.locators.json",
     path: "tests/appraise/locators/checkout.locators.json",
     kind: "JSON",
-    code: `&#123;
-  <span class="token-string">"addToCart"</span>: <span class="token-string">"[data-testid='add-to-cart']"</span>,
-  <span class="token-string">"paymentSubmit"</span>: <span class="token-string">"[data-testid='submit-payment']"</span>,
-  <span class="token-string">"orderTotal"</span>: <span class="token-string">"[data-testid='confirmation-total']"</span>
-&#125;`,
+    lang: "json",
+    source: `{
+  "addToCart": "[data-testid='add-to-cart']",
+  "paymentSubmit": "[data-testid='submit-payment']",
+  "orderTotal": "[data-testid='confirmation-total']"
+}`,
   },
   {
     id: "report",
@@ -60,23 +64,31 @@ Then(<span class="token-string">"the confirmation total should equal &#123;strin
     label: "report.json",
     path: "test-results/appraise/checkout-smoke/report.json",
     kind: "JSON",
-    code: `&#123;
-  <span class="token-string">"status"</span>: <span class="token-string">"passed"</span>,
-  <span class="token-string">"browser"</span>: <span class="token-string">"chromium"</span>,
-  <span class="token-string">"durationMs"</span>: 18420,
-  <span class="token-string">"startedAt"</span>: <span class="token-string">"2026-05-24T10:32:08.842Z"</span>,
-  <span class="token-string">"artifacts"</span>: [
-    <span class="token-string">"trace.zip"</span>,
-    <span class="token-string">"screenshots/order-confirmation.png"</span>,
-    <span class="token-string">"run-evidence.json"</span>
+    lang: "json",
+    source: `{
+  "status": "passed",
+  "browser": "chromium",
+  "durationMs": 18420,
+  "startedAt": "2026-05-24T10:32:08.842Z",
+  "artifacts": [
+    "trace.zip",
+    "screenshots/order-confirmation.png",
+    "run-evidence.json"
   ],
-  <span class="token-string">"steps"</span>: [
-    &#123; <span class="token-string">"name"</span>: <span class="token-string">"open storefront"</span>, <span class="token-string">"status"</span>: <span class="token-string">"passed"</span> &#125;,
-    &#123; <span class="token-string">"name"</span>: <span class="token-string">"complete checkout"</span>, <span class="token-string">"status"</span>: <span class="token-string">"passed"</span> &#125;
+  "steps": [
+    { "name": "open storefront", "status": "passed" },
+    { "name": "complete checkout", "status": "passed" }
   ]
-&#125;`,
+}`,
   },
 ];
+
+const files = await Promise.all(
+  fileDefinitions.map(async (file) => ({
+    ...file,
+    code: await highlightCodeInner(file.source, file.lang),
+  })),
+);
 ---
 
 <article class="mock-ide not-content" aria-labelledby="mock-ide-heading" data-mock-ide>
@@ -86,11 +98,15 @@ Then(<span class="token-string">"the confirmation total should equal &#123;strin
   </div>
   <div class="mock-ide__body">
     <aside class="mock-ide__sidebar" aria-label="Generated file tree">
-      <div class="mock-ide__tree-root">
-        <FolderGit2 aria-hidden="true" />
-        <span>tests/appraise/</span>
+      <div class="mock-ide__sidebar-bar">
+        <span>Explorer</span>
       </div>
-      <div class="mock-ide__tree-group" aria-label="Generated files">
+      <div class="mock-ide__sidebar-tree">
+        <div class="mock-ide__tree-root">
+          <FolderGit2 aria-hidden="true" />
+          <span>tests/appraise/</span>
+        </div>
+        <div class="mock-ide__tree-group" aria-label="Generated files">
         {
           files.map((file, index) => {
             const Icon = file.icon;
@@ -107,6 +123,7 @@ Then(<span class="token-string">"the confirmation total should equal &#123;strin
             );
           })
         }
+        </div>
       </div>
     </aside>
 
@@ -147,7 +164,7 @@ Then(<span class="token-string">"the confirmation total should equal &#123;strin
                 <span>{file.kind}</span>
               </div>
               <div class="mock-ide__code-wrap" data-code-wrap>
-                <pre><code set:html={file.code} /></pre>
+                <pre class="mock-ide__pre"><code set:html={file.code} /></pre>
                 <div class="mock-ide__fade" aria-hidden="true"></div>
               </div>
               <button type="button" class="mock-ide__expand" data-code-expand>
@@ -172,33 +189,62 @@ Then(<span class="token-string">"the confirmation total should equal &#123;strin
 
   .mock-ide__body {
     display: grid;
-    grid-template-columns: minmax(15rem, 0.28fr) minmax(0, 1fr);
+    grid-template-columns: auto minmax(0, 1fr);
     min-height: 31rem;
+    background: #0d0d0d;
   }
 
   .mock-ide__sidebar {
     display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    width: max-content;
+    max-width: 100%;
+    min-height: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    background: #0d0d0d;
+  }
+
+  .mock-ide__sidebar-bar {
+    display: flex;
+    align-items: center;
+    min-height: 2.55rem;
+    padding: 0.75rem 0.9rem;
+    border-bottom: 1px solid var(--landing-border);
+    background: #111;
+    color: var(--landing-dim);
+    font-family: "Geist Mono", var(--sl-font-mono), monospace;
+    font-size: 0.68rem;
+    font-weight: 620;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .mock-ide__sidebar-tree {
+    display: grid;
     align-content: start;
     gap: 0.7rem;
-    min-width: 0;
+    width: max-content;
+    max-width: 100%;
+    min-height: 0;
     padding: 0.8rem;
-    border-right: 1px solid var(--landing-border);
-    background: #101010;
+    overflow: auto;
   }
 
   .mock-ide__tree-root,
   .mock-ide__tree-file {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    align-items: center;
+    grid-template-columns: auto auto;
+    align-items: start;
+    width: max-content;
+    max-width: 100%;
     gap: 0.55rem;
-    min-width: 0;
     color: var(--landing-muted);
     font-family: "Geist Mono", var(--sl-font-mono), monospace;
     font-size: 0.75rem;
   }
 
   .mock-ide__tree-root {
+    align-items: center;
     color: var(--landing-text);
     font-weight: 650;
   }
@@ -211,12 +257,13 @@ Then(<span class="token-string">"the confirmation total should equal &#123;strin
   .mock-ide__tree-group {
     display: grid;
     gap: 0.25rem;
+    width: max-content;
+    max-width: 100%;
     padding-left: 0.55rem;
     border-left: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .mock-ide__tree-file {
-    width: 100%;
     margin: 0;
     padding: 0.5rem 0.55rem;
     border: 1px solid transparent;
@@ -234,22 +281,27 @@ Then(<span class="token-string">"the confirmation total should equal &#123;strin
     color: var(--landing-text);
   }
 
+  .mock-ide__tree-root span,
   .mock-ide__tree-file span {
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow: visible;
+    text-overflow: unset;
     white-space: nowrap;
+    line-height: 1.45;
   }
 
   .mock-ide__workspace {
     display: grid;
     grid-template-rows: auto minmax(0, 1fr);
     min-width: 0;
+    min-height: 0;
     background: #0d0d0d;
   }
 
   .mock-ide__tabs {
     display: flex;
+    align-items: stretch;
     min-width: 0;
+    min-height: 2.55rem;
     overflow-x: auto;
     border-bottom: 1px solid var(--landing-border);
     background: #111;
@@ -325,17 +377,34 @@ Then(<span class="token-string">"the confirmation total should equal &#123;strin
     background: #090909;
   }
 
-  .mock-ide pre {
+  .mock-ide__pre {
     min-width: 0;
     max-width: 100%;
+    margin: 0;
     padding: 1rem;
+    overflow: auto;
+    background: transparent;
+    color: #e1e4e8;
+    font-family: "Geist Mono", var(--sl-font-mono), monospace;
     font-size: clamp(0.68rem, 1.1vw, 0.82rem);
+    line-height: 1.68;
+    tab-size: 2;
   }
 
-  .mock-ide pre code {
+  .mock-ide__pre code {
     display: block;
     width: max-content;
     min-width: 100%;
+    background: transparent;
+  }
+
+  .mock-ide__pre :global(.line) {
+    display: block;
+  }
+
+  /* Shiki emits empty `.line` spans for blank source lines; without content they collapse. */
+  .mock-ide__pre :global(.line:empty)::before {
+    content: "\200b";
   }
 
   .mock-ide__fade,

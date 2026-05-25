@@ -2293,23 +2293,33 @@ pre {
 .proof-docs a {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
-  gap: 0.35rem 0.7rem;
+  grid-template-rows: auto auto;
+  column-gap: 0.7rem;
+  row-gap: 0.35rem;
+  align-items: start;
   min-width: 0;
   padding: 1rem;
 }
 
 .proof-docs a > svg {
-  grid-row: span 2;
-  margin-top: 0.05rem;
+  grid-row: 1;
+  grid-column: 1;
+  align-self: center;
 }
 
 .proof-docs span {
+  grid-row: 1;
+  grid-column: 2;
+  align-self: center;
   color: var(--landing-text);
   font-size: 0.96rem;
   font-weight: 640;
+  line-height: 1.25;
 }
 
 .proof-docs strong {
+  grid-row: 2;
+  grid-column: 2;
   color: var(--landing-muted);
   font-size: 0.86rem;
   font-weight: 450;
