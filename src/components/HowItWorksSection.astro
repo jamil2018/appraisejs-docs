@@ -1,238 +1,17 @@
 ---
-import FlowBuilderGraph from "./FlowBuilderGraph.astro";
-import LocatorCreatorDemo from "./LocatorCreatorDemo.astro";
-import DynamicIntegratorDemo from "./DynamicIntegratorDemo.astro";
-import PortableOutputDemo from "./PortableOutputDemo.astro";
-import LocalFirstDemo from "./LocalFirstDemo.astro";
 import {
-  Blocks,
   Check,
   ChevronDown,
   Code,
-  Database,
   FileChartColumn,
-  GitFork,
   KeyRound,
   MousePointerClick,
   Navigation,
   Play,
   Plus,
-  ShieldCheck,
   Type,
 } from "@lucide/astro";
-
-const features = [
-  {
-    id: "flow-builder",
-    title: "Visual Playwright flow builder",
-    description:
-      "Model browser journeys as ordered actions and assertions before they become automation.",
-    icon: GitFork,
-  },
-  {
-    id: "locator-creator",
-    title: "Locator Creator",
-    description:
-      "Capture route-aware selectors with role, label, and fallback context attached.",
-    icon: ShieldCheck,
-  },
-  {
-    id: "dynamic-node-builder",
-    title: "Build reusable workflow nodes",
-    description:
-      "Tailor AppraiseJS to your domain by turning team-specific actions into reusable visual nodes anyone can compose without rewriting automation.",
-    icon: Blocks,
-  },
-  {
-    id: "portable-output",
-    title: "Generated repo output",
-    description:
-      "Emit Cucumber scenarios, step code, locator data, and evidence your team can review.",
-    icon: Code,
-  },
-  {
-    id: "local-first",
-    title: "Local execution",
-    description:
-      "Run from developer machines and CI without routing through a hosted runner.",
-    icon: Database,
-  },
-];
 ---
-
-<section
-  class="landing-features landing-shell"
-  aria-labelledby="features-heading"
->
-  <div class="landing-section-copy">
-    <p class="landing-kicker">AppraiseJS toolset</p>
-    <h2 id="features-heading" class="landing-section-title">
-      Precision tools for teams that care about test quality.
-    </h2>
-    <p class="landing-section-description">
-      AppraiseJS ships with focused tools for visual flow building, locator
-      capture, reusable workflow nodes, generated repo output, and local
-      execution.
-    </p>
-  </div>
-
-  <div class="feature-carousel not-content" data-feature-carousel>
-    <div class="feature-carousel__rail" aria-label="Feature list">
-      {
-        features.map((feature, index) => (
-          <a
-            class:list={["feature-carousel__link", index === 0 && "is-active"]}
-            href={`#feature-${feature.id}`}
-            data-feature-link={feature.id}
-          >
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            {feature.title}
-          </a>
-        ))
-      }
-    </div>
-
-    <div class="feature-carousel__track">
-      {
-        features.map((feature, index) => {
-          const Icon = feature.icon;
-          const isFlowBuilder = index === 0;
-          const isLocatorCreator = index === 1;
-          const isDynamicIntegrator = index === 2;
-          const isPortableOutput = index === 3;
-          const isLocalFirst = index === 4;
-          const hasAnimation =
-            isFlowBuilder ||
-            isLocatorCreator ||
-            isDynamicIntegrator ||
-            isPortableOutput ||
-            isLocalFirst;
-          return (
-            <article
-              id={`feature-${feature.id}`}
-              class:list={[
-                "feature-carousel__item",
-                index === 0 && "is-active",
-              ]}
-              data-feature-panel={feature.id}
-            >
-              <div
-                class:list={[
-                  "feature-card",
-                  hasAnimation && "feature-card--with-animation",
-                  !hasAnimation && "feature-card--static",
-                  isFlowBuilder && "feature-card--flow-builder",
-                  isLocatorCreator && "feature-card--locator-creator",
-                  isDynamicIntegrator && "feature-card--dynamic-integrator",
-                  isPortableOutput && "feature-card--portable-output",
-                  isLocalFirst && "feature-card--local-first",
-                ]}
-              >
-                {hasAnimation ? (
-                  <div class="feature-card__desktop">
-                    <div class="feature-card__desktop-bar" aria-hidden="true">
-                      <span />
-                      <span />
-                      <span />
-                    </div>
-                    <div class="feature-card__animation">
-                      {isFlowBuilder ? (
-                        <FlowBuilderGraph fill />
-                      ) : isLocatorCreator ? (
-                        <LocatorCreatorDemo fill />
-                      ) : isDynamicIntegrator ? (
-                        <DynamicIntegratorDemo fill />
-                      ) : isPortableOutput ? (
-                        <PortableOutputDemo fill />
-                      ) : (
-                        <LocalFirstDemo fill />
-                      )}
-                    </div>
-                  </div>
-                ) : (
-                  <div class="feature-card__desktop feature-card__desktop--static">
-                    <div class="feature-card__desktop-bar" aria-hidden="true">
-                      <span />
-                      <span />
-                      <span />
-                    </div>
-                    <div class="feature-card__workspace">
-                      <span class="feature-card__icon" aria-hidden="true">
-                        <Icon />
-                      </span>
-                      <div class="feature-card__workspace-lines">
-                        <span />
-                        <span />
-                        <span />
-                      </div>
-                    </div>
-                  </div>
-                )}
-                <div class="feature-card__copy">
-                  <h3>{feature.title}</h3>
-                  <p>{feature.description}</p>
-                </div>
-              </div>
-            </article>
-          );
-        })
-      }
-    </div>
-  </div>
-</section>
-
-<script>
-  const carousels = document.querySelectorAll("[data-feature-carousel]");
-
-  carousels.forEach((carousel) => {
-    const links = Array.from(carousel.querySelectorAll("[data-feature-link]"));
-    const panels = Array.from(
-      carousel.querySelectorAll("[data-feature-panel]"),
-    );
-
-    if (!("IntersectionObserver" in window) || panels.length === 0) return;
-
-    const activate = (id: string) => {
-      links.forEach((link) => {
-        const isActive = link.getAttribute("data-feature-link") === id;
-        link.classList.toggle("is-active", isActive);
-        if (isActive) {
-          link.setAttribute("aria-current", "true");
-        } else {
-          link.removeAttribute("aria-current");
-        }
-      });
-
-      panels.forEach((panel) => {
-        panel.classList.toggle(
-          "is-active",
-          panel.getAttribute("data-feature-panel") === id,
-        );
-      });
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-        if (!visible) return;
-
-        const id = visible.target.getAttribute("data-feature-panel");
-        if (id) activate(id);
-      },
-      {
-        root: null,
-        rootMargin: "-24% 0px -42% 0px",
-        threshold: [0.2, 0.45, 0.7],
-      },
-    );
-
-    panels.forEach((panel) => observer.observe(panel));
-    activate(panels[0].getAttribute("data-feature-panel") || "");
-  });
-</script>
 
 <section
   class="landing-showcase landing-showcase--wide landing-showcase--execution"
@@ -280,7 +59,7 @@ const features = [
         <button
           class="execution-step"
           type="button"
-          data-execution-step="execute"
+          data-execution-step="generate"
           data-execution-index="2"
         >
           <span class="execution-step__index">03</span>
@@ -294,7 +73,7 @@ const features = [
         <button
           class="execution-step"
           type="button"
-          data-execution-step="output"
+          data-execution-step="execute"
           data-execution-index="3"
         >
           <span class="execution-step__index">04</span>
@@ -303,6 +82,18 @@ const features = [
             <small
               >Run the flow and keep report/log evidence in the project.</small
             >
+          </span>
+        </button>
+        <button
+          class="execution-step"
+          type="button"
+          data-execution-step="output"
+          data-execution-index="4"
+        >
+          <span class="execution-step__index">05</span>
+          <span>
+            <strong>Examine reports</strong>
+            <small>Inspect run evidence, timing, and failure details.</small>
           </span>
         </button>
       </div>
@@ -412,13 +203,46 @@ const features = [
         </article>
 
         <article
-          class="execution-visual execution-visual--execute"
-          data-execution-visual="execute"
+          class="execution-visual execution-visual--generate"
+          data-execution-visual="generate"
         >
           <div class="execution-visual__mobile-copy">
             <span>03</span>
             <strong>Generate code</strong>
             <p>Emit the `.feature` file and Playwright step definitions.</p>
+          </div>
+          <div class="execution-window execution-window--generated">
+            <div class="execution-window__bar">
+              <span>Generated test files</span>
+              <Code />
+            </div>
+            <div class="execution-generated">
+              <div class="execution-generated__files">
+                <span class="is-active">login.feature</span>
+                <span>login.steps.ts</span>
+                <span>login.locators.json</span>
+              </div>
+              <pre
+                class="execution-generated__code"
+                aria-label="Generated feature and step output"><code><span class="token-comment"># features/login.feature</span>
+<span class="token-key">Feature:</span> Login smoke
+
+  <span class="token-key">Scenario:</span> Valid user signs in
+    <span class="token-key">When</span> I open the login page
+    <span class="token-key">And</span> I submit valid credentials
+    <span class="token-key">Then</span> the dashboard should be visible</code></pre>
+            </div>
+          </div>
+        </article>
+
+        <article
+          class="execution-visual execution-visual--execute"
+          data-execution-visual="execute"
+        >
+          <div class="execution-visual__mobile-copy">
+            <span>04</span>
+            <strong>Run locally</strong>
+            <p>Run the flow and keep report/log evidence in the project.</p>
           </div>
           <div class="execution-run-stack">
             <div class="execution-window execution-window--run">
@@ -456,9 +280,9 @@ const features = [
           data-execution-visual="output"
         >
           <div class="execution-visual__mobile-copy">
-            <span>04</span>
-            <strong>Run locally</strong>
-            <p>Run the flow and keep report/log evidence in the project.</p>
+            <span>05</span>
+            <strong>Examine reports</strong>
+            <p>Inspect run evidence, timing, and failure details.</p>
           </div>
           <div class="execution-window">
             <div class="execution-window__bar">
@@ -605,8 +429,12 @@ const features = [
 
       const rect = section.getBoundingClientRect();
       const range = Math.max(1, rect.height - window.innerHeight);
-      const progress = Math.min(1, Math.max(0, -rect.top / range));
-      const thresholds = [0, 0.16, 0.42, 0.69];
+      const introBuffer = window.innerHeight * 0.22;
+      const progress = Math.min(
+        1,
+        Math.max(0, (-rect.top - introBuffer) / range),
+      );
+      const thresholds = [0, 0.14, 0.34, 0.56, 0.78];
       const index = thresholds.reduce((current, threshold, thresholdIndex) => {
         return progress >= threshold ? thresholdIndex : current;
       }, 0);

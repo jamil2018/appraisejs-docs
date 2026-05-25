@@ -1045,23 +1045,24 @@ pre {
 }
 
 .landing-showcase--execution {
-  min-height: 340vh;
+  min-height: 380vh;
 }
 
 .landing-showcase--execution > .landing-shell {
-  position: sticky;
-  top: 5rem;
   display: grid;
-  align-content: center;
-  min-height: calc(100vh - 5rem);
+  align-content: start;
+  min-height: inherit;
   padding-block: clamp(1rem, 3vw, 2rem);
 }
 
 .execution-model {
+  position: sticky;
+  top: 5rem;
   display: grid;
   grid-template-columns: minmax(19rem, 0.52fr) minmax(0, 1fr);
   gap: clamp(1rem, 4vw, 3rem);
   align-items: stretch;
+  min-height: calc(100vh - 5.5rem);
 }
 
 .sl-markdown-content .landing-root .landing-showcase,
@@ -1637,6 +1638,89 @@ pre {
   gap: 1rem;
 }
 
+.execution-visual--generate {
+  align-content: center;
+}
+
+.execution-window--generated {
+  width: min(100%, 56rem);
+}
+
+.execution-generated {
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.34fr) minmax(0, 1fr);
+  gap: 1px;
+  background: var(--landing-border);
+}
+
+.execution-generated__files,
+.execution-generated__code {
+  min-width: 0;
+  margin: 0;
+  background: #0d0d0d;
+}
+
+.execution-generated__files {
+  display: grid;
+  align-content: start;
+  gap: 0.45rem;
+  padding: 1rem;
+}
+
+.execution-generated__files span {
+  display: block;
+  padding: 0.58rem 0.65rem;
+  border: 1px solid transparent;
+  border-radius: var(--landing-radius);
+  color: var(--landing-muted);
+  font-family: "Geist Mono", var(--sl-font-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+}
+
+.execution-generated__files span.is-active,
+.execution-visual.is-active .execution-generated__files span {
+  animation: execution-generated-file-in 520ms ease both;
+}
+
+.execution-visual.is-active .execution-generated__files span:nth-child(2) {
+  animation-delay: 220ms;
+}
+
+.execution-visual.is-active .execution-generated__files span:nth-child(3) {
+  animation-delay: 420ms;
+}
+
+.execution-generated__files span.is-active,
+.execution-generated__files span:hover {
+  border-color: rgba(16, 185, 129, 0.34);
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--landing-text);
+}
+
+.execution-generated__code {
+  max-width: 100%;
+  min-height: 20rem;
+  padding: 1rem;
+  overflow: auto;
+  color: rgba(255, 255, 255, 0.82);
+  font-family: "Geist Mono", var(--sl-font-mono), ui-monospace, monospace;
+  font-size: clamp(0.64rem, 1.05vw, 0.8rem);
+  line-height: 1.7;
+}
+
+.execution-generated__code code {
+  display: block;
+  width: max-content;
+  min-width: 100%;
+  opacity: 0;
+  transform: translateY(0.75rem);
+}
+
+.execution-visual.is-active .execution-generated__code code {
+  animation: execution-generated-code-in 640ms ease forwards;
+  animation-delay: 260ms;
+}
+
 .execution-run-stack {
   position: relative;
   display: grid;
@@ -1962,6 +2046,24 @@ pre {
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes execution-generated-file-in {
+  from {
+    opacity: 0;
+    transform: translateX(-0.45rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes execution-generated-code-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -2432,14 +2534,13 @@ pre {
   overflow: hidden;
   border: 1px solid var(--landing-border);
   border-radius: var(--landing-radius);
-  background: var(--landing-border);
+  background: rgba(19, 19, 19, 0.96);
 }
 
 .comparison-table__header,
 .comparison-table__row {
   display: grid;
   grid-template-columns: minmax(10rem, 0.72fr) minmax(0, 1fr) minmax(0, 1fr);
-  gap: 1px;
 }
 
 .comparison-table__header span,
@@ -2448,6 +2549,15 @@ pre {
   margin: 0;
   padding: 0.9rem 1rem;
   background: rgba(19, 19, 19, 0.96);
+}
+
+.comparison-table__row {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.comparison-table__header span:not(:last-child),
+.comparison-table__row > *:not(:last-child) {
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .comparison-table__header span {
@@ -2837,7 +2947,6 @@ pre {
   .feature-grid,
   .positioning-grid,
   .proof-docs,
-  .trust-signals__grid,
   .engineer-trust__grid,
   .engineer-trust__list,
   .comparison-grid,
@@ -2846,13 +2955,16 @@ pre {
     grid-template-columns: 1fr;
   }
 
+  .trust-signals {
+    display: none;
+  }
+
   .comparison-table__header {
     display: none;
   }
 
   .comparison-table__row {
     grid-template-columns: 1fr;
-    gap: 1px;
   }
 
   .comparison-table__row strong::before,
@@ -3079,7 +3191,10 @@ pre {
   }
 
   .execution-model {
+    position: relative;
+    top: auto;
     grid-template-columns: 1fr;
+    min-height: 0;
   }
 
   .execution-model__copy {
@@ -3297,6 +3412,19 @@ pre {
 
   .execution-report__table {
     grid-template-columns: 1fr;
+  }
+
+  .execution-generated {
+    grid-template-columns: 1fr;
+  }
+
+  .execution-generated__files {
+    grid-template-columns: 1fr;
+  }
+
+  .execution-generated__code {
+    min-height: 15rem;
+    font-size: 0.66rem;
   }
 
   .code-map__panel li {
