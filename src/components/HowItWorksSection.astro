@@ -66,7 +66,9 @@ import {
           <span>
             <strong>Generate code</strong>
             <small
-              >Emit the `.feature` file and Playwright step definitions.</small
+              >Save the test flow and AppraiseJS conversion engine automatically
+              coverts the flow to relevant artifacts(feature files, step
+              definitions, locator entries)</small
             >
           </span>
         </button>
@@ -209,7 +211,11 @@ import {
           <div class="execution-visual__mobile-copy">
             <span>03</span>
             <strong>Generate code</strong>
-            <p>Emit the `.feature` file and Playwright step definitions.</p>
+            <p>
+              Save the test flow and AppraiseJS conversion engine automatically
+              coverts the flow to relevant artifacts(feature files, step
+              definitions, locator entries)
+            </p>
           </div>
           <div class="execution-window execution-window--generated">
             <div class="execution-window__bar">
@@ -348,6 +354,12 @@ import {
       visual.classList.add("is-active");
     };
 
+    const startModelAnimations = () => {
+      if (!model.classList.contains("has-started")) {
+        model.classList.add("has-started");
+      }
+    };
+
     const applyMobileStack = () => {
       const isMobile = mobileQuery.matches;
       model.classList.toggle("is-mobile-stack", isMobile);
@@ -377,6 +389,7 @@ import {
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
+              startModelAnimations();
               restartVisualAnimation(entry.target);
               return;
             }
@@ -464,8 +477,10 @@ import {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry?.isIntersecting) {
+          startModelAnimations();
           requestScrollUpdate();
         } else {
+          model.classList.remove("has-started");
           if (animationFrame) {
             window.cancelAnimationFrame(animationFrame);
             animationFrame = undefined;

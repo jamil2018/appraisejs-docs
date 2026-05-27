@@ -1233,7 +1233,7 @@ pre {
   color: var(--landing-green);
 }
 
-.execution-visual.is-active .execution-window__bar button {
+.execution-model.has-started .execution-visual.is-active .execution-window__bar button {
   animation: execution-add-click 640ms ease both;
   animation-delay: 220ms;
 }
@@ -1263,8 +1263,8 @@ pre {
   transform: translateY(0.75rem);
 }
 
-.execution-visual.is-active .execution-node strong,
-.execution-visual.is-active .execution-node span {
+.execution-model.has-started .execution-visual.is-active .execution-node strong,
+.execution-model.has-started .execution-visual.is-active .execution-node span {
   animation: execution-node-in 560ms ease forwards;
 }
 
@@ -1292,18 +1292,18 @@ pre {
   grid-row: 2;
 }
 
-.execution-visual.is-active .execution-node--username strong,
-.execution-visual.is-active .execution-node--username span {
+.execution-model.has-started .execution-visual.is-active .execution-node--username strong,
+.execution-model.has-started .execution-visual.is-active .execution-node--username span {
   animation-delay: 320ms;
 }
 
-.execution-visual.is-active .execution-node--password strong,
-.execution-visual.is-active .execution-node--password span {
+.execution-model.has-started .execution-visual.is-active .execution-node--password strong,
+.execution-model.has-started .execution-visual.is-active .execution-node--password span {
   animation-delay: 640ms;
 }
 
-.execution-visual.is-active .execution-node--click strong,
-.execution-visual.is-active .execution-node--click span {
+.execution-model.has-started .execution-visual.is-active .execution-node--click strong,
+.execution-model.has-started .execution-visual.is-active .execution-node--click span {
   animation-delay: 960ms;
 }
 
@@ -1394,16 +1394,16 @@ pre {
   background: var(--landing-green);
 }
 
-.execution-visual.is-active .execution-edge::after {
+.execution-model.has-started .execution-visual.is-active .execution-edge::after {
   animation: execution-edge-in 420ms ease forwards;
   animation-delay: 280ms;
 }
 
-.execution-visual.is-active .execution-edge:nth-child(4)::after {
+.execution-model.has-started .execution-visual.is-active .execution-edge:nth-child(4)::after {
   animation-delay: 600ms;
 }
 
-.execution-visual.is-active .execution-edge:nth-child(6)::after {
+.execution-model.has-started .execution-visual.is-active .execution-edge:nth-child(6)::after {
   animation-delay: 920ms;
 }
 
@@ -1547,7 +1547,7 @@ pre {
   opacity: 0;
 }
 
-.execution-visual.is-active .execution-mini-edge--assert {
+.execution-model.has-started .execution-visual.is-active .execution-mini-edge--assert {
   animation: execution-mini-edge-in 520ms ease forwards;
   animation-delay: 2450ms;
 }
@@ -1566,8 +1566,8 @@ pre {
   background: rgba(16, 185, 129, 0.12);
 }
 
-.execution-visual.is-active .execution-mini-node--assert strong,
-.execution-visual.is-active .execution-mini-node--assert span {
+.execution-model.has-started .execution-visual.is-active .execution-mini-node--assert strong,
+.execution-model.has-started .execution-visual.is-active .execution-mini-node--assert span {
   animation: execution-assert-in 520ms ease forwards;
   animation-delay: 2450ms;
 }
@@ -1591,7 +1591,7 @@ pre {
   transform: translateY(-0.7rem) scale(0.96);
 }
 
-.execution-visual.is-active .execution-popover--step {
+.execution-model.has-started .execution-visual.is-active .execution-popover--step {
   animation: execution-popover-step-cycle 3200ms ease forwards;
   animation-delay: 460ms;
 }
@@ -1642,7 +1642,7 @@ pre {
   transform: translateY(0.65rem) scale(0.96);
 }
 
-.execution-visual.is-active .execution-popover--picker {
+.execution-model.has-started .execution-visual.is-active .execution-popover--picker {
   animation: execution-popover-picker-cycle 2200ms ease forwards;
   animation-delay: 1300ms;
 }
@@ -1679,7 +1679,7 @@ pre {
   opacity: 0;
 }
 
-.execution-visual.is-active .execution-cursor {
+.execution-model.has-started .execution-visual.is-active .execution-cursor {
   animation: execution-cursor-tap 760ms ease forwards;
   animation-delay: 1850ms;
 }
@@ -1729,15 +1729,15 @@ pre {
 }
 
 .execution-generated__files span.is-active,
-.execution-visual.is-active .execution-generated__files span {
+.execution-model.has-started .execution-visual.is-active .execution-generated__files span {
   animation: execution-generated-file-in 520ms ease both;
 }
 
-.execution-visual.is-active .execution-generated__files span:nth-child(2) {
+.execution-model.has-started .execution-visual.is-active .execution-generated__files span:nth-child(2) {
   animation-delay: 220ms;
 }
 
-.execution-visual.is-active .execution-generated__files span:nth-child(3) {
+.execution-model.has-started .execution-visual.is-active .execution-generated__files span:nth-child(3) {
   animation-delay: 420ms;
 }
 
@@ -1767,7 +1767,7 @@ pre {
   transform: translateY(0.75rem);
 }
 
-.execution-visual.is-active .execution-generated__code code {
+.execution-model.has-started .execution-visual.is-active .execution-generated__code code {
   animation: execution-generated-code-in 640ms ease forwards;
   animation-delay: 260ms;
 }
@@ -1792,12 +1792,12 @@ pre {
   transform: translateY(1rem) scale(0.97);
 }
 
-.execution-visual.is-active .execution-window--run {
+.execution-model.has-started .execution-visual.is-active .execution-window--run {
   animation: execution-run-out 560ms ease forwards;
   animation-delay: 820ms;
 }
 
-.execution-visual.is-active .execution-window--running {
+.execution-model.has-started .execution-visual.is-active .execution-window--running {
   animation: execution-run-in 620ms ease forwards;
   animation-delay: 1180ms;
 }
@@ -1852,7 +1852,7 @@ pre {
   transform: translateX(-100%);
 }
 
-.execution-visual.is-active .execution-progress span {
+.execution-model.has-started .execution-visual.is-active .execution-progress span {
   animation: execution-progress 1500ms ease forwards;
   animation-delay: 1450ms;
 }
@@ -3372,7 +3372,7 @@ pre {
     transform: translateY(-100%);
   }
 
-  .execution-visual.is-active .execution-edge::after {
+  .execution-model.has-started .execution-visual.is-active .execution-edge::after {
     animation-name: execution-edge-in-vertical;
   }
 
@@ -3471,7 +3471,7 @@ pre {
     display: none;
   }
 
-  .execution-visual.is-active .execution-mini-edge--assert {
+  .execution-model.has-started .execution-visual.is-active .execution-mini-edge--assert {
     animation-name: execution-mini-edge-in-vertical;
   }
 
@@ -3506,7 +3506,7 @@ pre {
     transform: translateX(-50%) translateY(1rem) scale(0.97);
   }
 
-  .execution-visual.is-active .execution-window--running {
+  .execution-model.has-started .execution-visual.is-active .execution-window--running {
     animation-name: execution-run-in-mobile;
   }
 
