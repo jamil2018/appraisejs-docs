@@ -1,0 +1,58 @@
+---
+import {
+  ArrowDown,
+  FileCode2,
+  GitBranch,
+  ShieldCheck,
+  TerminalSquare,
+} from "@lucide/astro";
+
+const proofSteps = [
+  { icon: FileCode2, label: "Test Suite", artifact: ".feature" },
+  { icon: ShieldCheck, label: "Test Case", artifact: "*.feature.scenario" },
+  { icon: GitBranch, label: "Template Step", artifact: "*.step.ts" },
+  { icon: FileCode2, label: "Locators", artifact: "locators.json" },
+  { icon: TerminalSquare, label: "Evidence", artifact: "report.json" },
+];
+---
+
+<section
+  class="landing-touch-surfaces landing-shell"
+  aria-labelledby="touch-surfaces-heading"
+>
+  <div class="landing-section-copy">
+    <p class="landing-kicker">Team handoff</p>
+    <h2 id="touch-surfaces-heading" class="landing-section-title">
+      Anyone authors flows, engineers review files, CI runs normal automation.
+    </h2>
+    <p class="landing-section-description">
+      AppraiseJS gives the whole team a visual authoring layer while preserving
+      the Playwright/Cucumber artifacts engineers expect to inspect, version,
+      and run in existing pipelines.
+    </p>
+  </div>
+  <div
+    class="landing-touch-surfaces__proof"
+    aria-label="Generated files from the 15-minute result"
+  >
+    {
+      proofSteps.map(({ icon: Icon, label, artifact }) => (
+        <div class="landing-touch-surfaces__proof-step">
+          <span class="landing-touch-surfaces__proof-icon" aria-hidden="true">
+            <Icon />
+          </span>
+          <div class="landing-touch-surfaces__proof-flow">
+            <span class="landing-touch-surfaces__proof-label">{label}</span>
+            <span
+              class="landing-touch-surfaces__proof-arrow"
+              aria-hidden="true"
+            >
+              <ArrowDown size={14} stroke-width={2} />
+            </span>
+            <strong>{artifact}</strong>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

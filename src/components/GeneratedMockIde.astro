@@ -1,0 +1,547 @@
+---
+import { Code2, FileCode2, FileJson2, FolderGit2 } from "@lucide/astro";
+import { highlightCodeInner } from "../utils/highlightMockIdeCode";
+
+const fileDefinitions = [
+  {
+    id: "feature",
+    icon: FileCode2,
+    label: "checkout-smoke.feature",
+    path: "tests/appraise/features/checkout-smoke.feature",
+    kind: "Gherkin",
+    lang: "gherkin",
+    source: `# tests/appraise/features/checkout-smoke.feature
+Feature: Checkout smoke
+
+  Scenario: Returning buyer completes a card checkout
+    When I add "Everyday Hoodie" to the cart
+    And I use the saved shipping address
+    And I pay with "visa_success"
+    Then the order confirmation should be visible
+    And the confirmation total should equal "$64.00"`,
+  },
+  {
+    id: "steps",
+    icon: Code2,
+    label: "checkout.steps.ts",
+    path: "tests/appraise/steps/checkout.steps.ts",
+    kind: "TypeScript",
+    lang: "typescript",
+    source: `import { expect } from "@playwright/test";
+import locators from "../locators/checkout.locators.json";
+
+When("I add {string} to the cart", async ({ page }, itemName) => {
+  await page.getByRole("link", { name: itemName }).click();
+  await page.locator(locators.product.addToCart.selector).click();
+  await expect(page.locator(locators.cart.summary.selector)).toBeVisible();
+});
+
+When("I pay with {string}", async ({ page }, cardName) => {
+  await page.locator(locators.payment.savedCard.selector).selectOption(cardName);
+  await page.locator(locators.payment.submit.selector).click();
+});
+
+Then("the confirmation total should equal {string}", async ({ page }, total) => {
+  await expect(page.locator(locators.order.total.selector)).toHaveText(total);
+});`,
+  },
+  {
+    id: "locators",
+    icon: FileJson2,
+    label: "checkout.locators.json",
+    path: "tests/appraise/locators/checkout.locators.json",
+    kind: "JSON",
+    lang: "json",
+    source: `{
+  "addToCart": "[data-testid='add-to-cart']",
+  "paymentSubmit": "[data-testid='submit-payment']",
+  "orderTotal": "[data-testid='confirmation-total']"
+}`,
+  },
+  {
+    id: "report",
+    icon: FileJson2,
+    label: "report.json",
+    path: "test-results/appraise/checkout-smoke/report.json",
+    kind: "JSON",
+    lang: "json",
+    source: `{
+  "status": "passed",
+  "browser": "chromium",
+  "durationMs": 18420,
+  "startedAt": "2026-05-24T10:32:08.842Z",
+  "artifacts": [
+    "trace.zip",
+    "screenshots/order-confirmation.png",
+    "run-evidence.json"
+  ],
+  "steps": [
+    { "name": "open storefront", "status": "passed" },
+    { "name": "complete checkout", "status": "passed" }
+  ]
+}`,
+  },
+];
+
+const files = await Promise.all(
+  fileDefinitions.map(async (file) => ({
+    ...file,
+    code: await highlightCodeInner(file.source, file.lang),
+  })),
+);
+---
+
+<article class="mock-ide not-content" aria-labelledby="mock-ide-heading" data-mock-ide>
+  <div class="landing-panel__bar">
+    <span>sample repo output</span>
+    <span>mock IDE</span>
+  </div>
+  <div class="mock-ide__body">
+    <aside class="mock-ide__sidebar" aria-label="Generated file tree">
+      <div class="mock-ide__sidebar-bar">
+        <span>Explorer</span>
+      </div>
+      <div class="mock-ide__sidebar-tree">
+        <div class="mock-ide__tree-root">
+          <FolderGit2 aria-hidden="true" />
+          <span>tests/appraise/</span>
+        </div>
+        <div class="mock-ide__tree-group" aria-label="Generated files">
+        {
+          files.map((file, index) => {
+            const Icon = file.icon;
+            return (
+              <button
+                type="button"
+                class:list={["mock-ide__tree-file", index === 0 && "is-active"]}
+                data-mock-file={file.id}
+                aria-pressed={index === 0 ? "true" : "false"}
+              >
+                <Icon aria-hidden="true" />
+                <span>{file.path}</span>
+              </button>
+            );
+          })
+        }
+        </div>
+      </div>
+    </aside>
+
+    <div class="mock-ide__workspace">
+      <div class="mock-ide__tabs" role="tablist" aria-label="Generated sample files">
+        {
+          files.map((file, index) => (
+            <button
+              id={`mock-tab-${file.id}`}
+              type="button"
+              role="tab"
+              class:list={["mock-ide__tab", index === 0 && "is-active"]}
+              data-mock-tab={file.id}
+              aria-controls={`mock-panel-${file.id}`}
+              aria-selected={index === 0 ? "true" : "false"}
+              tabindex={index === 0 ? "0" : "-1"}
+            >
+              {file.label}
+            </button>
+          ))
+        }
+      </div>
+
+      <div class="mock-ide__panes">
+        {
+          files.map((file, index) => (
+            <section
+              id={`mock-panel-${file.id}`}
+              class:list={["mock-ide__pane", index === 0 && "is-active"]}
+              data-mock-pane={file.id}
+              role="tabpanel"
+              aria-labelledby={`mock-tab-${file.id}`}
+            >
+              <div class="mock-ide__pane-header">
+                <h3 id={index === 0 ? "mock-ide-heading" : undefined}>
+                  {file.label}
+                </h3>
+                <span>{file.kind}</span>
+              </div>
+              <div class="mock-ide__code-wrap" data-code-wrap>
+                <pre class="mock-ide__pre"><code set:html={file.code} /></pre>
+                <div class="mock-ide__fade" aria-hidden="true"></div>
+              </div>
+              <button type="button" class="mock-ide__expand" data-code-expand>
+                Show full file output
+              </button>
+            </section>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</article>
+
+<style>
+  .mock-ide {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--landing-border);
+    border-radius: var(--landing-radius);
+    background: rgba(19, 19, 19, 0.96);
+  }
+
+  .mock-ide__body {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    min-height: 31rem;
+    background: #0d0d0d;
+  }
+
+  .mock-ide__sidebar {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    width: max-content;
+    max-width: 100%;
+    min-height: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    background: #0d0d0d;
+  }
+
+  .mock-ide__sidebar-bar {
+    display: flex;
+    align-items: center;
+    min-height: 2.55rem;
+    padding: 0.75rem 0.9rem;
+    border-bottom: 1px solid var(--landing-border);
+    background: #111;
+    color: var(--landing-dim);
+    font-family: "Geist Mono", var(--sl-font-mono), monospace;
+    font-size: 0.68rem;
+    font-weight: 620;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .mock-ide__sidebar-tree {
+    display: grid;
+    align-content: start;
+    gap: 0.7rem;
+    width: max-content;
+    max-width: 100%;
+    min-height: 0;
+    padding: 0.8rem;
+    overflow: auto;
+  }
+
+  .mock-ide__tree-root,
+  .mock-ide__tree-file {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: start;
+    width: max-content;
+    max-width: 100%;
+    gap: 0.55rem;
+    color: var(--landing-muted);
+    font-family: "Geist Mono", var(--sl-font-mono), monospace;
+    font-size: 0.75rem;
+  }
+
+  .mock-ide__tree-root {
+    align-items: center;
+    color: var(--landing-text);
+    font-weight: 650;
+  }
+
+  .mock-ide__tree-root svg,
+  .mock-ide__tree-file svg {
+    color: var(--landing-green);
+  }
+
+  .mock-ide__tree-group {
+    display: grid;
+    gap: 0.25rem;
+    width: max-content;
+    max-width: 100%;
+    padding-left: 0.55rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .mock-ide__tree-file {
+    margin: 0;
+    padding: 0.5rem 0.55rem;
+    border: 1px solid transparent;
+    border-radius: var(--landing-radius);
+    background: transparent;
+    text-align: left;
+    appearance: none;
+    cursor: pointer;
+  }
+
+  .mock-ide__tree-file:hover,
+  .mock-ide__tree-file.is-active {
+    border-color: rgba(16, 185, 129, 0.26);
+    background: rgba(16, 185, 129, 0.08);
+    color: var(--landing-text);
+  }
+
+  .mock-ide__tree-root span,
+  .mock-ide__tree-file span {
+    overflow: visible;
+    text-overflow: unset;
+    white-space: nowrap;
+    line-height: 1.45;
+  }
+
+  .mock-ide__workspace {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    min-width: 0;
+    min-height: 0;
+    background: #0d0d0d;
+  }
+
+  .mock-ide__tabs {
+    display: flex;
+    align-items: stretch;
+    min-width: 0;
+    min-height: 2.55rem;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--landing-border);
+    background: #111;
+  }
+
+  .mock-ide__tab {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0.75rem 0.9rem;
+    border: 0;
+    border-right: 1px solid var(--landing-border);
+    border-radius: 0;
+    background: transparent;
+    color: var(--landing-dim);
+    font-family: "Geist Mono", var(--sl-font-mono), monospace;
+    font-size: 0.72rem;
+    appearance: none;
+    cursor: pointer;
+  }
+
+  .mock-ide__tab:hover,
+  .mock-ide__tab.is-active {
+    background: #171717;
+    color: var(--landing-text);
+  }
+
+  .mock-ide__tab.is-active {
+    box-shadow: inset 0 -2px 0 var(--landing-green);
+  }
+
+  .mock-ide__panes {
+    min-width: 0;
+  }
+
+  .mock-ide__pane {
+    display: none;
+    min-width: 0;
+    padding: 1rem;
+  }
+
+  .mock-ide__pane.is-active {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .mock-ide__pane-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .mock-ide__pane h3 {
+    margin: 0;
+    color: var(--landing-text);
+    font-size: 0.98rem;
+    font-weight: 640;
+  }
+
+  .mock-ide__pane-header span {
+    color: var(--landing-dim);
+    font-family: "Geist Mono", var(--sl-font-mono), monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+  }
+
+  .mock-ide__code-wrap {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--landing-border-soft);
+    border-radius: var(--landing-radius);
+    background: #090909;
+  }
+
+  .mock-ide__pre {
+    min-width: 0;
+    max-width: 100%;
+    margin: 0;
+    padding: 1rem;
+    overflow: auto;
+    background: transparent;
+    color: #e1e4e8;
+    font-family: "Geist Mono", var(--sl-font-mono), monospace;
+    font-size: clamp(0.68rem, 1.1vw, 0.82rem);
+    line-height: 1.68;
+    tab-size: 2;
+  }
+
+  .mock-ide__pre code {
+    display: block;
+    width: max-content;
+    min-width: 100%;
+    background: transparent;
+  }
+
+  .mock-ide__pre :global(.line) {
+    display: block;
+  }
+
+  /* Shiki emits empty `.line` spans for blank source lines; without content they collapse. */
+  .mock-ide__pre :global(.line:empty)::before {
+    content: "\200b";
+  }
+
+  .mock-ide__fade,
+  .mock-ide__expand {
+    display: none;
+  }
+
+  @media (max-width: 760px) {
+    .mock-ide__body {
+      display: block;
+      min-height: 0;
+    }
+
+    .mock-ide__sidebar,
+    .mock-ide__tabs {
+      display: none;
+    }
+
+    .mock-ide__panes {
+      display: grid;
+      grid-auto-columns: minmax(82%, 1fr);
+      grid-auto-flow: column;
+      gap: 0.75rem;
+      overflow-x: auto;
+      padding: 0.8rem;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+    }
+
+    .mock-ide__pane,
+    .mock-ide__pane.is-active {
+      display: grid;
+      gap: 0.75rem;
+      padding: 0.8rem;
+      border: 1px solid var(--landing-border-soft);
+      border-radius: var(--landing-radius);
+      background: #0d0d0d;
+      scroll-snap-align: start;
+    }
+
+    .mock-ide__code-wrap {
+      max-height: 13.5rem;
+    }
+
+    .mock-ide__pane.is-expanded .mock-ide__code-wrap {
+      max-height: none;
+    }
+
+    .mock-ide__fade {
+      position: absolute;
+      inset: auto 0 0;
+      display: block;
+      height: 4rem;
+      background: linear-gradient(rgba(9, 9, 9, 0), #090909 82%);
+      pointer-events: none;
+    }
+
+    .mock-ide__pane.is-expanded .mock-ide__fade {
+      display: none;
+    }
+
+    .mock-ide__expand {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.45rem;
+      margin: 0;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid var(--landing-border);
+      border-radius: var(--landing-radius);
+      background: var(--landing-surface-2);
+      color: var(--landing-text);
+      font-size: 0.82rem;
+      font-weight: 620;
+      appearance: none;
+    }
+  }
+</style>
+
+<script>
+  const mockIdes = document.querySelectorAll("[data-mock-ide]");
+
+  mockIdes.forEach((ide) => {
+    const controls = [
+      ...ide.querySelectorAll("[data-mock-tab], [data-mock-file]"),
+    ] as HTMLElement[];
+    const tabs = [...ide.querySelectorAll("[data-mock-tab]")] as HTMLElement[];
+    const files = [...ide.querySelectorAll("[data-mock-file]")] as HTMLElement[];
+    const panes = [...ide.querySelectorAll("[data-mock-pane]")] as HTMLElement[];
+
+    const activate = (id: string) => {
+      tabs.forEach((tab) => {
+        const isActive = tab.dataset.mockTab === id;
+        tab.classList.toggle("is-active", isActive);
+        tab.setAttribute("aria-selected", String(isActive));
+        tab.setAttribute("tabindex", isActive ? "0" : "-1");
+      });
+
+      files.forEach((file) => {
+        const isActive = file.dataset.mockFile === id;
+        file.classList.toggle("is-active", isActive);
+        file.setAttribute("aria-pressed", String(isActive));
+      });
+
+      panes.forEach((pane) => {
+        const isActive = pane.dataset.mockPane === id;
+        pane.classList.toggle("is-active", isActive);
+      });
+    };
+
+    controls.forEach((control) => {
+      control.addEventListener("click", () => {
+        const id = control.dataset.mockTab || control.dataset.mockFile;
+        if (id) activate(id);
+      });
+    });
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+        event.preventDefault();
+        const direction = event.key === "ArrowRight" ? 1 : -1;
+        const next = tabs[(index + direction + tabs.length) % tabs.length];
+        next?.focus();
+        const id = next?.dataset.mockTab;
+        if (id) activate(id);
+      });
+    });
+
+    ide.querySelectorAll("[data-code-expand]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const pane = button.closest("[data-mock-pane]");
+        const isExpanded = pane?.classList.toggle("is-expanded");
+        button.textContent = isExpanded
+          ? "Collapse file output"
+          : "Show full file output";
+      });
+    });
+  });
+</script>

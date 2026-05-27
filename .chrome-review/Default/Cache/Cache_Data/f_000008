@@ -1,0 +1,483 @@
+<!DOCTYPE html><html lang="en" dir="ltr" data-theme="dark" class="astro-bguv2lll"> <head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Home | AppraiseJS</title><link rel="canonical" href="https://appraisejs-docs.vercel.app/"/><link rel="sitemap" href="/sitemap-index.xml"/><link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v5.18.1"/><meta name="generator" content="Starlight v0.37.6"/><meta property="og:title" content="Home"/><meta property="og:type" content="article"/><meta property="og:url" content="https://appraisejs-docs.vercel.app/"/><meta property="og:locale" content="en"/><meta property="og:description" content="Design browser tests visually, generate real Playwright and Cucumber artifacts, and keep execution local-first."/><meta property="og:site_name" content="AppraiseJS"/><meta name="twitter:card" content="summary_large_image"/><meta name="description" content="Design browser tests visually, generate real Playwright and Cucumber artifacts, and keep execution local-first."/><meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"/><link rel="icon" type="image/svg+xml" href="/favicon.svg"><vercel-analytics data-props="{}" data-params="{}" data-pathname="/"></vercel-analytics> <script type="module">var f="@vercel/analytics",l="1.6.1",w=()=>{window.va||(window.va=function(...r){(window.vaq=window.vaq||[]).push(r)})};function d(){return typeof window<"u"}function u(){try{const e="production"}catch{}return"production"}function v(e="auto"){if(e==="auto"){window.vam=u();return}window.vam=e}function m(){return(d()?window.vam:u())||"production"}function c(){return m()==="development"}function b(e,r){if(!e||!r)return e;let n=e;try{const t=Object.entries(r);for(const[a,i]of t)if(!Array.isArray(i)){const o=s(i);o.test(n)&&(n=n.replace(o,`/[${a}]`))}for(const[a,i]of t)if(Array.isArray(i)){const o=s(i.join("/"));o.test(n)&&(n=n.replace(o,`/[...${a}]`))}return n}catch{return e}}function s(e){return new RegExp(`/${h(e)}(?=[/?#]|$)`)}function h(e){return e.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}function y(e){return e.scriptSrc?e.scriptSrc:c()?"https://va.vercel-scripts.com/v1/script.debug.js":e.basePath?`${e.basePath}/insights/script.js`:"/_vercel/insights/script.js"}function g(e={debug:!0}){var r;if(!d())return;v(e.mode),w(),e.beforeSend&&((r=window.va)==null||r.call(window,"beforeSend",e.beforeSend));const n=y(e);if(document.head.querySelector(`script[src*="${n}"]`))return;const t=document.createElement("script");t.src=n,t.defer=!0,t.dataset.sdkn=f+(e.framework?`/${e.framework}`:""),t.dataset.sdkv=l,e.disableAutoTrack&&(t.dataset.disableAutoTrack="1"),e.endpoint?t.dataset.endpoint=e.endpoint:e.basePath&&(t.dataset.endpoint=`${e.basePath}/insights`),e.dsn&&(t.dataset.dsn=e.dsn),t.onerror=()=>{const a=c()?"Please check if any ad blockers are enabled and try again.":"Be sure to enable Web Analytics for your project and deploy again. See https://vercel.com/docs/analytics/quickstart for more information.";console.log(`[Vercel Web Analytics] Failed to load script from ${n}. ${a}`)},c()&&e.debug===!1&&(t.dataset.debug="false"),document.head.appendChild(t)}function p({route:e,path:r}){var n;(n=window.va)==null||n.call(window,"pageview",{route:e,path:r})}function k(){try{return}catch{}}customElements.define("vercel-analytics",class extends HTMLElement{constructor(){super();try{const r=JSON.parse(this.dataset.props??"{}"),n=JSON.parse(this.dataset.params??"{}");g({...r,disableAutoTrack:!0,framework:"astro",basePath:k(),beforeSend:window.webAnalyticsBeforeSend});const t=this.dataset.pathname;p({route:b(t??"",n),path:t})}catch(r){throw new Error(`Failed to parse WebAnalytics properties: ${r}`)}}});</script><vercel-speed-insights data-props="{}" data-params="{}" data-pathname="/"></vercel-speed-insights> <script type="module">var o="@vercel/speed-insights",u="1.3.1",f=()=>{window.si||(window.si=function(...r){(window.siq=window.siq||[]).push(r)})};function l(){return typeof window<"u"}function h(){try{const e="production"}catch{}return"production"}function d(){return h()==="development"}function v(e,r){if(!e||!r)return e;let n=e;try{const t=Object.entries(r);for(const[s,i]of t)if(!Array.isArray(i)){const a=c(i);a.test(n)&&(n=n.replace(a,`/[${s}]`))}for(const[s,i]of t)if(Array.isArray(i)){const a=c(i.join("/"));a.test(n)&&(n=n.replace(a,`/[...${s}]`))}return n}catch{return e}}function c(e){return new RegExp(`/${g(e)}(?=[/?#]|$)`)}function g(e){return e.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}function m(e){return e.scriptSrc?e.scriptSrc:d()?"https://va.vercel-scripts.com/v1/speed-insights/script.debug.js":e.dsn?"https://va.vercel-scripts.com/v1/speed-insights/script.js":e.basePath?`${e.basePath}/speed-insights/script.js`:"/_vercel/speed-insights/script.js"}function w(e={}){var r;if(!l()||e.route===null)return null;f();const n=m(e);if(document.head.querySelector(`script[src*="${n}"]`))return null;e.beforeSend&&((r=window.si)==null||r.call(window,"beforeSend",e.beforeSend));const t=document.createElement("script");return t.src=n,t.defer=!0,t.dataset.sdkn=o+(e.framework?`/${e.framework}`:""),t.dataset.sdkv=u,e.sampleRate&&(t.dataset.sampleRate=e.sampleRate.toString()),e.route&&(t.dataset.route=e.route),e.endpoint?t.dataset.endpoint=e.endpoint:e.basePath&&(t.dataset.endpoint=`${e.basePath}/speed-insights/vitals`),e.dsn&&(t.dataset.dsn=e.dsn),d()&&e.debug===!1&&(t.dataset.debug="false"),t.onerror=()=>{console.log(`[Vercel Speed Insights] Failed to load script from ${n}. Please check if any content blockers are enabled and try again.`)},document.head.appendChild(t),{setRoute:s=>{t.dataset.route=s??void 0}}}function p(){try{return}catch{}}customElements.define("vercel-speed-insights",class extends HTMLElement{constructor(){super();try{const r=JSON.parse(this.dataset.props??"{}"),n=JSON.parse(this.dataset.params??"{}"),t=v(this.dataset.pathname??"",n);w({route:t,...r,framework:"astro",basePath:p(),beforeSend:window.speedInsightsBeforeSend})}catch(r){throw new Error(`Failed to parse SpeedInsights properties: ${r}`)}}});</script><script>(() => {
+  const ENHANCED_ATTR = "data-docs-lightbox-enhanced";
+  const OPT_OUT_VALUE = "off";
+  const DIALOG_ID = "appraise-docs-image-lightbox";
+
+  function getState() {
+    return (window.__APPRAISE_DOCS_IMAGE_LIGHTBOX__ ??= {
+      activeTrigger: null,
+      bound: false,
+      elements: null,
+    });
+  }
+
+  function getImageLabel(image) {
+    const alt = image.alt.trim();
+    return alt ? `View larger image: ${alt}` : "View larger image";
+  }
+
+  function getDialogLabel(image) {
+    const alt = image.alt.trim();
+    return alt ? `Expanded image: ${alt}` : "Expanded documentation image";
+  }
+
+  function ensureDialog() {
+    const state = getState();
+    if (state.elements) {
+      return state.elements;
+    }
+
+    const dialog = document.createElement("dialog");
+    dialog.id = DIALOG_ID;
+    dialog.className = "docs-image-lightbox__dialog";
+    dialog.setAttribute("aria-modal", "true");
+    dialog.setAttribute("aria-label", "Expanded documentation image");
+
+    const panel = document.createElement("div");
+    panel.className = "docs-image-lightbox__panel";
+
+    const toolbar = document.createElement("div");
+    toolbar.className = "docs-image-lightbox__toolbar";
+
+    const caption = document.createElement("p");
+    caption.className = "docs-image-lightbox__caption";
+    caption.hidden = true;
+
+    const closeButton = document.createElement("button");
+    closeButton.type = "button";
+    closeButton.className = "docs-image-lightbox__close";
+    closeButton.textContent = "Close";
+    closeButton.setAttribute("aria-label", "Close enlarged image");
+
+    const image = document.createElement("img");
+    image.className = "docs-image-lightbox__full";
+    image.alt = "";
+
+    toolbar.append(caption, closeButton);
+    panel.append(toolbar, image);
+    dialog.append(panel);
+    document.body.append(dialog);
+
+    closeButton.addEventListener("click", () => {
+      if (dialog.open) {
+        dialog.close();
+      }
+    });
+
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog && dialog.open) {
+        dialog.close();
+      }
+    });
+
+    dialog.addEventListener("close", () => {
+      image.removeAttribute("src");
+      image.alt = "";
+      caption.textContent = "";
+      caption.hidden = true;
+
+      const { activeTrigger } = getState();
+      getState().activeTrigger = null;
+      activeTrigger?.focus();
+    });
+
+    state.elements = {
+      caption,
+      closeButton,
+      dialog,
+      image,
+    };
+
+    return state.elements;
+  }
+
+  function openLightbox(image, trigger) {
+    const elements = ensureDialog();
+    const alt = image.alt.trim();
+    const source = image.currentSrc || image.src;
+
+    getState().activeTrigger = trigger;
+
+    elements.image.src = source;
+    elements.image.alt = alt;
+    elements.dialog.setAttribute("aria-label", getDialogLabel(image));
+
+    if (alt) {
+      elements.caption.hidden = false;
+      elements.caption.textContent = alt;
+    } else {
+      elements.caption.hidden = true;
+      elements.caption.textContent = "";
+    }
+
+    if (!elements.dialog.open) {
+      elements.dialog.showModal();
+    }
+  }
+
+  function enhanceImage(image) {
+    if (image.getAttribute(ENHANCED_ATTR) === "true") {
+      return;
+    }
+
+    if (image.dataset.lightbox === OPT_OUT_VALUE) {
+      return;
+    }
+
+    image.setAttribute(ENHANCED_ATTR, "true");
+    image.classList.add("docs-image-lightbox__preview");
+    image.tabIndex = 0;
+    image.setAttribute("role", "button");
+    image.setAttribute("aria-label", getImageLabel(image));
+
+    image.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      openLightbox(image, image);
+    });
+
+    image.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") {
+        return;
+      }
+
+      event.preventDefault();
+      openLightbox(image, image);
+    });
+
+  }
+
+  function enhanceDocsImages() {
+    const markdownRoot = document.querySelector(".sl-markdown-content");
+    if (!markdownRoot || document.querySelector(".landing-root")) {
+      return;
+    }
+
+    markdownRoot.querySelectorAll("img").forEach((image) => {
+      enhanceImage(image);
+    });
+  }
+
+  function queueEnhancement() {
+    window.requestAnimationFrame(() => {
+      enhanceDocsImages();
+    });
+  }
+
+  function bind() {
+    const state = getState();
+    if (state.bound) {
+      queueEnhancement();
+      return;
+    }
+
+    state.bound = true;
+
+    document.addEventListener("DOMContentLoaded", queueEnhancement);
+    document.addEventListener("astro:page-load", queueEnhancement);
+    document.addEventListener("astro:after-swap", queueEnhancement);
+
+    queueEnhancement();
+  }
+
+  bind();
+})();
+</script><script type="module">
+  import mermaid from "mermaid";
+
+  const mermaidState = (window.__APPRAISE_MERMAID_STATE__ ??= {
+    bound: false,
+    theme: null,
+  });
+
+  function getTheme() {
+    return document.documentElement.dataset.theme === "light"
+      ? "default"
+      : "dark";
+  }
+
+  function convertMermaidCodeBlocks() {
+    const blocks = document.querySelectorAll(
+      'pre[data-language="mermaid"], pre > code.language-mermaid',
+    );
+
+    blocks.forEach((el) => {
+      const pre = el.matches("pre") ? el : el.parentElement;
+      const code = el.matches("code") ? el : el.querySelector("code");
+      const definition = (code?.textContent ?? "").trim();
+
+      if (!pre || !definition) return;
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "mermaid-diagram";
+
+      const diagram = document.createElement("div");
+      diagram.className = "mermaid";
+      diagram.dataset.originalDefinition = definition;
+      diagram.textContent = definition;
+
+      wrapper.appendChild(diagram);
+      pre.replaceWith(wrapper);
+    });
+  }
+
+  function resetForThemeChange() {
+    document.querySelectorAll(".mermaid").forEach((diagram) => {
+      const definition = diagram.dataset.originalDefinition;
+      if (!definition) return;
+
+      diagram.removeAttribute("data-processed");
+      diagram.removeAttribute("id");
+      diagram.textContent = definition;
+    });
+  }
+
+  async function renderMermaidDiagrams() {
+    convertMermaidCodeBlocks();
+
+    const theme = getTheme();
+    if (mermaidState.theme !== theme) {
+      mermaid.initialize({ startOnLoad: false, theme });
+      mermaidState.theme = theme;
+      resetForThemeChange();
+    }
+
+    const nodes = Array.from(
+      document.querySelectorAll(".mermaid:not([data-processed='true'])"),
+    );
+    if (!nodes.length) return;
+
+    try {
+      await mermaid.run({ nodes });
+    } catch (error) {
+      console.error("Failed to render Mermaid diagram", error);
+    }
+  }
+
+  function queueRender() {
+    window.requestAnimationFrame(() => {
+      void renderMermaidDiagrams();
+    });
+  }
+
+  if (!mermaidState.bound) {
+    mermaidState.bound = true;
+
+    document.addEventListener("DOMContentLoaded", queueRender);
+    document.addEventListener("astro:page-load", queueRender);
+    document.addEventListener("astro:after-swap", queueRender);
+
+    const observer = new MutationObserver(queueRender);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+  }
+
+  queueRender();
+</script><script>
+	window.StarlightThemeProvider = {
+		updatePickers() { /* no-op: theme toggle removed */ },
+	};
+	document.documentElement.dataset.theme = 'dark';
+</script><link rel="stylesheet" href="/_astro/print.DNXP8c50.css" media="print"><link rel="stylesheet" href="/_astro/index.BEtzSVGk.css"><script type="module" src="/_astro/page.B1D-nYk3.js"></script><link rel="stylesheet" href="/_astro/landing.DbU_hbdg.css"><link rel="stylesheet" href="/_astro/GeneratedMockIde_astro_astro_type_style_index_0_lang.B1kRy9b1.css"></head> <body class="astro-bguv2lll"> <a href="#_top" class="astro-7q3lir66">Skip to content</a>  <div class="page sl-flex astro-vrdttmbt"> <header class="header astro-vrdttmbt"><div class="header astro-kmkmnagf"> <div class="title-wrapper sl-flex astro-kmkmnagf"> <a href="/" class="site-title sl-flex astro-m46x6ez3">  <img class="astro-m46x6ez3" alt="AppraiseJS" src="/_astro/logo.C0DQF7_7.svg" width="128" height="128">  <span class="astro-m46x6ez3" translate="no"> AppraiseJS </span> </a>  </div> <div class="sl-flex print:hidden astro-kmkmnagf"> <site-search class="astro-kmkmnagf astro-v37mnknz" data-translations="{&#34;placeholder&#34;:&#34;Search&#34;}"> <button data-open-modal disabled aria-label="Search" aria-keyshortcuts="Control+K" class="astro-v37mnknz"> <svg aria-hidden="true" class="astro-v37mnknz astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg> <span class="sl-hidden md:sl-block astro-v37mnknz" aria-hidden="true">Search</span> <kbd class="sl-hidden md:sl-flex astro-v37mnknz" style="display: none;"> <kbd class="astro-v37mnknz">Ctrl</kbd><kbd class="astro-v37mnknz">K</kbd> </kbd> </button> <dialog style="padding:0" aria-label="Search" class="astro-v37mnknz"> <div class="dialog-frame sl-flex astro-v37mnknz">  <button data-close-modal class="sl-flex md:sl-hidden astro-v37mnknz"> Cancel </button> <div class="search-container astro-v37mnknz"> <div id="starlight__search" class="astro-v37mnknz"></div> </div> </div> </dialog> </site-search>  <script>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+		const platformKey = shortcut.querySelector('kbd');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.cjYDvRdi.js"></script>   </div> <div class="sl-hidden md:sl-flex print:hidden right-group astro-kmkmnagf"> <div class="sl-flex social-icons astro-kmkmnagf"> <a href="https://github.com/jamil2018/appraisejs-core" rel="me" class="sl-flex astro-wy4te6ga"><span class="sr-only astro-wy4te6ga">GitHub</span><svg aria-hidden="true" class="astro-wy4te6ga astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a> </div>  <script type="module">class s extends HTMLElement{constructor(){super();const e=this.querySelector("select");e&&(e.addEventListener("change",t=>{t.currentTarget instanceof HTMLSelectElement&&(window.location.pathname=t.currentTarget.value)}),window.addEventListener("pageshow",t=>{if(!t.persisted)return;const n=e.querySelector("option[selected]")?.index;n!==e.selectedIndex&&(e.selectedIndex=n??0)}))}}customElements.define("starlight-lang-select",s);</script> </div> </div> </header>  <div class="main-frame astro-vrdttmbt">  <script type="module">const a=document.getElementById("starlight__sidebar"),n=a?.querySelector("sl-sidebar-state-persist"),o="sl-sidebar-state",i=()=>{let t=[];const e=n?.dataset.hash||"";try{const s=sessionStorage.getItem(o),r=JSON.parse(s||"{}");Array.isArray(r.open)&&r.hash===e&&(t=r.open)}catch{}return{hash:e,open:t,scroll:a?.scrollTop||0}},c=t=>{try{sessionStorage.setItem(o,JSON.stringify(t))}catch{}},d=()=>c(i()),l=(t,e)=>{const s=i();s.open[e]=t,c(s)};n?.addEventListener("click",t=>{if(!(t.target instanceof Element))return;const e=t.target.closest("summary")?.closest("details");if(!e)return;const s=e.querySelector("sl-sidebar-restore"),r=parseInt(s?.dataset.index||"");isNaN(r)||l(!e.open,r)});addEventListener("visibilitychange",()=>{document.visibilityState==="hidden"&&d()});addEventListener("pageHide",d);</script> <div class="lg:sl-flex astro-67yu43on">  <div class="main-pane astro-67yu43on">  <main data-pagefind-body class="astro-bguv2lll" lang="en" dir="ltr">    <div class="content-panel astro-7nkwcw3z"> <div class="sl-container astro-7nkwcw3z"> <h1 id="_top" class="astro-j6tvhyss">Home</h1>  </div> </div>  <div class="content-panel astro-7nkwcw3z"> <div class="sl-container astro-7nkwcw3z"> <div class="sl-markdown-content"> <div class="landing-root"><section class="landing-navbar-shell" aria-label="Landing navigation"> <div class="landing-navbar" id="landing-navbar"> <a class="landing-navbar__brand" href="/" aria-label="AppraiseJS home"> <img src="/logo.svg" alt="" class="landing-navbar__logo"> <span>AppraiseJS</span> </a> <button type="button" class="landing-navbar__hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="landing-navbar-menu" id="landing-navbar-hamburger"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-menu landing-navbar__menu-icon"> <path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path>  </svg> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-x landing-navbar__close-icon"> <path d="M18 6 6 18"></path><path d="m6 6 12 12"></path>  </svg> </button> <nav class="landing-navbar__links" id="landing-navbar-menu" aria-label="Landing links"> <a href="/getting-started/quick-start/">Try locally</a> <a href="#generated-output">Generated output</a> <a href="/getting-started/overview/#see-it-in-action">View demo</a> <a href="https://github.com/jamil2018/appraisejs-core" target="_blank" rel="noopener noreferrer" class="landing-navbar__github"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-external-link"> <path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>  </svg>
+GitHub
+</a> </nav> </div> </section> <script type="module">const r=window.__appraiseLandingNavbar??={cleanup:null};function l(){r.cleanup?.();const t=document.getElementById("landing-navbar"),e=document.getElementById("landing-navbar-hamburger"),i=document.getElementById("landing-navbar-menu");if(!(t&&e&&i))return;const a=new AbortController,s=()=>{t.classList.remove("is-open"),e.setAttribute("aria-expanded","false")};e.addEventListener("click",()=>{const n=t.classList.toggle("is-open");e.setAttribute("aria-expanded",String(n))},{signal:a.signal}),i.querySelectorAll("a").forEach(n=>{n.addEventListener("click",s,{signal:a.signal})}),document.addEventListener("keydown",n=>{n.key==="Escape"&&s()},{signal:a.signal}),r.cleanup=()=>a.abort()}document.addEventListener("astro:page-load",l);document.addEventListener("astro:before-swap",()=>r.cleanup?.());l();</script><section class="landing-hero landing-shell" aria-labelledby="landing-hero-heading"> <div class="landing-hero__copy"> <p class="landing-kicker">Open source visual test automation</p> <h1 id="landing-hero-heading">
+Bridge QA and Engineering with visual tests you can actually version
+      control.
+</h1> <p class="landing-hero__description">
+Visually author browser flows and generate reviewable Playwright/Cucumber
+      artifacts your team can run locally, inspect in git, and carry into CI.
+</p> <div class="landing-hero__install" aria-label="Install command"> <pre class="landing-hero__command"><code data-hero-install-command><span class="token-key">npx</span><span class="token-command"> create-appraisejs@latest</span></code></pre> <button type="button" class="landing-hero__copy-button" data-hero-copy-command aria-label="Copy install command"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-copy landing-hero__copy-icon"> <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>  </svg> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-check landing-hero__copy-icon landing-hero__copy-icon--success"> <path d="M20 6 9 17l-5-5"></path>  </svg> </button> </div> <a class="landing-hero__output-link" href="#generated-output">Or see the generated output first -&gt;</a> <figure class="landing-hero__video-card" aria-label="Visual editor generating Playwright artifacts"> <div class="landing-panel__bar"> <span>visual editor preview</span> <span>generates repo artifacts</span> </div> <video class="landing-hero__video" src="/landing/media/hero/hero-section-video.mp4" autoplay muted loop playsinline preload="metadata">
+Your browser does not support embedded video.
+</video> </figure> </div> </section> <script>(function(){const installCommand = "npx create-appraisejs@latest";
+
+  function initHeroCopy() {
+    const button = document.querySelector("[data-hero-copy-command]");
+    if (!button) return;
+
+    let resetTimer;
+
+    button.addEventListener("click", async () => {
+      window.clearTimeout(resetTimer);
+
+      try {
+        await navigator.clipboard.writeText(installCommand);
+      } catch {
+        const code = document.querySelector("[data-hero-install-command]");
+        const range = document.createRange();
+        range.selectNodeContents(code);
+        const selection = window.getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+        document.execCommand("copy");
+        selection?.removeAllRanges();
+      }
+
+      button.classList.add("is-copied");
+      button.setAttribute("aria-label", "Copied");
+
+      resetTimer = window.setTimeout(() => {
+        button.classList.remove("is-copied");
+        button.setAttribute("aria-label", "Copy install command");
+      }, 2000);
+    });
+  }
+
+  document.addEventListener("astro:page-load", initHeroCopy);
+  initHeroCopy();
+})();</script><section class="evaluate-path landing-shell" aria-labelledby="evaluate-path-heading"> <div class="docs-preview__copy"> <p class="landing-kicker">Evaluate in 15 minutes</p> <h2 id="evaluate-path-heading" class="landing-section-title">
+Prove it to yourself in 15 minutes.
+</h2> </div> <div class="docs-preview__grid evaluate-path__grid"> <a href="/getting-started/quick-start/" class="evaluate-path__step--primary"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-square-terminal"> <path d="m7 11 2-2-2-2"></path><path d="M11 13h4"></path><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>  </svg> <span>01</span> <strong>Run `npx create-appraisejs@latest`</strong> <p>Scaffold the local project and open the generated workspace.</p> <div class="evaluate-path__command" aria-label="Install command"> <code>npx create-appraisejs@latest</code> <button type="button" data-evaluate-copy-command aria-label="Copy install command"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-copy"> <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>  </svg> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-check evaluate-path__copy-icon--success"> <path d="M20 6 9 17l-5-5"></path>  </svg> </button> </div>  </a><a href="/getting-started/creating-tests/"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-monitor-play"> <path d="M15.033 9.44a.647.647 0 0 1 0 1.12l-4.065 2.352a.645.645 0 0 1-.968-.56V7.648a.645.645 0 0 1 .967-.56z"></path><path d="M12 17v4"></path><path d="M8 21h8"></path><rect x="2" y="3" width="20" height="14" rx="2"></rect>  </svg> <span>02</span> <strong>Build one visual smoke flow</strong> <p>Author a small browser journey with locators and assertions.</p>  <span class="evaluate-path__resource-link"> Open creating-tests guide <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-arrow-right"> <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>  </svg> </span> </a><a href="#generated-output"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-file-code-corner"> <path d="M4 12.15V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2h-3.35"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="m5 16-3 3 3 3"></path><path d="m9 22 3-3-3-3"></path>  </svg> <span>03</span> <strong>Inspect generated Playwright/Cucumber output</strong> <p>Review the feature, step code, locator data, and report shape.</p>  <span class="evaluate-path__resource-link"> Open generated output sample <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-arrow-right"> <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>  </svg> </span> </a> </div> </section> <script>(function(){const installCommand = "npx create-appraisejs@latest";
+
+  function initEvaluateCopy() {
+    const button = document.querySelector("[data-evaluate-copy-command]");
+    if (!button) return;
+
+    let resetTimer;
+
+    button.addEventListener("click", async (event) => {
+      event.preventDefault();
+      window.clearTimeout(resetTimer);
+
+      try {
+        await navigator.clipboard.writeText(installCommand);
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(button.previousElementSibling);
+        const selection = window.getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+        document.execCommand("copy");
+        selection?.removeAllRanges();
+      }
+
+      button.classList.add("is-copied");
+      button.setAttribute("aria-label", "Copied");
+
+      resetTimer = window.setTimeout(() => {
+        button.classList.remove("is-copied");
+        button.setAttribute("aria-label", "Copy install command");
+      }, 2000);
+    });
+  }
+
+  document.addEventListener("astro:page-load", initEvaluateCopy);
+  initEvaluateCopy();
+})();</script><section class="landing-touch-surfaces landing-shell" aria-labelledby="touch-surfaces-heading"> <div class="landing-section-copy"> <p class="landing-kicker">Team handoff</p> <h2 id="touch-surfaces-heading" class="landing-section-title">
+Anyone authors flows, engineers review files, CI runs normal automation.
+</h2> <p class="landing-section-description">
+AppraiseJS gives the whole team a visual authoring layer while preserving
+      the Playwright/Cucumber artifacts engineers expect to inspect, version,
+      and run in existing pipelines.
+</p> </div> <div class="landing-touch-surfaces__proof" aria-label="Generated files from the 15-minute result"> <div class="landing-touch-surfaces__proof-step"> <span class="landing-touch-surfaces__proof-icon" aria-hidden="true"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-file-code-corner"> <path d="M4 12.15V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2h-3.35"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="m5 16-3 3 3 3"></path><path d="m9 22 3-3-3-3"></path>  </svg> </span> <div class="landing-touch-surfaces__proof-flow"> <span class="landing-touch-surfaces__proof-label">Test Suite</span> <span class="landing-touch-surfaces__proof-arrow" aria-hidden="true"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-arrow-down"> <path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path>  </svg> </span> <strong>.feature</strong> </div> </div><div class="landing-touch-surfaces__proof-step"> <span class="landing-touch-surfaces__proof-icon" aria-hidden="true"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-shield-check"> <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path>  </svg> </span> <div class="landing-touch-surfaces__proof-flow"> <span class="landing-touch-surfaces__proof-label">Test Case</span> <span class="landing-touch-surfaces__proof-arrow" aria-hidden="true"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-arrow-down"> <path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path>  </svg> </span> <strong>*.feature.scenario</strong> </div> </div><div class="landing-touch-surfaces__proof-step"> <span class="landing-touch-surfaces__proof-icon" aria-hidden="true"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-git-branch"> <path d="M15 6a9 9 0 0 0-9 9V3"></path><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle>  </svg> </span> <div class="landing-touch-surfaces__proof-flow"> <span class="landing-touch-surfaces__proof-label">Template Step</span> <span class="landing-touch-surfaces__proof-arrow" aria-hidden="true"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-arrow-down"> <path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path>  </svg> </span> <strong>*.step.ts</strong> </div> </div><div class="landing-touch-surfaces__proof-step"> <span class="landing-touch-surfaces__proof-icon" aria-hidden="true"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-file-code-corner"> <path d="M4 12.15V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2h-3.35"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="m5 16-3 3 3 3"></path><path d="m9 22 3-3-3-3"></path>  </svg> </span> <div class="landing-touch-surfaces__proof-flow"> <span class="landing-touch-surfaces__proof-label">Locators</span> <span class="landing-touch-surfaces__proof-arrow" aria-hidden="true"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-arrow-down"> <path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path>  </svg> </span> <strong>locators.json</strong> </div> </div><div class="landing-touch-surfaces__proof-step"> <span class="landing-touch-surfaces__proof-icon" aria-hidden="true"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-square-terminal"> <path d="m7 11 2-2-2-2"></path><path d="M11 13h4"></path><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>  </svg> </span> <div class="landing-touch-surfaces__proof-flow"> <span class="landing-touch-surfaces__proof-label">Evidence</span> <span class="landing-touch-surfaces__proof-arrow" aria-hidden="true"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-arrow-down"> <path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path>  </svg> </span> <strong>report.json</strong> </div> </div> </div> </section><section class="code-map landing-shell" id="generated-output" aria-labelledby="code-map-heading"> <div class="landing-section-copy"> <p class="landing-kicker">Generated Output</p> <h2 id="code-map-heading" class="landing-section-title">
+Inspect what gets committed to your repo beforehand
+</h2> <p class="landing-section-description">
+Start with the files. A visual checkout smoke test becomes Gherkin,
+      Cucumber steps using Playwright, locator data, and report evidence your
+      team can review before adopting the tool.
+</p> </div> <div class="proof-stage"> <div class="code-map__grid"> <article class="code-map__panel"> <div class="landing-panel__bar"> <span>AppraiseJS Entity Authoring</span> <span>Source</span> </div> <ul> <li> <span>Visual flow</span> <strong>Checkout smoke test</strong> </li><li> <span>Locator capture</span> <strong>Cart, email, payment selectors</strong> </li><li> <span>Reusable step</span> <strong>Sign in and complete purchase</strong> </li><li> <span>Local run</span> <strong>Chromium execution</strong> </li> </ul> </article> <div class="code-map__bridges" aria-hidden="true"> <div class="landing-panel__bar code-map__bridges-bar"> <span>&nbsp;</span> </div> <div class="code-map__bridge-list"> <div class="code-map__bridge"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-arrow-right"> <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>  </svg> </div><div class="code-map__bridge"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-arrow-right"> <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>  </svg> </div><div class="code-map__bridge"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-arrow-right"> <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>  </svg> </div><div class="code-map__bridge"> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-arrow-right"> <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>  </svg> </div> </div> </div> <article class="code-map__panel code-map__panel--output"> <div class="landing-panel__bar"> <span>AppraiseJS Engine Generated Artifacts</span> <span>Output</span> </div> <ul> <li> <span>features/checkout.feature</span> <strong>Readable Gherkin feature file with scenario</strong> </li><li> <span>locators/checkout.locators.json</span> <strong>Repo-owned locators with mapping to page routes</strong> </li><li> <span>steps/checkout.steps.ts</span> <strong>Playwright step definition with reusable parameters</strong> </li><li> <span>/reports/checkout/report.json</span> <strong>Cucumber report with timing, debug evidence, and scenario details</strong> </li> </ul> </article> </div> <ul class="code-map__mobile-list" aria-label="Visual workflow to repository output"> <li class="code-map__mobile-row"> <div class="code-map__mobile-cell"> <span>Visual flow</span> <strong>Checkout smoke test</strong> </div> <div class="code-map__mobile-arrow" aria-hidden="true"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-arrow-down"> <path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path>  </svg> </div> <div class="code-map__mobile-cell code-map__mobile-cell--output"> <span>features/checkout.feature</span> <strong>Readable Gherkin feature file with scenario</strong> </div> </li><li class="code-map__mobile-row"> <div class="code-map__mobile-cell"> <span>Locator capture</span> <strong>Cart, email, payment selectors</strong> </div> <div class="code-map__mobile-arrow" aria-hidden="true"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-arrow-down"> <path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path>  </svg> </div> <div class="code-map__mobile-cell code-map__mobile-cell--output"> <span>locators/checkout.locators.json</span> <strong>Repo-owned locators with mapping to page routes</strong> </div> </li><li class="code-map__mobile-row"> <div class="code-map__mobile-cell"> <span>Reusable step</span> <strong>Sign in and complete purchase</strong> </div> <div class="code-map__mobile-arrow" aria-hidden="true"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-arrow-down"> <path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path>  </svg> </div> <div class="code-map__mobile-cell code-map__mobile-cell--output"> <span>steps/checkout.steps.ts</span> <strong>Playwright step definition with reusable parameters</strong> </div> </li><li class="code-map__mobile-row"> <div class="code-map__mobile-cell"> <span>Local run</span> <strong>Chromium execution</strong> </div> <div class="code-map__mobile-arrow" aria-hidden="true"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-arrow-down"> <path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path>  </svg> </div> <div class="code-map__mobile-cell code-map__mobile-cell--output"> <span>/reports/checkout/report.json</span> <strong>Cucumber report with timing, debug evidence, and scenario details</strong> </div> </li> </ul> <article class="mock-ide not-content astro-sntcnv66" aria-labelledby="mock-ide-heading" data-mock-ide> <div class="landing-panel__bar astro-sntcnv66"> <span class="astro-sntcnv66">sample repo output</span> <span class="astro-sntcnv66">mock IDE</span> </div> <div class="mock-ide__body astro-sntcnv66"> <aside class="mock-ide__sidebar astro-sntcnv66" aria-label="Generated file tree"> <div class="mock-ide__sidebar-bar astro-sntcnv66"> <span class="astro-sntcnv66">Explorer</span> </div> <div class="mock-ide__sidebar-tree astro-sntcnv66"> <div class="mock-ide__tree-root astro-sntcnv66"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-folder-git-2 astro-sntcnv66"> <path d="M18 19a5 5 0 0 1-5-5v8"></path><path d="M9 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v5"></path><circle cx="13" cy="12" r="2"></circle><circle cx="20" cy="19" r="2"></circle>  </svg> <span class="astro-sntcnv66">tests/appraise/</span> </div> <div class="mock-ide__tree-group astro-sntcnv66" aria-label="Generated files"> <button type="button" class="mock-ide__tree-file is-active astro-sntcnv66" data-mock-file="feature" aria-pressed="true"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-file-code-corner astro-sntcnv66"> <path d="M4 12.15V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2h-3.35"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="m5 16-3 3 3 3"></path><path d="m9 22 3-3-3-3"></path>  </svg> <span class="astro-sntcnv66">tests/appraise/features/checkout-smoke.feature</span> </button><button type="button" class="mock-ide__tree-file astro-sntcnv66" data-mock-file="steps" aria-pressed="false"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-code-xml astro-sntcnv66"> <path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path>  </svg> <span class="astro-sntcnv66">tests/appraise/steps/checkout.steps.ts</span> </button><button type="button" class="mock-ide__tree-file astro-sntcnv66" data-mock-file="locators" aria-pressed="false"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-file-braces-corner astro-sntcnv66"> <path d="M14 22h4a2 2 0 0 0 2-2V8a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 14 2H6a2 2 0 0 0-2 2v6"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M5 14a1 1 0 0 0-1 1v2a1 1 0 0 1-1 1 1 1 0 0 1 1 1v2a1 1 0 0 0 1 1"></path><path d="M9 22a1 1 0 0 0 1-1v-2a1 1 0 0 1 1-1 1 1 0 0 1-1-1v-2a1 1 0 0 0-1-1"></path>  </svg> <span class="astro-sntcnv66">tests/appraise/locators/checkout.locators.json</span> </button><button type="button" class="mock-ide__tree-file astro-sntcnv66" data-mock-file="report" aria-pressed="false"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-file-braces-corner astro-sntcnv66"> <path d="M14 22h4a2 2 0 0 0 2-2V8a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 14 2H6a2 2 0 0 0-2 2v6"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M5 14a1 1 0 0 0-1 1v2a1 1 0 0 1-1 1 1 1 0 0 1 1 1v2a1 1 0 0 0 1 1"></path><path d="M9 22a1 1 0 0 0 1-1v-2a1 1 0 0 1 1-1 1 1 0 0 1-1-1v-2a1 1 0 0 0-1-1"></path>  </svg> <span class="astro-sntcnv66">test-results/appraise/checkout-smoke/report.json</span> </button> </div> </div> </aside> <div class="mock-ide__workspace astro-sntcnv66"> <div class="mock-ide__tabs astro-sntcnv66" role="tablist" aria-label="Generated sample files"> <button id="mock-tab-feature" type="button" role="tab" class="mock-ide__tab is-active astro-sntcnv66" data-mock-tab="feature" aria-controls="mock-panel-feature" aria-selected="true" tabindex="0"> checkout-smoke.feature </button><button id="mock-tab-steps" type="button" role="tab" class="mock-ide__tab astro-sntcnv66" data-mock-tab="steps" aria-controls="mock-panel-steps" aria-selected="false" tabindex="-1"> checkout.steps.ts </button><button id="mock-tab-locators" type="button" role="tab" class="mock-ide__tab astro-sntcnv66" data-mock-tab="locators" aria-controls="mock-panel-locators" aria-selected="false" tabindex="-1"> checkout.locators.json </button><button id="mock-tab-report" type="button" role="tab" class="mock-ide__tab astro-sntcnv66" data-mock-tab="report" aria-controls="mock-panel-report" aria-selected="false" tabindex="-1"> report.json </button> </div> <div class="mock-ide__panes astro-sntcnv66"> <section id="mock-panel-feature" class="mock-ide__pane is-active astro-sntcnv66" data-mock-pane="feature" role="tabpanel" aria-labelledby="mock-tab-feature"> <div class="mock-ide__pane-header astro-sntcnv66"> <h3 id="mock-ide-heading" class="astro-sntcnv66"> checkout-smoke.feature </h3> <span class="astro-sntcnv66">Gherkin</span> </div> <div class="mock-ide__code-wrap astro-sntcnv66" data-code-wrap> <pre class="mock-ide__pre astro-sntcnv66"><code class="astro-sntcnv66"><span class="line"><span style="color:#6A737D"># tests/appraise/features/checkout-smoke.feature</span></span><span class="line"><span style="color:#F97583">Feature</span><span style="color:#E1E4E8">:</span><span style="color:#9ECBFF"> Checkout smoke</span></span><span class="line"></span><span class="line"><span style="color:#F97583">  Scenario</span><span style="color:#E1E4E8">:</span><span style="color:#9ECBFF"> Returning buyer completes a card checkout</span></span><span class="line"><span style="color:#F97583">    When </span><span style="color:#E1E4E8">I add </span><span style="color:#9ECBFF">"Everyday Hoodie"</span><span style="color:#E1E4E8"> to the cart</span></span><span class="line"><span style="color:#F97583">    And </span><span style="color:#E1E4E8">I use the saved shipping address</span></span><span class="line"><span style="color:#F97583">    And </span><span style="color:#E1E4E8">I pay with </span><span style="color:#9ECBFF">"visa_success"</span></span><span class="line"><span style="color:#F97583">    Then </span><span style="color:#E1E4E8">the order confirmation should be visible</span></span><span class="line"><span style="color:#F97583">    And </span><span style="color:#E1E4E8">the confirmation total should equal </span><span style="color:#9ECBFF">"$64.00"</span></span></code></pre> <div class="mock-ide__fade astro-sntcnv66" aria-hidden="true"></div> </div> <button type="button" class="mock-ide__expand astro-sntcnv66" data-code-expand>
+Show full file output
+</button> </section><section id="mock-panel-steps" class="mock-ide__pane astro-sntcnv66" data-mock-pane="steps" role="tabpanel" aria-labelledby="mock-tab-steps"> <div class="mock-ide__pane-header astro-sntcnv66"> <h3 class="astro-sntcnv66"> checkout.steps.ts </h3> <span class="astro-sntcnv66">TypeScript</span> </div> <div class="mock-ide__code-wrap astro-sntcnv66" data-code-wrap> <pre class="mock-ide__pre astro-sntcnv66"><code class="astro-sntcnv66"><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { expect } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "@playwright/test"</span><span style="color:#E1E4E8">;</span></span><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> locators </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "../locators/checkout.locators.json"</span><span style="color:#E1E4E8">;</span></span><span class="line"></span><span class="line"><span style="color:#B392F0">When</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"I add {string} to the cart"</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">async</span><span style="color:#E1E4E8"> ({ </span><span style="color:#FFAB70">page</span><span style="color:#E1E4E8"> }, </span><span style="color:#FFAB70">itemName</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span><span class="line"><span style="color:#F97583">  await</span><span style="color:#E1E4E8"> page.</span><span style="color:#B392F0">getByRole</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"link"</span><span style="color:#E1E4E8">, { name: itemName }).</span><span style="color:#B392F0">click</span><span style="color:#E1E4E8">();</span></span><span class="line"><span style="color:#F97583">  await</span><span style="color:#E1E4E8"> page.</span><span style="color:#B392F0">locator</span><span style="color:#E1E4E8">(locators.product.addToCart.selector).</span><span style="color:#B392F0">click</span><span style="color:#E1E4E8">();</span></span><span class="line"><span style="color:#F97583">  await</span><span style="color:#B392F0"> expect</span><span style="color:#E1E4E8">(page.</span><span style="color:#B392F0">locator</span><span style="color:#E1E4E8">(locators.cart.summary.selector)).</span><span style="color:#B392F0">toBeVisible</span><span style="color:#E1E4E8">();</span></span><span class="line"><span style="color:#E1E4E8">});</span></span><span class="line"></span><span class="line"><span style="color:#B392F0">When</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"I pay with {string}"</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">async</span><span style="color:#E1E4E8"> ({ </span><span style="color:#FFAB70">page</span><span style="color:#E1E4E8"> }, </span><span style="color:#FFAB70">cardName</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span><span class="line"><span style="color:#F97583">  await</span><span style="color:#E1E4E8"> page.</span><span style="color:#B392F0">locator</span><span style="color:#E1E4E8">(locators.payment.savedCard.selector).</span><span style="color:#B392F0">selectOption</span><span style="color:#E1E4E8">(cardName);</span></span><span class="line"><span style="color:#F97583">  await</span><span style="color:#E1E4E8"> page.</span><span style="color:#B392F0">locator</span><span style="color:#E1E4E8">(locators.payment.submit.selector).</span><span style="color:#B392F0">click</span><span style="color:#E1E4E8">();</span></span><span class="line"><span style="color:#E1E4E8">});</span></span><span class="line"></span><span class="line"><span style="color:#B392F0">Then</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"the confirmation total should equal {string}"</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">async</span><span style="color:#E1E4E8"> ({ </span><span style="color:#FFAB70">page</span><span style="color:#E1E4E8"> }, </span><span style="color:#FFAB70">total</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span><span class="line"><span style="color:#F97583">  await</span><span style="color:#B392F0"> expect</span><span style="color:#E1E4E8">(page.</span><span style="color:#B392F0">locator</span><span style="color:#E1E4E8">(locators.order.total.selector)).</span><span style="color:#B392F0">toHaveText</span><span style="color:#E1E4E8">(total);</span></span><span class="line"><span style="color:#E1E4E8">});</span></span></code></pre> <div class="mock-ide__fade astro-sntcnv66" aria-hidden="true"></div> </div> <button type="button" class="mock-ide__expand astro-sntcnv66" data-code-expand>
+Show full file output
+</button> </section><section id="mock-panel-locators" class="mock-ide__pane astro-sntcnv66" data-mock-pane="locators" role="tabpanel" aria-labelledby="mock-tab-locators"> <div class="mock-ide__pane-header astro-sntcnv66"> <h3 class="astro-sntcnv66"> checkout.locators.json </h3> <span class="astro-sntcnv66">JSON</span> </div> <div class="mock-ide__code-wrap astro-sntcnv66" data-code-wrap> <pre class="mock-ide__pre astro-sntcnv66"><code class="astro-sntcnv66"><span class="line"><span style="color:#E1E4E8">{</span></span><span class="line"><span style="color:#79B8FF">  "addToCart"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"[data-testid='add-to-cart']"</span><span style="color:#E1E4E8">,</span></span><span class="line"><span style="color:#79B8FF">  "paymentSubmit"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"[data-testid='submit-payment']"</span><span style="color:#E1E4E8">,</span></span><span class="line"><span style="color:#79B8FF">  "orderTotal"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"[data-testid='confirmation-total']"</span></span><span class="line"><span style="color:#E1E4E8">}</span></span></code></pre> <div class="mock-ide__fade astro-sntcnv66" aria-hidden="true"></div> </div> <button type="button" class="mock-ide__expand astro-sntcnv66" data-code-expand>
+Show full file output
+</button> </section><section id="mock-panel-report" class="mock-ide__pane astro-sntcnv66" data-mock-pane="report" role="tabpanel" aria-labelledby="mock-tab-report"> <div class="mock-ide__pane-header astro-sntcnv66"> <h3 class="astro-sntcnv66"> report.json </h3> <span class="astro-sntcnv66">JSON</span> </div> <div class="mock-ide__code-wrap astro-sntcnv66" data-code-wrap> <pre class="mock-ide__pre astro-sntcnv66"><code class="astro-sntcnv66"><span class="line"><span style="color:#E1E4E8">{</span></span><span class="line"><span style="color:#79B8FF">  "status"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"passed"</span><span style="color:#E1E4E8">,</span></span><span class="line"><span style="color:#79B8FF">  "browser"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"chromium"</span><span style="color:#E1E4E8">,</span></span><span class="line"><span style="color:#79B8FF">  "durationMs"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">18420</span><span style="color:#E1E4E8">,</span></span><span class="line"><span style="color:#79B8FF">  "startedAt"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"2026-05-24T10:32:08.842Z"</span><span style="color:#E1E4E8">,</span></span><span class="line"><span style="color:#79B8FF">  "artifacts"</span><span style="color:#E1E4E8">: [</span></span><span class="line"><span style="color:#9ECBFF">    "trace.zip"</span><span style="color:#E1E4E8">,</span></span><span class="line"><span style="color:#9ECBFF">    "screenshots/order-confirmation.png"</span><span style="color:#E1E4E8">,</span></span><span class="line"><span style="color:#9ECBFF">    "run-evidence.json"</span></span><span class="line"><span style="color:#E1E4E8">  ],</span></span><span class="line"><span style="color:#79B8FF">  "steps"</span><span style="color:#E1E4E8">: [</span></span><span class="line"><span style="color:#E1E4E8">    { </span><span style="color:#79B8FF">"name"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"open storefront"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">"status"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"passed"</span><span style="color:#E1E4E8"> },</span></span><span class="line"><span style="color:#E1E4E8">    { </span><span style="color:#79B8FF">"name"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"complete checkout"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">"status"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"passed"</span><span style="color:#E1E4E8"> }</span></span><span class="line"><span style="color:#E1E4E8">  ]</span></span><span class="line"><span style="color:#E1E4E8">}</span></span></code></pre> <div class="mock-ide__fade astro-sntcnv66" aria-hidden="true"></div> </div> <button type="button" class="mock-ide__expand astro-sntcnv66" data-code-expand>
+Show full file output
+</button> </section> </div> </div> </div> </article>  <script type="module">const f=document.querySelectorAll("[data-mock-ide]");f.forEach(c=>{const r=[...c.querySelectorAll("[data-mock-tab], [data-mock-file]")],s=[...c.querySelectorAll("[data-mock-tab]")],n=[...c.querySelectorAll("[data-mock-file]")],d=[...c.querySelectorAll("[data-mock-pane]")],o=a=>{s.forEach(t=>{const e=t.dataset.mockTab===a;t.classList.toggle("is-active",e),t.setAttribute("aria-selected",String(e)),t.setAttribute("tabindex",e?"0":"-1")}),n.forEach(t=>{const e=t.dataset.mockFile===a;t.classList.toggle("is-active",e),t.setAttribute("aria-pressed",String(e))}),d.forEach(t=>{const e=t.dataset.mockPane===a;t.classList.toggle("is-active",e)})};r.forEach(a=>{a.addEventListener("click",()=>{const t=a.dataset.mockTab||a.dataset.mockFile;t&&o(t)})}),s.forEach((a,t)=>{a.addEventListener("keydown",e=>{if(e.key!=="ArrowRight"&&e.key!=="ArrowLeft")return;e.preventDefault();const k=e.key==="ArrowRight"?1:-1,i=s[(t+k+s.length)%s.length];i?.focus();const l=i?.dataset.mockTab;l&&o(l)})}),c.querySelectorAll("[data-code-expand]").forEach(a=>{a.addEventListener("click",()=>{const e=a.closest("[data-mock-pane]")?.classList.toggle("is-expanded");a.textContent=e?"Collapse file output":"Show full file output"})})});</script> </div> <div class="proof-support-grid" aria-label="Generated output support"> <article class="inspection-checklist"> <div class="inspection-checklist__heading"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-list-checks"> <path d="M13 5h8"></path><path d="M13 12h8"></path><path d="M13 19h8"></path><path d="m3 17 2 2 4-4"></path><path d="m3 7 2 2 4-4"></path>  </svg> <h3>What to inspect before adopting</h3> </div> <ul> <li> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-circle-check"> <circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path>  </svg> <span>Review the generated Gherkin, step code, and locator data.</span> </li><li> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-circle-check"> <circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path>  </svg> <span>Confirm the Playwright output fits your existing CI shape.</span> </li><li> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-circle-check"> <circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path>  </svg> <span>Check reports for enough failed-run debugging evidence.</span> </li> </ul> </article> <div class="proof-docs" aria-label="Relevant documentation"> <a href="/getting-started/creating-tests/"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-external-link"> <path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>  </svg> <span>Creating tests</span> <strong>See how visual flows transforms into test scenarios.</strong> </a><a href="/run-and-analyze/reports/"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-external-link"> <path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>  </svg> <span>Reports</span> <strong>Where local run evidence and report data live.</strong> </a> </div> </div> <div class="positioning-grid" aria-label="Why AppraiseJS fits engineering teams"> <article> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-circle-check"> <circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path>  </svg> <h3>Anyone can model flows</h3> <p>
+Browser journeys start as visual steps, locators, and assertions before
+        they become automation.
+</p> </article> <article> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-code-xml"> <path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path>  </svg> <h3>Engineers review generated code</h3> <p>
+The output lands as repo-owned Playwright/Cucumber files instead of
+        trapped recorder scripts.
+</p> </article> <article> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-git-pull-request-arrow"> <circle cx="5" cy="6" r="3"></circle><path d="M5 9v12"></path><circle cx="19" cy="18" r="3"></circle><path d="m15 9-3-3 3-3"></path><path d="M12 6h5a2 2 0 0 1 2 2v7"></path>  </svg> <h3>CI runs normal automation</h3> <p>
+Run locally first, then carry the same generated artifacts into your
+        existing CI loop.
+</p> </article> </div> <div class="section-cta"> <a class="landing-secondary-button" href="/getting-started/quick-start/"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-square-terminal"> <path d="m7 11 2-2-2-2"></path><path d="M11 13h4"></path><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>  </svg>
+Run quick start locally
+</a> </div> </section> <div class="mobile-sticky-cta" aria-label="Mobile quick start"> <a class="mobile-sticky-cta__quick-start" href="/getting-started/quick-start/"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-square-terminal"> <path d="m7 11 2-2-2-2"></path><path d="M11 13h4"></path><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>  </svg> <span>Quick start</span> </a> <span class="landing-visually-hidden" data-mobile-install-command>npx create-appraisejs@latest</span> <button type="button" class="mobile-sticky-cta__copy" data-mobile-copy-command aria-label="Copy install command"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-copy mobile-sticky-cta__icon"> <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>  </svg> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-check mobile-sticky-cta__icon mobile-sticky-cta__icon--success"> <path d="M20 6 9 17l-5-5"></path>  </svg> </button> </div> <script>(function(){const installCommand = "npx create-appraisejs@latest";
+
+  function initMobileInstallCopy() {
+    const button = document.querySelector("[data-mobile-copy-command]");
+    const code = document.querySelector("[data-mobile-install-command]");
+    if (!button || !code) return;
+
+    let resetTimer;
+
+    button.addEventListener("click", async () => {
+      window.clearTimeout(resetTimer);
+
+      try {
+        await navigator.clipboard.writeText(installCommand);
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(code);
+        const selection = window.getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+        document.execCommand("copy");
+        selection?.removeAllRanges();
+      }
+
+      button.classList.add("is-copied");
+      button.setAttribute("aria-label", "Copied");
+
+      resetTimer = window.setTimeout(() => {
+        button.classList.remove("is-copied");
+        button.setAttribute("aria-label", "Copy install command");
+      }, 2000);
+    });
+  }
+
+  document.addEventListener("astro:page-load", initMobileInstallCopy);
+  initMobileInstallCopy();
+})();</script><section class="trust-signals landing-shell" aria-label="Trust signals"> <div class="trust-signals__grid"> <div class="trust-signal"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-git-branch"> <path d="M15 6a9 9 0 0 0-9 9V3"></path><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle>  </svg> <span>Open source core</span> </div><div class="trust-signal"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-folder-git-2"> <path d="M18 19a5 5 0 0 1-5-5v8"></path><path d="M9 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v5"></path><circle cx="13" cy="12" r="2"></circle><circle cx="20" cy="19" r="2"></circle>  </svg> <span>Local-first project</span> </div><div class="trust-signal"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-file-code-corner"> <path d="M4 12.15V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2h-3.35"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="m5 16-3 3 3 3"></path><path d="m9 22 3-3-3-3"></path>  </svg> <span>Playwright/Cucumber artifacts</span> </div><div class="trust-signal"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-server-off"> <path d="M7 2h13a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-5"></path><path d="M10 10 2.5 2.5C2 2 2 2.5 2 5v3a2 2 0 0 0 2 2h6z"></path><path d="M22 17v-1a2 2 0 0 0-2-2h-1"></path><path d="M4 14a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16.5l1-.5.5.5-8-8H4z"></path><path d="M6 18h.01"></path><path d="m2 2 20 20"></path>  </svg> <span>No hosted runner required</span> </div><div class="trust-signal"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-book-open-check"> <path d="M12 21V7"></path><path d="m16 12 2 2 4-4"></path><path d="M22 6V4a1 1 0 0 0-1-1h-5a4 4 0 0 0-4 4 4 4 0 0 0-4-4H3a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6a1 1 0 0 0 1-1v-1.3"></path>  </svg> <span>Architecture, sync, reports, and runtime docs</span> </div><div class="trust-signal"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-square-terminal"> <path d="m7 11 2-2-2-2"></path><path d="M11 13h4"></path><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>  </svg> <span>Runs from the generated repo</span> </div> </div> </section><section class="landing-showcase landing-showcase--wide landing-showcase--execution" aria-labelledby="workflow-heading" data-execution-scroll> <div class="landing-shell landing-shell--wide"> <div class="landing-section-copy"> <p class="landing-kicker">Workflow proof</p> <h2 id="workflow-heading" class="landing-section-title">
+One workflow, concrete artifacts at every step.
+</h2> <p class="landing-section-description">
+Follow a single visual flow as it becomes locator context, generated
+        test files, and local run evidence.
+</p> </div> <div class="execution-model not-content" data-execution-model> <div class="execution-model__copy" aria-label="Execution model steps"> <button class="execution-step is-active is-revealed" type="button" data-execution-step="create" data-execution-index="0"> <span class="execution-step__index">01</span> <span> <strong>Create flow</strong> <small>Author the login journey as a saved flow definition.</small> </span> </button> <button class="execution-step" type="button" data-execution-step="configure" data-execution-index="1"> <span class="execution-step__index">02</span> <span> <strong>Add locators/assertions</strong> <small>Attach selectors and assertions to the locator map.</small> </span> </button> <button class="execution-step" type="button" data-execution-step="generate" data-execution-index="2"> <span class="execution-step__index">03</span> <span> <strong>Generate code</strong> <small>Emit the `.feature` file and Playwright step definitions.</small> </span> </button> <button class="execution-step" type="button" data-execution-step="execute" data-execution-index="3"> <span class="execution-step__index">04</span> <span> <strong>Run locally</strong> <small>Run the flow and keep report/log evidence in the project.</small> </span> </button> <button class="execution-step" type="button" data-execution-step="output" data-execution-index="4"> <span class="execution-step__index">05</span> <span> <strong>Examine reports</strong> <small>Inspect run evidence, timing, and failure details.</small> </span> </button> </div> <div class="execution-model__stage" aria-live="polite"> <article class="execution-visual execution-visual--create is-active" data-execution-visual="create"> <div class="execution-visual__mobile-copy"> <span>01</span> <strong>Create flow</strong> <p>Author the login journey as a saved flow definition.</p> </div> <div class="execution-window"> <div class="execution-window__bar"> <span>Create Test</span> <i aria-hidden="true"></i> </div> <div class="execution-canvas"> <div class="execution-node execution-node--navigate"> <strong>Navigate</strong> <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-navigation"> <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>  </svg></span> </div> <div class="execution-edge" aria-hidden="true"></div> <div class="execution-node execution-node--username"> <strong>Fill Username</strong> <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-type"> <path d="M12 4v16"></path><path d="M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2"></path><path d="M9 20h6"></path>  </svg></span> </div> <div class="execution-edge" aria-hidden="true"></div> <div class="execution-node execution-node--password"> <strong>Fill Password</strong> <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-key-round"> <path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"></path><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle>  </svg></span> </div> <div class="execution-edge" aria-hidden="true"></div> <div class="execution-node execution-node--click"> <strong>Click Login</strong> <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-mouse-pointer-click"> <path d="M14 4.1 12 6"></path><path d="m5.1 8-2.9-.8"></path><path d="m6 12-1.9 2"></path><path d="M7.2 2.2 8 5.1"></path><path d="M9.037 9.69a.498.498 0 0 1 .653-.653l11 4.5a.5.5 0 0 1-.074.949l-4.349 1.041a1 1 0 0 0-.74.739l-1.04 4.35a.5.5 0 0 1-.95.074z"></path>  </svg></span> </div> </div> </div> </article> <article class="execution-visual execution-visual--configure" data-execution-visual="configure"> <div class="execution-visual__mobile-copy"> <span>02</span> <strong>Add locators/assertions</strong> <p>Attach selectors and assertions to the locator map.</p> </div> <div class="execution-window"> <div class="execution-window__bar"> <span>Create Test</span> <button type="button" aria-label="Add test step"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-plus"> <path d="M5 12h14"></path><path d="M12 5v14"></path>  </svg></button> </div> <div class="execution-configure"> <div class="execution-configure__canvas"> <div class="execution-mini-node is-ready"> <strong>Navigate</strong> <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-navigation"> <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>  </svg></span> </div> <div class="execution-mini-edge" aria-hidden="true"></div> <div class="execution-mini-node is-ready"> <strong>Fill Username</strong> <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-type"> <path d="M12 4v16"></path><path d="M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2"></path><path d="M9 20h6"></path>  </svg></span> </div> <div class="execution-mini-edge" aria-hidden="true"></div> <div class="execution-mini-node is-ready"> <strong>Fill Password</strong> <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-key-round"> <path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"></path><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle>  </svg></span> </div> <div class="execution-mini-edge" aria-hidden="true"></div> <div class="execution-mini-node is-ready"> <strong>Click Login</strong> <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-mouse-pointer-click"> <path d="M14 4.1 12 6"></path><path d="m5.1 8-2.9-.8"></path><path d="m6 12-1.9 2"></path><path d="M7.2 2.2 8 5.1"></path><path d="M9.037 9.69a.498.498 0 0 1 .653-.653l11 4.5a.5.5 0 0 1-.074.949l-4.349 1.041a1 1 0 0 0-.74.739l-1.04 4.35a.5.5 0 0 1-.95.074z"></path>  </svg></span> </div> <div class="execution-mini-edge execution-mini-edge--assert" aria-hidden="true"></div> <div class="execution-mini-node execution-mini-node--assert"> <strong>Assert Text</strong> <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-check"> <path d="M20 6 9 17l-5-5"></path>  </svg></span> </div> </div> <div class="execution-popover execution-popover--step"> <div class="execution-popover__title">Add Node</div> <span></span> <span></span> <button type="button">
+Assert Text
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-chevron-down"> <path d="m6 9 6 6 6-6"></path>  </svg> </button> </div> <div class="execution-popover execution-popover--picker"> <div class="execution-popover__title">Extract Locator</div> <div class="execution-page-block"></div> <div class="execution-page-block is-selected"></div> <div class="execution-page-block"></div> <div class="execution-cursor"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-mouse-pointer-click"> <path d="M14 4.1 12 6"></path><path d="m5.1 8-2.9-.8"></path><path d="m6 12-1.9 2"></path><path d="M7.2 2.2 8 5.1"></path><path d="M9.037 9.69a.498.498 0 0 1 .653-.653l11 4.5a.5.5 0 0 1-.074.949l-4.349 1.041a1 1 0 0 0-.74.739l-1.04 4.35a.5.5 0 0 1-.95.074z"></path>  </svg></div> </div> </div> </div> </article> <article class="execution-visual execution-visual--generate" data-execution-visual="generate"> <div class="execution-visual__mobile-copy"> <span>03</span> <strong>Generate code</strong> <p>Emit the `.feature` file and Playwright step definitions.</p> </div> <div class="execution-window execution-window--generated"> <div class="execution-window__bar"> <span>Generated test files</span> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-code"> <path d="m16 18 6-6-6-6"></path><path d="m8 6-6 6 6 6"></path>  </svg> </div> <div class="execution-generated"> <div class="execution-generated__files"> <span class="is-active">login.feature</span> <span>login.steps.ts</span> <span>login.locators.json</span> </div> <pre class="execution-generated__code" aria-label="Generated feature and step output"><code><span class="token-comment"># features/login.feature</span>
+<span class="token-key">Feature:</span> Login smoke
+
+  <span class="token-key">Scenario:</span> Valid user signs in
+    <span class="token-key">When</span> I open the login page
+    <span class="token-key">And</span> I submit valid credentials
+    <span class="token-key">Then</span> the dashboard should be visible</code></pre> </div> </div> </article> <article class="execution-visual execution-visual--execute" data-execution-visual="execute"> <div class="execution-visual__mobile-copy"> <span>04</span> <strong>Run locally</strong> <p>Run the flow and keep report/log evidence in the project.</p> </div> <div class="execution-run-stack"> <div class="execution-window execution-window--run"> <div class="execution-window__bar"> <span>Create Test Run</span> <i aria-hidden="true"></i> </div> <div class="execution-run-form"> <span></span> <span></span> <span></span> <button type="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-play"> <path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"></path>  </svg> Start Test Run</button> </div> </div> <div class="execution-window execution-window--running"> <div class="execution-window__bar"> <span>Executing Tests</span> <i aria-hidden="true"></i> </div> <div class="execution-progress"> <span></span> </div> <div class="execution-run-fields"> <span></span> <span></span> <span></span> <span></span> </div> </div> </div> </article> <article class="execution-visual execution-visual--output" data-execution-visual="output"> <div class="execution-visual__mobile-copy"> <span>05</span> <strong>Examine reports</strong> <p>Inspect run evidence, timing, and failure details.</p> </div> <div class="execution-window"> <div class="execution-window__bar"> <span>Test Report</span> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-file-chart-column"> <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M8 18v-1"></path><path d="M12 18v-6"></path><path d="M16 18v-3"></path>  </svg> </div> <div class="execution-report"> <div class="execution-report__summary"> <span></span> <span></span> <span></span> </div> <div class="execution-report__graphs"> <i></i> <i></i> <i></i> </div> <div class="execution-report__table"> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> </div> </div> </div> </article> </div> </div> </div> </section> <script type="module">const S=document.querySelectorAll("[data-execution-model]");S.forEach(a=>{const c=a.closest("[data-execution-scroll]"),s=Array.from(a.querySelectorAll("[data-execution-step]")),u=Array.from(a.querySelectorAll("[data-execution-visual]"));if(s.length===0||u.length===0)return;let m=-1,r,g=!1,n;const h=window.matchMedia("(prefers-reduced-motion: reduce)").matches,v=window.matchMedia("(max-width: 760px)"),w=e=>{e.classList.remove("is-active"),e.offsetWidth,e.classList.add("is-active")},L=()=>{const e=v.matches;return a.classList.toggle("is-mobile-stack",e),e?(g||(g=!0,s.forEach((t,i)=>{t.classList.add("is-revealed"),t.classList.toggle("is-active",i===0),t.setAttribute("aria-pressed",String(i===0))}),u.forEach(t=>t.classList.remove("is-active")),n=new IntersectionObserver(t=>{t.forEach(i=>{if(i.isIntersecting){w(i.target);return}i.target.classList.remove("is-active")})},{rootMargin:"-8% 0px -18% 0px",threshold:.22}),u.forEach(t=>n?.observe(t))),!0):(n&&(n.disconnect(),n=void 0),g=!1,!1)},f=e=>{if(e===m&&s[e]?.classList.contains("is-active"))return;m=e;const t=s[e]?.getAttribute("data-execution-step");t&&(s.forEach((i,l)=>{const d=i.getAttribute("data-execution-step")===t;i.classList.toggle("is-active",d),i.classList.toggle("is-revealed",l<=e),i.setAttribute("aria-pressed",String(d))}),u.forEach(i=>{i.classList.toggle("is-active",i.getAttribute("data-execution-visual")===t)}))},b=()=>{if(r=void 0,L()||!c||h)return;const e=c.getBoundingClientRect(),t=Math.max(1,e.height-window.innerHeight),i=window.innerHeight*.22,l=Math.min(1,Math.max(0,(-e.top-i)/t)),E=[0,.14,.34,.56,.78].reduce((A,x,M)=>l>=x?M:A,0);f(E)},o=()=>{r||h||(r=window.requestAnimationFrame(b))};s.forEach((e,t)=>{e.addEventListener("click",()=>{if(f(t),!c||h||v.matches)return;const i=c.getBoundingClientRect().top+window.scrollY,l=Math.max(1,c.clientHeight-window.innerHeight),d=i+l*((t+.5)/Math.max(1,s.length));window.scrollTo({top:d,behavior:"smooth"})})});const p=new IntersectionObserver(([e])=>{e?.isIntersecting?o():r&&(window.cancelAnimationFrame(r),r=void 0)},{threshold:.35});window.addEventListener("scroll",o,{passive:!0}),window.addEventListener("resize",o),v.addEventListener("change",o),f(0),h&&s.forEach(e=>e.classList.add("is-revealed")),p.observe(a),o(),document.addEventListener("astro:before-swap",()=>{r&&window.cancelAnimationFrame(r),n&&n.disconnect(),window.removeEventListener("scroll",o),window.removeEventListener("resize",o),v.removeEventListener("change",o)},{once:!0})});</script><section class="engineer-trust landing-shell" aria-labelledby="engineer-trust-heading"> <div class="landing-section-copy"> <p class="landing-kicker">What engineers keep</p> <h2 id="engineer-trust-heading" class="landing-section-title">
+Visual authoring without giving up the engineering loop.
+</h2> <p class="landing-section-description">
+AppraiseJS should fit a serious test stack: generated artifacts stay
+      portable, execution stays local-first, and the evaluation path starts with
+      one real smoke test.
+</p> </div> <div class="engineer-trust__list"> <article> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-circle-check"> <circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path>  </svg> <span>Local execution</span> <strong>Run the generated project on your machine before CI.</strong> </article><article> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-circle-check"> <circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path>  </svg> <span>Git-reviewed files</span> <strong>Review feature files, steps, locators, and reports in PRs.</strong> </article><article> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-circle-check"> <circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path>  </svg> <span>CI-compatible runs</span> <strong>Carry the generated Playwright/Cucumber output into pipelines.</strong> </article><article> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-circle-check"> <circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path>  </svg> <span>Open source core</span> <strong>Inspect the implementation instead of trusting a black box.</strong> </article> </div> </section> <section class="comparison-block landing-shell" aria-labelledby="comparison-heading"> <div class="landing-section-copy"> <p class="landing-kicker">Tradeoffs</p> <h2 id="comparison-heading" class="landing-section-title">
+Use AppraiseJS when visual authoring and repo-owned automation both
+      matter.
+</h2> <p class="landing-section-description">
+It is not a replacement for every testing tool. It is a bridge for teams
+      that need non-code authoring without losing Playwright, Cucumber, git
+      review, and local execution.
+</p> </div> <div class="comparison-table" role="table" aria-label="Testing tool tradeoffs"> <div class="comparison-table__header" role="row"> <span role="columnheader">Current path</span> <span role="columnheader">Keep it when</span> <span role="columnheader">Use AppraiseJS when</span> </div> <div class="comparison-table__row" role="row"> <strong role="cell">Playwright alone</strong> <span role="cell">Engineers own all authoring, locators, maintenance, and review.</span> <span role="cell">Product, test, or engineering teammates need visual authoring while engineers still review repo output.</span> </div><div class="comparison-table__row" role="row"> <strong role="cell">Cypress and recorders</strong> <span role="cell">Quick capture and a single-tool workflow are enough.</span> <span role="cell">Generated Playwright/Cucumber files need to live in git, not recorder state.</span> </div><div class="comparison-table__row" role="row"> <strong role="cell">TestRail and Gherkin</strong> <span role="cell">Planning, traceability, and scenario language are the main need.</span> <span role="cell">Authoring, locators, execution, and reports must stay connected.</span> </div><div class="comparison-table__row" role="row"> <strong role="cell">Custom frameworks</strong> <span role="cell">Your team already has mature authoring, locator, CI, and reporting infrastructure.</span> <span role="cell">Fragmentation across those pieces is the problem to reduce.</span> </div> </div> <aside class="known-boundaries known-boundaries--not-for-you"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-triangle-alert"> <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path>  </svg> <div> <h3>Not for you if...</h3> <ul> <li>You want a hosted test-management suite to replace your existing planning tool.</li><li>Your engineers prefer to hand-author every test and do not need visual collaboration.</li><li>Your team is not willing to inspect generated code and own it in the repo.</li> </ul> </div> </aside> </section> <section class="open-source landing-shell" aria-labelledby="open-source-heading"> <div class="open-source__copy"> <p class="landing-kicker">Open source</p> <h2 id="open-source-heading" class="landing-section-title">
+No hidden runner. No generated-code black box.
+</h2> <p class="landing-section-description">
+AppraiseJS is built around local projects, pull requests, and automation
+      artifacts that remain useful outside the visual editor.
+</p> </div> <div class="open-source__actions"> <a class="landing-secondary-button" href="/getting-started/quick-start/"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-book-open"> <path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path>  </svg>
+Run quick start locally
+</a> <a class="open-source__link" href="https://github.com/jamil2018/appraisejs-core" target="_blank" rel="noopener noreferrer"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-external-link"> <path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>  </svg>
+View GitHub Repository
+</a> </div> </section><footer class="landing-footer landing-shell"> <div class="landing-footer__brand"> <strong>AppraiseJS</strong> <span>Deterministic browser automation from visual workflows.</span> </div> <nav class="landing-footer__links" aria-label="Footer links"> <a href="/getting-started/quick-start/">Quick Start</a> <a href="/reference/">Reference</a> <a href="/core-concepts/architecture-overview/">Architecture</a> <a href="https://github.com/jamil2018/appraisejs-core" target="_blank" rel="noopener noreferrer">
+GitHub
+</a> </nav> </footer></div> </div> <footer class="sl-flex astro-3yyafb3n"> <div class="meta sl-flex astro-3yyafb3n">   </div> <div class="pagination-links print:hidden astro-u2l5gyhi" dir="ltr">   </div>   </footer>  </div> </div>   </main> </div> </div>  </div> </div>  </body></html>
