@@ -62,13 +62,16 @@ import UIPath from "../../../components/UIPath.astro";
 
 ## How to think about Test Cases in AppraiseJS
 
-Think of Test Cases like this:
+Start with the core building blocks:
 
-- **Modules and environments** -> exist before you create the case
-- **Test case form** -> captures the title, description, suite, tags, and module
-- **Flow builder** -> defines what happens
-- **Node addition sidebar** -> adds steps and can create needed locators
-- **Scenario Preview** -> shows the generated test code in real time
+- **Modules** -> groups for test suites
+- **Environments** -> test environment configurations, such as base URLs and API routes. Environments are not required to fill out test case metadata, but they are helpful when creating locators from the builder.
+- **Test suites** -> groups for test cases
+
+The test case creation process has two parts:
+
+- **Test case metadata** -> setting the test case title, description, test suite, and tags
+- **Test case flow** -> a flow builder for building tests visually so users can create automated tests with less friction
 
 You are not writing scripts. You are designing test logic.
 
@@ -105,8 +108,7 @@ Enough theory, let's get hands-on.
 4. Before building the flow, fill in the basics:
    - **Title** -> short identifier, such as `Login success`
    - **Description** -> one sentence describing what this validates
-   - **Module** -> select `Authentication`
-   - **Test Suite** -> select an existing suite or create `Auth Smoke` from the form
+   - **Test Suite** -> select an existing suite, or create `Auth Smoke` from the form under the `Authentication` module
    - **Tags** -> select existing tags or create labels such as `@smoke` and `@auth`
 5. Use the flow builder to construct the test visually:
    - Each node is one action or assertion.
@@ -160,7 +162,7 @@ Here are screenshots of the saved test case editor state with ordered steps and 
 
 - The case opens with a complete ordered flow and no missing required parameters.
 - Every referenced locator exists and belongs to a route-aware locator group.
-- The suite, module, tag, and environment names are clear enough that another team member could reuse them later.
+- The suite, tag, and environment names are clear enough that another team member could reuse them later.
 
 > AppraiseJS is designed so your test logic stays clear, reusable, and never buried inside scripts.
 

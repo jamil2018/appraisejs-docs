@@ -9,20 +9,50 @@ A test case is a single scenario composed of ordered template steps.
 
 ## Workflow context
 
-Test cases are where reusable assets become a specific business scenario. Environments and modules still need to exist before you create a test case. From the test case form, you can create or select suites and tags, then build steps in the flow builder. When a step needs a locator, create it from the node addition sidebar or select an existing locator.
+Test cases are where reusable assets become a specific business scenario. Environments and modules still need to exist before you create a test case, because suites belong to modules and environments help with locator creation. From the test case form, you can create or select suites and tags, then build steps in the flow builder. When a step needs a locator, create it from the node addition sidebar or select an existing locator.
+
+## Core building blocks
+
+- **Modules** -> groups for test suites
+- **Environments** -> test environment configurations, such as base URLs and API routes. Environments are not required to fill out test case metadata, but they are helpful when creating locators from the builder.
+- **Test suites** -> groups for test cases
+
+The test case creation process has two parts:
+
+- **Test case metadata** -> setting the test case title, description, test suite, and tags
+- **Test case flow** -> a flow builder for building tests visually so users can create automated tests with less friction
 
 ## Do this
 
 1. Go to `Test Cases -> Create`.
 2. Add title (min 3 chars) and description.
-3. Select the module that owns the scenario.
-4. Select an existing test suite or create one from the test case form.
-5. Optionally select existing tags or create tags from the same flow.
-6. Build the flow in the flow builder.
-7. Add steps from the node addition sidebar.
-8. Create or select locators from the node addition sidebar when a step needs one.
-9. Fill required parameters for each step.
-10. Save.
+3. Select an existing test suite or create one from the test case form.
+4. Optionally select existing tags or create tags from the same flow.
+5. Build the flow in the flow builder.
+6. Add steps from the node addition sidebar.
+7. Create or select locators from the node addition sidebar when a step needs one.
+8. Fill required parameters for each step.
+9. Save.
+
+Here is a demo of the test case editor in action.
+
+<video
+  controls
+  preload="metadata"
+  playsinline
+  src="/docs/media/getting-started/quick-start/creating-test-cases.mp4"
+>
+  Your browser does not support the creating test case video.
+</video>
+
+## Quick sanity check
+
+Before saving, confirm that the case has:
+
+- A navigable flow from start to input, click, and assertion steps
+- No missing parameters
+- A live Gherkin preview updating from the flow
+- Suite, tags, and any needed locators created or selected without leaving the creation flow
 
 Here are screenshots of a completed test case form.
 
@@ -39,14 +69,13 @@ Here are screenshots of a completed test case form.
 ## Minimal example
 
 - Title: `Valid login shows welcome banner`
-- Module: `Authentication`
-- Suite: `Auth Smoke`
+- Suite: `Auth Smoke` under `Authentication`
 - Tags: `@smoke`, `@auth`
 - Steps: navigate, fill email, fill password, click submit, assert banner visible
 
 ## Flow builder tools
 
-The refreshed flow builder keeps larger scenarios easier to create and review without turning the test case form into a separate product area.
+The flow builder includes helper tools that make test scenarios easier to define and review. Blocks, search, and full-screen mode also make the intent of a flow easier to understand when it is shared with teammates.
 
 ### Blocks
 
