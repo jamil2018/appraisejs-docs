@@ -39,7 +39,7 @@ import UIPath from "../../../components/UIPath.astro";
 
 The locator creator matters because it sits between page discovery and durable test authoring. A good locator makes the case editor faster and the rerun more reliable.
 
-## Do this
+## Create locators ahead of time
 
 <UIPath
   steps={[
@@ -50,6 +50,8 @@ The locator creator matters because it sits between page discovery and durable t
     "Save",
   ]}
 />
+
+Use this path when you want reusable locators prepared before test case creation.
 
 1. Open `Locators -> Create`.
 2. Choose whether to launch from a saved environment or a direct URL.
@@ -83,6 +85,25 @@ Here is the complete flow of creating a locator.
   Your browser does not support the locator flow video.
 </video>
 
+## Create locators while adding a step
+
+You can also create needed locators directly from the node addition sidebar while building a test case. This is the smoother path when you are already in the test case creation flow and discover that an input, click, or assertion step needs a new element reference.
+
+1. Open the test case form.
+2. Add a node from the flow builder.
+3. Choose the step type that needs an element.
+4. Use the node addition sidebar to create a locator or select an existing one.
+5. Save the node and continue building the flow.
+
+<video
+  controls
+  preload="metadata"
+  playsinline
+  src="/docs/media/getting-started/quick-start/creating-locator-inline.mp4"
+>
+  Your browser does not support the inline locator creation video.
+</video>
+
 ## Minimal example
 
 - Group: `Login Page`
@@ -94,6 +115,7 @@ Here is the complete flow of creating a locator.
 - The locator name is readable and specific.
 - The selector is stable enough to survive layout changes.
 - The locator group route matches the page where the step actually uses the selector.
+- Locators created during test case creation are named clearly enough to reuse later.
 
 ## Next step
 

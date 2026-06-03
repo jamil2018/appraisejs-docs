@@ -47,7 +47,7 @@ import UIPath from "../../../components/UIPath.astro";
   Generates a report you can inspect
 </OutcomeCard>
 
-New scaffolds start clean. That means everything you create here — environments, locators, test cases — reflects how real projects are structured in AppraiseJS.
+New scaffolds start clean. That means everything you create here — environments, modules, suites, tags, locators, and test cases — reflects how real projects are structured in AppraiseJS.
 
 ---
 
@@ -57,9 +57,10 @@ New scaffolds start clean. That means everything you create here — environment
   steps={[
     "Environments",
     "Modules",
-    "Locators",
     "Test Suites",
     "Test Cases",
+    "Inline Tags",
+    "Inline Locators",
     "Test Runs",
     "Reports",
   ]}
@@ -67,7 +68,7 @@ New scaffolds start clean. That means everything you create here — environment
 
 This quick start builds a login validation flow that confirms a successful login by asserting a welcome message on the home page.
 
-Each step below builds a part of a complete, executable test system.
+Environment and module setup still happens before test case creation. Creating the suite first keeps the structure easy to understand, while tags, locators, and steps can still be created or selected inside the test case creation flow.
 
 ---
 
@@ -130,35 +131,17 @@ Create module `Authentication`.
 
 ---
 
-### 4. Capture locators
+### 4. Create or select a test suite
 
-Open `Locators -> Create` and use the Chromium Locator Picker to capture:
+There are two ways to create the suite for this flow.
 
-- Email input
-- Password input
-- Submit button
-- Welcome message element
+##### Path 1: Create the suite ahead of time
 
-> Instead of manually crafting selectors, Appraise helps you capture stable locators tied to real UI state.
+Use the standalone Test Suites screen when you want to prepare reusable organization ahead of time.
 
-<br />
-
-<video
-  controls
-  preload="metadata"
-  playsinline
-  src="/docs/media/getting-started/quick-start/creating-locators.mp4"
->
-  Your browser does not support the capturing locators video.
-</video>
-
----
-
-### 5. Create a test suite
-
-Create a test suite named `Login` under the `Authentication` module.
-
-> Test suites group related flows — keeping execution and reporting organized.
+1. Open `Test Suites -> Create`.
+2. Create a test suite named `Login`.
+3. Assign it to the `Authentication` module.
 
 <br />
 
@@ -168,17 +151,37 @@ Create a test suite named `Login` under the `Authentication` module.
   playsinline
   src="/docs/media/getting-started/quick-start/creating-test-suites.mp4"
 >
-  Your browser does not support the creating test suite video.
+  Your browser does not support the standalone test suite creation video.
+</video>
+
+##### Path 2: Create the suite from the test case window
+
+Use the suite control in the test case form to create `Login` under the `Authentication` module, then continue filling out the case without leaving the creation flow.
+
+<br />
+
+<video
+  controls
+  preload="metadata"
+  playsinline
+  src="/docs/media/getting-started/quick-start/creating-test-suite-inline.mp4"
+>
+  Your browser does not support the inline test suite creation video.
 </video>
 
 ---
 
-### 6. Create the test case
+### 5. Create the test case
 
 Create a test case:
 
 - Title: `Login`
 - Description: `Login with valid credentials and verify home page`
+
+From the test case form, create or select:
+
+- Test suite: `Login` under the `Authentication` module
+- Tags: `@smoke` and `@auth`
 
 Build a flow that:
 
@@ -186,6 +189,8 @@ Build a flow that:
 2. Enters email and password
 3. Clicks submit
 4. Asserts that a welcome message is visible on the home page
+
+When a step needs a locator, create it from the node addition sidebar instead of leaving the test case flow. Capture locators for the email input, password input, submit button, and welcome message as you add those steps.
 
 > You are defining behavior visually — Appraise translates this into executable logic behind the scenes.
 
@@ -202,7 +207,47 @@ Build a flow that:
 
 ---
 
-### 7. Run the test
+### 6. Create locators while adding steps
+
+There are two ways to create locators for this flow. For quick-start authoring, create locators inline while adding steps so you can stay in the test case creation flow.
+
+##### Path 1: Create locators from the node addition sidebar
+
+Use the node addition sidebar to create needed locators while you add input, click, and assertion steps. This keeps each locator tied to the step that needs it and avoids leaving the test case window.
+
+<br />
+
+<video
+  controls
+  preload="metadata"
+  playsinline
+  src="/docs/media/getting-started/quick-start/creating-locator-inline.mp4"
+>
+  Your browser does not support the inline locator creation video.
+</video>
+
+##### Path 2: Create locators ahead of time
+
+Use the standalone Locators screen when you want to prepare reusable selectors before building the test case.
+
+1. Open `Locators -> Create`.
+2. Launch the Chromium picker from the saved environment or a direct URL.
+3. Capture the element and save it to a route-aware locator group.
+
+<br />
+
+<video
+  controls
+  preload="metadata"
+  playsinline
+  src="/docs/media/getting-started/quick-start/creating-locators.mp4"
+>
+  Your browser does not support the standalone locator creation video.
+</video>
+
+---
+
+### 7. Run the test and inspect the report
 
 Open `Test Runs -> Create` and configure:
 
@@ -215,19 +260,11 @@ Start the run.
 
 > No CLI commands. No runner setup. Execution is fully managed from the UI.
 
----
-
-### 8. Observe execution
-
 Watch the run status update in real time.
 
 > You’re seeing the exact flow executed in a real browser.
 
----
-
-### 9. Inspect the report
-
-Open the generated report and confirm:
+After the run finishes, open the generated report and confirm:
 
 - Steps executed correctly
 - Login succeeded
@@ -249,7 +286,7 @@ Here is a demo of the run execution and the report inspection in action.
 
 ---
 
-## 💡 What just happened
+## What just happened
 
 <br />
 You just:
