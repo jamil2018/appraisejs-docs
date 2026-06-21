@@ -577,6 +577,94 @@ const files = await Promise.all(
       grid-template-columns: 1fr;
     }
   }
+
+  @media (max-width: 640px) {
+    .pr-header {
+      padding: 1rem 1rem 0;
+    }
+
+    .pr-header__top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .pr-header h3 {
+      font-size: 1.1rem;
+    }
+
+    .pr-header__meta {
+      font-size: 0.8rem;
+      line-height: 1.4;
+    }
+
+    .pr-header__branch {
+      font-size: 0.75rem;
+    }
+
+    .pr-tabs {
+      overflow-x: auto;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE 10+ */
+    }
+
+    .pr-tabs::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
+    }
+
+    .pr-tab {
+      flex-shrink: 0;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8rem;
+    }
+
+    .pr-diff-viewer {
+      padding: 0.5rem;
+      gap: 0.75rem;
+    }
+
+    .pr-diff-pane__header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.35rem;
+      padding: 0.5rem 0.75rem;
+    }
+
+    .pr-diff-pane__path {
+      font-size: 0.75rem;
+      word-break: break-all;
+    }
+
+    .pr-diff-pane__kind {
+      font-size: 0.65rem;
+    }
+
+    .pr-diff-pre {
+      padding: 0.75rem;
+      font-size: 0.75rem;
+    }
+
+    .pr-comment__header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
+      padding: 0.6rem 0.75rem;
+    }
+
+    .pr-comment__time {
+      margin-left: 2rem;
+      font-size: 0.7rem;
+    }
+
+    .pr-comment__body {
+      padding: 0.75rem;
+      font-size: 0.8rem;
+    }
+
+    .pr-comment__footer {
+      padding: 0.4rem 0.75rem;
+    }
+  }
 </style>
 
 <script>
