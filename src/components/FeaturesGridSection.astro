@@ -1,0 +1,427 @@
+---
+import {
+  ArrowRight,
+  Blocks,
+  BookOpen,
+  Check,
+  Copy,
+  ExternalLink,
+  FolderGit2,
+  TerminalSquare,
+} from "@lucide/astro";
+
+const installCommand = "npx create-appraisejs@latest";
+
+const features = [
+  {
+    icon: TerminalSquare,
+    title: "Local-first execution",
+    description:
+      "Run your full suite on your machine in seconds. No cloud queues, no per-seat runners.",
+  },
+  {
+    icon: FolderGit2,
+    title: "Repo-owned artifacts",
+    description:
+      "Features, steps, and locators live in git. Review them in PRs like any other code.",
+  },
+  {
+    icon: Blocks,
+    title: "Extensible step library",
+    description:
+      "Add custom TypeScript steps in seconds and wire them into visual flows.",
+  },
+];
+
+const quickStartSteps = [
+  {
+    label: "01",
+    title: "Scaffold the workspace",
+    href: "/getting-started/quick-start/",
+    linkText: "Quick start guide",
+  },
+  {
+    label: "02",
+    title: "Build your first flow",
+    href: "/getting-started/creating-tests/",
+    linkText: "Creating tests guide",
+  },
+  {
+    label: "03",
+    title: "Run and inspect output",
+    href: "/getting-started/viewing-reports/",
+    linkText: "Viewing reports",
+  },
+];
+---
+
+<section
+  class="features-grid landing-shell"
+  id="features"
+  aria-labelledby="features-heading"
+>
+  <div class="landing-section-copy landing-section-copy--center">
+    <p class="landing-kicker">Built for engineering teams</p>
+    <h2 id="features-heading" class="landing-section-title">
+      Everything you need to adopt visual testing without giving up code control.
+    </h2>
+  </div>
+
+  <div class="features-grid__cards not-content">
+    {
+      features.map((feature) => {
+        const Icon = feature.icon;
+        return (
+          <article class="features-grid__card">
+            <span class="features-grid__card-icon" aria-hidden="true">
+              <Icon size={20} stroke-width={1.8} />
+            </span>
+            <h3>{feature.title}</h3>
+            <p>{feature.description}</p>
+          </article>
+        );
+      })
+    }
+  </div>
+
+  <div class="features-grid__cta">
+    <div class="features-grid__cta-copy">
+      <p class="landing-kicker">Try it in 15 minutes</p>
+      <h3>Install locally and prove the workflow yourself.</h3>
+      <div class="features-grid__install" aria-label="Install command">
+        <code data-features-install-command>{installCommand}</code>
+        <button
+          type="button"
+          data-features-copy-command
+          aria-label="Copy install command"
+        >
+          <Copy aria-hidden="true" />
+          <Check
+            class="features-grid__copy-icon--success"
+            aria-hidden="true"
+          />
+        </button>
+      </div>
+    </div>
+
+    <ol class="features-grid__steps">
+      {
+        quickStartSteps.map((step) => (
+          <li>
+            <a href={step.href}>
+              <span class="features-grid__step-label">{step.label}</span>
+              <strong>{step.title}</strong>
+              <span class="features-grid__step-link">
+                {step.linkText}
+                <ArrowRight aria-hidden="true" />
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+
+  <div class="features-grid__trust">
+    <p>
+      AppraiseJS is fully open source. Your tests, locators, and reports are
+      plain files in your repository—inspect them locally, review them in PRs,
+      and run them in any CI pipeline.
+    </p>
+    <div class="features-grid__trust-actions">
+      <a
+        class="landing-cta-button"
+        href="/getting-started/overview/"
+      >
+        <BookOpen size={16} />
+        Read the Docs
+      </a>
+      <a
+        class="landing-secondary-button"
+        href="https://github.com/jamil2018/appraisejs-core"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <ExternalLink size={16} />
+        View on GitHub
+      </a>
+      <a class="landing-secondary-button" href="/core-concepts/architecture-overview/">
+        <ArrowRight size={16} />
+        Architecture overview
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .features-grid {
+    padding-block: var(--landing-section-gap);
+  }
+
+  .features-grid__cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.85rem;
+    margin-top: 2rem;
+  }
+
+  .features-grid__card {
+    display: grid;
+    gap: 0.65rem;
+    padding: 1.25rem;
+    border: 1px solid var(--landing-border);
+    border-radius: var(--landing-radius);
+    background: rgba(19, 19, 19, 0.8);
+  }
+
+  .features-grid__card-icon {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--landing-border);
+    border-radius: var(--landing-radius);
+    background: #101010;
+    color: var(--landing-green);
+  }
+
+  .features-grid__card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--landing-text);
+  }
+
+  .features-grid__card p {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--landing-muted);
+  }
+
+  .features-grid__cta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: clamp(1.25rem, 4vw, 2rem);
+    align-items: start;
+    margin-top: clamp(2rem, 5vw, 3rem);
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    border: 1px solid var(--landing-border);
+    border-radius: var(--landing-radius);
+    background: rgba(19, 19, 19, 0.6);
+  }
+
+  .features-grid__cta-copy {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .features-grid__cta-copy h3 {
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--landing-text);
+  }
+
+  .features-grid__install {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 2.5rem;
+    align-items: stretch;
+    overflow: hidden;
+    border: 1px solid var(--landing-border);
+    border-radius: var(--landing-radius);
+    background: #0d0d0d;
+  }
+
+  .features-grid__install code {
+    padding: 0.7rem 0.85rem;
+    overflow-x: auto;
+    font-family: var(--landing-font-mono);
+    font-size: 0.8rem;
+    color: var(--landing-text);
+    white-space: nowrap;
+  }
+
+  .features-grid__install button {
+    display: grid;
+    place-items: center;
+    margin: 0;
+    border: 0;
+    border-left: 1px solid var(--landing-border);
+    background: transparent;
+    color: var(--landing-muted);
+    cursor: pointer;
+    appearance: none;
+  }
+
+  .features-grid__install button:hover,
+  .features-grid__install button.is-copied {
+    color: var(--landing-green);
+  }
+
+  .features-grid__install button svg {
+    grid-area: 1 / 1;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .features-grid__copy-icon--success {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .features-grid__install
+    button.is-copied
+    svg:not(.features-grid__copy-icon--success) {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .features-grid__install button.is-copied .features-grid__copy-icon--success {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .features-grid__steps {
+    display: grid;
+    gap: 0.55rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .features-grid__steps a {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.65rem 1rem;
+    align-items: center;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--landing-border-soft);
+    border-radius: var(--landing-radius);
+    background: rgba(255, 255, 255, 0.02);
+    transition:
+      border-color 180ms ease,
+      background-color 180ms ease;
+  }
+
+  .features-grid__steps a:hover {
+    border-color: rgba(16, 185, 129, 0.35);
+    background: rgba(16, 185, 129, 0.05);
+  }
+
+  .features-grid__step-label {
+    font-family: var(--landing-font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--landing-green);
+  }
+
+  .features-grid__steps strong {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--landing-text);
+  }
+
+  .features-grid__step-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--landing-green);
+  }
+
+  .features-grid__step-link svg {
+    width: 0.85rem;
+    height: 0.85rem;
+  }
+
+  .features-grid__trust {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: center;
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border: 1px solid var(--landing-border);
+    border-radius: var(--landing-radius);
+    background:
+      linear-gradient(135deg, rgba(16, 185, 129, 0.04) 0%, transparent 50%),
+      rgba(19, 19, 19, 0.7);
+    text-align: center;
+  }
+
+  .features-grid__trust p {
+    max-width: 42rem;
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--landing-muted);
+  }
+
+  .features-grid__trust-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  @media (max-width: 1024px) {
+    .features-grid__cards {
+      grid-template-columns: 1fr;
+    }
+
+    .features-grid__cta {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .features-grid__steps a {
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto auto;
+    }
+
+    .features-grid__step-link {
+      grid-column: 2;
+    }
+
+    .features-grid__trust-actions > a {
+      width: 100%;
+    }
+  }
+</style>
+
+<script define:vars={{ installCommand }}>
+  function initFeaturesCopy() {
+    const button = document.querySelector("[data-features-copy-command]");
+    if (!button) return;
+
+    let resetTimer;
+
+    button.addEventListener("click", async () => {
+      window.clearTimeout(resetTimer);
+
+      try {
+        await navigator.clipboard.writeText(installCommand);
+      } catch {
+        const code = document.querySelector("[data-features-install-command]");
+        const range = document.createRange();
+        range.selectNodeContents(code);
+        const selection = window.getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+        document.execCommand("copy");
+        selection?.removeAllRanges();
+      }
+
+      button.classList.add("is-copied");
+      button.setAttribute("aria-label", "Copied");
+
+      resetTimer = window.setTimeout(() => {
+        button.classList.remove("is-copied");
+        button.setAttribute("aria-label", "Copy install command");
+      }, 2000);
+    });
+  }
+
+  document.addEventListener("astro:page-load", initFeaturesCopy);
+  initFeaturesCopy();
+</script>

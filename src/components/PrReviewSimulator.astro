@@ -1,0 +1,712 @@
+---
+import { FileCode2, FileJson2, FolderGit2, GitBranch, GitPullRequest, MessageSquare } from "@lucide/astro";
+import { highlightCodeInner } from "../utils/highlightMockIdeCode";
+
+const fileDefinitions = [
+  {
+    id: "feature",
+    icon: FileCode2,
+    label: "checkout-smoke.feature",
+    path: "tests/appraise/features/checkout-smoke.feature",
+    kind: "Gherkin Diff",
+    source: `@@ -1,3 +1,11 @@
+ Feature: Checkout smoke
+ 
+-  # TODO: Write manual test steps
++  Scenario: Returning buyer completes a card checkout
++    When I add "Everyday Hoodie" to the cart
++    And I use the saved shipping address
++    And I pay with "visa_success"
++    Then the order confirmation should be visible
++    And the confirmation total should equal "$64.00"`,
+    lang: "diff",
+    review: {
+      body:
+        "Readable scenario structure—QA can follow this without opening the visual tool. The steps map cleanly to a smoke test I'd sign off on.",
+      verdict: "Approved.",
+    },
+  },
+  {
+    id: "steps",
+    icon: FileCode2,
+    label: "checkout.steps.ts",
+    path: "tests/appraise/steps/checkout.steps.ts",
+    kind: "TypeScript Step Definition Diff",
+    source: `@@ -0,0 +1,15 @@
++import { expect } from "@playwright/test";
++import locators from "../locators/checkout.locators.json";
++
++When("I add {string} to the cart", async ({ page }, itemName) => {
++  await page.getByRole("link", { name: itemName }).click();
++  await page.locator(locators.product.addToCart.selector).click();
++  await expect(page.locator(locators.cart.summary.selector)).toBeVisible();
++});
++
++When("I pay with {string}", async ({ page }, cardName) => {
++  await page.locator(locators.payment.savedCard.selector).selectOption(cardName);
++  await page.locator(locators.payment.submit.selector).click();
++});`,
+    lang: "diff",
+    review: {
+      body:
+        "Standard Playwright step definitions importing locators from JSON. I can debug these locally and extend them when we need custom logic.",
+      verdict: "Approved.",
+    },
+  },
+  {
+    id: "locators",
+    icon: FileJson2,
+    label: "checkout.locators.json",
+    path: "tests/appraise/locators/checkout.locators.json",
+    kind: "JSON Locator Diff",
+    source: `@@ -4,4 +4,7 @@
+   "cart": {
+     "summary": "[data-testid='cart-summary']"
+   },
++  "product": {
++    "addToCart": "[data-testid='add-to-cart']"
++  },
++  "payment": {
++    "savedCard": "[data-testid='saved-card']",
++    "submit": "[data-testid='submit-payment']"
++  }`,
+    lang: "diff",
+    review: {
+      body:
+        "Selectors live in version-controlled JSON, not a hosted database. When a `data-testid` changes, it's one file to grep and patch.",
+      verdict: "Approved.",
+    },
+  },
+];
+
+const files = await Promise.all(
+  fileDefinitions.map(async (file) => ({
+    ...file,
+    code: await highlightCodeInner(file.source, file.lang),
+  })),
+);
+---
+
+<section
+  class="pr-simulator landing-shell"
+  id="generated-output"
+  aria-labelledby="pr-heading"
+>
+  <div class="landing-section-copy landing-section-copy--center">
+    <p class="landing-kicker">Review in PRs</p>
+    <h2 id="pr-heading" class="landing-section-title">
+      The output looks like code your team already writes.
+    </h2>
+    <p class="landing-section-description">
+      Every visual flow becomes Gherkin features, Playwright steps, and locator
+      JSON in your repo—ready for normal code review, not a 5 MB proprietary diff.
+    </p>
+  </div>
+
+  <div class="pr-window not-content" data-pr-simulator>
+    <!-- PR Header -->
+    <div class="pr-header">
+      <div class="pr-header__top">
+        <div class="pr-header__title-row">
+          <span class="pr-header__icon-wrapper">
+            <GitPullRequest size={20} />
+          </span>
+          <h3>feat: add checkout visual smoke test <span class="pr-header__number">#42</span></h3>
+        </div>
+        <div class="pr-header__status-badge">
+          Open
+        </div>
+      </div>
+      
+      <div class="pr-header__meta">
+        <strong>jamil2018</strong> wants to merge <code class="pr-header__branch">visual-checkout</code> into <code class="pr-header__branch">main</code>
+      </div>
+
+      <!-- PR Tabs (decorative chrome — only Files changed is shown) -->
+      <div class="pr-tabs" aria-hidden="true">
+        <span class="pr-tab">
+          Conversation <span class="pr-tab__badge">2</span>
+        </span>
+        <span class="pr-tab">
+          Commits <span class="pr-tab__badge">1</span>
+        </span>
+        <span class="pr-tab">
+          Checks <span class="pr-tab__badge pr-tab__badge--success">✓</span>
+        </span>
+        <span class="pr-tab is-active">
+          Files changed <span class="pr-tab__badge">3</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- PR Workspace -->
+    <div class="pr-body">
+      <!-- File Tree Sidebar -->
+      <aside class="pr-sidebar" aria-label="Changed files list">
+        <div class="pr-sidebar__header">
+          <span>Files (3)</span>
+        </div>
+        <div class="pr-sidebar__tree">
+          {
+            files.map((file, index) => {
+              const Icon = file.icon;
+              return (
+                <button
+                  type="button"
+                  class:list={["pr-sidebar__file", index === 0 && "is-active"]}
+                  data-pr-file={file.id}
+                  aria-pressed={index === 0 ? "true" : "false"}
+                >
+                  <Icon size={14} />
+                  <span>{file.label}</span>
+                </button>
+              );
+            })
+          }
+        </div>
+      </aside>
+
+      <!-- Diff Viewer -->
+      <div class="pr-diff-viewer">
+        {
+          files.map((file, index) => (
+            <div
+              id={`pr-panel-${file.id}`}
+              class:list={["pr-diff-pane", index === 0 && "is-active"]}
+              data-pr-pane={file.id}
+            >
+              <div class="pr-diff-pane__header">
+                <span class="pr-diff-pane__path">{file.path}</span>
+                <span class="pr-diff-pane__kind">{file.kind}</span>
+              </div>
+              <div class="pr-diff-pane__code-wrap">
+                <pre class="pr-diff-pre"><code set:html={file.code} /></pre>
+              </div>
+            </div>
+          ))
+        }
+
+        <!-- Mock Comment -->
+        <div class="pr-comment" aria-live="polite">
+          <div class="pr-comment__header">
+            <div class="pr-comment__user">
+              <span class="pr-comment__avatar">SR</span>
+              <strong>senior_dev_reviewer</strong>
+            </div>
+            <span class="pr-comment__time">5 minutes ago</span>
+          </div>
+          {
+            files.map((file, index) => (
+              <div
+                class:list={["pr-comment__body", index === 0 && "is-active"]}
+                data-pr-comment={file.id}
+              >
+                <p>{file.review.body}</p>
+                <p>
+                  <strong>{file.review.verdict}</strong>
+                </p>
+              </div>
+            ))
+          }
+          <div class="pr-comment__footer">
+            <span class="pr-comment__reaction-btn" aria-hidden="true">
+              <MessageSquare size={12} /> Reply
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pr-simulator {
+    padding-block: var(--landing-section-gap);
+  }
+
+  .pr-window {
+    border: 1px solid var(--landing-border);
+    border-radius: var(--landing-radius);
+    background: #0d0d0d;
+    overflow: hidden;
+    margin-top: 2rem;
+    box-shadow: 
+      0 25px 60px rgba(0, 0, 0, 0.4),
+      inset 0 0 30px rgba(255, 255, 255, 0.01);
+  }
+
+  .pr-header {
+    background: #111;
+    border-bottom: 1px solid var(--landing-border);
+    padding: 1.5rem 1.5rem 0;
+  }
+
+  .pr-header__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .pr-header__title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .pr-header__icon-wrapper {
+    color: #8b949e;
+  }
+
+  .pr-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--landing-text);
+    margin: 0;
+  }
+
+  .pr-header__number {
+    color: #8b949e;
+    font-weight: 400;
+  }
+
+  .pr-header__status-badge {
+    background: rgba(35, 134, 54, 0.15);
+    border: 1px solid rgba(35, 134, 54, 0.4);
+    color: #3fb950;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+  }
+
+  .pr-header__meta {
+    margin-top: 0.75rem;
+    font-size: 0.88rem;
+    color: var(--landing-muted);
+  }
+
+  .pr-header__branch {
+    font-family: "Geist Mono", var(--sl-font-mono), monospace;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 0.12rem 0.35rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: var(--landing-text);
+  }
+
+  .pr-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .pr-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-bottom: 2px solid transparent;
+    color: var(--landing-muted);
+    font-size: 0.88rem;
+    font-weight: 500;
+    padding: 0.65rem 0.85rem;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .pr-tab:hover {
+    color: var(--landing-muted);
+  }
+
+  .pr-tab.is-active {
+    color: var(--landing-text);
+    border-bottom-color: #f78166;
+    font-weight: 600;
+  }
+
+  .pr-tab__badge {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.1rem 0.4rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+  }
+
+  .pr-tab__badge--success {
+    background: rgba(56, 189, 248, 0.15);
+    color: #38bdf8;
+  }
+
+  .pr-body {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    min-height: 28rem;
+  }
+
+  .pr-sidebar {
+    background: #0d0d0d;
+    border-right: 1px solid var(--landing-border);
+    width: 15rem;
+  }
+
+  .pr-sidebar__header {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--landing-border-soft);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--landing-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .pr-sidebar__tree {
+    padding: 0.5rem;
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .pr-sidebar__file {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--landing-radius);
+    color: var(--landing-muted);
+    font-family: "Geist Mono", var(--sl-font-mono), monospace;
+    font-size: 0.78rem;
+    padding: 0.55rem 0.75rem;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    appearance: none;
+  }
+
+  .pr-sidebar__file:hover,
+  .pr-sidebar__file.is-active {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--landing-text);
+  }
+
+  .pr-sidebar__file.is-active {
+    border-color: var(--landing-border-soft);
+    background: rgba(255, 255, 255, 0.03);
+    font-weight: 600;
+  }
+
+  .pr-diff-viewer {
+    display: flex;
+    flex-direction: column;
+    background: #090909;
+    padding: 1rem;
+    gap: 1rem;
+    overflow-y: auto;
+  }
+
+  .pr-diff-pane {
+    display: none;
+    border: 1px solid var(--landing-border);
+    border-radius: var(--landing-radius);
+    background: #0d0d0d;
+    overflow: hidden;
+  }
+
+  .pr-diff-pane.is-active {
+    display: block;
+  }
+
+  .pr-diff-pane__header {
+    background: #111;
+    border-bottom: 1px solid var(--landing-border-soft);
+    padding: 0.65rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .pr-diff-pane__path {
+    font-family: "Geist Mono", var(--sl-font-mono), monospace;
+    font-size: 0.78rem;
+    color: var(--landing-text);
+  }
+
+  .pr-diff-pane__kind {
+    font-size: 0.7rem;
+    color: var(--landing-dim);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .pr-diff-pane__code-wrap {
+    overflow-x: auto;
+  }
+
+  .pr-diff-pre {
+    margin: 0;
+    padding: 1rem;
+    background: transparent;
+    font-family: var(--landing-font-mono);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    white-space: pre;
+  }
+
+  .pr-diff-pre code {
+    display: block;
+    width: max-content;
+    min-width: 100%;
+    font: inherit;
+    background: transparent;
+  }
+
+  .pr-diff-pre :global(.line) {
+    display: block;
+    min-height: 1.6em;
+  }
+
+  .pr-diff-pre :global(.line:empty)::before {
+    content: "\200b";
+  }
+
+  /* Mock Comment Card */
+  .pr-comment {
+    border: 1px solid rgba(56, 139, 253, 0.4);
+    border-radius: var(--landing-radius);
+    background: rgba(13, 25, 41, 0.7);
+    backdrop-filter: blur(8px);
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .pr-comment__header {
+    background: rgba(56, 139, 253, 0.08);
+    border-bottom: 1px solid rgba(56, 139, 253, 0.2);
+    padding: 0.75rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .pr-comment__user {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .pr-comment__avatar {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 999px;
+    background: #388bfd;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+  }
+
+  .pr-comment__user strong {
+    font-size: 0.88rem;
+    color: var(--landing-text);
+  }
+
+  .pr-comment__time {
+    font-size: 0.78rem;
+    color: #8b949e;
+  }
+
+  .pr-comment__body {
+    display: none;
+    padding: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--landing-muted);
+  }
+
+  .pr-comment__body.is-active {
+    display: block;
+  }
+
+  .pr-comment__body p {
+    margin: 0;
+  }
+
+  .pr-comment__body p + p {
+    margin-top: 0.75rem;
+  }
+
+  .pr-comment__body strong {
+    color: var(--landing-text);
+  }
+
+  .pr-comment__footer {
+    padding: 0.5rem 1rem;
+    background: rgba(56, 139, 253, 0.04);
+    border-top: 1px solid rgba(56, 139, 253, 0.15);
+  }
+
+  .pr-comment__reaction-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: #8b949e;
+    font-size: 0.75rem;
+    font-weight: 600;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  @media (max-width: 1024px) {
+    .pr-body {
+      grid-template-columns: 1fr;
+    }
+
+    .pr-sidebar {
+      width: 100%;
+      border-right: 0;
+      border-bottom: 1px solid var(--landing-border);
+    }
+
+    .pr-sidebar__tree {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.5rem;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .pr-sidebar__tree {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .pr-header {
+      padding: 1rem 1rem 0;
+    }
+
+    .pr-header__top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .pr-header h3 {
+      font-size: 1.1rem;
+    }
+
+    .pr-header__meta {
+      font-size: 0.8rem;
+      line-height: 1.4;
+    }
+
+    .pr-header__branch {
+      font-size: 0.75rem;
+    }
+
+    .pr-tabs {
+      overflow-x: auto;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE 10+ */
+    }
+
+    .pr-tabs::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
+    }
+
+    .pr-tab {
+      flex-shrink: 0;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8rem;
+    }
+
+    .pr-diff-viewer {
+      padding: 0.5rem;
+      gap: 0.75rem;
+    }
+
+    .pr-diff-pane__header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.35rem;
+      padding: 0.5rem 0.75rem;
+    }
+
+    .pr-diff-pane__path {
+      font-size: 0.75rem;
+      word-break: break-all;
+    }
+
+    .pr-diff-pane__kind {
+      font-size: 0.65rem;
+    }
+
+    .pr-diff-pre {
+      padding: 0.75rem;
+      font-size: 0.75rem;
+    }
+
+    .pr-comment__header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
+      padding: 0.6rem 0.75rem;
+    }
+
+    .pr-comment__time {
+      margin-left: 2rem;
+      font-size: 0.7rem;
+    }
+
+    .pr-comment__body {
+      padding: 0.75rem;
+      font-size: 0.8rem;
+    }
+
+    .pr-comment__footer {
+      padding: 0.4rem 0.75rem;
+    }
+  }
+</style>
+
+<script>
+  function initPrSimulator() {
+    const simulators = document.querySelectorAll("[data-pr-simulator]");
+
+    simulators.forEach((sim) => {
+      const files = Array.from(sim.querySelectorAll("[data-pr-file]")) as HTMLElement[];
+      const panes = Array.from(sim.querySelectorAll("[data-pr-pane]")) as HTMLElement[];
+      const comments = Array.from(
+        sim.querySelectorAll("[data-pr-comment]"),
+      ) as HTMLElement[];
+
+      if (files.length === 0 || panes.length === 0) return;
+
+      const activate = (id: string) => {
+        files.forEach((file) => {
+          const isActive = file.dataset.prFile === id;
+          file.classList.toggle("is-active", isActive);
+          file.setAttribute("aria-pressed", String(isActive));
+        });
+
+        panes.forEach((pane) => {
+          const isActive = pane.dataset.prPane === id;
+          pane.classList.toggle("is-active", isActive);
+        });
+
+        comments.forEach((comment) => {
+          const isActive = comment.dataset.prComment === id;
+          comment.classList.toggle("is-active", isActive);
+        });
+      };
+
+      files.forEach((file) => {
+        file.addEventListener("click", () => {
+          const id = file.dataset.prFile;
+          if (id) activate(id);
+        });
+      });
+    });
+  }
+
+  document.addEventListener("astro:page-load", initPrSimulator);
+  initPrSimulator();
+</script>

@@ -310,10 +310,11 @@ const { fill = false } = Astro.props;
 
   .locator-creator-demo--fill {
     flex: 1 1 auto;
-    align-items: center;
-    justify-content: center;
+    align-items: stretch;
+    justify-content: stretch;
     min-height: 0;
     width: 100%;
+    height: 100%;
     padding: clamp(0.75rem, 3vw, 1.25rem);
     border: 0;
     border-radius: 0;
@@ -323,11 +324,13 @@ const { fill = false } = Astro.props;
   .locator-creator-demo--fill .locator-creator-demo__panel {
     width: 100%;
     max-width: none;
-    height: auto;
+    height: 100%;
+    min-height: 0;
   }
 
   .locator-creator-demo--fill .locator-creator-demo__canvas {
-    min-height: 6.5rem;
+    flex: 1 1 auto;
+    min-height: 0;
   }
 
   .locator-creator-demo--fill .locator-creator-demo__canvas.is-form-step {
@@ -335,26 +338,45 @@ const { fill = false } = Astro.props;
   }
 
   .locator-creator-demo--fill .locator-creator-demo__page {
-    padding: 0.5rem 0.6rem;
+    display: grid;
+    align-items: center;
+    padding: clamp(1rem, 3vw, 1.4rem);
   }
 
   .locator-creator-demo--fill .locator-creator-demo__page-content {
-    gap: 0.54rem;
+    gap: clamp(0.8rem, 2vw, 1.1rem);
+  }
+
+  .locator-creator-demo--fill .locator-creator-demo__block {
+    min-height: clamp(1.5rem, 4vw, 2.4rem);
+  }
+
+  .locator-creator-demo--fill .locator-creator-demo__block[data-block="header"] {
+    min-height: clamp(1.25rem, 3vw, 1.8rem);
   }
 
   .locator-creator-demo--fill .locator-creator-demo__view--form {
-    padding: 0.48rem 0.55rem 0.52rem;
-    gap: 0.42rem;
+    align-content: center;
+    padding: clamp(1rem, 3vw, 1.4rem);
+    gap: clamp(0.65rem, 1.5vw, 0.9rem);
+  }
+
+  .locator-creator-demo--fill .locator-creator-demo__form-heading {
+    font-size: clamp(0.72rem, 1.4vw, 0.92rem);
   }
 
   .locator-creator-demo--fill .locator-creator-demo__form-field {
-    height: 0.8rem;
+    height: clamp(1.3rem, 3vw, 1.8rem);
+  }
+
+  .locator-creator-demo--fill .locator-creator-demo__form-field-text {
+    font-size: clamp(0.56rem, 1.2vw, 0.72rem);
   }
 
   .locator-creator-demo--fill .locator-creator-demo__form-button {
-    height: 1rem;
-    min-width: 5rem;
-    font-size: 0.46rem;
+    height: clamp(1.25rem, 2.8vw, 1.65rem);
+    min-width: clamp(5.5rem, 16vw, 7rem);
+    font-size: clamp(0.52rem, 1.2vw, 0.66rem);
   }
 
   @media (max-width: 760px) {
@@ -596,8 +618,21 @@ const { fill = false } = Astro.props;
     };
   }
 
+  function getDemoPanels(root) {
+    return [
+      root.closest("[data-showcase-panel]"),
+      root.closest("[data-feature-panel]"),
+    ].filter(Boolean);
+  }
+
+  function isDemoPanelActive(root) {
+    const panels = getDemoPanels(root);
+    if (panels.length === 0) return true;
+    return panels.some((panel) => panel.classList.contains("is-active"));
+  }
+
   function manageVisibleLoop(root, setup) {
-    const panel = root.closest("[data-feature-panel]");
+    const panels = getDemoPanels(root);
     let cleanup = null;
     let isVisible = false;
 
@@ -607,8 +642,7 @@ const { fill = false } = Astro.props;
     };
 
     const update = () => {
-      const isActivePanel = !panel || panel.classList.contains("is-active");
-      const shouldRun = isVisible && isActivePanel;
+      const shouldRun = isVisible && isDemoPanelActive(root);
 
       if (shouldRun && !cleanup) {
         cleanup = setup(root);
@@ -631,18 +665,22 @@ const { fill = false } = Astro.props;
 
     observer.observe(root);
 
-    const mutationObserver = panel ? new MutationObserver(update) : null;
-
-    mutationObserver?.observe(panel, {
-      attributes: true,
-      attributeFilter: ["class"],
+    const mutationObservers = panels.map((panel) => {
+      const mutationObserver = new MutationObserver(update);
+      mutationObserver.observe(panel, {
+        attributes: true,
+        attributeFilter: ["class"],
+      });
+      return mutationObserver;
     });
 
     update();
 
     return () => {
       observer.disconnect();
-      mutationObserver?.disconnect();
+      mutationObservers.forEach((mutationObserver) =>
+        mutationObserver.disconnect(),
+      );
       stop();
     };
   }

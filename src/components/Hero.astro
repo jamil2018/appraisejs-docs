@@ -1,5 +1,6 @@
 ---
-import { Check, Copy } from "@lucide/astro";
+import { ArrowRight, Check, Copy } from "@lucide/astro";
+import AllInOneWorkspaceDemo from "./AllInOneWorkspaceDemo.astro";
 
 const installCommand = "npx create-appraisejs@latest";
 ---
@@ -8,44 +9,58 @@ const installCommand = "npx create-appraisejs@latest";
   class="landing-hero landing-shell"
   aria-labelledby="landing-hero-heading"
 >
-  <div class="landing-hero__copy">
-    <p class="landing-kicker">Open source visual test automation</p>
-    <h1 id="landing-hero-heading">
-      Bridge QA and Engineering with visual tests you can actually version
-      control.
-    </h1>
-    <p class="landing-hero__description">
-      Visually author browser flows and generate reviewable Playwright/Cucumber
-      artifacts your team can run locally, inspect in git, and carry into CI.
-    </p>
-    <div class="landing-hero__install" aria-label="Install command">
-      <pre
-        class="landing-hero__command"><code data-hero-install-command><span class="token-key">npx</span><span class="token-command"> create-appraisejs@latest</span></code></pre>
-      <button
-        type="button"
-        class="landing-hero__copy-button"
-        data-hero-copy-command
-        aria-label="Copy install command"
-      >
-        <Copy
-          class="landing-hero__copy-icon"
-          size={16}
-          stroke-width={2}
-          aria-hidden="true"
-        />
-        <Check
-          class="landing-hero__copy-icon landing-hero__copy-icon--success"
-          size={16}
-          stroke-width={2}
-          aria-hidden="true"
-        />
-      </button>
+  <div class="landing-hero__glow" aria-hidden="true"></div>
+
+  <div class="landing-hero__content">
+    <div class="landing-hero__copy">
+      <p class="landing-kicker">Open source visual test automation</p>
+      <h1 id="landing-hero-heading">
+        Build browser tests visually. Ship them as code.
+      </h1>
+      <p class="landing-hero__description">
+        Design test flows in a visual workspace, then export clean Playwright and
+        Gherkin your team can run locally, review in git, and trust in CI.
+      </p>
+
+      <div class="landing-hero__actions">
+        <a class="landing-cta-button" href="/getting-started/overview/">
+          Get Started
+          <ArrowRight size={16} stroke-width={2} aria-hidden="true" />
+        </a>
+        <a class="landing-secondary-button" href="#how-it-works">
+          See how it works
+        </a>
+        <div class="landing-hero__install" aria-label="Install command">
+          <pre
+            class="landing-hero__command"><code data-hero-install-command><span class="token-key">npx</span><span class="token-command"> create-appraisejs@latest</span></code></pre>
+          <button
+            type="button"
+            class="landing-hero__copy-button"
+            data-hero-copy-command
+            aria-label="Copy install command"
+          >
+            <Copy
+              class="landing-hero__copy-icon"
+              size={16}
+              stroke-width={2}
+              aria-hidden="true"
+            />
+            <Check
+              class="landing-hero__copy-icon landing-hero__copy-icon--success"
+              size={16}
+              stroke-width={2}
+              aria-hidden="true"
+            />
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="landing-hero__workflow-cta">
-      <p class="landing-hero__workflow-prompt">Curious how it works?</p>
-      <a class="landing-secondary-button" href="#workflow-heading">
-        See the workflow
-      </a>
+
+    <div class="landing-hero__visual" aria-hidden="true">
+      <div class="landing-hero__visual-glow"></div>
+      <div class="landing-hero__visual-inner">
+        <AllInOneWorkspaceDemo fill={true} />
+      </div>
     </div>
   </div>
 </section>

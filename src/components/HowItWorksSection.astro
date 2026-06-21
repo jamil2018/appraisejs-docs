@@ -1,514 +1,297 @@
 ---
-import {
-  Check,
-  ChevronDown,
-  Code,
-  FileChartColumn,
-  KeyRound,
-  MousePointerClick,
-  Navigation,
-  Play,
-  Plus,
-  Type,
-} from "@lucide/astro";
+import { Crosshair, FileCode2, TerminalSquare, Workflow } from "@lucide/astro";
+import FlowBuilderGraph from "./FlowBuilderGraph.astro";
+import LocatorCreatorDemo from "./LocatorCreatorDemo.astro";
+import PortableOutputDemo from "./PortableOutputDemo.astro";
+import LocalFirstDemo from "./LocalFirstDemo.astro";
+
+const workflowSteps = [
+  {
+    id: "build",
+    index: "01",
+    title: "Build flows by defining steps",
+    description:
+      "Create test cases visually by chaining steps together. Define user actions, assertions, and navigation in an intuitive flow builder.",
+    icon: Workflow,
+  },
+  {
+    id: "design",
+    index: "02",
+    title: "Generate locators from the builder",
+    description:
+      "If locators are required, generate them directly from the visual builder on your live application—no hand-written selectors required.",
+    icon: Crosshair,
+  },
+  {
+    id: "generate",
+    index: "03",
+    title: "Save and generate artifacts",
+    description:
+      "Save your flow to automatically generate standard, reviewable artifacts like Gherkin feature files, Playwright step definitions, and locator JSON.",
+    icon: FileCode2,
+  },
+  {
+    id: "run",
+    index: "04",
+    title: "Run tests and view reports",
+    description:
+      "Execute tests locally with zero cloud latency and view rich, interactive reports. Everything is stored as plain text, making it easy to version control.",
+    icon: TerminalSquare,
+  },
+];
 ---
 
 <section
-  class="landing-showcase landing-showcase--wide landing-showcase--execution"
-  aria-labelledby="workflow-heading"
-  data-execution-scroll
+  class="how-it-works landing-shell"
+  id="how-it-works"
+  aria-labelledby="how-it-works-heading"
 >
-  <div class="landing-shell landing-shell--wide">
-    <div class="landing-section-copy">
-      <p class="landing-kicker">Workflow proof</p>
-      <h2 id="workflow-heading" class="landing-section-title">
-        One workflow, concrete artifacts at every step.
-      </h2>
-      <p class="landing-section-description">
-        Follow a single visual flow as it becomes locator context, generated
-        test files, and local run evidence.
-      </p>
-    </div>
+  <div class="landing-section-copy landing-section-copy--center">
+    <p class="landing-kicker">How it works</p>
+    <h2 id="how-it-works-heading" class="landing-section-title">
+      From visual design to reviewable code in four steps.
+    </h2>
+    <p class="landing-section-description">
+      A visual IDE built for the modern testing loop. No black boxes, no lock-in.
+    </p>
+  </div>
 
-    <div class="execution-model not-content" data-execution-model>
-      <div class="execution-model__copy" aria-label="Execution model steps">
-        <button
-          class="execution-step is-active is-revealed"
-          type="button"
-          data-execution-step="create"
-          data-execution-index="0"
-        >
-          <span class="execution-step__index">01</span>
-          <span>
-            <strong>Create flow</strong>
-            <small>Author the login journey as a saved flow definition.</small>
-          </span>
-        </button>
-        <button
-          class="execution-step"
-          type="button"
-          data-execution-step="configure"
-          data-execution-index="1"
-        >
-          <span class="execution-step__index">02</span>
-          <span>
-            <strong>Add locators/assertions</strong>
-            <small>Attach selectors and assertions to the locator map.</small>
-          </span>
-        </button>
-        <button
-          class="execution-step"
-          type="button"
-          data-execution-step="generate"
-          data-execution-index="2"
-        >
-          <span class="execution-step__index">03</span>
-          <span>
-            <strong>Generate code</strong>
-            <small
-              >Save the test flow and AppraiseJS conversion engine automatically
-              coverts the flow to relevant artifacts(feature files, step
-              definitions, locator entries)</small
-            >
-          </span>
-        </button>
-        <button
-          class="execution-step"
-          type="button"
-          data-execution-step="execute"
-          data-execution-index="3"
-        >
-          <span class="execution-step__index">04</span>
-          <span>
-            <strong>Run locally</strong>
-            <small
-              >Run the flow and keep report/log evidence in the project.</small
-            >
-          </span>
-        </button>
-        <button
-          class="execution-step"
-          type="button"
-          data-execution-step="output"
-          data-execution-index="4"
-        >
-          <span class="execution-step__index">05</span>
-          <span>
-            <strong>Examine reports</strong>
-            <small>Inspect run evidence, timing, and failure details.</small>
-          </span>
-        </button>
-      </div>
-
-      <div class="execution-model__stage" aria-live="polite">
-        <article
-          class="execution-visual execution-visual--create is-active"
-          data-execution-visual="create"
-        >
-          <div class="execution-visual__mobile-copy">
-            <span>01</span>
-            <strong>Create flow</strong>
-            <p>Author the login journey as a saved flow definition.</p>
-          </div>
-          <div class="execution-window">
-            <div class="execution-window__bar">
-              <span>Create Test</span>
-              <i aria-hidden="true"></i>
+  <div class="how-it-works__steps-list not-content">
+    {
+      workflowSteps.map((step, index) => {
+        const Icon = step.icon;
+        const isEven = index % 2 === 1;
+        return (
+          <div class:list={["how-it-works__row", isEven && "how-it-works__row--reverse"]}>
+            <div class="how-it-works__content">
+              <span class="how-it-works__badge">Step {step.index}</span>
+              <h3 class="how-it-works__step-title">
+                <span class="how-it-works__icon-wrap" aria-hidden="true">
+                  <Icon size={20} stroke-width={1.8} />
+                </span>
+                {step.title}
+              </h3>
+              <p class="how-it-works__step-desc">{step.description}</p>
             </div>
-            <div class="execution-canvas">
-              <div class="execution-node execution-node--navigate">
-                <strong>Navigate</strong>
-                <span><Navigation /></span>
-              </div>
-              <div class="execution-edge" aria-hidden="true"></div>
-              <div class="execution-node execution-node--username">
-                <strong>Fill Username</strong>
-                <span><Type /></span>
-              </div>
-              <div class="execution-edge" aria-hidden="true"></div>
-              <div class="execution-node execution-node--password">
-                <strong>Fill Password</strong>
-                <span><KeyRound /></span>
-              </div>
-              <div class="execution-edge" aria-hidden="true"></div>
-              <div class="execution-node execution-node--click">
-                <strong>Click Login</strong>
-                <span><MousePointerClick /></span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article
-          class="execution-visual execution-visual--configure"
-          data-execution-visual="configure"
-        >
-          <div class="execution-visual__mobile-copy">
-            <span>02</span>
-            <strong>Add locators/assertions</strong>
-            <p>Attach selectors and assertions to the locator map.</p>
-          </div>
-          <div class="execution-window">
-            <div class="execution-window__bar">
-              <span>Create Test</span>
-              <button type="button" aria-label="Add test step"><Plus /></button>
-            </div>
-            <div class="execution-configure">
-              <div class="execution-configure__canvas">
-                <div class="execution-mini-node is-ready">
-                  <strong>Navigate</strong>
-                  <span><Navigation /></span>
+            <div class="how-it-works__visual-container">
+              <div class="how-it-works__window">
+                <div class="how-it-works__window-header" aria-hidden="true">
+                  <span class="how-it-works__window-dot"></span>
+                  <span class="how-it-works__window-dot"></span>
+                  <span class="how-it-works__window-dot"></span>
+                  <span class="how-it-works__window-title">{step.id}.appraise</span>
                 </div>
-                <div class="execution-mini-edge" aria-hidden="true"></div>
-                <div class="execution-mini-node is-ready">
-                  <strong>Fill Username</strong>
-                  <span><Type /></span>
-                </div>
-                <div class="execution-mini-edge" aria-hidden="true"></div>
-                <div class="execution-mini-node is-ready">
-                  <strong>Fill Password</strong>
-                  <span><KeyRound /></span>
-                </div>
-                <div class="execution-mini-edge" aria-hidden="true"></div>
-                <div class="execution-mini-node is-ready">
-                  <strong>Click Login</strong>
-                  <span><MousePointerClick /></span>
-                </div>
-                <div
-                  class="execution-mini-edge execution-mini-edge--assert"
-                  aria-hidden="true"
-                >
-                </div>
-                <div class="execution-mini-node execution-mini-node--assert">
-                  <strong>Assert Text</strong>
-                  <span><Check /></span>
+                <div class="how-it-works__window-body">
+                  {step.id === "build" && <FlowBuilderGraph fill={true} />}
+                  {step.id === "design" && <LocatorCreatorDemo fill={true} />}
+                  {step.id === "generate" && <PortableOutputDemo fill={true} />}
+                  {step.id === "run" && <LocalFirstDemo fill={true} />}
                 </div>
               </div>
-              <div class="execution-popover execution-popover--step">
-                <div class="execution-popover__title">Add Node</div>
-                <span></span>
-                <span></span>
-                <button type="button">
-                  Assert Text
-                  <ChevronDown />
-                </button>
-              </div>
-              <div class="execution-popover execution-popover--picker">
-                <div class="execution-popover__title">Extract Locator</div>
-                <div class="execution-page-block"></div>
-                <div class="execution-page-block is-selected"></div>
-                <div class="execution-page-block"></div>
-                <div class="execution-cursor"><MousePointerClick /></div>
-              </div>
             </div>
           </div>
-        </article>
-
-        <article
-          class="execution-visual execution-visual--generate"
-          data-execution-visual="generate"
-        >
-          <div class="execution-visual__mobile-copy">
-            <span>03</span>
-            <strong>Generate code</strong>
-            <p>
-              Save the test flow and AppraiseJS conversion engine automatically
-              coverts the flow to relevant artifacts(feature files, step
-              definitions, locator entries)
-            </p>
-          </div>
-          <div class="execution-window execution-window--generated">
-            <div class="execution-window__bar">
-              <span>Generated test files</span>
-              <Code />
-            </div>
-            <div class="execution-generated">
-              <div class="execution-generated__files">
-                <span class="is-active">login.feature</span>
-                <span>login.steps.ts</span>
-                <span>login.locators.json</span>
-              </div>
-              <pre
-                class="execution-generated__code"
-                aria-label="Generated feature and step output"><code><span class="token-comment"># features/login.feature</span>
-<span class="token-key">Feature:</span> Login smoke
-
-  <span class="token-key">Scenario:</span> Valid user signs in
-    <span class="token-key">When</span> I open the login page
-    <span class="token-key">And</span> I submit valid credentials
-    <span class="token-key">Then</span> the dashboard should be visible</code></pre>
-            </div>
-          </div>
-        </article>
-
-        <article
-          class="execution-visual execution-visual--execute"
-          data-execution-visual="execute"
-        >
-          <div class="execution-visual__mobile-copy">
-            <span>04</span>
-            <strong>Run locally</strong>
-            <p>Run the flow and keep report/log evidence in the project.</p>
-          </div>
-          <div class="execution-run-stack">
-            <div class="execution-window execution-window--run">
-              <div class="execution-window__bar">
-                <span>Create Test Run</span>
-                <i aria-hidden="true"></i>
-              </div>
-              <div class="execution-run-form">
-                <span></span>
-                <span></span>
-                <span></span>
-                <button type="button"><Play /> Start Test Run</button>
-              </div>
-            </div>
-            <div class="execution-window execution-window--running">
-              <div class="execution-window__bar">
-                <span>Executing Tests</span>
-                <i aria-hidden="true"></i>
-              </div>
-              <div class="execution-progress">
-                <span></span>
-              </div>
-              <div class="execution-run-fields">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article
-          class="execution-visual execution-visual--output"
-          data-execution-visual="output"
-        >
-          <div class="execution-visual__mobile-copy">
-            <span>05</span>
-            <strong>Examine reports</strong>
-            <p>Inspect run evidence, timing, and failure details.</p>
-          </div>
-          <div class="execution-window">
-            <div class="execution-window__bar">
-              <span>Test Report</span>
-              <FileChartColumn />
-            </div>
-            <div class="execution-report">
-              <div class="execution-report__summary">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-              <div class="execution-report__graphs">
-                <i></i>
-                <i></i>
-                <i></i>
-              </div>
-              <div class="execution-report__table">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
+        );
+      })
+    }
   </div>
 </section>
 
-<script>
-  const executionModels = document.querySelectorAll("[data-execution-model]");
+<style>
+  .how-it-works {
+    padding-block: var(--landing-section-gap);
+  }
 
-  executionModels.forEach((model) => {
-    const section = model.closest("[data-execution-scroll]");
-    const steps = Array.from(
-      model.querySelectorAll("[data-execution-step]"),
-    ) as HTMLButtonElement[];
-    const visuals = Array.from(
-      model.querySelectorAll("[data-execution-visual]"),
-    );
+  .how-it-works__steps-list {
+    display: grid;
+    gap: clamp(4rem, 8vw, 8rem);
+    margin-top: 3.5rem;
+  }
 
-    if (steps.length === 0 || visuals.length === 0) return;
+  .how-it-works__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
 
-    let activeIndex = -1;
-    let animationFrame: number | undefined;
-    let mobileStackApplied = false;
-    let mobileVisualObserver: IntersectionObserver | undefined;
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    const mobileQuery = window.matchMedia("(max-width: 760px)");
-
-    const restartVisualAnimation = (visual: Element) => {
-      visual.classList.remove("is-active");
-      void (visual as HTMLElement).offsetWidth;
-      visual.classList.add("is-active");
-    };
-
-    const startModelAnimations = () => {
-      if (!model.classList.contains("has-started")) {
-        model.classList.add("has-started");
-      }
-    };
-
-    const applyMobileStack = () => {
-      const isMobile = mobileQuery.matches;
-      model.classList.toggle("is-mobile-stack", isMobile);
-
-      if (!isMobile) {
-        if (mobileVisualObserver) {
-          mobileVisualObserver.disconnect();
-          mobileVisualObserver = undefined;
-        }
-        mobileStackApplied = false;
-        return false;
-      }
-
-      if (mobileStackApplied) return true;
-
-      mobileStackApplied = true;
-
-      steps.forEach((step, index) => {
-        step.classList.add("is-revealed");
-        step.classList.toggle("is-active", index === 0);
-        step.setAttribute("aria-pressed", String(index === 0));
-      });
-
-      visuals.forEach((visual) => visual.classList.remove("is-active"));
-
-      mobileVisualObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              startModelAnimations();
-              restartVisualAnimation(entry.target);
-              return;
-            }
-
-            entry.target.classList.remove("is-active");
-          });
-        },
-        {
-          rootMargin: "-8% 0px -18% 0px",
-          threshold: 0.22,
-        },
-      );
-
-      visuals.forEach((visual) => mobileVisualObserver?.observe(visual));
-      return true;
-    };
-
-    const activate = (index: number) => {
-      if (
-        index === activeIndex &&
-        steps[index]?.classList.contains("is-active")
-      ) {
-        return;
-      }
-
-      activeIndex = index;
-      const id = steps[index]?.getAttribute("data-execution-step");
-      if (!id) return;
-
-      steps.forEach((step, stepIndex) => {
-        const isActive = step.getAttribute("data-execution-step") === id;
-        step.classList.toggle("is-active", isActive);
-        step.classList.toggle("is-revealed", stepIndex <= index);
-        step.setAttribute("aria-pressed", String(isActive));
-      });
-
-      visuals.forEach((visual) => {
-        visual.classList.toggle(
-          "is-active",
-          visual.getAttribute("data-execution-visual") === id,
-        );
-      });
-    };
-
-    const updateFromScroll = () => {
-      animationFrame = undefined;
-
-      if (applyMobileStack()) return;
-      if (!section || prefersReducedMotion) return;
-
-      const rect = section.getBoundingClientRect();
-      const range = Math.max(1, rect.height - window.innerHeight);
-      const introBuffer = window.innerHeight * 0.22;
-      const progress = Math.min(
-        1,
-        Math.max(0, (-rect.top - introBuffer) / range),
-      );
-      const thresholds = [0, 0.14, 0.34, 0.56, 0.78];
-      const index = thresholds.reduce((current, threshold, thresholdIndex) => {
-        return progress >= threshold ? thresholdIndex : current;
-      }, 0);
-
-      activate(index);
-    };
-
-    const requestScrollUpdate = () => {
-      if (animationFrame || prefersReducedMotion) return;
-      animationFrame = window.requestAnimationFrame(updateFromScroll);
-    };
-
-    steps.forEach((step, index) => {
-      step.addEventListener("click", () => {
-        activate(index);
-        if (!section || prefersReducedMotion || mobileQuery.matches) return;
-
-        const sectionTop = section.getBoundingClientRect().top + window.scrollY;
-        const range = Math.max(1, section.clientHeight - window.innerHeight);
-        const target =
-          sectionTop + range * ((index + 0.5) / Math.max(1, steps.length));
-
-        window.scrollTo({ top: target, behavior: "smooth" });
-      });
-    });
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          startModelAnimations();
-          requestScrollUpdate();
-        } else {
-          model.classList.remove("has-started");
-          if (animationFrame) {
-            window.cancelAnimationFrame(animationFrame);
-            animationFrame = undefined;
-          }
-        }
-      },
-      { threshold: 0.35 },
-    );
-
-    window.addEventListener("scroll", requestScrollUpdate, { passive: true });
-    window.addEventListener("resize", requestScrollUpdate);
-    mobileQuery.addEventListener("change", requestScrollUpdate);
-    activate(0);
-    if (prefersReducedMotion) {
-      steps.forEach((step) => step.classList.add("is-revealed"));
+  @media (min-width: 1024px) {
+    .how-it-works__row {
+      grid-template-columns: 0.9fr 1.1fr;
     }
-    observer.observe(model);
-    requestScrollUpdate();
-    document.addEventListener(
-      "astro:before-swap",
-      () => {
-        if (animationFrame) window.cancelAnimationFrame(animationFrame);
-        if (mobileVisualObserver) mobileVisualObserver.disconnect();
-        window.removeEventListener("scroll", requestScrollUpdate);
-        window.removeEventListener("resize", requestScrollUpdate);
-        mobileQuery.removeEventListener("change", requestScrollUpdate);
-      },
-      { once: true },
-    );
-  });
-</script>
+
+    .how-it-works__row--reverse {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+
+    .how-it-works__row--reverse .how-it-works__content {
+      order: 2;
+    }
+
+    .how-it-works__row--reverse .how-it-works__visual-container {
+      order: 1;
+    }
+  }
+
+  .how-it-works__content {
+    display: grid;
+    gap: 1rem;
+    max-width: 32rem;
+  }
+
+  .how-it-works__badge {
+    display: inline-flex;
+    align-items: center;
+    width: max-content;
+    padding: 0.25rem 0.75rem;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 999px;
+    background: rgba(16, 185, 129, 0.06);
+    color: var(--landing-green);
+    font-family: var(--landing-font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .how-it-works__step-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--landing-text);
+  }
+
+  .how-it-works__icon-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid var(--landing-border);
+    border-radius: var(--landing-radius);
+    background: #101010;
+    color: var(--landing-green);
+    flex-shrink: 0;
+  }
+
+  .how-it-works__step-desc {
+    color: var(--landing-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .how-it-works__visual-container {
+    width: 100%;
+  }
+
+  .how-it-works__window {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: clamp(22rem, 42vw, 30rem);
+    min-height: 22rem;
+    border: 1px solid var(--landing-border);
+    border-radius: var(--landing-radius);
+    background: #101010;
+    overflow: hidden;
+    box-shadow: 
+      0 20px 50px rgba(0, 0, 0, 0.3),
+      inset 0 0 30px rgba(255, 255, 255, 0.01);
+  }
+
+  .how-it-works__window-header {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    height: 2.5rem;
+    padding-inline: 1rem;
+    border-bottom: 1px solid var(--landing-border);
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .how-it-works__window-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .how-it-works__window-title {
+    margin-left: 0.75rem;
+    color: var(--landing-dim);
+    font-family: var(--landing-font-mono);
+    font-size: 0.75rem;
+  }
+
+  .how-it-works__window-body {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .how-it-works__window-body :global(.flow-builder-graph--fill),
+  .how-it-works__window-body :global(.locator-creator-demo--fill),
+  .how-it-works__window-body :global(.portable-output-demo--fill),
+  .how-it-works__window-body :global(.local-first-demo--fill) {
+    display: flex;
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .how-it-works__window-body :global(.locator-creator-demo--fill .locator-creator-demo__panel),
+  .how-it-works__window-body :global(.portable-output-demo--fill .portable-output-demo__panel) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    min-height: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .how-it-works__window-body :global(.locator-creator-demo--fill .locator-creator-demo__canvas) {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .how-it-works__window-body :global(.local-first-demo--fill .local-first-demo__stage),
+  .how-it-works__window-body :global(.portable-output-demo--fill .portable-output-demo__stage) {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    min-height: 0;
+    margin: 0;
+  }
+
+  .how-it-works__window-body :global(.locator-creator-demo--fill .locator-creator-demo__view) {
+    min-height: 0;
+  }
+
+  .how-it-works__window-body :global(.locator-creator-demo--fill .locator-creator-demo__page),
+  .how-it-works__window-body :global(.locator-creator-demo--fill .locator-creator-demo__view--form) {
+    height: 100%;
+  }
+
+  @media (max-width: 1024px) {
+    .how-it-works__window {
+      height: clamp(19rem, 58vw, 25rem);
+      min-height: 19rem;
+    }
+  }
+</style>
