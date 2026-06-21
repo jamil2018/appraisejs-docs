@@ -20,6 +20,11 @@ const fileDefinitions = [
 +    Then the order confirmation should be visible
 +    And the confirmation total should equal "$64.00"`,
     lang: "diff",
+    review: {
+      body:
+        "Readable scenario structure—QA can follow this without opening the visual tool. The steps map cleanly to a smoke test I'd sign off on.",
+      verdict: "Approved.",
+    },
   },
   {
     id: "steps",
@@ -42,6 +47,11 @@ const fileDefinitions = [
 +  await page.locator(locators.payment.submit.selector).click();
 +});`,
     lang: "diff",
+    review: {
+      body:
+        "Standard Playwright step definitions importing locators from JSON. I can debug these locally and extend them when we need custom logic.",
+      verdict: "Approved.",
+    },
   },
   {
     id: "locators",
@@ -61,6 +71,11 @@ const fileDefinitions = [
 +    "submit": "[data-testid='submit-payment']"
 +  }`,
     lang: "diff",
+    review: {
+      body:
+        "Selectors live in version-controlled JSON, not a hosted database. When a `data-testid` changes, it's one file to grep and patch.",
+      verdict: "Approved.",
+    },
   },
 ];
 
@@ -77,13 +92,14 @@ const files = await Promise.all(
   id="generated-output"
   aria-labelledby="pr-heading"
 >
-  <div class="landing-section-copy">
-    <p class="landing-kicker">Developer Proof</p>
+  <div class="landing-section-copy landing-section-copy--center">
+    <p class="landing-kicker">Review in PRs</p>
     <h2 id="pr-heading" class="landing-section-title">
-      Zero magic. Just standard code in your Pull Requests.
+      The output looks like code your team already writes.
     </h2>
     <p class="landing-section-description">
-      AppraiseJS doesn't hide your tests in a proprietary cloud database. It generates clean, standard, human-readable Playwright and Gherkin files that live directly in your git repository.
+      Every visual flow becomes Gherkin features, Playwright steps, and locator
+      JSON in your repo—ready for normal code review, not a 5 MB proprietary diff.
     </p>
   </div>
 
@@ -106,20 +122,20 @@ const files = await Promise.all(
         <strong>jamil2018</strong> wants to merge <code class="pr-header__branch">visual-checkout</code> into <code class="pr-header__branch">main</code>
       </div>
 
-      <!-- PR Tabs -->
-      <div class="pr-tabs" role="tablist" aria-label="GitHub Pull Request Tabs">
-        <button type="button" class="pr-tab" aria-selected="false" tabindex="-1">
+      <!-- PR Tabs (decorative chrome — only Files changed is shown) -->
+      <div class="pr-tabs" aria-hidden="true">
+        <span class="pr-tab">
           Conversation <span class="pr-tab__badge">2</span>
-        </button>
-        <button type="button" class="pr-tab" aria-selected="false" tabindex="-1">
+        </span>
+        <span class="pr-tab">
           Commits <span class="pr-tab__badge">1</span>
-        </button>
-        <button type="button" class="pr-tab" aria-selected="false" tabindex="-1">
+        </span>
+        <span class="pr-tab">
           Checks <span class="pr-tab__badge pr-tab__badge--success">✓</span>
-        </button>
-        <button type="button" class="pr-tab is-active" aria-selected="true" tabindex="0">
+        </span>
+        <span class="pr-tab is-active">
           Files changed <span class="pr-tab__badge">3</span>
-        </button>
+        </span>
       </div>
     </div>
 
@@ -171,7 +187,7 @@ const files = await Promise.all(
         }
 
         <!-- Mock Comment -->
-        <div class="pr-comment">
+        <div class="pr-comment" aria-live="polite">
           <div class="pr-comment__header">
             <div class="pr-comment__user">
               <span class="pr-comment__avatar">SR</span>
@@ -179,18 +195,23 @@ const files = await Promise.all(
             </div>
             <span class="pr-comment__time">5 minutes ago</span>
           </div>
-          <div class="pr-comment__body">
-            <p>
-              Wow, wait. Is this visual tool actually committing clean Gherkin and standard Playwright step definitions? I can actually review this! No proprietary blobs, no lock-in, and it integrates perfectly with our existing CI pipeline.
-            </p>
-            <p>
-              <strong>Approved.</strong> This is exactly how visual testing should work.
-            </p>
-          </div>
+          {
+            files.map((file, index) => (
+              <div
+                class:list={["pr-comment__body", index === 0 && "is-active"]}
+                data-pr-comment={file.id}
+              >
+                <p>{file.review.body}</p>
+                <p>
+                  <strong>{file.review.verdict}</strong>
+                </p>
+              </div>
+            ))
+          }
           <div class="pr-comment__footer">
-            <button type="button" class="pr-comment__reaction-btn">
+            <span class="pr-comment__reaction-btn" aria-hidden="true">
               <MessageSquare size={12} /> Reply
-            </button>
+            </span>
           </div>
         </div>
       </div>
@@ -200,7 +221,7 @@ const files = await Promise.all(
 
 <style>
   .pr-simulator {
-    padding-top: clamp(4rem, 8vw, 8rem);
+    padding-block: var(--landing-section-gap);
   }
 
   .pr-window {
@@ -208,7 +229,7 @@ const files = await Promise.all(
     border-radius: var(--landing-radius);
     background: #0d0d0d;
     overflow: hidden;
-    margin-top: 2.5rem;
+    margin-top: 2rem;
     box-shadow: 
       0 25px 60px rgba(0, 0, 0, 0.4),
       inset 0 0 30px rgba(255, 255, 255, 0.01);
@@ -281,22 +302,20 @@ const files = await Promise.all(
   }
 
   .pr-tab {
-    background: transparent;
-    border: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
     border-bottom: 2px solid transparent;
     color: var(--landing-muted);
     font-size: 0.88rem;
     font-weight: 500;
     padding: 0.65rem 0.85rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    appearance: none;
+    user-select: none;
+    pointer-events: none;
   }
 
   .pr-tab:hover {
-    color: var(--landing-text);
+    color: var(--landing-muted);
   }
 
   .pr-tab.is-active {
@@ -425,14 +444,27 @@ const files = await Promise.all(
     margin: 0;
     padding: 1rem;
     background: transparent;
-    font-family: "Geist Mono", var(--sl-font-mono), monospace;
+    font-family: var(--landing-font-mono);
     font-size: 0.8rem;
     line-height: 1.6;
+    white-space: pre;
   }
 
-  /* Custom styling for diff highlighting */
-  .pr-diff-pre :global(.token-comment) {
-    color: #8b949e;
+  .pr-diff-pre code {
+    display: block;
+    width: max-content;
+    min-width: 100%;
+    font: inherit;
+    background: transparent;
+  }
+
+  .pr-diff-pre :global(.line) {
+    display: block;
+    min-height: 1.6em;
+  }
+
+  .pr-diff-pre :global(.line:empty)::before {
+    content: "\200b";
   }
 
   /* Mock Comment Card */
@@ -483,10 +515,15 @@ const files = await Promise.all(
   }
 
   .pr-comment__body {
+    display: none;
     padding: 1rem;
     font-size: 0.9rem;
     line-height: 1.55;
     color: var(--landing-muted);
+  }
+
+  .pr-comment__body.is-active {
+    display: block;
   }
 
   .pr-comment__body p {
@@ -508,20 +545,14 @@ const files = await Promise.all(
   }
 
   .pr-comment__reaction-btn {
-    background: transparent;
-    border: 0;
-    color: #8b949e;
-    font-size: 0.75rem;
-    font-weight: 600;
-    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 0.25rem;
-    appearance: none;
-  }
-
-  .pr-comment__reaction-btn:hover {
-    color: var(--landing-text);
+    color: #8b949e;
+    font-size: 0.75rem;
+    font-weight: 600;
+    user-select: none;
+    pointer-events: none;
   }
 
   @media (max-width: 1024px) {
@@ -555,6 +586,9 @@ const files = await Promise.all(
     simulators.forEach((sim) => {
       const files = Array.from(sim.querySelectorAll("[data-pr-file]")) as HTMLElement[];
       const panes = Array.from(sim.querySelectorAll("[data-pr-pane]")) as HTMLElement[];
+      const comments = Array.from(
+        sim.querySelectorAll("[data-pr-comment]"),
+      ) as HTMLElement[];
 
       if (files.length === 0 || panes.length === 0) return;
 
@@ -568,6 +602,11 @@ const files = await Promise.all(
         panes.forEach((pane) => {
           const isActive = pane.dataset.prPane === id;
           pane.classList.toggle("is-active", isActive);
+        });
+
+        comments.forEach((comment) => {
+          const isActive = comment.dataset.prComment === id;
+          comment.classList.toggle("is-active", isActive);
         });
       };
 
