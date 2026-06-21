@@ -1,0 +1,342 @@
+---
+import { AlertOctagon, CheckCircle2, ShieldAlert, Sparkles, XOctagon } from "@lucide/astro";
+---
+
+<section
+  class="wall-of-pain landing-shell"
+  id="wall-of-pain-section"
+  aria-labelledby="pain-heading"
+>
+  <div class="landing-section-copy">
+    <p class="landing-kicker">The Hard Truth</p>
+    <h2 id="pain-heading" class="landing-section-title">
+      Visual testing is broken. We rebuilt it from the git history up.
+    </h2>
+    <p class="landing-section-description">
+      Traditional visual testing tools force a painful compromise: give up code control for visual ease, or hand-author everything. Here is how AppraiseJS ends the compromise.
+    </p>
+  </div>
+
+  <div class="pain-matrix not-content" data-pain-matrix>
+    <div class="pain-matrix__toggle-bar">
+      <button
+        type="button"
+        class="pain-matrix__toggle-btn is-active"
+        data-toggle-mode="old"
+        aria-pressed="true"
+      >
+        <AlertOctagon size={16} />
+        Traditional Black-Box Tools
+      </button>
+      <button
+        type="button"
+        class="pain-matrix__toggle-btn"
+        data-toggle-mode="new"
+        aria-pressed="false"
+      >
+        <Sparkles size={16} />
+        The AppraiseJS Way
+      </button>
+    </div>
+
+    <div class="pain-matrix__cards-wrapper">
+      <!-- Old Way Cards -->
+      <div class="pain-matrix__grid is-active" data-matrix-grid="old">
+        <article class="pain-card pain-card--old">
+          <div class="pain-card__header">
+            <XOctagon class="pain-card__icon text-red" size={24} />
+            <h3>Proprietary JSON Blobs</h3>
+          </div>
+          <p class="pain-card__text">
+            Click record, and get a 10,000-line proprietary JSON blob committed to your repository. It is completely unreadable, impossible to review in a PR, and breaks on every minor UI change.
+          </p>
+          <div class="pain-card__quote">
+            "We had to disable PR reviews for tests because nobody can review a 5MB JSON diff."
+          </div>
+        </article>
+
+        <article class="pain-card pain-card--old">
+          <div class="pain-card__header">
+            <XOctagon class="pain-card__icon text-red" size={24} />
+            <h3>Hosted Cloud Lock-In</h3>
+          </div>
+          <p class="pain-card__text">
+            Your tests can only execute on their proprietary cloud servers. Want to run a single test locally to debug? Pay $500/month per seat, or wait in a 10-minute queue for a container to spin up.
+          </p>
+          <div class="pain-card__quote">
+            "Debugging a failing test takes 15 minutes of pushing to git and waiting for cloud logs."
+          </div>
+        </article>
+
+        <article class="pain-card pain-card--old">
+          <div class="pain-card__header">
+            <XOctagon class="pain-card__icon text-red" size={24} />
+            <h3>Hidden Locator Databases</h3>
+          </div>
+          <p class="pain-card__text">
+            Locators are stored in a database on their servers, completely detached from your codebase. When an engineer changes a class name, the test breaks silently, requiring manual re-recording.
+          </p>
+          <div class="pain-card__quote">
+            "Our tests are constantly flaky because the locators live in a black box we don't own."
+          </div>
+        </article>
+      </div>
+
+      <!-- New Way Cards -->
+      <div class="pain-matrix__grid" data-matrix-grid="new">
+        <article class="pain-card pain-card--new">
+          <div class="pain-card__header">
+            <CheckCircle2 class="pain-card__icon text-green" size={24} />
+            <h3>Clean Gherkin & Playwright</h3>
+          </div>
+          <p class="pain-card__text">
+            AppraiseJS generates clean, human-readable Gherkin feature files and standard Playwright step definitions. It looks exactly like code written by a senior QA engineer.
+          </p>
+          <div class="pain-card__quote">
+            "It looks like standard code. I can review, edit, and approve it directly in GitHub."
+          </div>
+        </article>
+
+        <article class="pain-card pain-card--new">
+          <div class="pain-card__header">
+            <CheckCircle2 class="pain-card__icon text-green" size={24} />
+            <h3>Local-First & Instant</h3>
+          </div>
+          <p class="pain-card__text">
+            Run tests instantly on your local machine with zero cloud latency. AppraiseJS runs on top of your local Node.js and Playwright installation. No proprietary runners, no queues, no extra costs.
+          </p>
+          <div class="pain-card__quote">
+            "I can run my entire visual suite locally in 10 seconds before committing my code."
+          </div>
+        </article>
+
+        <article class="pain-card pain-card--new">
+          <div class="pain-card__header">
+            <CheckCircle2 class="pain-card__icon text-green" size={24} />
+            <h3>Repo-Owned Locator Map</h3>
+          </div>
+          <p class="pain-card__text">
+            All locators are stored in a simple, version-controlled JSON file in your repository. They are mapped to page routes, making them easy to inspect, update, and reuse across tests.
+          </p>
+          <div class="pain-card__quote">
+            "Our selectors are fully version-controlled. If a locator changes, we update one JSON line."
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .wall-of-pain {
+    padding-top: clamp(4rem, 8vw, 8rem);
+  }
+
+  .pain-matrix {
+    display: grid;
+    gap: 2rem;
+    margin-top: 2.5rem;
+  }
+
+  .pain-matrix__toggle-bar {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.35rem;
+    border: 1px solid var(--landing-border);
+    border-radius: var(--landing-radius);
+    background: rgba(19, 19, 19, 0.8);
+    backdrop-filter: blur(12px);
+    width: max-content;
+    margin-inline: auto;
+  }
+
+  .pain-matrix__toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.5rem;
+    padding: 0.5rem 1.25rem;
+    border: 1px solid transparent;
+    border-radius: var(--landing-radius);
+    background: transparent;
+    color: var(--landing-muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition:
+      background-color 200ms ease,
+      border-color 200ms ease,
+      color 200ms ease,
+      box-shadow 200ms ease;
+    cursor: pointer;
+    appearance: none;
+  }
+
+  .pain-matrix__toggle-btn:hover {
+    color: var(--landing-text);
+  }
+
+  .pain-matrix__toggle-btn.is-active[data-toggle-mode="old"] {
+    background: rgba(239, 68, 68, 0.08);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.05);
+  }
+
+  .pain-matrix__toggle-btn.is-active[data-toggle-mode="new"] {
+    background: rgba(16, 185, 129, 0.08);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: #a7f3d0;
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.05);
+  }
+
+  .pain-matrix__cards-wrapper {
+    position: relative;
+    min-height: 22rem;
+  }
+
+  .pain-matrix__grid {
+    display: none;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 300ms ease,
+      transform 300ms ease;
+  }
+
+  .pain-matrix__grid.is-active {
+    display: grid;
+    position: relative;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .pain-card {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 1.25rem;
+    padding: 1.75rem;
+    border: 1px solid var(--landing-border);
+    border-radius: var(--landing-radius);
+    background: rgba(19, 19, 19, 0.96);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition:
+      border-color 250ms ease,
+      box-shadow 250ms ease,
+      transform 250ms ease;
+  }
+
+  .pain-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .pain-card--old:hover {
+    border-color: rgba(239, 68, 68, 0.25);
+    box-shadow: 0 15px 35px rgba(239, 68, 68, 0.03);
+  }
+
+  .pain-card--new:hover {
+    border-color: rgba(16, 185, 129, 0.25);
+    box-shadow: 0 15px 35px rgba(16, 185, 129, 0.03);
+  }
+
+  .pain-card__header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .pain-card h3 {
+    font-size: 1.15rem;
+    font-weight: 650;
+    color: var(--landing-text);
+  }
+
+  .pain-card__text {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--landing-muted);
+  }
+
+  .pain-card__quote {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    font-style: italic;
+    color: var(--landing-dim);
+    padding-top: 1rem;
+    border-top: 1px solid var(--landing-border-soft);
+  }
+
+  .text-red {
+    color: var(--landing-red);
+    filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.15));
+  }
+
+  .text-green {
+    color: var(--landing-green);
+    filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.15));
+  }
+
+  @media (max-width: 1024px) {
+    .pain-matrix__grid.is-active {
+      grid-template-columns: 1fr;
+    }
+    
+    .pain-matrix__cards-wrapper {
+      min-height: auto;
+    }
+  }
+</style>
+
+<script>
+  function initPainMatrix() {
+    const matrixContainers = document.querySelectorAll("[data-pain-matrix]");
+
+    matrixContainers.forEach((container) => {
+      const buttons = Array.from(container.querySelectorAll("[data-toggle-mode]")) as HTMLElement[];
+      const grids = Array.from(container.querySelectorAll("[data-matrix-grid]")) as HTMLElement[];
+
+      if (buttons.length === 0 || grids.length === 0) return;
+
+      const activate = (mode: string) => {
+        buttons.forEach((btn) => {
+          const isActive = btn.dataset.toggleMode === mode;
+          btn.classList.toggle("is-active", isActive);
+          btn.setAttribute("aria-pressed", String(isActive));
+        });
+
+        grids.forEach((grid) => {
+          const isActive = grid.dataset.matrixGrid === mode;
+          if (isActive) {
+            grid.style.display = "grid";
+            void grid.offsetWidth;
+            grid.classList.add("is-active");
+          } else {
+            grid.classList.remove("is-active");
+            setTimeout(() => {
+              if (!grid.classList.contains("is-active")) {
+                grid.style.display = "none";
+              }
+            }, 300);
+          }
+        });
+      };
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const mode = btn.dataset.toggleMode;
+          if (mode) activate(mode);
+        });
+      });
+    });
+  }
+
+  document.addEventListener("astro:page-load", initPainMatrix);
+  initPainMatrix();
+</script>
