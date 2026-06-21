@@ -1,5 +1,5 @@
 ---
-import { Check, Copy } from "@lucide/astro";
+import { ArrowRight, Check, Copy } from "@lucide/astro";
 import AllInOneWorkspaceDemo from "./AllInOneWorkspaceDemo.astro";
 
 const installCommand = "npx create-appraisejs@latest";
@@ -23,6 +23,13 @@ const installCommand = "npx create-appraisejs@latest";
       </p>
 
       <div class="landing-hero__actions">
+        <a class="landing-cta-button" href="/getting-started/overview/">
+          Get Started
+          <ArrowRight size={16} stroke-width={2} aria-hidden="true" />
+        </a>
+        <a class="landing-secondary-button" href="#how-it-works">
+          See how it works
+        </a>
         <div class="landing-hero__install" aria-label="Install command">
           <pre
             class="landing-hero__command"><code data-hero-install-command><span class="token-key">npx</span><span class="token-command"> create-appraisejs@latest</span></code></pre>
@@ -46,9 +53,6 @@ const installCommand = "npx create-appraisejs@latest";
             />
           </button>
         </div>
-        <a class="landing-secondary-button" href="#how-it-works">
-          See how it works
-        </a>
       </div>
     </div>
 

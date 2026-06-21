@@ -3150,7 +3150,7 @@ pre {
     width: 100%;
   }
 
-  .landing-hero__actions .landing-secondary-button {
+  .landing-hero__actions :is(.landing-cta-button, .landing-secondary-button) {
     justify-content: center;
     width: 100%;
   }
