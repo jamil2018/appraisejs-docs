@@ -14,12 +14,23 @@ const cycle = "7.2s";
   aria-hidden="true"
 >
   <div class="all-in-one-demo__panel">
+    <div class="all-in-one-demo__status-layer">
+      <div class="all-in-one-demo__status all-in-one-demo__status--design">
+        <span class="all-in-one-demo__status-dot all-in-one-demo__status-dot--design"></span>
+        <span class="all-in-one-demo__status-text">1. Design</span>
+      </div>
+      <div class="all-in-one-demo__status all-in-one-demo__status--run">
+        <span class="all-in-one-demo__status-dot all-in-one-demo__status-dot--run"></span>
+        <span class="all-in-one-demo__status-text">2. Run</span>
+      </div>
+      <div class="all-in-one-demo__status all-in-one-demo__status--analyze">
+        <span class="all-in-one-demo__status-dot all-in-one-demo__status-dot--analyze"></span>
+        <span class="all-in-one-demo__status-text">3. Analyze</span>
+      </div>
+    </div>
+
     <div class="all-in-one-demo__stage">
       <div class="all-in-one-demo__view all-in-one-demo__view--canvas">
-        <div class="all-in-one-demo__status">
-          <span class="all-in-one-demo__status-dot all-in-one-demo__status-dot--design"></span>
-          <span class="all-in-one-demo__status-text">1. Design</span>
-        </div>
         <div class="all-in-one-demo__window all-in-one-demo__window--canvas">
           <div class="all-in-one-demo__title">Create Test Case</div>
           <div class="all-in-one-demo__canvas-grid">
@@ -46,10 +57,6 @@ const cycle = "7.2s";
       </div>
 
       <div class="all-in-one-demo__view all-in-one-demo__view--run">
-        <div class="all-in-one-demo__status">
-          <span class="all-in-one-demo__status-dot all-in-one-demo__status-dot--run"></span>
-          <span class="all-in-one-demo__status-text">2. Run</span>
-        </div>
         <div class="all-in-one-demo__window">
           <div class="all-in-one-demo__title">Create Test Run</div>
           <div class="all-in-one-demo__form">
@@ -64,10 +71,6 @@ const cycle = "7.2s";
       </div>
 
       <div class="all-in-one-demo__view all-in-one-demo__view--report">
-        <div class="all-in-one-demo__status">
-          <span class="all-in-one-demo__status-dot all-in-one-demo__status-dot--analyze"></span>
-          <span class="all-in-one-demo__status-text">3. Analyze</span>
-        </div>
         <div class="all-in-one-demo__window all-in-one-demo__window--report">
           <div class="all-in-one-demo__title">Test Report</div>
           <div class="all-in-one-demo__report-main">
@@ -113,7 +116,12 @@ const cycle = "7.2s";
     background: #101010;
   }
 
+  .all-in-one-demo :where(div, span) {
+    margin: 0;
+  }
+
   .all-in-one-demo__panel {
+    position: relative;
     display: flex;
     width: 100%;
     max-width: 15rem;
@@ -128,6 +136,7 @@ const cycle = "7.2s";
     position: relative;
     display: grid;
     flex: 1 1 auto;
+    width: 100%;
     min-height: 100%;
     overflow: hidden;
     perspective: 780px;
@@ -142,24 +151,53 @@ const cycle = "7.2s";
     position: relative;
     grid-area: 1 / 1;
     display: grid;
+    align-self: stretch;
     min-width: 0;
+    min-height: 100%;
     padding: clamp(0.75rem, 2.5vw, 1.2rem);
     transform-origin: center;
   }
 
+  .all-in-one-demo__status-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: max-content;
+    margin: 0;
+    pointer-events: none;
+  }
+
   .all-in-one-demo__status {
     position: absolute;
-    top: clamp(0.5rem, 1.5vw, 0.85rem);
-    left: clamp(0.5rem, 1.5vw, 0.85rem);
-    display: flex;
+    top: 0;
+    left: 0;
+    display: inline-flex;
     align-items: center;
+    width: max-content;
+    max-width: none;
+    margin: 0;
     gap: 0.35rem;
     padding: 0.22rem 0.55rem;
     background: rgba(18, 18, 18, 0.65);
     border: 1px solid var(--landing-border-soft);
     border-radius: 999px;
     backdrop-filter: blur(8px);
-    z-index: 10;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    opacity: 0;
+  }
+
+  .all-in-one-demo__status--design {
+    animation: all-in-one-status-design var(--all-in-one-cycle) ease-in-out infinite;
+  }
+
+  .all-in-one-demo__status--run {
+    animation: all-in-one-status-run var(--all-in-one-cycle) ease-in-out infinite;
+  }
+
+  .all-in-one-demo__status--analyze {
+    animation: all-in-one-status-analyze var(--all-in-one-cycle) ease-in-out infinite;
   }
 
   .all-in-one-demo__status-text {
@@ -168,9 +206,11 @@ const cycle = "7.2s";
     color: var(--landing-muted);
     letter-spacing: 0.02em;
     line-height: 1;
+    white-space: nowrap;
   }
 
   .all-in-one-demo__status-dot {
+    flex: 0 0 auto;
     width: 6px;
     height: 6px;
     border-radius: 50%;
@@ -554,6 +594,44 @@ const cycle = "7.2s";
     }
   }
 
+  @keyframes all-in-one-status-design {
+    0%,
+    32% {
+      opacity: 1;
+    }
+    39%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes all-in-one-status-run {
+    0%,
+    33%,
+    100% {
+      opacity: 0;
+    }
+    40%,
+    60% {
+      opacity: 1;
+    }
+    67% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes all-in-one-status-analyze {
+    0%,
+    64%,
+    100% {
+      opacity: 0;
+    }
+    72%,
+    94% {
+      opacity: 1;
+    }
+  }
+
   @keyframes all-in-one-node {
     0%,
     2% {
@@ -714,6 +792,14 @@ const cycle = "7.2s";
     .all-in-one-demo__view--report {
       opacity: 1;
       transform: none;
+    }
+
+    .all-in-one-demo__status {
+      animation: none;
+    }
+
+    .all-in-one-demo__status--analyze {
+      opacity: 1;
     }
 
     .all-in-one-demo__node,
