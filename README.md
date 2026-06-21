@@ -1,62 +1,82 @@
-# AppraiseJS Docs Website
+# AppraiseJS Docs
 
-Build with astro starlight.
+The documentation website for [AppraiseJS](https://github.com/jamil2018/appraisejs-core) — a tool for designing browser tests visually, generating real Playwright and Cucumber artifacts, and keeping execution local-first.
 
-```
+The site is built with [Astro](https://astro.build) and the [Starlight](https://starlight.astro.build) documentation theme, styled with Tailwind CSS v4, and deployed to Vercel.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro + Starlight project, you'll see the following folders and files:
+## Project Structure
 
 ```
-
 .
-├── public/
+├── public/                     # Static assets served as-is
+│   ├── logo.svg
+│   └── docs/media/             # Screenshots and videos used in docs pages
 ├── src/
-│ ├── assets/
-│ ├── content/
-│ │ └── docs/
-│ └── content.config.ts
-├── astro.config.mjs
+│   ├── components/             # Shared Astro components (landing page, demos, doc UI)
+│   │   └── overrides/          # Starlight component overrides (Head, theme controls)
+│   ├── content/
+│   │   └── docs/               # Documentation pages (.md / .mdx)
+│   │       ├── getting-started/
+│   │       ├── core-concepts/
+│   │       ├── build-tests/
+│   │       ├── run-and-analyze/
+│   │       └── reference/
+│   ├── content.config.ts       # Starlight content collection config
+│   ├── pages/robots.txt.ts     # Generated robots.txt
+│   ├── plugins/                # Custom remark/Starlight plugins (nomnoml diagrams)
+│   ├── scripts/                # Client-side scripts (e.g. image lightbox)
+│   ├── styles/                 # theme.css, global.css, custom.css, landing.css
+│   └── utils/
+├── astro.config.mjs            # Astro + Starlight config and sidebar
 ├── package.json
 └── tsconfig.json
-
 ```
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+Starlight renders every `.md` or `.mdx` file in `src/content/docs/` as a route based on its file path. The sidebar navigation is defined explicitly in `astro.config.mjs`.
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+## Getting Started
 
-Static assets, like favicons, can be placed in the `public/` directory.
+Requires Node.js and npm. Run all commands from the repository root.
 
-## 🧞 Commands
+```bash
+npm install
+npm run dev
+```
 
-All commands are run from the root of the project, from a terminal:
+The dev server runs at `localhost:4321`.
+
+## Commands
 
 | Command                   | Action                                           |
 | :------------------------ | :----------------------------------------------- |
 | `npm install`             | Installs dependencies                            |
 | `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run build`           | Build the production site to `./dist/`           |
+| `npm run preview`         | Preview the build locally before deploying       |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## SEO configuration
+Treat `npm run build` as the main validation step before submitting changes; there is no dedicated test script.
 
-Set `SITE_URL` (or `PUBLIC_SITE_URL`) in your deployment environment to your
-production docs URL, for example:
+## Authoring Content
+
+- Add documentation pages under `src/content/docs/` using lowercase kebab-case filenames (for example `quick-start.mdx`).
+- Register new pages in the sidebar by editing the `sidebar` array in `astro.config.mjs`.
+- Place screenshots and videos under `public/docs/media/`, mirroring the docs route they belong to. Optimize large media before committing.
+- Diagrams can be authored with [nomnoml](https://nomnoml.com/) fenced code blocks via the custom `starlight-nomnoml` plugin, or with [Mermaid](https://mermaid.js.org/).
+
+## SEO Configuration
+
+Canonical URLs, the sitemap, and `robots.txt` are derived from the site URL. Set one of `SITE_URL`, `PUBLIC_SITE_URL`, or `URL` in the deployment environment to the production docs URL:
 
 ```bash
 SITE_URL=https://docs.yourdomain.com
 ```
 
-This project now generates canonical URLs, `robots.txt`, and sitemap links from
-that value.
+If none is set, the build falls back to `https://appraisejs-docs.vercel.app`.
 
-## 👀 Want to learn more?
+## Learn More
 
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
-```
+- [Starlight documentation](https://starlight.astro.build/)
+- [Astro documentation](https://docs.astro.build)
+- [Astro Discord](https://astro.build/chat)
