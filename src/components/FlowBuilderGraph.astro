@@ -431,8 +431,21 @@ const { fill = false } = Astro.props;
     };
   }
 
+  function getDemoPanels(root) {
+    return [
+      root.closest("[data-showcase-panel]"),
+      root.closest("[data-feature-panel]"),
+    ].filter(Boolean);
+  }
+
+  function isDemoPanelActive(root) {
+    const panels = getDemoPanels(root);
+    if (panels.length === 0) return true;
+    return panels.some((panel) => panel.classList.contains("is-active"));
+  }
+
   function manageVisibleLoop(root, setup) {
-    const panel = root.closest("[data-feature-panel]");
+    const panels = getDemoPanels(root);
     let cleanup = null;
     let isVisible = false;
 
@@ -442,8 +455,7 @@ const { fill = false } = Astro.props;
     };
 
     const update = () => {
-      const isActivePanel = !panel || panel.classList.contains("is-active");
-      const shouldRun = isVisible && isActivePanel;
+      const shouldRun = isVisible && isDemoPanelActive(root);
 
       if (shouldRun && !cleanup) {
         cleanup = setup(root);
@@ -466,18 +478,22 @@ const { fill = false } = Astro.props;
 
     observer.observe(root);
 
-    const mutationObserver = panel ? new MutationObserver(update) : null;
-
-    mutationObserver?.observe(panel, {
-      attributes: true,
-      attributeFilter: ["class"],
+    const mutationObservers = panels.map((panel) => {
+      const observer = new MutationObserver(update);
+      observer.observe(panel, {
+        attributes: true,
+        attributeFilter: ["class"],
+      });
+      return observer;
     });
 
     update();
 
     return () => {
       observer.disconnect();
-      mutationObserver?.disconnect();
+      mutationObservers.forEach((mutationObserver) =>
+        mutationObserver.disconnect(),
+      );
       stop();
     };
   }

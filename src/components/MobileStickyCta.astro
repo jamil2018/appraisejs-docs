@@ -1,0 +1,67 @@
+---
+import { Check, Copy, TerminalSquare } from "@lucide/astro";
+
+const installCommand = "npx create-appraisejs@latest";
+---
+
+<div class="mobile-sticky-cta" aria-label="Mobile quick start">
+  <a
+    class="mobile-sticky-cta__quick-start"
+    href="/getting-started/quick-start/"
+  >
+    <TerminalSquare aria-hidden="true" />
+    <span>Quick start</span>
+  </a>
+  <span class="landing-visually-hidden" data-mobile-install-command
+    >{installCommand}</span
+  >
+  <button
+    type="button"
+    class="mobile-sticky-cta__copy"
+    data-mobile-copy-command
+    aria-label="Copy install command"
+  >
+    <Copy class="mobile-sticky-cta__icon" aria-hidden="true" />
+    <Check
+      class="mobile-sticky-cta__icon mobile-sticky-cta__icon--success"
+      aria-hidden="true"
+    />
+  </button>
+</div>
+
+<script define:vars={{ installCommand }}>
+  function initMobileInstallCopy() {
+    const button = document.querySelector("[data-mobile-copy-command]");
+    const code = document.querySelector("[data-mobile-install-command]");
+    if (!button || !code) return;
+
+    let resetTimer;
+
+    button.addEventListener("click", async () => {
+      window.clearTimeout(resetTimer);
+
+      try {
+        await navigator.clipboard.writeText(installCommand);
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(code);
+        const selection = window.getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+        document.execCommand("copy");
+        selection?.removeAllRanges();
+      }
+
+      button.classList.add("is-copied");
+      button.setAttribute("aria-label", "Copied");
+
+      resetTimer = window.setTimeout(() => {
+        button.classList.remove("is-copied");
+        button.setAttribute("aria-label", "Copy install command");
+      }, 2000);
+    });
+  }
+
+  document.addEventListener("astro:page-load", initMobileInstallCopy);
+  initMobileInstallCopy();
+</script>

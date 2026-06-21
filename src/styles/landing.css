@@ -492,7 +492,10 @@ body:has(.landing-root) .sl-markdown-content {
 .landing-hero__visual-inner {
   position: relative;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  min-height: clamp(16rem, 32vw, 22rem);
   border: 1px solid var(--landing-border);
   border-radius: var(--landing-radius);
   background: rgba(19, 19, 19, 0.8);
@@ -501,6 +504,11 @@ body:has(.landing-root) .sl-markdown-content {
   box-shadow:
     0 30px 70px rgba(0, 0, 0, 0.4),
     inset 0 0 30px rgba(255, 255, 255, 0.02);
+}
+
+.landing-hero__visual-inner .all-in-one-demo--fill {
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 .landing-hero__workflow-prompt {
