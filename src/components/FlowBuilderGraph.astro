@@ -201,8 +201,11 @@ const { fill = false } = Astro.props;
 
   .flow-builder-graph--fill {
     flex: 1 1 auto;
+    align-items: stretch;
+    justify-content: stretch;
     min-height: 0;
     width: 100%;
+    height: 100%;
     padding: clamp(0.75rem, 3vw, 1.25rem);
     border: 0;
     border-radius: 0;
@@ -213,7 +216,7 @@ const { fill = false } = Astro.props;
     width: 100%;
     max-width: none;
     height: 100%;
-    min-height: 6.5rem;
+    min-height: 0;
   }
 
   @media (max-width: 760px) {

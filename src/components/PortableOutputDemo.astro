@@ -288,8 +288,8 @@ const cycle = "5.4s";
 
   .portable-output-demo--fill {
     flex: 1 1 auto;
-    align-items: center;
-    justify-content: center;
+    align-items: stretch;
+    justify-content: stretch;
     min-height: 0;
     width: 100%;
     height: 100%;
@@ -307,6 +307,25 @@ const cycle = "5.4s";
 
   .portable-output-demo--fill .portable-output-demo__stage {
     min-height: 0;
+  }
+
+  .portable-output-demo--fill .portable-output-demo__canvas,
+  .portable-output-demo--fill .portable-output-demo__script {
+    height: 100%;
+  }
+
+  .portable-output-demo--fill .portable-output-demo__graph {
+    max-width: min(100%, 34rem);
+    gap: clamp(0.65rem, 2vw, 1.1rem) clamp(0.4rem, 1.3vw, 0.8rem);
+  }
+
+  .portable-output-demo--fill .portable-output-demo__node {
+    min-height: clamp(2.7rem, 8vw, 4.25rem);
+  }
+
+  .portable-output-demo--fill .portable-output-demo__script {
+    align-content: center;
+    padding: clamp(1rem, 3vw, 1.6rem);
   }
 
   @keyframes portable-output-canvas {

@@ -363,7 +363,11 @@ const { fill = false } = Astro.props;
   }
 
   .local-first-demo--fill {
+    align-items: stretch;
+    justify-content: stretch;
     min-height: 0;
+    width: 100%;
+    height: 100%;
     padding: 0;
     border: 0;
     border-radius: 0;
@@ -374,6 +378,16 @@ const { fill = false } = Astro.props;
     max-width: none;
     height: 100%;
     min-height: 0;
+  }
+
+  .local-first-demo--fill .local-first-demo__desktop {
+    width: min(58%, 20rem);
+  }
+
+  .local-first-demo--fill .local-first-demo__window {
+    top: 26%;
+    width: min(78%, 24rem);
+    min-height: clamp(7rem, 22vw, 10rem);
   }
 
   @keyframes local-first-desktop {

@@ -192,7 +192,8 @@ const workflowSteps = [
     display: flex;
     flex-direction: column;
     width: 100%;
-    min-height: clamp(20rem, 45vh, 28rem);
+    height: clamp(22rem, 42vw, 30rem);
+    min-height: 22rem;
     border: 1px solid var(--landing-border);
     border-radius: var(--landing-radius);
     background: #101010;
@@ -227,11 +228,13 @@ const workflowSteps = [
   }
 
   .how-it-works__window-body {
+    position: relative;
     flex: 1;
     display: flex;
     align-items: stretch;
     justify-content: stretch;
     min-height: 0;
+    overflow: hidden;
   }
 
   .how-it-works__window-body :global(.flow-builder-graph--fill),
@@ -251,12 +254,20 @@ const workflowSteps = [
 
   .how-it-works__window-body :global(.locator-creator-demo--fill .locator-creator-demo__panel),
   .how-it-works__window-body :global(.portable-output-demo--fill .portable-output-demo__panel) {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     max-width: none;
     height: 100%;
+    min-height: 0;
     margin: 0;
     border: 0;
     border-radius: 0;
+  }
+
+  .how-it-works__window-body :global(.locator-creator-demo--fill .locator-creator-demo__canvas) {
+    flex: 1 1 auto;
+    min-height: 0;
   }
 
   .how-it-works__window-body :global(.local-first-demo--fill .local-first-demo__stage),
@@ -268,13 +279,19 @@ const workflowSteps = [
     margin: 0;
   }
 
-  @media (max-width: 1024px) {
-    .how-it-works__layout {
-      grid-template-columns: 1fr;
-    }
+  .how-it-works__window-body :global(.locator-creator-demo--fill .locator-creator-demo__view) {
+    min-height: 0;
+  }
 
-    .how-it-works__stage {
-      min-height: clamp(18rem, 40vh, 24rem);
+  .how-it-works__window-body :global(.locator-creator-demo--fill .locator-creator-demo__page),
+  .how-it-works__window-body :global(.locator-creator-demo--fill .locator-creator-demo__view--form) {
+    height: 100%;
+  }
+
+  @media (max-width: 1024px) {
+    .how-it-works__window {
+      height: clamp(19rem, 58vw, 25rem);
+      min-height: 19rem;
     }
   }
 </style>
