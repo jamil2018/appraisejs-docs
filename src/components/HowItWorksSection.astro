@@ -1,32 +1,41 @@
 ---
-import { Crosshair, FileCode2, TerminalSquare } from "@lucide/astro";
+import { Crosshair, FileCode2, TerminalSquare, Workflow } from "@lucide/astro";
+import FlowBuilderGraph from "./FlowBuilderGraph.astro";
 import LocatorCreatorDemo from "./LocatorCreatorDemo.astro";
 import PortableOutputDemo from "./PortableOutputDemo.astro";
 import LocalFirstDemo from "./LocalFirstDemo.astro";
 
 const workflowSteps = [
   {
-    id: "design",
+    id: "build",
     index: "01",
-    title: "Design flows on a live app",
+    title: "Build flows by defining steps",
     description:
-      "Point, click, and map locators from your running application. Build assertions and steps in a visual flow builder—no hand-written selectors required.",
+      "Create test cases visually by chaining steps together. Define user actions, assertions, and navigation in an intuitive flow builder.",
+    icon: Workflow,
+  },
+  {
+    id: "design",
+    index: "02",
+    title: "Generate locators from the builder",
+    description:
+      "If locators are required, generate them directly from the visual builder on your live application—no hand-written selectors required.",
     icon: Crosshair,
   },
   {
     id: "generate",
-    index: "02",
-    title: "Generate standard artifacts",
+    index: "03",
+    title: "Save and generate artifacts",
     description:
-      "AppraiseJS exports Gherkin feature files, Playwright step definitions, and locator JSON into your repository. Every file is plain text you can diff and review.",
+      "Save your flow to automatically generate standard, reviewable artifacts like Gherkin feature files, Playwright step definitions, and locator JSON.",
     icon: FileCode2,
   },
   {
     id: "run",
-    index: "03",
-    title: "Run locally, ship through CI",
+    index: "04",
+    title: "Run tests and view reports",
     description:
-      "Execute tests on your machine with zero cloud latency. The same artifacts run in any pipeline—no proprietary runners or hosted lock-in.",
+      "Execute tests locally with zero cloud latency and view rich, interactive reports. Everything is stored as plain text, making it easy to version control.",
     icon: TerminalSquare,
   },
 ];
@@ -40,7 +49,7 @@ const workflowSteps = [
   <div class="landing-section-copy landing-section-copy--center">
     <p class="landing-kicker">How it works</p>
     <h2 id="how-it-works-heading" class="landing-section-title">
-      From visual design to reviewable code in three steps.
+      From visual design to reviewable code in four steps.
     </h2>
     <p class="landing-section-description">
       A visual IDE built for the modern testing loop. No black boxes, no lock-in.
@@ -73,6 +82,7 @@ const workflowSteps = [
                   <span class="how-it-works__window-title">{step.id}.appraise</span>
                 </div>
                 <div class="how-it-works__window-body">
+                  {step.id === "build" && <FlowBuilderGraph fill={true} />}
                   {step.id === "design" && <LocatorCreatorDemo fill={true} />}
                   {step.id === "generate" && <PortableOutputDemo fill={true} />}
                   {step.id === "run" && <LocalFirstDemo fill={true} />}
@@ -224,6 +234,7 @@ const workflowSteps = [
     min-height: 0;
   }
 
+  .how-it-works__window-body :global(.flow-builder-graph--fill),
   .how-it-works__window-body :global(.locator-creator-demo--fill),
   .how-it-works__window-body :global(.portable-output-demo--fill),
   .how-it-works__window-body :global(.local-first-demo--fill) {
