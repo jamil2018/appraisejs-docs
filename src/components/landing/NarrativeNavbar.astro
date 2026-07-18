@@ -1,0 +1,50 @@
+---
+import { Menu, X, ExternalLink } from "@lucide/astro";
+---
+
+<header class="n-nav-wrap">
+  <nav class="n-nav shell" aria-label="Main navigation">
+    <a class="n-brand" href="/" aria-label="AppraiseJS home"
+      ><img src="/logo.svg" alt="" />AppraiseJS</a
+    >
+    <button
+      class="n-menu"
+      type="button"
+      aria-expanded="false"
+      aria-controls="n-links"
+      aria-label="Open navigation"
+      ><Menu class="open" /><X class="close" /></button
+    >
+    <div class="n-links" id="n-links">
+      <a href="#story">The story</a><a href="#quality-os">Quality OS</a><a
+        href="/getting-started/overview/">Docs</a
+      >
+      <a
+        class="button secondary"
+        href="https://github.com/jamil2018/appraisejs-core"
+        ><ExternalLink />GitHub</a
+      >
+    </div>
+  </nav>
+</header>
+<script>
+  const setup = () => {
+    const button = document.querySelector<HTMLButtonElement>(".n-menu");
+    const links = document.querySelector<HTMLElement>(".n-links");
+    if (!button || !links || button.dataset.ready) return;
+    button.dataset.ready = "true";
+    button.addEventListener("click", () => {
+      const open = button.getAttribute("aria-expanded") !== "true";
+      button.setAttribute("aria-expanded", String(open));
+      links.classList.toggle("open", open);
+    });
+    links.querySelectorAll("a").forEach((link) =>
+      link.addEventListener("click", () => {
+        button.setAttribute("aria-expanded", "false");
+        links.classList.remove("open");
+      }),
+    );
+  };
+  setup();
+  document.addEventListener("astro:page-load", setup);
+</script>

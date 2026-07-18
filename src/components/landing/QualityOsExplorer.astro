@@ -1,0 +1,90 @@
+---
+const capabilities = [
+  [
+    "Plan",
+    "Understand tasks, dependencies, feedback, revisions, and approvals.",
+  ],
+  ["Prove", "Turn approved decisions into executable validations."],
+  ["Build", "Keep implementation aligned with approved intent."],
+  [
+    "Recover",
+    "Guide agents safely when plans, environments, or evidence fail.",
+  ],
+  ["Verify", "Connect the original idea to final completion evidence."],
+];
+---
+
+<section class="quality shell" id="quality-os" aria-labelledby="quality-title">
+  <div class="philosophy">
+    <p>Every feature has a story.</p><h2 id="quality-title">
+      Every story has decisions. Every decision needs proof. Every proof leaves
+      evidence.
+    </h2><span>That’s how software should be built.</span>
+  </div>
+  <div class="explorer">
+    <div class="tabs" role="tablist" aria-label="Quality OS capabilities">
+      {
+        capabilities.map(([name], i) => (
+          <button
+            id={`tab-${name}`}
+            role="tab"
+            aria-selected={i === 0 ? "true" : "false"}
+            aria-controls="quality-panel"
+            tabindex={i === 0 ? 0 : -1}
+            data-index={i}
+          >
+            {name}
+          </button>
+        ))
+      }
+    </div>
+    <div
+      class="explorer-panel artifact"
+      id="quality-panel"
+      role="tabpanel"
+      aria-live="polite"
+      aria-labelledby="tab-Plan"
+    >
+      <span class="explorer-index">01 / 05</span><h3>Plan</h3><p>
+        Understand tasks, dependencies, feedback, revisions, and approvals.
+      </p><div class="explorer-map">
+        <i>Intent</i><b>Plan</b><i>Approval</i>
+      </div>
+    </div>
+  </div>
+</section>
+<script define:vars={{ capabilities }}>
+  const tabs = [...document.querySelectorAll(".tabs [role=tab]")];
+  const panel = document.querySelector("#quality-panel");
+  const select = (index) => {
+    tabs.forEach((tab, i) => {
+      tab.setAttribute("aria-selected", String(i === index));
+      tab.setAttribute("tabindex", i === index ? "0" : "-1");
+    });
+    const [name, copy] = capabilities[index];
+    panel.setAttribute("aria-labelledby", `tab-${name}`);
+    panel.querySelector(".explorer-index").textContent =
+      `${String(index + 1).padStart(2, "0")} / 05`;
+    panel.querySelector("h3").textContent = name;
+    panel.querySelector("p").textContent = copy;
+    panel.querySelector(".explorer-map").innerHTML =
+      `<i>Intent</i><b>${name}</b><i>Evidence</i>`;
+  };
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => select(index));
+    tab.addEventListener("keydown", (event) => {
+      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key))
+        return;
+      event.preventDefault();
+      let next =
+        event.key === "Home"
+          ? 0
+          : event.key === "End"
+            ? tabs.length - 1
+            : (index + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) %
+              tabs.length;
+      select(next);
+      tabs[next].focus();
+    });
+  });
+</script>

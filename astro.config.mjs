@@ -27,7 +27,7 @@ export default defineConfig({
         alt: "AppraiseJS",
       },
       description:
-        "AppraiseJS documentation for visual test modeling, orchestration, execution, and reporting workflows.",
+        "AppraiseJS keeps agent-authored plans, approved validations, implementation, and completion evidence connected.",
       customCss: [
         "./src/styles/theme.css",
         "./src/styles/global.css",
@@ -63,10 +63,19 @@ export default defineConfig({
             { label: "Overview", link: "/getting-started/overview/" },
             { label: "Installation", link: "/getting-started/installation/" },
             { label: "Quick Start", link: "/getting-started/quick-start/" },
-            { label: "Creating Tests", link: "/getting-started/creating-tests/" },
+            {
+              label: "Creating Tests",
+              link: "/getting-started/creating-tests/",
+            },
             { label: "Running Tests", link: "/getting-started/running-tests/" },
-            { label: "Viewing Reports", link: "/getting-started/viewing-reports/" },
-            { label: "Troubleshooting", link: "/getting-started/troubleshooting/" },
+            {
+              label: "Viewing Reports",
+              link: "/getting-started/viewing-reports/",
+            },
+            {
+              label: "Troubleshooting",
+              link: "/getting-started/troubleshooting/",
+            },
           ],
         },
         {
@@ -79,7 +88,10 @@ export default defineConfig({
               link: "/core-concepts/why-appraisejs/",
             },
             { label: "Comparison", link: "/core-concepts/comparison/" },
-            { label: "Architecture Overview", link: "/core-concepts/architecture-overview/" },
+            {
+              label: "Architecture Overview",
+              link: "/core-concepts/architecture-overview/",
+            },
           ],
         },
         {
@@ -129,15 +141,30 @@ export default defineConfig({
                   label: "Parameter Conventions",
                   link: "/reference/step-references/step-parameter-conventions/",
                 },
-                { label: "Click Steps", link: "/reference/step-references/click-steps/" },
-                { label: "Input Steps", link: "/reference/step-references/input-steps/" },
+                {
+                  label: "Click Steps",
+                  link: "/reference/step-references/click-steps/",
+                },
+                {
+                  label: "Input Steps",
+                  link: "/reference/step-references/input-steps/",
+                },
                 {
                   label: "Navigation Steps",
                   link: "/reference/step-references/navigation-steps/",
                 },
-                { label: "Wait Steps", link: "/reference/step-references/wait-steps/" },
-                { label: "Storage Steps", link: "/reference/step-references/storage-steps/" },
-                { label: "Hover Steps", link: "/reference/step-references/hover-steps/" },
+                {
+                  label: "Wait Steps",
+                  link: "/reference/step-references/wait-steps/",
+                },
+                {
+                  label: "Storage Steps",
+                  link: "/reference/step-references/storage-steps/",
+                },
+                {
+                  label: "Hover Steps",
+                  link: "/reference/step-references/hover-steps/",
+                },
                 {
                   label: "Random Data Steps",
                   link: "/reference/step-references/random-data-steps/",

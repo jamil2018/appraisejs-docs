@@ -1,26 +1,22 @@
 ---
-title: Home
-description: Design browser tests visually, generate real Playwright and Cucumber artifacts, and keep execution local-first.
+title: AppraiseJS — from intent to evidence
+description: Shape agent-authored plans, approve executable proof, and follow implementation through verified evidence.
 template: splash
 prev: false
 next: false
 ---
 
 import "../../styles/landing.css";
-import LandingNavbar from "../../components/LandingNavbar.astro";
-import Hero from "../../components/Hero.astro";
-import HowItWorksSection from "../../components/HowItWorksSection.astro";
-import PrReviewSimulator from "../../components/PrReviewSimulator.astro";
-import FeaturesGridSection from "../../components/FeaturesGridSection.astro";
-import LandingFooterSection from "../../components/LandingFooterSection.astro";
-import MobileStickyCta from "../../components/MobileStickyCta.astro";
+import NarrativeNavbar from "../../components/landing/NarrativeNavbar.astro";
+import TimedHero from "../../components/landing/TimedHero.astro";
+import StorySections from "../../components/landing/StorySections.astro";
+import QualityOsExplorer from "../../components/landing/QualityOsExplorer.astro";
+import NarrativeClosing from "../../components/landing/NarrativeClosing.astro";
 
 <div class="landing-root">
-  <LandingNavbar />
-  <Hero />
-  <HowItWorksSection />
-  <PrReviewSimulator />
-  <FeaturesGridSection />
-  <LandingFooterSection />
-  <MobileStickyCta />
+  <NarrativeNavbar />
+  <TimedHero />
+  <StorySections />
+  <QualityOsExplorer />
+  <NarrativeClosing />
 </div>

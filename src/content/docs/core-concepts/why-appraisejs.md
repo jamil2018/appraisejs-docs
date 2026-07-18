@@ -1,26 +1,25 @@
 ---
 title: Why AppraiseJS
-description: Why teams choose AppraiseJS for test development and execution.
+description: Why teams use AppraiseJS to keep agent-assisted delivery aligned and evidence-backed.
 sidebar:
   order: 4
 ---
 
-AppraiseJS exists to remove the usual split between test management tools and automation execution frameworks.
+AppraiseJS exists to prevent intent, planning, validation, implementation, and evidence from becoming disconnected during agent-assisted delivery.
 
 ## The problem it solves
 
-- Traditional setups require stitching multiple tools together.
-- Test logic often lives only in code, slowing collaboration.
-- Reporting and execution context are fragmented.
-- Teams spend too much time maintaining framework glue.
+- A request can change meaning as it moves from conversation to code.
+- Plans and validations are often reviewed in different places, or not at all.
+- Passing tests can lose their connection to the decisions they were meant to prove.
+- Failures leave agents without safe, project-aware recovery guidance.
 
 ## What AppraiseJS changes
 
-- One local app for authoring, execution, and reporting.
-- Visual-first test modeling with reusable template steps and locators.
-- Automatic generation/sync of executable artifacts with a built-in sync dashboard in `Settings`.
-- Built-in run orchestration (tags, workers, browser engine selection).
-- Structured report ingestion with test-case and suite-level metrics.
+- Agent-authored plans and validations pass through explicit human review gates.
+- Approved requirements remain connected to executable proof and implementation evidence.
+- Durable, project-bound lifecycle state makes ownership and the next safe action visible.
+- Visual test modeling, reusable steps, locators, orchestration, and reports support the validation workflow.
 
 ## Who it is for
 

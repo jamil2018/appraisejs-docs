@@ -1,0 +1,315 @@
+---
+import { ArrowRight, ExternalLink } from "@lucide/astro";
+---
+
+<section
+  class="hero shell"
+  aria-labelledby="hero-title"
+  data-hero-phase="resolved"
+>
+  <div class="hero-copy">
+    <p class="eyebrow">Intent, made durable</p>
+    <h1 id="hero-title">Turn that <em>promise</em> into an agreement.</h1>
+    <p id="hero-description">
+      See the plan. Shape every decision. Agree on what success means before
+      your agent begins building.
+    </p>
+    <div class="hero-actions">
+      <a class="button primary" href="/getting-started/installation/"
+        >Try AppraiseJS <ArrowRight /></a
+      ><a
+        class="button secondary"
+        href="https://github.com/jamil2018/appraisejs-core"
+        ><ExternalLink />View on GitHub</a
+      >
+    </div>
+  </div>
+  <div class="hero-opening" aria-hidden="true">
+    <p class="hero-opening__question">
+      <span>What if your plans could talk to you?</span>
+    </p>
+    <p class="hero-opening__promise">
+      <span>And your agent had to </span><strong>promise</strong><span>
+        it would build exactly what you had in mind.</span
+      >
+    </p>
+  </div>
+  <div class="hero-mark" aria-hidden="true">
+    <svg viewBox="0 0 440 280" role="presentation">
+      <g class="mark-stage mark-stage-plan">
+        <circle class="mark-node mark-node-plan" cx="80" cy="120" r="24"
+        ></circle>
+        <text class="mark-label mark-label-plan" x="80" y="210">Plan</text>
+      </g>
+      <g class="mark-stage mark-stage-validate">
+        <line
+          class="mark-connector mark-connector-one"
+          pathLength="1"
+          x1="110"
+          y1="120"
+          x2="150"
+          y2="120"></line>
+        <circle class="mark-node mark-node-validate" cx="180" cy="120" r="24"
+        ></circle>
+        <text class="mark-label mark-label-validate" x="180" y="210"
+          >Validate</text
+        >
+      </g>
+      <g class="mark-stage mark-stage-build">
+        <line
+          class="mark-connector mark-connector-two"
+          pathLength="1"
+          x1="210"
+          y1="120"
+          x2="276"
+          y2="120"></line>
+        <circle class="mark-build-node" cx="330" cy="120" r="48"></circle>
+        <polyline
+          class="mark-check"
+          pathLength="1"
+          points="308,122 325,140 354,103"></polyline>
+        <text class="mark-label mark-label-build" x="330" y="210">Build</text>
+      </g>
+    </svg>
+  </div>
+</section>
+<script>
+  import { animate, stagger } from "motion";
+
+  const heroState = (window.__appraiseHero ??= { cleanup: undefined });
+
+  function initHero() {
+    const hero = document.querySelector<HTMLElement>(".hero");
+    if (
+      !hero ||
+      hero.dataset.heroInitialized === "true" ||
+      matchMedia("(prefers-reduced-motion: reduce)").matches
+    )
+      return;
+    heroState.cleanup?.();
+    hero.dataset.heroInitialized = "true";
+
+    const timers: number[] = [];
+    const question = hero.querySelector<HTMLElement>(".hero-opening__question");
+    const promiseSentence = hero.querySelector<HTMLElement>(
+      ".hero-opening__promise",
+    );
+    const navigation = document.querySelector<HTMLElement>(".n-nav-wrap");
+    const mark = hero.querySelector<HTMLElement>(".hero-mark");
+
+    hero.classList.add("is-playing");
+    hero.classList.remove("is-resolved");
+    hero.dataset.heroPhase = "question";
+    if (question) question.style.opacity = "0";
+    if (promiseSentence) promiseSentence.style.opacity = "0";
+    if (navigation) navigation.style.opacity = "0";
+    timers.push(
+      window.setTimeout(() => {
+        if (!question) return;
+        animate(
+          question,
+          { opacity: [0, 1], y: [22, 0] },
+          { duration: 1.5, ease: [0.22, 1, 0.36, 1] },
+        );
+      }, 400),
+      window.setTimeout(() => {
+        if (question) {
+          animate(
+            question,
+            { opacity: [1, 0], y: [0, -14] },
+            { duration: 0.5, ease: [0.4, 0, 0.2, 1] },
+          );
+        }
+      }, 2100),
+      window.setTimeout(() => {
+        hero.dataset.heroPhase = "promise";
+        if (!promiseSentence) return;
+        animate(
+          promiseSentence,
+          { opacity: [0, 1], y: [24, 0] },
+          { duration: 1.8, ease: [0.22, 1, 0.36, 1] },
+        );
+      }, 2700),
+      window.setTimeout(() => {
+        hero.dataset.heroPhase = "transition";
+        const opening = hero.querySelector<HTMLElement>(".hero-opening");
+        if (opening) {
+          animate(
+            opening,
+            { opacity: [1, 0], y: [0, -16] },
+            { duration: 0.5, ease: [0.4, 0, 0.2, 1] },
+          ).then(() => {
+            opening.style.opacity = "0";
+            opening.style.visibility = "hidden";
+          });
+        }
+        animate(
+          hero.querySelectorAll(".hero-copy > *, .hero-mark"),
+          { opacity: [0, 1], y: [18, 0] },
+          { duration: 0.8, delay: stagger(0.06), ease: "easeOut" },
+        );
+        if (mark) {
+          const planStage = mark.querySelector(".mark-stage-plan");
+          const validateStage = mark.querySelector(".mark-stage-validate");
+          const buildStage = mark.querySelector(".mark-stage-build");
+          const planNode = mark.querySelector(".mark-node-plan");
+          const validateNode = mark.querySelector(".mark-node-validate");
+          const planLabel = mark.querySelector(".mark-label-plan");
+          const validateLabel = mark.querySelector(".mark-label-validate");
+          const buildLabel = mark.querySelector(".mark-label-build");
+          const connectorOne = mark.querySelector(".mark-connector-one");
+          const connectorTwo = mark.querySelector(".mark-connector-two");
+          const buildNode = mark.querySelector(".mark-build-node");
+          const check = mark.querySelector(".mark-check");
+
+          [
+            planNode,
+            validateNode,
+            planLabel,
+            validateLabel,
+            connectorOne,
+            buildStage,
+          ].forEach((element) => element?.setAttribute("opacity", "0"));
+
+          if (planStage) {
+            animate(
+              planStage,
+              { x: [140, 140, 70, 70, 0] },
+              {
+                duration: 3.52,
+                times: [0, 0.34, 0.55, 0.77, 1],
+                ease: [0.16, 1, 0.3, 1],
+              },
+            );
+          }
+          if (validateStage) {
+            animate(
+              validateStage,
+              { x: [70, 70, 0] },
+              {
+                duration: 3.52,
+                times: [0, 0.77, 1],
+                ease: [0.16, 1, 0.3, 1],
+              },
+            );
+          }
+
+          if (planNode) {
+            animate(
+              planNode,
+              { opacity: [0, 1], scale: [0.55, 1] },
+              { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
+            );
+            animate(
+              planNode,
+              { fill: ["var(--l-text)", "var(--l-green)"] },
+              {
+                duration: 0.75,
+                delay: 1.2,
+                ease: [0.16, 1, 0.3, 1],
+              },
+            );
+          }
+          if (planLabel) {
+            animate(
+              planLabel,
+              { opacity: [0, 1], y: [10, 0] },
+              {
+                duration: 0.75,
+                delay: 1.2,
+                ease: [0.16, 1, 0.3, 1],
+              },
+            );
+          }
+          if (connectorOne) {
+            animate(
+              connectorOne,
+              { opacity: [0, 1], pathLength: [0, 1] },
+              { duration: 0.55, delay: 1.55 },
+            );
+          }
+          if (validateNode) {
+            animate(
+              validateNode,
+              { opacity: [0, 1], scale: [0.55, 1] },
+              { duration: 0.55, delay: 1.62, ease: [0.16, 1, 0.3, 1] },
+            );
+            animate(
+              validateNode,
+              { fill: ["var(--l-text)", "var(--l-green)"] },
+              {
+                duration: 0.8,
+                delay: 2.72,
+                ease: [0.16, 1, 0.3, 1],
+              },
+            );
+          }
+          if (validateLabel) {
+            animate(
+              validateLabel,
+              { opacity: [0, 1], y: [10, 0] },
+              {
+                duration: 0.8,
+                delay: 2.72,
+                ease: [0.16, 1, 0.3, 1],
+              },
+            );
+          }
+          if (buildStage) {
+            animate(
+              buildStage,
+              { opacity: [0, 1] },
+              { duration: 0.01, delay: 3.05 },
+            );
+          }
+          if (connectorTwo) {
+            animate(
+              connectorTwo,
+              { opacity: [0, 1], pathLength: [0, 1] },
+              { duration: 0.65, delay: 3.15 },
+            );
+          }
+          if (buildNode) {
+            animate(
+              buildNode,
+              { opacity: [0, 1], scale: [0.5, 1] },
+              { duration: 0.7, delay: 3.35, ease: [0.16, 1, 0.3, 1] },
+            );
+          }
+          if (check) {
+            animate(
+              check,
+              { opacity: [0, 1], pathLength: [0, 1] },
+              { duration: 0.55, delay: 3.95, ease: "easeOut" },
+            );
+          }
+          if (buildLabel) {
+            animate(
+              buildLabel,
+              { opacity: [0, 1], y: [10, 0] },
+              { duration: 0.45, delay: 4.05 },
+            );
+          }
+        }
+        if (navigation) {
+          animate(
+            navigation,
+            { opacity: [0, 1], y: [-12, 0] },
+            { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+          );
+        }
+      }, 5300),
+      window.setTimeout(() => {
+        hero.dataset.heroPhase = "resolved";
+        hero.classList.add("is-resolved");
+      }, 5820),
+    );
+    heroState.cleanup = () => {
+      timers.forEach(window.clearTimeout);
+    };
+  }
+
+  initHero();
+  document.addEventListener("astro:page-load", initHero);
+  document.addEventListener("astro:before-swap", () => heroState.cleanup?.());
+</script>

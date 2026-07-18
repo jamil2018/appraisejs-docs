@@ -1,0 +1,174 @@
+---
+import { ArrowRight, Check, MessageSquare, ShieldCheck } from "@lucide/astro";
+import { story } from "./story-data";
+---
+
+<div id="story">
+  <section class="story-section intent shell" aria-labelledby="intent-title">
+    <div class="section-copy">
+      <span class="step">01 / Intent</span><h2 id="intent-title">
+        It starts with a conversation.
+      </h2><p>
+        Describe the outcome. Ask your coding agent to plan it with AppraiseJS.
+      </p>
+    </div>
+    <div class="conversation artifact">
+      <div><span>You</span><p>{story.prompt}</p></div><div>
+        <span>Agent</span><p>{story.reply}</p>
+      </div>
+    </div>
+  </section>
+  <section class="story-section shape shell" aria-labelledby="shape-title">
+    <div class="section-copy">
+      <span class="step">02 / Plan</span><h2 id="shape-title">
+        Your idea becomes something you can shape.
+      </h2><p>Review the decisions before your agent begins writing code.</p>
+    </div>
+    <div class="decision-flow artifact">
+      <ol>
+        {
+          story.decisions.map((decision, index) => (
+            <li class:list={{ selected: index === 1 }}>
+              <strong>{decision}</strong>
+              {index === 1 && <small class="decision-value">15 minutes</small>}
+            </li>
+          ))
+        }
+      </ol>
+      <div class="feedback">
+        <MessageSquare /><p>{story.feedback}</p><button
+          class="text-button"
+          type="button"
+          data-update>Apply feedback <ArrowRight /></button
+        >
+      </div>
+      <div class="updated" role="status" aria-live="polite">
+        <span>Agent</span><strong>Updated.</strong><p>
+          Reminder Timing · 5 minutes to 24 hours
+        </p>
+      </div>
+      <button class="button primary approve-plan" type="button"
+        >Approve plan <Check /></button
+      >
+    </div>
+  </section>
+  <section class="story-section proof shell" aria-labelledby="proof-title">
+    <div class="section-copy">
+      <span class="step">03 / Proof</span><h2 id="proof-title">
+        Decide what “done” means before the build begins.
+      </h2><p>Every approved decision deserves proof.</p>
+    </div>
+    <div class="proof-map">
+      <article class="artifact requirement">
+        <span>Approved decision</span><p>{story.requirement}</p>
+      </article>
+      <div class="proof-link" aria-hidden="true">
+        <span></span><em>becomes executable</em>
+      </div>
+      <article class="artifact scenario">
+        <span>Proposed validation</span><h3>
+          Reminder arrives at the chosen time
+        </h3><dl>
+          <div><dt>Given</dt><dd>{story.validation.given}</dd></div><div>
+            <dt>When</dt><dd>{story.validation.when}</dd>
+          </div><div><dt>Then</dt><dd>{story.validation.then}</dd></div>
+        </dl><div class="proof-actions">
+          <button class="button primary" type="button" data-proof="approved"
+            >Approve validations</button
+          ><button class="button secondary" type="button" data-proof="changes"
+            >Request changes</button
+          >
+        </div><p class="proof-status" role="status" aria-live="polite"></p>
+      </article>
+    </div>
+  </section>
+  <section class="story-section build shell" aria-labelledby="build-title">
+    <div class="section-copy">
+      <span class="step">04 / Build</span><h2 id="build-title">
+        Now your agent can build.
+      </h2><p>
+        The approved plan guides the work. The approved validations keep it
+        honest.
+      </p>
+    </div>
+    <div class="build-visual artifact">
+      <div class="plan-ghost">
+        <span>Approved plan</span><strong>{story.name}</strong><p>
+          {story.requirement}
+        </p>
+      </div><ol class="lifecycle">
+        <li><Check />Approved plan</li><li><Check />Agent implementation</li><li
+          class="active"
+        >
+          Validation running
+        </li><li>Evidence collected</li>
+      </ol><blockquote>
+        “Notification delivery is implemented. Verifying behavior when meetings
+        are rescheduled.”
+      </blockquote><p class="passing">
+        <ShieldCheck />15-minute reminder validation passing
+      </p>
+    </div>
+  </section>
+  <section
+    class="story-section verified shell"
+    aria-labelledby="verified-title"
+  >
+    <div class="section-copy">
+      <span class="step">05 / Evidence</span><h2 id="verified-title">
+        Did your agent build what you imagined?
+      </h2><p>
+        Return to the original idea and see the evidence behind every decision.
+      </p>
+    </div>
+    <div class="story-chain" aria-label="Original idea to evidence">
+      <span>Original idea</span><i>→</i><span>Approved plan</span><i>→</i><span
+        >Approved validations</span
+      ><i>→</i><span>Implementation</span><i>→</i><span>Evidence</span>
+    </div>
+    <article class="completion artifact">
+      <span><ShieldCheck />Verified complete</span><h3>{story.name}</h3><p>
+        Every approved decision has passing evidence.
+      </p><a class="text-button" href="/getting-started/overview/"
+        >View the story <ArrowRight /></a
+      >
+    </article>
+  </section>
+</div>
+<script>
+  import { inView } from "motion";
+
+  function revealStorySections() {
+    const sections = document.querySelectorAll<HTMLElement>(".story-section");
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    document.documentElement.classList.add("landing-motion-ready");
+    inView(
+      sections,
+      (element) => {
+        element.classList.add("is-visible");
+      },
+      { margin: "0px 0px -14%", amount: 0.08 },
+    );
+  }
+
+  document
+    .querySelector("[data-update]")
+    ?.addEventListener("click", () =>
+      document.querySelector(".decision-flow")?.classList.add("has-update"),
+    );
+  document
+    .querySelectorAll<HTMLButtonElement>("[data-proof]")
+    .forEach((button) =>
+      button.addEventListener("click", () => {
+        const status = document.querySelector<HTMLElement>(".proof-status");
+        if (!status) return;
+        const approved = button.dataset.proof === "approved";
+        status.textContent = approved
+          ? "Validations approved. The build can begin."
+          : "Changes requested. The agent will revise this proof.";
+        status.dataset.state = approved ? "approved" : "changes";
+      }),
+    );
+  revealStorySections();
+  document.addEventListener("astro:page-load", revealStorySections);
+</script>

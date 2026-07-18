@@ -1,11 +1,21 @@
 ---
 title: Comparison
-description: Compare AppraiseJS with script-first and multi-tool testing setups.
+description: Compare AppraiseJS with unstructured agent workflows and separate testing stacks.
 sidebar:
   order: 5
 ---
 
-AppraiseJS is best understood as a unified test control plane plus execution engine.
+AppraiseJS is best understood as a local quality operating system: agents author the work, while AppraiseJS preserves project binding, review gates, validation integrity, evidence, and completion state.
+
+## AppraiseJS vs an unstructured coding-agent workflow
+
+| Dimension                   | AppraiseJS                                | Conversation-only workflow              |
+| --------------------------- | ----------------------------------------- | --------------------------------------- |
+| Plan review                 | Durable, revisable artifact with approval | Often trapped in chat history           |
+| Definition of done          | Approved executable validations           | Inferred during or after implementation |
+| Implementation traceability | Connected to approved intent and evidence | Depends on agent narration              |
+| Recovery                    | Project-aware lifecycle guidance          | Ad hoc retries and manual diagnosis     |
+| Completion                  | Gated by passing approved evidence        | Declared from the latest agent result   |
 
 ## Use this page when
 
