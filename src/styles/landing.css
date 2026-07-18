@@ -259,14 +259,21 @@ body:has(.landing-root) :is(.main-frame, .content-panel) {
 .hero-opening {
   display: none;
   position: absolute;
-  inset: 12% 0 auto;
+  inset: 0;
   width: min(100%, 1020px);
   max-width: calc(100vw - 2rem);
   font-size: clamp(2.6rem, 4.25vw, 4.5rem);
   line-height: 1.08;
   letter-spacing: -0.045em;
   overflow-wrap: break-word;
+}
+.hero-opening__slot {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
   min-height: 5.25em;
+  transform: translateY(-50%);
 }
 .hero-opening p {
   position: absolute;
@@ -841,7 +848,6 @@ body:has(.landing-root) :is(.main-frame, .content-panel) {
     margin-block: -1rem 0;
   }
   .hero-opening {
-    inset: 13% 0 auto;
     font-size: clamp(2rem, 9vw, 3rem);
     line-height: 1.12;
   }
